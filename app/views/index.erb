@@ -1,0 +1,87 @@
+<div id="fullpage">
+  <div id='home' class="section container first">
+    <%=image_tag 'content.png', :class => 'first_photo' %>
+    <a class="smoothScroll center-btn" href="#invite"></a>
+  </div>
+  <div id='student' class="section container container_2 second">
+  <%=image_tag 'student.png', :class => 'photo' %>
+  </div>
+  <div id='teacher' class="section container container_2 third">
+  <%=image_tag 'teacher.png', :class => 'photo' %>
+  </div>
+  <div id='auto' class="section container forth">
+  <%=image_tag 'auto-teach.png', :class => 'photo forth_photo' %>
+  </div>
+  <div id='partner' class="section container container_2 sixth">
+    <%=image_tag 'partner.png', :class => 'photo' %>
+  </div>
+  <div id='invite' class="section container container_2 fifth">
+  <div class="title">
+    <%=image_tag 'private-title.png', :class => 'photo' %>
+  </div>
+    <div class="row">
+    <div class="form-group">
+      <label class="col-xs-2 form-label text-right" for="school">驾校</label>
+      <input class="form-control" id="school" name="school" placeholder="驾校" required="" type="text">
+    </div>
+  </div>
+    <div class="row">
+      <div class="form-group">
+        <label class="col-xs-2 form-label text-right" for="name" >姓名</label>
+        <input class="form-control" id="name" name="name" placeholder="姓名" required="" type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label class="col-xs-2 form-label text-right" for="phone">手机</label>
+        <input class="form-control" id="phone" name="phone" placeholder="手机" required="" type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <button class='btn btn-info join_btn'>立即报名</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('.join_btn').click(function(){
+    var school = $('#school').val();
+    var name = $('#name').val();
+    var phone = $('#phone').val();
+    if(!school){
+      alert("驾校不能为空！");
+      $('#school').focus();
+      return false;
+    }
+    if(!name){
+      alert("姓名不能为空！");
+      $('#name').focus();
+      return false;
+    }
+    if (!phone) {
+      alert("手机号不能为空！");
+      $('#phone').focus();
+      return false;
+    }
+    //正则表达式
+    var reg = /(1[3-9]\d{9}$)/;
+    if (!reg.test(phone)) {
+      alert("请输入正确格式的手机号码！");
+      $('#phone').focus();
+      return false;
+    }
+    $.ajax({
+      type:'get',
+      url:'/enroll',
+      data:{school:school,name:name,phone:phone}
+    }).done(function(data){
+      if(data[0]){
+        alert('报名成功,稍后会有客服联系您!');
+        window.location.reload();
+      }
+    }).fail(function(){
+      alert('网络异常，请稍后重试');
+    })
+  })
+</script>

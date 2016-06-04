@@ -1,0 +1,212 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require bootstrap.min
+ *= require font-awesome.min
+ *= require_self
+ */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+}
+ul li{
+    list-style:none;
+}
+.container{
+    width:100%;
+    padding:0;
+}
+
+.nav-top{
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    opacity:0.75;
+}
+.inner-top{
+    width:80%;
+    margin:2rem auto;
+}
+.logo{
+    width:120%;
+    margin-top: 10px;
+    margin-right: 0;
+    margin-left: auto;
+    float:right;
+}
+.nav-name{
+    padding:0 2rem;
+}
+.nav-name a{
+    height: 50%;
+    color:#FFF;
+    font-weight: 500;
+}
+.nav-name a.active, .nav-name a:hover, .nav-name a:focus{
+    border-top: 4px solid #0086FF;
+    border-bottom: 4px solid #0086FF;
+    background:transparent !important;
+    transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+}
+.footer{
+    background-color: #474747;
+    height: 200px;
+}
+.footer .ft_item_tit {
+    color: #FFF;
+    font-size: 20px;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 10%;
+}
+.footer .ft_contact_tel{
+    color: #FFF;
+    font-size:35px;
+}
+.footer_phone{
+    margin-top: 60px;
+    margin-right: 0px;
+    margin-left: auto;
+}
+.contact{
+    margin-top:60px;
+    font-size:15px;
+    color:#ffffff;
+}
+.contact a, .contact a:hover{
+    color:#ffffff;
+}
+.footer .wx_tips {
+    cursor: pointer;
+    position: relative;
+    margin: 4rem auto;
+}
+.footer .ico_sns {
+    background: rgba(0, 0, 0, 0) url("../images/ft_sns.png") no-repeat scroll 0 0;
+    display: block;
+    height: 62px;
+    margin: 0 auto;
+    width: 62px;
+}
+.footer .wx_tips:hover .ico_weixin {
+    background-position: 0 -63px;
+}
+.footer .wx_tips .tips_bd {
+    display: none;
+    background-color: #fff;
+    left: 7rem;
+    padding: 15px 15px 0;
+    position: absolute;
+    top: -230px;
+    width: 200px;
+}
+.footer .wx_tips .tips_bd .arrow {
+    border-color: #fff transparent transparent transparent;
+    border-style: solid dashed none dashed;
+    border-width: 11px;
+    height: 0;
+    left: 92px;
+    overflow: hidden;
+    position: absolute;
+    top: 214px;
+}
+.footer .wx_tips .tips_bd img {
+    height: 200px;
+    width: 200px;
+}
+.footer .wx_tips:hover .ico_weixin {
+    background-position: 0 -63px;
+}
+.footer .wx_tips:hover .tips_bd {
+    display: block;
+}
+.beian,.beian:hover,.beian:focus{
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    font-size:12px;
+}
+
+/*首页*/
+.container_2 {
+    max-height:80rem;
+    padding: 2rem 0 7rem 0;
+}
+.first{
+    height: 800px;
+    text-align: center;
+    background: url(../images/background.png) center bottom no-repeat;
+    background-size: 100% 100%;
+}
+.first_photo{
+    text-align: center;
+    margin-top:20rem;
+}
+.center-btn{
+    display: block;
+    position: relative;
+    top: -15%;
+    height: 22%;
+}
+.second{
+    background-color: #F2F2F2;
+}
+.photo{
+    max-width:100%;
+    display:block;
+    margin:0 auto;
+}
+.forth{
+    padding-top:2rem;
+    background:url(../images/auto_teach_bj.png) center bottom no-repeat;
+    background-size: 100% 100%;
+}
+.forth_photo{
+    padding-bottom:18%;
+}
+.fifth{
+    padding: 2rem 0 18% 0;
+    background:url(../images/private-bj.png) center bottom no-repeat;
+    background-size:100% 100%;
+}
+.fifth .title{
+    padding: 5rem;
+}
+.fifth .form-group{
+    margin:2rem auto;
+    width:30%;
+}
+.fifth .form-label{
+    margin:1rem auto;
+    color: #FFF;
+    font-size:2rem;
+}
+.fifth .form-group input{
+    width:65%;
+    height: 5.5rem;
+    background:transparent;
+    border:.2rem solid #FFF;
+    color: #000;
+}
+.fifth .join_btn{
+    height: 5rem;
+    left: 40%;
+    margin: 0 auto;
+    position: relative;
+}
+

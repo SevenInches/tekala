@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name=viewport content='width=device-width,initial-scale=1' />
+    <title>萌萌学车管理系统</title>
+    <%= favicon_tag "favicon.ico" %>
+    <%= stylesheet_link_tag  'bootstrap.min'%>
+    <%= stylesheet_link_tag 'bootstrap.min', 'application' %>
+  </head>
+  <body>
+    <div class="container" style='margin:0 auto;'>
+    	<%=@product_binding.introduction.html_safe%>
+    </div>
+    <style type="text/css">
+    body{
+      font-size: 13px;
+      line-height: 20px;
+    }
+    .container{
+      padding:0 5px;
+    }
+    .container img{
+    	max-width: 100%;
+    }
+    ul{
+	 	padding-left:10px;
+	 }
+	li{
+		list-style:none;
+	}
+	li p{
+		font-size: 1.15em;
+	}
+    </style>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name=viewport content='width=device-width,initial-scale=1' />
+    <title>萌萌学车</title>
+    <%= favicon_tag "favicon.ico" %>
+    <%= stylesheet_link_tag 'bootstrap', 'application' %>
+  </head>
+  <body>
+	<div class="rows box">
+      <div class="car">
+        <%=image_tag 'pic_process_car.png', :class => 'car_icon' %>
+      </div>
+      <div class='line'></div>
+      <%UserCycle.all(:user_id => params[:user_id], :order => :date.desc).each do |cycle|%>
+        <div class="cell">
+          <div class="time"><%=cycle.date%></div>
+          <div class="point <%=cycle.color%>"><div class="point_inner <%=cycle.color%>_inner"></div></div>
+          <div class="content"><%=UserCycle::get_level_name(cycle.level)%></div>
+        </div>
+      <%end%>
+      <div class="clear"></div>
+	</div>
+
+  <style type="text/css">
+  body, html, .box{
+    height: 100%
+  }
+  .box{
+    padding-top: 3%;
+  }
+  .line{
+    position: absolute;
+    height: 100%;
+    width: 0px;
+    border:5px #DDDDDD solid;
+    left:40%;
+  }
+  .cell{
+    position: relative;
+    width:100%;
+    z-index:10;
+    height: 30px;
+    line-height: 25px;
+    padding-top: 40px; 
+  }
+  .cell .time, .cell .point, .cell .content{
+    float:left;
+    color:#666666;
+  }
+  .cell .time{
+    text-align: right;
+    padding-right:20px;
+    width:40%;
+  }
+  .cell .point{
+    width:3%;
+    width:24px;
+    height:24px;
+    margin-left: -8px;
+    border-radius: 12px;
+    background-color: rgba(160, 212, 104, 0.5);
+  }
+  .cell .point .point_inner{
+    width:14px;
+    height: 14px;
+    margin:5px;
+    background-color: #A0D468;
+    border-radius: 7px;
+    border:1px solid #8CC152;
+  }
+  .cell .content{
+    width:30%;
+    padding-left:20px;
+    font-size: 0.95em;
+  }
+  .cell .red_point{
+    background-color: rgba(252, 110, 81, 0.5);
+
+  }
+
+  .cell .red_point .red_point_inner{
+    background-color: #FC6E51;
+    border:1px solid #E9573F;
+
+  }
+
+  .cell .gray_point{
+    background-color: rgba(245, 247, 250, 0.5);
+
+  }
+
+  .cell .gray_point .gray_point_inner{
+    background-color: #F5F7FA;
+    border:1px solid #E6E9ED;
+  }
+
+  .car_icon{
+   position: relative;
+   width:68px;
+   height:108px;
+   left: 40%;
+   margin-left: -30px;
+  }
+
+  </style>
+  </body>
