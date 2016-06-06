@@ -26,13 +26,15 @@ ul li{
     list-style:none;
 }
 .container{
+    min-width: 86rem;
     width:100%;
     padding:0;
+    height: 57rem;
+    text-align: center;
 }
-
 .nav-top{
     width: 100%;
-    height: 30px;
+    height: 1.8rem;
     position: absolute;
     top: 0;
     opacity:0.75;
@@ -43,7 +45,7 @@ ul li{
 }
 .logo{
     width:120%;
-    margin-top: 10px;
+    margin-top: .625rem;
     margin-right: 0;
     margin-left: auto;
     float:right;
@@ -57,39 +59,38 @@ ul li{
     font-weight: 500;
 }
 .nav-name a.active, .nav-name a:hover, .nav-name a:focus{
-    border-top: 4px solid #0086FF;
-    border-bottom: 4px solid #0086FF;
+    border-top: .25rem solid #0086FF;
+    border-bottom: .25rem solid #0086FF;
     background:transparent !important;
     transition: all .1s ease-in-out;
     -webkit-transition: all .1s ease-in-out;
 }
 .footer{
     background-color: #474747;
-    height: 200px;
+    height: 18rem;
+    min-width: 86rem;
+    padding:0;
+    text-align: center;
 }
 .footer .ft_item_tit {
     color: #FFF;
-    font-size: 20px;
-    height: 28px;
-    line-height: 28px;
+    font-size: 1.5rem;
+    height: 2rem;
+    line-height: 2rem;
     margin-top: 10%;
+    margin-left: 20%;
 }
 .footer .ft_contact_tel{
     color: #FFF;
-    font-size:35px;
+    font-size:2.5rem;
 }
-.footer_phone{
-    margin-top: 60px;
-    margin-right: 0px;
-    margin-left: auto;
+.footer .contact{
+    margin-top:4.3rem;
+    font-size:1rem;
+    color:#FFF;
 }
-.contact{
-    margin-top:60px;
-    font-size:15px;
-    color:#ffffff;
-}
-.contact a, .contact a:hover{
-    color:#ffffff;
+.footer .contact a, .contact a:hover{
+    color:#FFF;
 }
 .footer .wx_tips {
     cursor: pointer;
@@ -99,38 +100,38 @@ ul li{
 .footer .ico_sns {
     background: rgba(0, 0, 0, 0) url("../images/ft_sns.png") no-repeat scroll 0 0;
     display: block;
-    height: 62px;
+    height: 3.9rem;
     margin: 0 auto;
-    width: 62px;
+    width: 3.9rem;
 }
 .footer .wx_tips:hover .ico_weixin {
-    background-position: 0 -63px;
+    background-position: 0 -3.95rem;
 }
 .footer .wx_tips .tips_bd {
     display: none;
     background-color: #fff;
-    left: 7rem;
-    padding: 15px 15px 0;
+    left: 11.2rem;
+    padding: 1rem 1rem 0;
     position: absolute;
-    top: -230px;
-    width: 200px;
+    top: -14.4rem;
+    width: 14.3rem;
 }
 .footer .wx_tips .tips_bd .arrow {
     border-color: #fff transparent transparent transparent;
     border-style: solid dashed none dashed;
-    border-width: 11px;
+    border-width: 1rem;
     height: 0;
-    left: 92px;
+    left: 5.5rem;
     overflow: hidden;
     position: absolute;
-    top: 214px;
+    top: 13rem;
 }
 .footer .wx_tips .tips_bd img {
-    height: 200px;
-    width: 200px;
+    height: 12.5rem;
+    width: 12.5rem;
 }
 .footer .wx_tips:hover .ico_weixin {
-    background-position: 0 -63px;
+    background-position: 0 -.25rem;
 }
 .footer .wx_tips:hover .tips_bd {
     display: block;
@@ -148,8 +149,6 @@ ul li{
     padding: 2rem 0 7rem 0;
 }
 .first{
-    height: 800px;
-    text-align: center;
     background: url(../images/background.png) center bottom no-repeat;
     background-size: 100% 100%;
 }
@@ -183,6 +182,7 @@ ul li{
     padding: 2rem 0 18% 0;
     background:url(../images/private-bj.png) center bottom no-repeat;
     background-size:100% 100%;
+    overflow: hidden;
 }
 .fifth .title{
     padding: 5rem;
