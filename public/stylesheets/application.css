@@ -26,7 +26,7 @@ ul li{
     list-style:none;
 }
 .container{
-    min-width: 86rem;
+    min-width: 85rem;
     width:100%;
     padding:0;
     height: 57rem;
@@ -68,7 +68,7 @@ ul li{
 .footer{
     background-color: #474747;
     height: 18rem;
-    min-width: 86rem;
+    min-width: 85rem;
     padding:0;
     text-align: center;
 }
