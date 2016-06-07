@@ -109,7 +109,7 @@ class Teacher
 
   property :vip, Integer, :default => 0#收入是否已超3万元
 
-  property :school_id, Integer
+  property :school_id, Integer, :default => 0
 
   has n, :comments, :model => 'TeacherComment', :child_key =>'teacher_id' , :constraint => :destroy
 
@@ -119,7 +119,6 @@ class Teacher
 
   has 1, :teacher_audit, 'TeacherAudit', :child_key => 'teacher_id', :constraint => :destroy
 
-  has 1, :school
   #教练接单
   has n, :order_confirms, :model => 'OrderConfirm', :child_key => 'teacher_id', :constraint => :destroy
 
@@ -127,6 +126,8 @@ class Teacher
   # 教练钱包
   has 1, :teacher_wallet, :constraint => :destroy
   has n, :users
+
+  belongs_to :school
   
   mount_uploader :drive_card_photo, DrivePhoto
 

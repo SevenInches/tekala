@@ -24,11 +24,12 @@ class TrainField
   property :good_tags, String, :default => ''
   property :bad_tags, String, :default => ''
   property :subject, Integer, :default => 2
-  property :school_id, Integer
+  property :school_id, Integer,:default => 0
   
   has n, :teachers, 'Teacher', :through => :teacher_field, :via => :teachers
   has n, :users
-  has 1, :school
+
+  belongs_to :school
 
   def self.get_area(city)
     case city
