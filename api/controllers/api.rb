@@ -28,8 +28,10 @@ Szcgs::Api.controllers :v1 do
         session[:user_id] = @user.id
         if @has_assign = @user.has_assign
         	@train_field = @user.train_field
-          @school = @user.school
-      	end
+        end
+        
+        @school = @user.school
+
         @invite_text = "使用我的邀请码 #{@user.invite_code}，获得萌萌学车 50 元学车优惠，深圳考驾照只需 5630。点击链接立即报名：http://www.mmxueche.com/invite/#{@user.invite_code}"
   			render 'v1/user'
   		else
