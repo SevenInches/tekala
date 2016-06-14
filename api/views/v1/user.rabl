@@ -1,6 +1,6 @@
 node(:status) { 'success' }
 child(@user => :data){
-	attributes :id, :name, :nickname, :mobile, :city, :sex, :score, :school, :avatar_url, :avatar_thumb_url, :motto, :type, :type_word, :status_flag_word, :status_flag, :exam_type, :exam_type_word, :has_hour, :invite_code, :invite_url, :login_count, :has_assign, :address 
+	attributes :id, :name, :nickname, :mobile, :city, :sex, :score, :avatar_url, :avatar_thumb_url, :motto, :type, :type_word, :status_flag_word, :status_flag, :exam_type, :exam_type_word, :has_hour, :invite_code, :invite_url, :login_count, :has_assign, :address
 
 	node(:pass_first_exam) {  5531 }
 	node(:pass_second_exam) { 2240 }
@@ -33,9 +33,11 @@ child(@user => :data){
 			  node(:has_hour ) { |teacher| teacher.has_hour ? teacher.has_hour : 0  }
 			  node(:comment_count ) { |teacher| teacher.comments ? teacher.comments.count : 0  }
 		}
-		child(:school =>:school){
-			attributes :id, :city, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
-		}
+	end
+	if @school
+		child(@school){
+       		attributes :id, :city, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
+       	}
 	end
 }
 
