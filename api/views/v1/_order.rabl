@@ -19,3 +19,6 @@ child(:train_field => :train_field){
 child(:user_coupon => :coupon) {
   attributes :id, :code, :money
 }
+child(:school){
+  attributes :id, :city, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
+}

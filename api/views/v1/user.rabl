@@ -19,7 +19,6 @@ child(@user => :data){
 	    	attributes :id, :name, :longitude, :latitude, :address
 	    }
 	    child(:teacher){
-
 			attributes :id, :id_card, :rate, :name, :profile, :wechat, :driving_age, :teaching_age, :avatar_thumb_url, :avatar_url, :status, :status_flag, :date_setting_filter, :mobile
 			  attributes :remark,     :if => lambda { |val| !val.remark.nil? }
 			  attributes :email,      :if => lambda { |val| !val.email.nil? }
@@ -33,7 +32,9 @@ child(@user => :data){
 			  attributes :address,  :if => lambda { |val| !val.address.nil? }
 			  node(:has_hour ) { |teacher| teacher.has_hour ? teacher.has_hour : 0  }
 			  node(:comment_count ) { |teacher| teacher.comments ? teacher.comments.count : 0  }
-
+		}
+		child(:school){
+			attributes :id, :city, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
 		}
 	end
 }
