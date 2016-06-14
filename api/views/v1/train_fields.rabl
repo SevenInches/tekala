@@ -5,8 +5,7 @@ child(@train_fields => :data){
 
 	attribute :distance,     :if => lambda { |val| !val.distance.nil? }
 	#该教练符合我学车车型的教练
-	
-}
-child(:school){
-	attributes :id, :city, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
+	child(:school){
+    	attributes :id, :city, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
+    }
 }
