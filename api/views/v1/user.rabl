@@ -33,7 +33,7 @@ child(@user => :data){
 			  node(:has_hour ) { |teacher| teacher.has_hour ? teacher.has_hour : 0  }
 			  node(:comment_count ) { |teacher| teacher.comments ? teacher.comments.count : 0  }
 		}
-		child(:school){
+		child(:school =>:school){
 			attributes :id, :city, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
 		}
 	end
