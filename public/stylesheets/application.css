@@ -26,10 +26,8 @@ ul li{
     list-style:none;
 }
 .container{
-    min-width: 85rem;
     width:100%;
     padding:0;
-    height: 57rem;
     text-align: center;
 }
 .nav-top{
@@ -42,16 +40,16 @@ ul li{
 .inner-top{
     width:80%;
     margin:2rem auto;
+    overflow: hidden;
 }
 .logo{
-    width:120%;
     margin-top: .625rem;
     margin-right: 0;
     margin-left: auto;
-    float:right;
+    float:left;
 }
 .nav-name{
-    padding:0 2rem;
+    padding:0 1rem;
 }
 .nav-name a{
     height: 50%;
@@ -68,26 +66,25 @@ ul li{
 .footer{
     background-color: #474747;
     height: 18rem;
-    min-width: 85rem;
     padding:0;
     text-align: center;
+    padding: 5% 0;
 }
 .footer .ft_item_tit {
     color: #FFF;
     font-size: 1.5rem;
     height: 2rem;
     line-height: 2rem;
-    margin-top: 10%;
-    margin-left: 20%;
+    text-align: center;
 }
 .footer .ft_contact_tel{
     color: #FFF;
     font-size:2.5rem;
 }
 .footer .contact{
-    margin-top:4.3rem;
     font-size:1rem;
     color:#FFF;
+    text-align: center;
 }
 .footer .contact a, .contact a:hover{
     color:#FFF;
@@ -149,12 +146,16 @@ ul li{
     padding: 2rem 0 7rem 0;
 }
 .first{
-    background: url(../images/background.png) center bottom no-repeat;
-    background-size: 100% 100%;
+    background: url(../images/background.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 .first_photo{
     text-align: center;
-    margin-top:20rem;
+    margin-top:10rem;
+    margin-bottom: 5rem;
+    width: 32%;
 }
 .center-btn{
     display: block;
@@ -166,7 +167,7 @@ ul li{
     background-color: #F2F2F2;
 }
 .photo{
-    max-width:100%;
+    max-width:95%;
     display:block;
     margin:0 auto;
 }
@@ -180,24 +181,31 @@ ul li{
 }
 .fifth{
     padding: 2rem 0 18% 0;
-    background:url(../images/private-bj.png) center bottom no-repeat;
-    background-size:100% 100%;
+    background:url(../images/private-bj.png);
+    background-size: cover;
     overflow: hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
+
 .fifth .title{
-    padding: 5rem;
+    padding-top: 5rem;
 }
+
 .fifth .form-group{
     margin:2rem auto;
-    width:30%;
+    width: 210px;
 }
 .fifth .form-label{
     margin:1rem auto;
     color: #FFF;
     font-size:2rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-285%);
 }
 .fifth .form-group input{
-    width:65%;
+    width: 214px;
     height: 5.5rem;
     background:transparent;
     border:.2rem solid #FFF;
@@ -205,8 +213,8 @@ ul li{
 }
 .fifth .join_btn{
     height: 5rem;
-    left: 40%;
     margin: 0 auto;
     position: relative;
+    width: 160px;
+    display: block;
 }
-
