@@ -1,6 +1,6 @@
 node(:status) { 'success' }
 child(@user => :data){
-	attributes :id, :name, :nickname, :mobile, :city, :sex, :score, :avatar_url, :avatar_thumb_url, :motto, :type, :type_word, :status_flag_word, :status_flag, :exam_type, :exam_type_word, :has_hour, :invite_code, :invite_url, :login_count, :has_assign, :address
+	attributes :id, :name, :nickname, :mobile, :city_name, :sex, :score, :avatar_url, :avatar_thumb_url, :motto, :type, :type_word, :status_flag_word, :status_flag, :exam_type, :exam_type_word, :has_hour, :invite_code, :invite_url, :login_count, :has_assign, :address
 
 	node(:pass_first_exam) {  5531 }
 	node(:pass_second_exam) { 2240 }

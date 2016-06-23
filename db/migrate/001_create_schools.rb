@@ -1,8 +1,8 @@
-migration 236, :create_schools do
+migration 1, :create_schools do
   up do
     create_table :schools do
       column :id, Integer, :serial => true
-      column :city, DataMapper::Property::String, :length => 255
+      column :city_id, DataMapper::Property::String, :length => 255
       column :name, DataMapper::Property::String, :length => 255
       column :address, DataMapper::Property::String, :length => 255
       column :phone, DataMapper::Property::String, :length => 255

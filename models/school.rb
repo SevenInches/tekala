@@ -3,7 +3,7 @@ class School
 
   # property <name>, <type>
   property :id, Serial
-  property :city, String
+  property :city_id, Integer
   property :name, String
   property :address, String
   property :phone, String
@@ -20,4 +20,13 @@ class School
   property :note, String
   property :created_at, DateTime
   property :updated_at, DateTime
+
+  belongs_to :city
+
+  has n, :products
+
+  def city_name
+    city.name
+  end
+
 end

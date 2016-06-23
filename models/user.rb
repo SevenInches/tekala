@@ -22,7 +22,7 @@ class User
                :is_unique => "手机号已被注册"
            }
 
-  property :city, String, :default => '0755'
+  property :city_id, Integer
   property :started_at, DateTime
   property :sex, Integer, :default => 0
   property :age, Integer
@@ -163,6 +163,8 @@ class User
 
   belongs_to :school, :model => 'School'
 
+  belongs_to :city,  :model => 'City'
+
   # Callbacks
   before :save, :encrypt_password
 
@@ -260,6 +262,9 @@ class User
     end
   end
 
+  def city_name
+    city.name
+  end
 
   def avatar_url
     if avatar
@@ -288,7 +293,7 @@ class User
 
   def self.authenticate_by_mobile(mobile, password)
     user = first(:conditions => ["lower(mobile) = lower(?)", mobile]) if mobile.present?
-
+    puts user
     if user && user.has_password?(password)
 
       user.last_login_at = Time.now

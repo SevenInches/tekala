@@ -32,7 +32,7 @@ Szcgs::Api.controllers :v1, :schools do
 
   get :schools, :map => '/v1/schools', :provides => [:json] do
     @schools = School.all(:order => :weight.desc, :is_open => 1)
-    @schools = @schools.all(:city => params['city'] ) if params['city'].present?
+    @schools = @schools.all(:city_id => params['city'] ) if params['city'].present?
     @total  = @schools.count
     @schools = @schools.paginate(:per_page => 20, :page => params[:page])
     render 'v1/schools'
