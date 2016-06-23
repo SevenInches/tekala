@@ -57,10 +57,6 @@ class Product
 
   end
 
-  def price_rmb
-    price/100
-  end
-
   def can_buy 
     show == 1 && deadline > Date.today
   end

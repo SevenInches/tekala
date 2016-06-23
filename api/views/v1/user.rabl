@@ -9,12 +9,12 @@ child(@user => :data){
 	attributes :started_at,  :if => lambda { |val| !val.started_at.nil? }
 	attributes :last_login,  :if => lambda { |val| !val.last_login.nil? }
 	node(:invite_text){ @invite_text }
-	if @order
+	if @order.present?
 		child(@order){
 		  attributes :id, :order_no, :note, :subject, :price, :amount, :promotion_amount, :discount, :teacher_id, :user_id, :device, :status, :created_at, :book_time, :type
 		}
 	end
-	if @has_assign
+	if @has_assign.present?
 	    child(:train_field => :train_field){
 	    	attributes :id, :name, :longitude, :latitude, :address
 	    }
@@ -34,10 +34,8 @@ child(@user => :data){
 			  node(:comment_count ) { |teacher| teacher.comments ? teacher.comments.count : 0  }
 		}
 	end
-	if @school
-		child(@school){
-       		attributes :id, :city, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
-       	}
-	end
+    child(:school){
+       	attributes :id, :city_name, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude
+    }
 }
 
