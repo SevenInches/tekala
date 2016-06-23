@@ -28,11 +28,13 @@ class TrainField
   property :school_id, Integer,:default => 0
   
   has n, :teachers, 'Teacher', :through => :teacher_field, :via => :teachers
+
   has n, :users
 
   belongs_to :school
 
   belongs_to :city
+
 
   def city_name
     city.name
