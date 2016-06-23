@@ -40,6 +40,10 @@ class TrainField
     city.name
   end
 
+  def area_name
+    City.get(area).name
+  end
+
   def teacher_count
     count
   end

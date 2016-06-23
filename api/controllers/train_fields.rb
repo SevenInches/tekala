@@ -33,8 +33,8 @@ Szcgs::Api.controllers :v1, :train_fields do
   end
 
   get :search, :provides => [:json] do
-    @train_fields = TrainField.all(:count.gt => 0, :display => true, :open => 1, :name.like => "%#{params[:name]}%")
-    @train_fields = @train_fields.all(:city => params[:city])       if params[:city]
+    @train_fields = TrainField.all(:display => true, :open => 1, :name.like => "%#{params[:name]}%")
+    @train_fields = @train_fields.all(:city_id => params[:city])       if params[:city]
     @train_fields = @train_fields.all(:subject => @subject)         if @subject
     @total        = @train_fields.count
     @train_fields = @train_fields.paginate(:page => params[:page], :per_page => 20)
@@ -87,15 +87,14 @@ Szcgs::Api.controllers :v1, :train_fields do
   end 
 
   get :area, :provides => [:json] do 
-  	area_num = params[:area_num]
-  	city_num = params[:city_num]
+  	select_area = params[:area]
+    select_city = params[:city]
 
-  	@train_fields = TrainField.all(:count.gt => 0, :display => true, :open => 1)
-    @train_fields = @train_fields.all(:order => @exam_type.to_sym.desc, 
-                                        @exam_type.to_sym.gt => 0) if @exam_type
+  	@train_fields = TrainField.all(:display => true, :open => 1)
+    @train_fields = @train_fields.all(:order => @exam_type.to_sym.desc) if @exam_type
 
-  	@train_fields = @train_fields.all(:city => city_num)    if !empty?(city_num)
-  	@train_fields = @train_fields.all(:area => area_num)    if !empty?(area_num)
+    @train_fields = @train_fields.all(:city_id => select_city)    if select_city.present?
+    @train_fields = @train_fields.all(:area => select_area)    if select_area.present?
     @train_fields = @train_fields.all(:subject => [0, @subject]) if @subject
 
     @total = @train_fields.count
