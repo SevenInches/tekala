@@ -167,6 +167,7 @@ Szcgs::Api.controllers :v1 do
     get :app_config, :provides => [:json] do
       key      = "20150607mm"
       token    = Digest::MD5.hexdigest("#{params[:user_id]}#{key}")
+      puts token
       if params[:token] != token
         {msg:'token 不正确',status:'fail'}.to_json
       else
