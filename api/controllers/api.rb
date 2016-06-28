@@ -35,7 +35,7 @@ Szcgs::Api.controllers :v1 do
         @invite_text = "使用我的邀请码 #{@user.invite_code}，获得萌萌学车 50 元学车优惠，深圳考驾照只需 5630。点击链接立即报名：http://www.mmxueche.com/invite/#{@user.invite_code}"
   			render 'v1/user'
   		else
-  			msg = (User.first(:mobile => params[:mobile])) ? '密码错误' : '用户名错误'
+  			msg = User.first(:mobile => params[:mobile]) ? '密码错误' : '用户名错误'
   			{:status => :failure, :msg => msg}.to_json
   		end
   	end
@@ -165,16 +165,8 @@ Szcgs::Api.controllers :v1 do
     end
 
     get :app_config, :provides => [:json] do
-      key      = "20150607mm"
-      token    = Digest::MD5.hexdigest("#{params[:user_id]}#{key}")
-      puts token
-      if params[:token] != token
-        {msg:'token 不正确',status:'fail'}.to_json
-      else
-        @configs = AppConfig.all(:order=>:weight.desc, :city=>params[:city], :open=>1)
-        @total  = @configs.count
-        render 'v1/app_configs'
-      end
-  end
-
+      @configs = AppConfig.all(:order=>:weight.desc, :city=>params[:city], :open=>1)
+      @total  = @configs.count
+      render 'v1/app_configs'
+    end
 end
