@@ -43,4 +43,15 @@ Szcgs::Api.controllers :v1, :schools do
     render 'v1/school'
   end
 
+  get :teachers, :map => '/v1/teachers_via_school/:school_id', :provides => [:json] do
+    @teachers = Teacher.all(:school_id => params[:school_id], :open => 1)
+    @total  = @teachers.count
+    render 'v1/teachers'
+  end
+
+  get :fields, :map => '/v1/fields_via_school/:school_id', :provides => [:json] do
+    @train_fields = TrainField.all(:school_id => params[:school_id], :open => 1)
+    @total  = @train_fields.count
+    render 'v1/train_fields'
+  end
 end

@@ -293,12 +293,9 @@ class User
 
   def self.authenticate_by_mobile(mobile, password)
     user = first(:conditions => ["lower(mobile) = lower(?)", mobile]) if mobile.present?
-    puts user
     if user && user.has_password?(password)
-
       user.last_login_at = Time.now
       user.save
-
     end
     user && user.has_password?(password) ? user : nil
 

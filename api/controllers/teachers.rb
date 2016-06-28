@@ -264,8 +264,6 @@ Szcgs::Api.controllers :v1, :teachers do
     else
       {:status => :failure, :msg => @comment.errors.full_messages.join(',') }.to_json
     end
-
-
   end
 
 
