@@ -41,7 +41,7 @@ class TrainField
   end
 
   def area_name
-    City.get(area).name
+    City.get(area).name if area.present?
   end
 
   def teacher_count
