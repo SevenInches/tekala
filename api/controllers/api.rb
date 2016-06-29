@@ -169,4 +169,6 @@ Szcgs::Api.controllers :v1 do
       @total  = @configs.count
       render 'v1/app_configs'
     end
+
+
 end

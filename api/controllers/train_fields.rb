@@ -113,30 +113,21 @@ Szcgs::Api.controllers :v1, :train_fields do
   end
 
   get :teachers, :map => '/v1/train_fields/:id/teachers', :provides => [:json] do 
-    train_field  = TrainField.get params[:id]
-    @teachers    = train_field.teachers
-    @teachers    = @teachers.all(:open => 1, :status_flag => 1)
-    @teachers    = @teachers.all(:exam_type => [@user.exam_type, 3]) if @exam_type
-    @teachers    = @teachers.all(:subject => [0, @subject]) if @subject
+    train_field  = TrainField.get params[:id].to_i
+    if train_field.present?
+      teacher_ids = TeacherTrainField.all(:train_field_id => train_field.id)
+      if teacher_ids
+        @teachers    = Teacher.all(:id =>teacher_ids.aggregate(:teacher_id), :open => 1, :status_flag => 1)
+        @teachers    = @teachers.all(:exam_type => [@user.exam_type, 3]) if @exam_type
+        @teachers    = @teachers.all(:subject => [0, @subject]) if @subject
 
-    #执行该句可减少mysql查询次数
-    @teachers.each do |teacher|
-      teacher.comments
-      if @user
-        teacher.status_flag      = 0 if @user && @user.city == '027' && @user.type == 0
-        #如果用户是c2 修改价格
-        teacher.price            += Teacher::C2ADD if @user && @user.exam_type == 2
-        teacher.promo_price      += Teacher::C2ADD if @user && @user.exam_type == 2
+        @total = @teachers.count
+        puts @total
+        @teachers = @teachers.paginate(:page => params[:page], :per_page => 20)
+        render 'v1/teachers'
       end
-
+    else
+       {:status=>:error, :msg => '训练场不存在'}.to_json
     end
-    #执行该句可减少mysql查询次数
-    
-    @total = @teachers.count
-    @teachers = @teachers.paginate(:page => params[:page], :per_page => 20)
-    render 'v1/teachers'
-
   end
-
-
 end
