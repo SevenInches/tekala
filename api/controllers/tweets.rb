@@ -8,8 +8,7 @@ Szcgs::Api.controllers :v1, :tweets do
     redirect_to("#{current_url}/unlogin") if @user.nil?
   end
 
-  get :index, :provides =>[:json] do 
-
+  get :index, :provides =>[:json] do
   	last_id = params[:last_id].to_i
     if last_id > 0
       current_tweet = Tweet.get(last_id)
@@ -20,7 +19,6 @@ Szcgs::Api.controllers :v1, :tweets do
     end
     @total  = Tweet.count
     render 'v1/tweets'
-
   end
 
   post :index, :provides => [:json] do 
@@ -36,7 +34,16 @@ Szcgs::Api.controllers :v1, :tweets do
 	  else 
 	  	{:status => :failure, :msg => @tweet.errors.full_messages.join(',')}.to_json
     end
+  end
 
+  get :list, :map => 'v1/tweets/list/:user_id', :provides => [:json] do
+    @tweets = Tweet.all(:user_id => params[:user_id])
+    if @tweets
+      @total  = @tweets.count
+      render 'v1/tweets'
+    else
+      {:status => :failure, :msg => '未能找到该用户的tweet'}.to_json
+    end
   end
 
   get :show, :map => 'v1/tweets/:tweet_id', :provides => [:json] do 
