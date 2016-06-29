@@ -306,7 +306,6 @@ class User
   end
 
   def has_password?(password)
-
     ::BCrypt::Password.new(crypted_password) == password
   end
 
@@ -805,13 +804,13 @@ class User
     if status_flag < 7
       if user_plan.exam_two + order.quantity > user_plan.exam_two_standard
         return {:status => :failure,
-                :msg    => '您当前科目的预约学时已达到小萌建议的学习时长，还没学会？请让小萌了解您的学车进度，提出申请后再进行预约。',
+                :msg    => '您当前科目的预约学时已达到小萌建议的学习时长，还没学会？请让小萌了解您的学车进度，提出申请后再进行预约哦。',
                 :code   => 2002 }
       end
     else
       if user_plan.exam_three + order.quantity > user_plan.exam_three_standard
         return {:status => :failure,
-                :msg    => '您当前科目的预约学时已达到小萌建议的学习时长，还没学会？请让小萌了解您的学车进度，提出申请后再进行预约。',
+                :msg    => '您当前科目的预约学时已达到小萌建议的学习时长，还没学会？请让小萌了解您的学车进度，提出申请后再进行预约吧。',
                 :code   => 9003 }
 
       end

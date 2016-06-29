@@ -71,7 +71,6 @@ Szcgs::Api.controllers :v1, :orders do
       pay_hours = (quantity - (total_hours - current_hours)) 
       hours     = (pay_hours > 0 && user_limit) ? pay_hours : 0
       pay_money = hours* teacher.price
-
     end
     {:status => :success, :data => {:user_limit => user_limit, :standard_hours => total_hours, :current_hours => current_hours, :pay_money => pay_money  } }.to_json
   end
