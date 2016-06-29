@@ -54,4 +54,10 @@ Szcgs::Api.controllers :v1, :schools do
     @total  = @train_fields.count
     render 'v1/train_fields'
   end
+
+  get :products, :map => '/v1/products_via_school/:school_id', :provides => [:json] do
+    @products = Product.all(:school_id => params[:school_id])
+    @total  = @products.count
+    render 'v1/products'
+  end
 end
