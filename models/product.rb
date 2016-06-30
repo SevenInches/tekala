@@ -15,7 +15,7 @@ class Product
   property :info_photo, String, :auto_validation => false
   property :exam_two_standard, Integer, :default => 0
   property :exam_three_standard, Integer, :default => 0
-  property :total_quantity, Integer, :default => 0
+  property :total_quantity,  Integer, :default => 0
   #"c1"=>1,"c2"=>2
   property :exam_type, Integer, :default => 0
 

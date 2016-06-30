@@ -114,6 +114,7 @@ Szcgs::Api.controllers :v1, :train_fields do
 
   get :teachers, :map => '/v1/train_fields/:id/teachers', :provides => [:json] do 
     train_field  = TrainField.get params[:id].to_i
+
     if train_field.present?
       teacher_ids = TeacherTrainField.all(:train_field_id => train_field.id)
       if teacher_ids
@@ -122,7 +123,6 @@ Szcgs::Api.controllers :v1, :train_fields do
         @teachers    = @teachers.all(:subject => [0, @subject]) if @subject
 
         @total = @teachers.count
-        puts @total
         @teachers = @teachers.paginate(:page => params[:page], :per_page => 20)
         render 'v1/teachers'
       end

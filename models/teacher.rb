@@ -59,7 +59,7 @@ class Teacher
   #'未知'=>0, 'C1'=>1, 'C2'=>2, 'C1/C2'=>3 #mok 2015-07-24
   property :exam_type, Enum[ 0, 1, 2, 3], :default => 1 #教练教学的车型
   # '科目二/科目三 => 0', '科目二 => 1'，'科目三 => 2'
-  property :tech_type, Enum[ 0, 1, 2], :default => 0 #教练教学的类型
+  property :tech_type, Enum[0, 1, 2], :default => 0 #教练教学的类型
 
   property :mobile, String, :unique => true, :required => true,
            :messages => {:is_unique => "手机号已经存在",

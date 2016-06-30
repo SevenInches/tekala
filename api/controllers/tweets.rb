@@ -130,9 +130,7 @@ Szcgs::Api.controllers :v1, :tweets do
       else
       	{:status => :failure}.to_json
       end
-
   	end
   end
-
 
 end

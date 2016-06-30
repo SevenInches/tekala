@@ -13,17 +13,16 @@ class ProductBinding
   property :c1_price, Float, :default => 0
   property :c2_price, Float, :default => 0
   property :color, String
-  property :city, String
+  property :city_id, Integer, :default => 0
   property :show, Boolean, :default => false
   property :created_at, DateTime
 
-  # has 1,  :c1_product, :model => 'Product', :parent_key => :c1_product_id, :child_key => :id 
-  # has 1,  :c2_product, :model => 'Product', :parent_key => :c2_product_id, :child_key => :id
-
   has n, :product_binding_photos
 
-  def self.city 
-    return {'深圳' => '0755', '武汉' => '027', '重庆' => '023'}
+  belongs_to :city
+
+  def city_name
+    city.name
   end
 
   def c2_product
