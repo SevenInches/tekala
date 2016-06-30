@@ -20,7 +20,7 @@ class ProductBinding
 
   has n, :product_binding_photos
 
-  belongs_to :city
+  belongs_to :city,
 
   belongs_to :school
 

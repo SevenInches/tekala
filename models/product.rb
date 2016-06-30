@@ -2,7 +2,6 @@ class Product
   include DataMapper::Resource
 
   property :id, Serial
-  property :city_id, Integer
   property :name, String
   property :price, Integer #单位 分
   property :detail, Text
@@ -23,12 +22,6 @@ class Product
   mount_uploader :info_photo, ProductInfoPhoto
 
   has n, :users, :model => 'User'
-
-  belongs_to :city
-
-  def city_name
-    city.name
-  end
 
   def photo_thumb_url
      photo.thumb && photo.thumb.url ? CustomConfig::HOST + photo.thumb.url : ''
