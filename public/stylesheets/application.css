@@ -64,9 +64,9 @@ ul li{
 }
 .footer{
     background-color: #474747;
-    padding:0;
     text-align: center;
-    padding: 5% 0;
+    padding: 50px 0;
+    overflow: hidden;
 }
 .footer .ft_item_tit {
     color: #FFF;
