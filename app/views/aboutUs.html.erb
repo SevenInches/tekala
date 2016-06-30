@@ -1,5 +1,9 @@
 <%=stylesheet_link_tag 'common', 'aboutUs' %>
+<<<<<<< HEAD
 <div class="ab-container">
+=======
+<div class="ab-container" >
+>>>>>>> 1bfe0f45b3dc7b6a088ecf60346150c4d474eeca
     <ul class="ab-nav">
         <li class="active">关于我们</li>
         <li>加入我们</li>
@@ -160,6 +164,9 @@
             var bodyHeight = window.innerHeight - $('header').height() - $('footer').height() - 100 - 40;
         }
         $('.ab-container').css('height',bodyHeight);
+        var bodyHeight = window.innerHeight - $('header').height() - $('footer').height() - 100 - 40;
+        $('.ab-container').css('height',bodyHeight);
+
         var aboutUs = $('.ab-text'),
                 joinUs = $('.job-box'),
                 navLi = $('.ab-nav li'),
@@ -199,9 +206,5 @@
                 //footer.css('position','relative');
             }
         });
-
-
-
     })
-
 </script>
