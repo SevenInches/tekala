@@ -18,6 +18,8 @@ class Product
   #"c1"=>1,"c2"=>2
   property :exam_type, Integer, :default => 0
 
+  property :school_id, Integer, :default => 0
+
   mount_uploader :photo, ProductPhoto
   mount_uploader :info_photo, ProductInfoPhoto
 
