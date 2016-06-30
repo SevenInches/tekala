@@ -32,15 +32,14 @@ ul li{
 }
 .nav-top{
     width: 100%;
-    height: 1.8rem;
+    overflow: hidden;
     position: absolute;
     top: 0;
     opacity:0.75;
 }
 .inner-top{
-    width:80%;
-    margin:2rem auto;
     overflow: hidden;
+    padding: 20px 35px;
 }
 .logo{
     margin-top: .625rem;
@@ -217,4 +216,57 @@ ul li{
     position: relative;
     width: 160px;
     display: block;
+}
+
+.navbar-header{
+    float: left;
+}
+
+.app-nav{
+    float: right;
+    padding: 1.1rem 0;
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+}
+
+.app-nav li{
+    float: left;
+    margin-right: 10px;
+}
+.app-nav li a{
+    position: relative;
+    display: block;
+    padding: 10px 0;
+    color: #fff;
+}
+
+.app-nav li:hover a{
+    border-top: .25rem solid #0086FF;
+    border-bottom: .25rem solid #0086FF;
+}
+
+.app-nav li a:hover{
+    text-decoration: none;
+}
+
+@media screen and (max-device-width: 414px){
+    .app-nav{
+        width: 215px;
+        padding: 0.5rem 0;
+    }
+    .inner-top {
+        overflow: hidden;
+        padding: 20px 0;
+    }
+
+    .app-nav li a {
+        font-size: 12px;
+    }
+    .navbar-header{
+        width: 85px;
+    }
+    .job-btn{
+        width: 56px;
+    }
 }
