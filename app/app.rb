@@ -16,6 +16,22 @@ module Szcgs
       render 'index'
     end
 
+    get :about do
+      render 'aboutUs'
+    end
+
+    get :article do
+      render 'article'
+    end
+
+    get :info do
+      render 'information'
+    end
+
+    get :question do
+      render 'question'
+    end
+
     get :enroll do
       new_enroll = Enroll.new
       if params.present?

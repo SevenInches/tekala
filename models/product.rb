@@ -24,8 +24,6 @@ class Product
 
   has n, :users, :model => 'User'
 
-  belongs_to :school
-
   belongs_to :city
 
   def city_name

@@ -23,7 +23,7 @@ class School
 
   belongs_to :city
 
-  has n, :products
+  has n, :product_bindings
 
   def city_name
     city.name

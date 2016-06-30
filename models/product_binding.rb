@@ -15,11 +15,14 @@ class ProductBinding
   property :color, String
   property :city_id, Integer, :default => 0
   property :show, Boolean, :default => false
+  property :school_id, Integer, :default => 0
   property :created_at, DateTime
 
   has n, :product_binding_photos
 
   belongs_to :city
+
+  belongs_to :school
 
   def city_name
     city.name

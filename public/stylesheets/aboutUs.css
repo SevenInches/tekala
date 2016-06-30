@@ -1,0 +1,242 @@
+.ab-container{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/*导航栏*/
+.ab-nav{
+    overflow: hidden;
+    width: 70%;
+    margin: 20px auto;
+    padding: 0;
+}
+
+.ab-nav li{
+    float: left;
+    margin-right: 20px;
+    cursor: pointer;
+    color: #666;
+    font-size: 14px;
+    position: relative;
+}
+
+.ab-nav li.active{
+    font-weight: 700;
+}
+.ab-nav li:hover{
+    font-weight: 700;
+}
+
+.ab-nav li:nth-of-type(2):before{
+    content: ' ';
+    position: absolute;
+    left: -11px;
+    top: 50%;
+    width: 2px;
+    height: 2px;
+    margin-top: -1px;
+    background: #bdbdbd;
+}
+
+/*关于我们*/
+.ab-text{
+    width: 70%;
+    box-shadow: rgba(0,0,0,.27) 0 1px 3px,#DCDCDC 0 1px 0,#DDD 0 -1px 0;
+    border-radius: 8px;
+    margin: 0 auto;
+    border:1px solid #d4d4d4;
+    margin-bottom: 30px;
+    background-color: #fff;
+}
+
+.ab-title{
+    border-bottom: 1px solid #d4d4d4;
+    border-radius: 8px 8px 0 0;
+    box-shadow: rgba(0,0,0,.06) 0 1px 7px;
+    line-height: 60px;
+    font-size: 18px;
+    color: #333;
+    text-indent: 30px;
+    margin: 0;
+    font-weight: 400;
+}
+
+.ab-content{
+    padding: 30px;
+}
+
+.ab-content p{
+    line-height: 1.857142857142857;
+}
+
+.job-box{
+    width: 70%;
+    box-shadow: rgba(0,0,0,.27) 0 1px 3px,#DCDCDC 0 1px 0,#DDD 0 -1px 0;
+    border-radius: 8px;
+    margin: 0 auto;
+    border: 1px solid #d4d4d4;
+    padding-bottom: 5px;
+    display: none;
+}
+.job-title{
+    height: 60px;
+    padding: 0 10px 0 30px;
+    line-height: 60px;
+    border-bottom: 1px solid #CFCFCF;
+    border-radius: 8px 8px 0 0;
+    box-shadow: rgba(0,0,0,.12) 0 1px 8px;
+    position: relative;
+    background-color: #fff;
+}
+
+.job-title h2{
+    font-size: 18px;
+    font-weight: 400;
+    color: #626262;
+    margin: 0;
+    line-height: 60px;
+}
+
+/*职位列表*/
+.job-list-head{
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #CFCFCF;
+    box-shadow: rgba(0,0,0,.12) 0 1px 8px;
+}
+
+.job-list-head li{
+    float: left;
+    line-height: 37px;
+    border-left: 1px solid #e4e4e4;
+    border-left: 1px solid rgba(0,0,0,.1);
+    font-size: 12px;
+    background: #f2f2f2;
+}
+
+.job-list-name{
+    width: 25%;
+    color: #8d8d8d;
+    padding-left: 29px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.job-item.active .ab-down{
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+.job-list-category,.job-list-address,.job-list-operation{
+    color: #8d8d8d;
+    text-align: center;
+    float: left;
+    width: 25%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.job-list-content{
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+}
+
+.job-list-content>li{
+
+}
+.job-list-content li:hover{
+    background-color: #eee;
+}
+
+.job-item{
+    overflow: hidden;
+    border-bottom: 1px solid #CFCFCF;
+    padding: 10px 0;
+}
+.job-item div{
+    line-height: 34px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.job-item .job-list-name:hover .ab-down{
+    opacity: 1;
+}
+
+.job-btn{
+    display: block;
+    margin: 0 auto;
+    width: 70px;
+    line-height: 34px;
+    border-radius: 5px;
+    color: #8d8d8d;
+    background-image: linear-gradient(rgba(255,255,255,.06),rgba(0,0,0,.06));
+    cursor: pointer;
+    transition: all .5s ease;
+    font-size: 12px;
+    border: 1px solid #ddd;
+}
+
+.job-btn:hover,.job-item.active .job-btn{
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.1),inset 0 -1px 1px rgba(255,255,255,.1),0 1px 3px rgba(0,0,0,.06);
+    background-color: #5c85e5;
+    text-decoration: none;
+}
+
+.job-detail{
+    padding: 20px;
+    display: none;
+}
+.job-detail h4{
+    margin-bottom: 9px;
+    font-size: 16px;
+    color: #878787;
+    font-weight: 700;
+    line-height: 1.5;
+}
+.job-detail>ul li{
+    list-style-type: decimal;
+    margin-left: 17px;
+    color: #999;
+    line-height: 2.15;
+}
+
+/*底部*/
+.footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/*icon*/
+.ab-down{
+    margin-left: 15px;
+    font-size: 12px;
+    transition: all .5s ease;
+    opacity: 0;
+}
+
+@media screen and (max-device-width: 414px){
+    .job-box {
+        width: 87%;
+    }
+    .ab-text{
+        width: 87%;
+    }
+    .ab-nav {
+            width: 86%;
+    }
+    .footer {
+        position: relative;
+    }
+}
+
+
+

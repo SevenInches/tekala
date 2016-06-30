@@ -1,0 +1,80 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+    color: #666;
+    font-size: 14px;
+    [data-dpr='1'] {
+        font-size: 14px;
+    }
+    [data-dpr='2'] {
+        font-size: 28px;
+    }
+}
+
+.im-box{
+}
+
+.im-container{
+    width: 75%;
+    box-shadow: rgba(0,0,0,.27) 0 1px 3px,#DCDCDC 0 1px 0,#DDD 0 -1px 0;
+    border-radius: 8px;
+    margin: 40px auto;
+    border: 1px solid #d4d4d4;
+    background-color: #fff;
+}
+
+@media screen and (max-device-width: 414px){
+    .im-container{
+        width: 88%;
+    }
+
+}
+
+.im-title{
+    border-bottom: 1px solid #d4d4d4;
+    border-radius: 8px 8px 0 0;
+    box-shadow: rgba(0,0,0,.06) 0 1px 7px;
+    line-height: 60px;
+    font-size: 18px;
+    color: #333;
+    text-indent: 20px;
+    margin: 0;
+    font-weight: 400;
+    background: linear-gradient(#fbfbfb,#ececec);
+}
+
+.im-list{
+
+}
+
+.im-list li{
+    padding: 20px;
+    border-bottom: 1px solid #e6e7e8;
+}
+
+.im-list li:hover{
+    background-color: #eee;
+}
+
+.article-title{
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.article-title>a{
+    font-size: 22px;
+    color: #333;
+}
+
+.article-title>p{
+    float: right;
+    margin: 13px 0 0;
+    font-size: 13px;
+}
+
+.footer{
+
+}
