@@ -563,6 +563,7 @@ class User
     return nil if product.nil?
     order = Order.all(:product_id => product.id, :status => 101, :type => Order::VIPTYPE)
     order.update(:status => 0)
+
     order = Order.new
     order.order_no   = Order::generate_order_no_h5
     order.quantity   = 1
@@ -581,8 +582,9 @@ class User
     order.device     = from
     order.book_time  = Date.today
     order.school_id  = product.school_id
-    order.save
-    order
+    if order.save
+      order
+    end
   end
 
   # 获得推荐人名字
