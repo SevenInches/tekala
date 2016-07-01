@@ -119,9 +119,6 @@ Szcgs::Api.controllers :v1, :train_fields do
       teacher_ids = TeacherTrainField.all(:train_field_id => train_field.id)
       if teacher_ids
         @teachers    = Teacher.all(:id =>teacher_ids.aggregate(:teacher_id), :open => 1, :status_flag => 1)
-        @teachers    = @teachers.all(:exam_type => [@user.exam_type, 3]) if @exam_type
-        @teachers    = @teachers.all(:subject => [0, @subject]) if @subject
-
         @total = @teachers.count
         @teachers = @teachers.paginate(:page => params[:page], :per_page => 20)
         render 'v1/teachers'
