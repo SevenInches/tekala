@@ -43,7 +43,7 @@ Szcgs::Api.controllers :v1, :orders do
       }.to_json
     else
       {:status => :success,
-       :data => {}
+       :data => []
        }.to_json
     end
   end
