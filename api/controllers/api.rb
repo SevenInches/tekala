@@ -59,10 +59,10 @@ Szcgs::Api.controllers :v1 do
       if !empty?(params[:mobile]) && @user.nil? 
 
         #验证码是否过期
-        validate = UserValidate.first(:mobile => params[:mobile])
-        if !(validate && (validate.updated_at + 10.minute > Time.now)  && (validate.code == params[:validate_code]))
-          return {:status => :failure, :msg => '验证码错误'}.to_json
-        end
+        # validate = UserValidate.first(:mobile => params[:mobile])
+        # if !(validate && (validate.updated_at + 10.minute > Time.now)  && (validate.code == params[:validate_code]))
+        #   return {:status => :failure, :msg => '验证码错误'}.to_json
+        # end
 
         @user = User.new
         @user.mobile   = params[:mobile]
@@ -70,18 +70,17 @@ Szcgs::Api.controllers :v1 do
         @user.nickname = params[:nickname]
         @user.password = params[:password]
         @user.email    = params[:email]
-        @user.city     = params[:city]
+        @user.city_id  = params[:city_id]
+        @user.school_id= params[:school_id]
         @user.avatar   = params[:avatar]
-        @user.beta     = 1
 
         #如果有给用户指定产品
         product = Product.get(params[:product_id])
         if product && product.can_buy #产品存在并可购买
-          @user.city       = product.city
           @user.product_id = product.id 
         end
         
-        @user.status_flag  = (@user.city == '027') ? 5 : 0 #武汉学员直接状态变为科目一
+        @user.status_flag  = 0
         @user.save
         @user.send_sms(:signup)  #发送短信通知
 
@@ -90,7 +89,7 @@ Szcgs::Api.controllers :v1 do
           validate.updated_at = Time.now - 10.minute
           validate.save
 
-          @order = @user.create_signup(product, params[:device]) if product
+          @order = @user.create_signup(product) if product
           @msg   = "报名成功"
           session[:user_id] = @user.id
           
@@ -98,7 +97,6 @@ Szcgs::Api.controllers :v1 do
           render 'v1/user'
         else
           {:status => :failure, :msg => '注册失败'}.to_json
-
         end
         
       else
