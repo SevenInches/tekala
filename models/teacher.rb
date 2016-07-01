@@ -56,10 +56,10 @@ class Teacher
   #银行卡持卡人姓名
   property :bank_account_name, String, :default => ''
 
-  #'未知'=>0, 'C1'=>1, 'C2'=>2, 'C1/C2'=>3 #mok 2015-07-24
-  property :exam_type, Enum[ 0, 1, 2, 3], :default => 1 #教练教学的车型
-  # '科目二/科目三 => 0', '科目二 => 1'，'科目三 => 2'
-  property :tech_type, Enum[0, 1, 2], :default => 0 #教练教学的类型
+  #'未知'=>1, 'C1'=>2, 'C2'=>3, 'C1/C2'=>4 #mok 2015-07-24
+  property :exam_type, Integer, :default => 2 #教练教学的车型
+  # '科目二/科目三 => 1', '科目二 => 2'，'科目三 => 3'
+  property :tech_type, Integer, :default => 1 #教练教学的类型
 
   property :mobile, String, :unique => true, :required => true,
            :messages => {:is_unique => "手机号已经存在",
@@ -83,10 +83,10 @@ class Teacher
   property :sort, Integer,:default => 0
 
   #教练状态 0休假 1正常使用
-  property :status_flag , Enum[0, 1], :default => 1
+  property :status_flag , Integer, :default => 1
   
-  #'待审核'=>200, '审核通过'=>201, '审核不通过'=>0, '报名' => 100
-  property :status, Enum[ 200, 201, 0, 100], :default => 200
+  #'待审核'=>1, '审核通过'=>2, '审核不通过'=>3, '报名' => 4
+  property :status, Integer, :default => 200
   
   #用户区域
   #   {:龙岗 => 1, :宝安 => 2, :罗湖 => 3, :福田 => 4, :南山 => 5, :盐田 => 6, :其他 => 0}
@@ -114,6 +114,8 @@ class Teacher
   has n, :comments, :model => 'TeacherComment', :child_key =>'teacher_id' , :constraint => :destroy
 
   has n, :orders
+
+  has n, :signups
 
   has n, :train_fields, 'TrainField', :through => :teacher_field, :via => :train_field
 

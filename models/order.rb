@@ -48,20 +48,18 @@ class Order
   
   property :ch_id, String #ping++ ch_id
 
-  #'深圳'=>0755, '武汉'=>027
-  #property :city, Enum['0755', '027'], :default => '0755'
 
-  #'未支付'=>101, '已支付'=>102, '已完成'=>103, 退款中 => 2, 已退款 => 1, '取消'=>0 , '104' => '已确定'
-  property :status, Enum[101, 102, 103, 1, 0, 2, 104], :default => 101
+  #'未支付'=>1, '已支付'=>2, '已完成'=>3, '已确定'=>4, '退款中' => 5, '已退款' => 6, '取消'=>7
+  property :status, Integer, :default => 1
 
-  #{:练车预约订单 => 0, :报名订单 => 1, :打包订单 => 2, :活动预付款 => 3} 
-  property :type, Enum[0, 1, 2, 3], :default => 0 #2 为无需记录学时
+  #'练车预约订单' => 1, '打包订单' => 2, '活动预付款' => 3
+  property :type, Integer, :default => 1 #2 为无需记录学时
 
-  #{"未知" => 0, "C1" => 1, "C2" => 2}
-  property :exam_type, Enum[0, 1, 2], :default => 1 #学车类型
+  #'C1' => 1, 'C2' => 2
+  property :exam_type, Integer, :default => 1 #学车类型
 
-  #{:会员的订单 => 1, :普通订单 => 0}
-  property :vip, Enum[0, 1], :default => 0
+  #'普通订单' => 1, '会员的订单' =>2
+  property :vip, Integer, :default => 1
 
   property :remark, String
 
@@ -73,7 +71,7 @@ class Order
 
   #mok 产品id号 2015-09-30
   property :product_id, Integer, :default => 0
-  property :city, String, :default => '0755'
+  property :city_id, Integer
 
   property :theme, String
 
@@ -87,6 +85,7 @@ class Order
   belongs_to :train_field
   belongs_to :product, :model => 'Product'
   belongs_to :school
+  belongs_to :city
 
   has 1, :user_coupon
   has 1, :teacher_comment

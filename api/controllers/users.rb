@@ -49,7 +49,7 @@ Szcgs::Api.controllers :v1, :users do
     	@user.avatar        = params[:avatar]     		if params[:avatar]
       if !empty?(params[:product_id])
         product = Product.get(params[:product_id])
-        @order = @user.create_order(product, 'app update profile')
+        @order = @user.create_signup(product)  if !@request_user.signups.present?
       end
 
 	    if @user.save

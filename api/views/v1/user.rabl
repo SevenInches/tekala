@@ -11,7 +11,7 @@ child(@user => :data){
 	node(:invite_text){ @invite_text }
 	if @order.present?
 		child(@order){
-		  attributes :id, :order_no, :note, :subject, :price, :amount, :promotion_amount, :discount, :teacher_id, :user_id, :device, :status, :created_at, :book_time, :type
+		  attributes :id, :order_no, :amount, :discount, :teacher_id, :user_id, :school_id , :status, :created_at, :exam_type
 		}
 	end
 	if @has_assign.present?

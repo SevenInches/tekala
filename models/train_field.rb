@@ -31,6 +31,8 @@ class TrainField
 
   has n, :users
 
+  has n, :signups
+
   belongs_to :school
 
   belongs_to :city

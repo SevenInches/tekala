@@ -90,7 +90,7 @@ Szcgs::Api.controllers :v1 do
           validate.updated_at = Time.now - 10.minute
           validate.save
 
-          @order = @user.create_order(product, params[:device]) if product
+          @order = @user.create_signup(product, params[:device]) if product
           @msg   = "报名成功"
           session[:user_id] = @user.id
           

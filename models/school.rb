@@ -25,6 +25,8 @@ class School
 
   has n, :product_bindings
 
+  has n, :signups
+
   def city_name
     city.name
   end

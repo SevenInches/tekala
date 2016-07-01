@@ -32,11 +32,11 @@ class User
   property :birthday, Date, :default => ''
 
   property :daily_limit, Integer, :default => 2
-  #{"未知" => 0, "C1" => 1, "C2" => 2} #mok 2015-08-04
-  property :exam_type, Enum[0, 1, 2], :default => 1 #报名类型
+  #"C1" => 1, "C2" => 2
+  property :exam_type, Integer, :default => 1 #报名类型
 
   #{"注册" => 0, "已付费" => 1, "拍照" => 2, "体检" => 3, "录指纹" => 4, "科目一" => 5, "科目二" => 6, "科目三" => 7, "考长途" => 8, "科目四" => 9, "已拿驾照" => 10, "已离开" => 11, "已入网" => 12}
-  property :status_flag, Enum[ 0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], :default => 0
+  property :status_flag, Integer, :default => 0
 
   # property :last_login, DateTime
   property :last_login_at, DateTime
@@ -50,7 +50,7 @@ class User
   property :created_at, DateTime
   property :updated_at, DateTime
   # {:普通班 => 0, :包过班 => 1} 订单交付类型 2015-07-20 mok
-  property :type, Enum[0, 1], :default => 0
+  property :type, Integer, :default => 0
 
   property :address, String
 
@@ -58,12 +58,12 @@ class User
   #用户区域
 
   #   {:龙岗 => 1, :宝安 => 2, :罗湖 => 3, :福田 => 4, :南山 => 5, :盐田 => 6, :武昌 => 21, :洪山 => 22, :黄陂 => 23, :东西湖 => 24, :蔡甸 => 25, :汉南 => 26, :江夏 => 27, :江岸 => 28, :江汉 => 29, :硚口 => 30, :青山 => 31, :新州 => 32, :汉阳 => 33, :其他 => 0} mok 2015-08-07
-  property :work_area, Enum[ 0, 1, 2, 3, 4, 5, 6, 7, 8], :default => 0
-  property :live_area, Enum[ 0, 1, 2, 3, 4, 5, 6, 7, 8], :default => 0
-  property :local,     Enum[ 0, 1], :default => 0
+  property :work_area, Integer, :default => 0
+  property :live_area, Integer, :default => 0
+  property :local,     Integer, :default => 0
 
   # {:其他 => 0, :互联网 => 1, :金融 => 2, '公务员'=>3, '医务人员' => 4, '学生'=>5, '自由职业'=>6}
-  property :profession, Enum[0, 1, 2, 3, 4, 5, 6], :default => 0
+  property :profession, Integer, :default => 0
 
   property :live_card, Integer
 
@@ -121,6 +121,8 @@ class User
   property :signup_at, Date
 
   has n, :orders
+
+  has n, :signups
   #进度记录
   has n, :user_schedule, :model => 'UserSchedule', :child_key =>'user_id' , :constraint => :destroy
 
@@ -200,8 +202,8 @@ class User
     #创建学车计划
     plan = UserPlan.first_or_create(:user_id => id)
 
-    plan.exam_two_standard   = (city == '0755') ? 14 : 12
-    plan.exam_three_standard = (city == '0755') ? 8  : 5
+    plan.exam_two_standard   = 0
+    plan.exam_three_standard = 0
 
     plan.exam_two_standard     = product.exam_two_standard if product
     plan.exam_three_standard   = product.exam_three_standard if product
@@ -213,13 +215,6 @@ class User
     promotion.phase          = section        if section
     promotion.wechat_avatar  = wechat_avatar  if wechat_avatar
     promotion.wechat_unionid = wechat_unionid if wechat_unionid
-
-    #发送 萌萌学车介绍及报考攻略 给新注册的用户
-    if city == "0755"
-      emails = []
-      emails << email if !email.nil?
-      send_email(emails, "signup_email") if !email.nil?
-    end
   end
 
 
@@ -558,29 +553,16 @@ class User
 
   end
 
-  # 根据产品，创建交费订单
-  def create_order(product, from='app')
+  # 根据产品，创建报名订单
+  def create_signup(product)
     return nil if product.nil?
-    order = Order.all(:product_id => product.id, :status => 101, :type => Order::VIPTYPE)
-    if order.count ==0
-      order = Order.new
-    end
+    order = Signup.new
     order.order_no   = Order::generate_order_no_h5
-    order.quantity   = 1
-    order.type       = 1
     order.exam_type  = product.exam_type
-    order.teacher_id = 477
     order.user_id    = self.id
-    order.city       = self.city
-    order.price      = product.price.to_i / 100 # 分到元
+    order.city_id    = product.city_id
     order.product_id = product.id
-
-    order.subject    = product.name
-    order.note       = product.name
-    order.amount     = order.price * order.quantity
-
-    order.device     = from
-    order.book_time  = Date.today
+    order.amount     = product.price
     order.school_id  = product.school_id
     order.save
     order
