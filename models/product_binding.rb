@@ -25,7 +25,7 @@ class ProductBinding
   belongs_to :school
 
   def city_name
-    city.name
+    city.nil? ? '--' : city.name
   end
 
   def c2_product

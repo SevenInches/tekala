@@ -134,7 +134,7 @@ class Teacher
   belongs_to :city
 
   def city_name
-    city.name
+    city.nil? ? '--' : city.name
   end
   
   mount_uploader :drive_card_photo, DrivePhoto

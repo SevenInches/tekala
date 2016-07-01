@@ -24,7 +24,7 @@ class Order
   property :teacher_id, Integer
   property :train_field_id, Integer
   property :school_id, Integer
-
+  property :city_id, Integer
   property :order_no, String
   property :amount, Float
   property :discount, Float, :default => 0.0
@@ -490,7 +490,6 @@ class Order
        '曲线行驶'       => 5,
        '直角转弯'       => 6,
        '科目三训练项'    => 7}
-   
   end
 
   def self.theme_api

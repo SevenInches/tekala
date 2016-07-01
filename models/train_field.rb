@@ -39,7 +39,7 @@ class TrainField
 
 
   def city_name
-    city.name
+    city.nil? ? '--' : city.name
   end
 
   def area_name
@@ -73,16 +73,6 @@ class TrainField
     return {'深圳' => '0755', '武汉' => '027', '重庆' => '023'}
   end
 
-  def city_name
-    case self.city
-    when '0755'
-      return '深圳'
-    when '027'
-      return '武汉'
-    when '023'
-      return '重庆'
-    end
-  end
   def self.open
     return {'开' => 1, '关' => 0}
   end

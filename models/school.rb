@@ -28,7 +28,7 @@ class School
   has n, :signups
 
   def city_name
-    city.name
+    city.nil? ? '--' : city.name
   end
 
 end
