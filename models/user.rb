@@ -562,9 +562,9 @@ class User
   def create_order(product, from='app')
     return nil if product.nil?
     order = Order.all(:product_id => product.id, :status => 101, :type => Order::VIPTYPE)
-    order.update(:status => 0)
-
-    order = Order.new
+    if order.count ==0
+      order = Order.new
+    end
     order.order_no   = Order::generate_order_no_h5
     order.quantity   = 1
     order.type       = 1
@@ -582,9 +582,8 @@ class User
     order.device     = from
     order.book_time  = Date.today
     order.school_id  = product.school_id
-    if order.save
-      order
-    end
+    order.save
+    order
   end
 
   # 获得推荐人名字
