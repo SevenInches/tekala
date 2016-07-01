@@ -258,7 +258,7 @@ class User
   end
 
   def city_name
-    city.name
+    city.nil? ? '--' : city.name
   end
 
   def avatar_url
@@ -563,6 +563,7 @@ class User
     order.city_id    = product.city_id
     order.product_id = product.id
     order.amount     = product.price
+    #order.discount   = discount
     order.school_id  = product.school_id
     order.save
     order

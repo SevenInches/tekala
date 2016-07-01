@@ -74,6 +74,10 @@ Szcgs::Api.controllers :v1 do
         @user.school_id= params[:school_id]
         @user.avatar   = params[:avatar]
 
+        if params[:city_id].present?
+          @user.city_id = params[:city_id]
+        end
+
         #如果有给用户指定产品
         product = Product.get(params[:product_id])
         if product && product.can_buy #产品存在并可购买
