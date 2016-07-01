@@ -15,7 +15,6 @@
     <orderEntry type="library" scope="PROVIDED" name="carrierwave (v0.8.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="carrierwave-datamapper (v0.2.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="carrierwave-imagesorcery (v0.0.5, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="carrierwave-qiniu (v0.0.7.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="celluloid (v0.16.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="chronic (v0.10.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coderay (v1.1.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
@@ -43,7 +42,6 @@
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="faraday (v0.9.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fastercsv (v1.5.5, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="hitimes (v1.2.4, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-cookie (v1.0.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.7.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="image_sorcery (v1.1.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
@@ -53,27 +51,17 @@
     <orderEntry type="library" scope="PROVIDED" name="method_source (v0.8.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_magick (v4.5.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_portile2 (v2.0.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="minitest (v5.9.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="moneta (v0.7.20, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multipart-post (v2.0.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mustermann19 (v0.4.3, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="netrc (v0.7.9, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.6.7.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="oneapm_rpm (v1.1.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="padrino (v0.13.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="padrino-admin (v0.13.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="padrino-cache (v0.13.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="padrino-cookies (v0.1.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="padrino-core (v0.13.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="padrino-gen (v0.13.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="padrino-helpers (v0.13.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="padrino-mailer (v0.13.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="padrino-support (v0.13.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pingpp (v2.0.12, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry (v0.10.3, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry-padrino (v0.1.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.4.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="qiniu-rs (v1.1.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rabl (v0.12.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.6.4, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-protection (v1.5.3, RVM: ruby-2.2.0-dev) [gem]" level="application" />
@@ -81,7 +69,6 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v11.1.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis (v3.1.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis-namespace (v1.5.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rest-client (v1.8.0, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rest_client (v1.8.3, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rmagick (v2.15.4, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="roo (v2.0.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
@@ -103,7 +90,6 @@
     <orderEntry type="library" scope="PROVIDED" name="stringex (v1.5.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.19.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.5, RVM: ruby-2.2.0-dev) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="tilt (v1.4.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="timers (v4.0.4, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="twilio-ruby (v4.11.1, RVM: ruby-2.2.0-dev) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.2, RVM: ruby-2.2.0-dev) [gem]" level="application" />

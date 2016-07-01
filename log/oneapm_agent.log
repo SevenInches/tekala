@@ -195,3 +195,37 @@
 [06/04/16 15:50:03 +0800 JohndeMacBook-Pro.local (5127)] INFO : Installing Rack::Builder middleware instrumentation
 [06/04/16 15:50:03 +0800 JohndeMacBook-Pro.local (5127)] INFO : Finished instrumentation
 [06/04/16 15:50:11 +0800 JohndeMacBook-Pro.local (5127)] INFO : Doing deferred library-detection before Rack startup
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Starting the OneApm agent in "development" environment.
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Reading configuration from ./config/oneapm.yml (/Users/john/project/tekala)
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Using JSON marshaller (json)
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Environment: development
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Dispatcher: puma
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Application: mmxueche
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Deferring startup of agent reporting thread because puma may fork.
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Installing Sidekiq instrumentation
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Installing Sinatra instrumentation
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Installing Padrino instrumentation
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Installing Curb instrumentation
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Installing Net instrumentation
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Installing Redis Instrumentation
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Installing deferred Rack instrumentation
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Installing Rack::Builder middleware instrumentation
+[06/30/16 20:37:15 +0800 7hao.local (11249)] INFO : Finished instrumentation
+[06/30/16 20:37:22 +0800 7hao.local (11249)] INFO : Doing deferred library-detection before Rack startup
+[06/30/16 20:54:41 +0800 7hao.local (11501)] INFO : Starting the OneApm agent in "development" environment.
+[06/30/16 20:54:41 +0800 7hao.local (11501)] INFO : Reading configuration from ./config/oneapm.yml (/Users/john/project/tekala)
+[06/30/16 20:54:41 +0800 7hao.local (11501)] INFO : Using JSON marshaller (json)
+[06/30/16 20:54:41 +0800 7hao.local (11501)] INFO : Environment: development
+[06/30/16 20:54:41 +0800 7hao.local (11501)] INFO : Dispatcher: puma
+[06/30/16 20:54:41 +0800 7hao.local (11501)] INFO : Application: mmxueche
+[06/30/16 20:54:41 +0800 7hao.local (11501)] INFO : Deferring startup of agent reporting thread because puma may fork.
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing Sidekiq instrumentation
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing Sinatra instrumentation
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing Padrino instrumentation
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing Curb instrumentation
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing Net instrumentation
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing Redis Instrumentation
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing deferred Rack instrumentation
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing Rack::Builder middleware instrumentation
+[06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Finished instrumentation
+[06/30/16 20:54:49 +0800 7hao.local (11501)] INFO : Doing deferred library-detection before Rack startup

@@ -24,7 +24,6 @@ header{
     padding: 1.1rem 0;
     display: flex;
     justify-content: space-between;
-    width: 400px;
 }
 
 .app-nav li{
@@ -35,6 +34,7 @@ header{
     position: relative;
     display: block;
     padding: 10px 0;
+    color: #fff;
 }
 
 .app-nav li a:hover{
@@ -69,18 +69,16 @@ header{
 
 @media screen and (max-device-width: 414px){
     .app-nav{
-        width: 240px;
     }
     .nav-top {
-        padding: 20px 5px;
+        padding: 20px 0;
         opacity: 0.75;
     }
     .im-container{
         width: 88%;
     }
-    .navbar-header {
-        width: 106px;
-    }
 }
+
+
 
 
