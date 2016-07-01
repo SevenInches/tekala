@@ -59,10 +59,10 @@ Szcgs::Api.controllers :v1 do
       if !empty?(params[:mobile]) && @user.nil? 
 
         #验证码是否过期
-        # validate = UserValidate.first(:mobile => params[:mobile])
-        # if !(validate && (validate.updated_at + 10.minute > Time.now)  && (validate.code == params[:validate_code]))
-        #   return {:status => :failure, :msg => '验证码错误'}.to_json
-        # end
+        validate = UserValidate.first(:mobile => params[:mobile])
+        if !(validate && (validate.updated_at + 10.minute > Time.now)  && (validate.code == params[:validate_code]))
+          return {:status => :failure, :msg => '验证码错误'}.to_json
+        end
 
         @user = User.new
         @user.mobile   = params[:mobile]
