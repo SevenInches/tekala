@@ -103,7 +103,6 @@ Szcgs::Api.controllers :v1, :users do
           {:status => 'failure', :msg => @user.errors.full_messages.json(',')}.to_json
         end
 
-
       else
         {:status => :failure, :msg => '该手机号不存在'}.to_json
       end
@@ -151,6 +150,5 @@ Szcgs::Api.controllers :v1, :users do
     @message = Message.get(params[:message_id])
     {:status => @message && @message.destroy ? :success : :failure}.to_json 
   end
-
 
 end
