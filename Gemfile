@@ -138,6 +138,7 @@ gem 'netrc'
 gem 'http-cookie'
 gem 'rest-client'
 
+gem 'szm-chinese-name'
 
 
 
