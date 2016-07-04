@@ -175,5 +175,8 @@ Szcgs::Api.controllers :v1 do
       render 'v1/app_configs'
     end
 
-
+  get :ads, :provides => [:html] do
+    @ad = Ad.first(:order=> :pv.desc, :city_id => params[:city])
+    render 'v1/ad'
+  end
 end
