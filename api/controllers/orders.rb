@@ -180,7 +180,7 @@ Szcgs::Api.controllers :v1, :orders do
 
     channel = params[:channel].to_s.empty? ? 'wx' : params[:channel]
 
-    @signup  = @user.signup.get(params[:signup_id])
+    @signup  = @user.signup.first(params[:signup_id])
 
     return {:status => :failure, :msg => '没有该订单'}.to_json if @signup.nil?
 
