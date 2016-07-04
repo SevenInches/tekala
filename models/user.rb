@@ -563,7 +563,7 @@ class User
     order.city_id    = product.city_id
     order.product_id = product.id
     order.amount     = product.price
-    #order.discount   = discount
+    order.status     = 1
     order.school_id  = product.school_id
     order.save
     order
