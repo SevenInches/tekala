@@ -35,19 +35,9 @@ Szcgs::Api.controllers :v1, :teachers do
 
   get :search, :provides => [:json] do
     @teachers     = Teacher.all(:name.like => "%#{params[:name]}%")
-    @teachers     = @teachers.all(:status_flag => 1, :open => 1)
-    @teachers     = @teachers.all(:city => @city)
-    @teachers     = @teachers.all(:subject => [0, @subject]) if @subject
+    @teachers     = @teachers.all(:status_flag => 2, :open => 1)
     @total        = @teachers.count
     @teachers     = @teachers.paginate(:page => params[:page], :per_page => 20)
-
-    @teachers.each do |teacher|
-      teacher.status_flag      = 0 if @user &&  @user.city == '027' && @user.type == 0
-      #如果用户是c2 修改价格
-      teacher.price            += 20 if @user && @user.exam_type == 2
-      teacher.promo_price      += 20 if @user && @user.exam_type == 2
-    end
-
     render 'v1/teachers'
   end
 

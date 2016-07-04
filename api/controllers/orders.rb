@@ -174,6 +174,49 @@ Szcgs::Api.controllers :v1, :orders do
   end
 
   #app端支付 请求返回的charge内容
+  post :signup_pay, :map => '/v1/signups/:signup_id/pay', :provides => [:json] do
+
+    app_id  = CustomConfig::PINGAPPID #应用id
+
+    channel = params[:channel].to_s.empty? ? 'wx' : params[:channel]
+
+    @signup  = @user.signups.first(:id => params[:signup_id], :status => 0)
+
+    return {:status => :failure, :msg => '没有该订单'}.to_json if @signup.nil?
+
+    subject = @signup.product.name
+
+    return {:status => :failure, :msg => '未选择支付金额'}.to_json if @signup.amount == 0.0
+
+    CustomConfig.pingxx
+
+    order_result = Pingpp::Charge.create(
+        :order_no  => @signup.order_no,
+        :amount    => @signup.amount,
+        :subject   => subject,
+        :body      => subject,
+        :channel   => channel,
+        :currency  => "cny",
+        :client_ip => request.ip,
+        :app       => { :id => app_id },
+        :extra     => {}
+    )
+
+    result = JSON.parse(order_result.to_s)
+    @signup.ch_id = result['id']
+    @signup.pay_channel = channel
+    @signup.save
+    return {:status => :success,
+            :data => {
+                :result     => order_result.to_s,
+                :is_live    => result['livemode'],
+                :channel    => result['channel'],
+                :pay_status => @signup.status
+            }
+    }.to_json
+  end
+
+  #app端支付 请求返回的charge内容
   post :pay, :map => '/v1/orders/:order_id/pay', :provides => [:json] do  
 
     app_id  = CustomConfig::PINGAPPID #应用id

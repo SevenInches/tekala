@@ -81,7 +81,10 @@ Szcgs::Api.controllers :v1 do
         #如果有给用户指定产品
         product = Product.get(params[:product_id])
         if product && product.can_buy #产品存在并可购买
-          @user.product_id = product.id 
+          @user.product_id = product.id
+          if params[:city_id].nil?
+            @user.city_id = product.city_id
+          end
         end
         
         @user.status_flag  = 0
