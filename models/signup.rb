@@ -15,7 +15,6 @@ class Signup
   property :cancel_at, DateTime
   property :created_at, DateTime
   property :updated_at, DateTime
-  property :has_insure, Integer, :default => 0
   property :ch_id, String
   property :city_id, Integer
   property :product_id, Integer
@@ -31,7 +30,5 @@ class Signup
   belongs_to :product, :model => 'Product'
   belongs_to :school
   belongs_to :city
-
-  has 1, :insure
 
 end

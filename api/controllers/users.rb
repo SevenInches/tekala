@@ -64,7 +64,6 @@ Szcgs::Api.controllers :v1, :users do
   	else
   		{:status => :failure, :msg => '您没有修改权限', :err_code => 3001}.to_json
   	end
-
 	end
 
 	put :reset, :map => '/v1/users/:user_id/password', :provides => [:json] do
@@ -81,7 +80,6 @@ Szcgs::Api.controllers :v1, :users do
 	  else
   		{:status => :failure, :msg => '您没有修改密码的权限', :error_code => 3001}.to_json
 	  end
-
   end
 
   post :forget_password, :provides => [:json] do 
