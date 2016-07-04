@@ -174,13 +174,13 @@ Szcgs::Api.controllers :v1, :orders do
   end
 
   #app端支付 请求返回的charge内容
-  post :signup_pay, :map => '/v1/signups/:signup_id/pay', :provides => [:json] do
+  post :signup_pay, :map => '/v1/signups/pay', :provides => [:json] do
 
     app_id  = CustomConfig::PINGAPPID #应用id
 
     channel = params[:channel].to_s.empty? ? 'wx' : params[:channel]
 
-    @signup  = @user.signup.first(params[:signup_id])
+    @signup  = @user.signup
 
     return {:status => :failure, :msg => '没有该订单'}.to_json if @signup.nil?
 
