@@ -738,8 +738,6 @@ class User
     return {:status => :failure, :msg => "您当天已学 #{days_current} 个学时，为保证教学质量，防止疲劳学习，建议一天最多学习 #{daily_limit} 小时哦！"} if days_count > daily_limit
     # 限制用户一天只能约4个小时 */
     return {:status => :success}
-
-
   end
 
 end

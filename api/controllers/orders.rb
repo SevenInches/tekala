@@ -29,10 +29,10 @@ Szcgs::Api.controllers :v1, :orders do
     render 'v1/orders'
   end
 
-  get :index_vip, :map => '/v1/orders/vip', :provides => [:json] do 
-    @orders = @user.orders.all(:type => Order::VIPTYPE, :status => [101, 102, 103, 1, 2, 104])
+  get :index_signup, :map => '/v1/orders/signup', :provides => [:json] do
+    @orders = @user.signups.all
     @total  = @orders.count
-    render 'v1/order_vips'
+    render 'v1/order_signups'
   end
 
   get :theme, :provides => [:json] do 
@@ -75,9 +75,9 @@ Szcgs::Api.controllers :v1, :orders do
     {:status => :success, :data => {:user_limit => user_limit, :standard_hours => total_hours, :current_hours => current_hours, :pay_money => pay_money  } }.to_json
   end
 
-  get :show_vip, :map => '/v1/orders/vip/:order_id', :provides => [:json] do 
-    @orders = Order.get(params[:order_id])
-    render 'v1/order_vip'
+  get :show_signup, :map => '/v1/orders/signup/:signup_id', :provides => [:json] do
+    @order = Signup.get(params[:signup_id])
+    render 'v1/order_signup'
   end
 
   get :show, :map => '/v1/orders/:order_id', :provides => [:json] do 
@@ -263,23 +263,20 @@ Szcgs::Api.controllers :v1, :orders do
 
 
   #购买产品订单
-  post :index_vip, :map => '/v1/orders/vip', :provides => [:json] do 
+  post :index_signups, :map => '/v1/orders/signups', :provides => [:json] do
     product = Product.get(params[:product_id])
     if product.can_buy
-      # {:status => :success, }.to_json
       @order = @user.create_signup(product)
       if @order.nil?
       {:status => :failure, :msg => '产品订单生成失败，请联系小萌' }.to_json
       else
         # 用户城市修改
-        @user.city = @order.city
+        @user.city_id = @order.city_id
         @user.save
-        render 'v1/order_vip'
+        render 'v1/order_signup'
       end
     else
       {:status => :failure, :msg => '该产品暂不能购买' }.to_json
     end
-    
   end
-  
 end

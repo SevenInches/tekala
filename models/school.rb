@@ -31,4 +31,6 @@ class School
     city.nil? ? '--' : city.name
   end
 
+
+
 end

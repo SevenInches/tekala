@@ -10,7 +10,7 @@ class Order
   PAYTOTEACHER  = 0
   FREETOTEACHER = 2
 
-  STATUS_CANCEL     = 0   # 取消状态
+  STATUS_CANCEL     = 7   # 取消状态
   STATUS_REFUNDING  = 2   # 退款中
   #补贴
 
