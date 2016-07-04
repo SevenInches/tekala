@@ -35,7 +35,7 @@ Szcgs::Api.controllers :v1, :train_fields do
   get :search, :provides => [:json] do
     @train_fields = TrainField.all(:display => true, :open => 1, :name.like => "%#{params[:name]}%")
     @train_fields = @train_fields.all(:city_id => params[:city])       if params[:city]
-    @train_fields = @train_fields.all(:subject => @subject)         if @subject
+    #@train_fields = @train_fields.all(:subject => @subject)         if @subject
     @total        = @train_fields.count
     @train_fields = @train_fields.paginate(:page => params[:page], :per_page => 20)
     render 'v1/train_fields'
