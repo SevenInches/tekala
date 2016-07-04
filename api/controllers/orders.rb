@@ -266,6 +266,9 @@ Szcgs::Api.controllers :v1, :orders do
   post :index_signups, :map => '/v1/orders/signups', :provides => [:json] do
     product = Product.get(params[:product_id])
     if product.can_buy
+      if @user.signup.present?
+        @user.signup.destroy
+      end
       @order = @user.create_signup(product)
       if @order.nil?
       {:status => :failure, :msg => '产品订单生成失败，请联系小萌' }.to_json

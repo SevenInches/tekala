@@ -51,7 +51,7 @@ class Product
   end
 
   def can_buy 
-    show == 1 && deadline > Date.today
+    show == 1 && deadline > Date.today if deadline.present?
   end
 
 end

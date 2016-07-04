@@ -122,7 +122,6 @@ class User
 
   has n, :orders
 
-  has n, :signups
   #进度记录
   has n, :user_schedule, :model => 'UserSchedule', :child_key =>'user_id' , :constraint => :destroy
 
@@ -154,6 +153,8 @@ class User
   has 1, :user_wallet, :constraint => :destroy
 
   has 1, :user_plan, :constraint => :destroy
+
+  has 1, :signup, :constraint => :destroy
 
   has 1, :recommend, :constraint => :destroy
 
