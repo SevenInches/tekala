@@ -11,7 +11,7 @@ class Order
   FREETOTEACHER = 2
 
   STATUS_CANCEL     = 7   # 取消状态
-  STATUS_REFUNDING  = 2   # 退款中
+  STATUS_REFUNDING  = 5   # 退款中
   #补贴
 
   C2_ALLOWANCE = 10
@@ -166,7 +166,7 @@ class Order
   #推送给教练 是否接单
   def push_to_teacher
     #预订的日期
-    if status == 102 && Order::should_record_hours.include?(type)
+    if status == 2 && Order::should_record_hours.include?(type)
       current_confirm = OrderConfirm.create(:order_id   => id,
                                             :user_id    => user_id, 
                                             :teacher_id => teacher_id, 
@@ -182,7 +182,7 @@ class Order
 
   # 判断是否可退款
   def can_refund?
-    ([102,103,104].include? status) && pay_at != nil
+    ([2,3,4].include? status) && pay_at != nil
   end
 
   #统计来源 状态为支付 类型是 4800包过班 通过微信支付渠道
@@ -585,25 +585,15 @@ class Order
 
   #   可否取消订单
   def can_cancel?
-    status == 101 || status == 102 || status == 104
-  end
-
-  # 是否为练车订单
-  def booking_order?
-    type != 1
+    status == 1 || status == 2 || status == 4
   end
 
   # 取消订单操作
   def cancel
     # 未付款订单
-    return if status == 0
-    return set_status_cancel if status == 101
-    
-    if booking_order?
-      cancel_book_order
-    else
-      cancel_signup_order
-    end
+    return if status == 7
+    return set_status_cancel if status == 1 || status == 2
+    #cancel_book_order
   end
 
   # 将订单改变取消状态
@@ -616,10 +606,6 @@ class Order
     update(:status => STATUS_REFUNDING, :cancel_at=> Time.now)
   end
 
-  # 取消报名付款订单
-  def cancel_signup_order
-
-  end
 
   # 取消练车订单
   def cancel_book_order
@@ -629,10 +615,6 @@ class Order
         user_plan_decrease
         learn_hours_decrease 
         teacher_tech_decrease
-        
-        return_coupon if has_coupon   # 退回代金券
-        return_money  if ch_id        # 把钱退回用户支付帐号
-
         JPush.order_cancel id         # 推送取消订单的消息
       end
     else
