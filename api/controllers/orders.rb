@@ -108,7 +108,7 @@ Szcgs::Api.controllers :v1, :orders do
     @order.price      = @order.teacher.price
     @order.exam_type  = @user.exam_type
     @order.note       = params[:note]
-    @order.amount     = @order.price * @order.quantity
+    @order.amount     = @order.price * @order.quantity if @order.price.present?
     @order.device     = params[:device]
     @order.longitude  = params[:longitude]
     @order.latitude   = params[:latitude]
