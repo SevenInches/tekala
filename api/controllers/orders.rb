@@ -158,7 +158,7 @@ Szcgs::Api.controllers :v1, :orders do
 
     order_result = Pingpp::Charge.create(
         :order_no  => @signup.order_no,
-        :amount    => @signup.amount,
+        :amount    => @signup.amount*100,
         :subject   => subject,
         :body      => subject,
         :channel   => channel,
