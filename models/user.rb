@@ -666,57 +666,58 @@ class User
     teacher     = order.teacher
     train_field = order.train_field
 
-    if status_flag <= 5 && type == User::VIP
-      return {:status   => :failure,
-              :msg      => '需通过科目一考试后才可进行预约练车。如已通过科目一考试，请联系小萌更新学习进度哦~',
-              :err_code => 2001 }
-    end
-    #如果用户是在考科目一则不能下单*/
-
-    #limit
-    #/*学时限制
-    if status_flag < 7
-      if user_plan.exam_two + order.quantity > user_plan.exam_two_standard
-        return {:status => :failure,
-                :msg    => '您当前科目的预约学时已达到小萌建议的学习时长，还没学会？请让小萌了解您的学车进度，提出申请后再进行预约哦。',
-                :code   => 2002 }
-      end
-    else
-      if user_plan.exam_three + order.quantity > user_plan.exam_three_standard
-        return {:status => :failure,
-                :msg    => '您当前科目的预约学时已达到小萌建议的学习时长，还没学会？请让小萌了解您的学车进度，提出申请后再进行预约吧。',
-                :code   => 9003 }
-
-      end
-    end
-    #学时限制 */
+    # if status_flag <= 5 && type == User::VIP
+    #   return {:status   => :failure,
+    #           :msg      => '需通过科目一考试后才可进行预约练车。如已通过科目一考试，请联系小萌更新学习进度哦~',
+    #           :err_code => 2001 }
+    # end
+    # #如果用户是在考科目一则不能下单*/
+    #
+    # #limit
+    # #/*学时限制
+    # if status_flag < 7
+    #   if user_plan.exam_two + order.quantity > user_plan.exam_two_standard
+    #     return {:status => :failure,
+    #             :msg    => '您当前科目的预约学时已达到小萌建议的学习时长，还没学会？请让小萌了解您的学车进度，提出申请后再进行预约哦。',
+    #             :code   => 2002 }
+    #   end
+    # else
+    #   if user_plan.exam_three + order.quantity > user_plan.exam_three_standard
+    #     return {:status => :failure,
+    #             :msg    => '您当前科目的预约学时已达到小萌建议的学习时长，还没学会？请让小萌了解您的学车进度，提出申请后再进行预约吧。',
+    #             :code   => 9003 }
+    #
+    #   end
+    # end
+    # #学时限制 */
 
     #判断教练是否存在
     return {:status => :failure, :msg => '未能找到该教练', :err_code => 1001}  if teacher.nil?
-    if teacher.train_fields.first(:id => train_field.id).nil?
+    if train_field.present? && teacher.train_fields.first(:id => train_field.id).nil?
       return {:status => :failure, :msg => '该教练已不在该训练场', :err_code => 1002}
     end
+
     #/*预订的日期
     book_time_first = (book_time.to_time).strftime('%Y-%m-%d %k:00')
     book_time_second = (book_time.to_time + 1.hours).strftime('%Y-%m-%d %k:00') if order.quantity == 2
-
     tmp = []
     Order.all(:teacher_id => teacher.id, :status => Order::pay_or_done, :book_time => ((Date.today+1)..(Date.today+8.day))).each do |order|
       tmp << order.book_time.strftime('%Y-%m-%d %k:00')
       tmp << (order.book_time+1.hour).strftime('%Y-%m-%d %k:00') if order.quantity == 2
     end
+
     # 预订的日期 */
 
     #/* 不能预约当天时间
-    if book_time.to_date <= Date.today
-      return {:status => :failure, :msg => '不能预约当天/之前时间练车'}
-    end
+    # if book_time.to_date <= Date.today
+    #   return {:status => :failure, :msg => '不能预约当天/之前时间练车'}
+    # end
     # 不能预约当天时间*/
 
     #/*如果现在时间是18点 则不允许预约隔天的
-    if Time.now.strftime('%H').to_i > 17 &&  book_time.to_time <= (Date.today + 2.days).to_time
-      return {:status => :failure, :msg => '18点后不能预约第二天练车'}
-    end
+    # if Time.now.strftime('%H').to_i > 17 &&  book_time.to_time <= (Date.today + 2.days).to_time
+    #   return {:status => :failure, :msg => '18点后不能预约第二天练车'}
+    # end
     #如果现在时间是18点 则不允许预约隔天的*/
 
     #limit
@@ -727,16 +728,16 @@ class User
     #limit
 
     # /*限制用户一天只能约N个小时
-    tmp = []
-    Order.all(:user_id => id, :status => Order::pay_or_done, :book_time => ((book_time_first.to_date)..(book_time_first.to_date+1.day))).each do |order|
-      tmp << order.book_time.strftime('%Y-%m-%d %k:00')
-      tmp << (order.book_time+1.hour).strftime('%Y-%m-%d %k:00') if order.quantity == 2
-    end
-
-    days_count   = tmp.map{|val| val[0..9] }.count(book_time_first[0..9])
-    days_current = days_count
-    days_count  += order.quantity #今天学时
-    return {:status => :failure, :msg => "您当天已学 #{days_current} 个学时，为保证教学质量，防止疲劳学习，建议一天最多学习 #{daily_limit} 小时哦！"} if days_count > daily_limit
+    # tmp = []
+    # Order.all(:user_id => id, :status => Order::pay_or_done, :book_time => ((book_time_first.to_date)..(book_time_first.to_date+1.day))).each do |order|
+    #   tmp << order.book_time.strftime('%Y-%m-%d %k:00')
+    #   tmp << (order.book_time+1.hour).strftime('%Y-%m-%d %k:00') if order.quantity == 2
+    # end
+    #
+    # days_count   = tmp.map{|val| val[0..9] }.count(book_time_first[0..9])
+    # days_current = days_count
+    # days_count  += order.quantity #今天学时
+    # return {:status => :failure, :msg => "您当天已学 #{days_current} 个学时，为保证教学质量，防止疲劳学习，建议一天最多学习 #{daily_limit} 小时哦！"} if days_count > daily_limit
     # 限制用户一天只能约4个小时 */
     return {:status => :success}
   end

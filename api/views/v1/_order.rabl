@@ -1,6 +1,5 @@
 attributes :id, :order_no, :note, :subject, :price, :amount, :quantity, :promotion_amount, :discount, :type, 
-:teacher_id, :user_id, 
-:device, :status,  :accept_status, :status_word, :created_at, :book_time, :has_coupon, :can_comment, :user_has_comment
+:teacher_id, :user_id,  :status, :created_at, :book_time_format, :has_coupon, :can_comment, :user_has_comment
 node(:book_time ) { |val| val.type == 1 ? '' : val.book_time }
 
 attribute :pay_at,      :if => lambda { |val| !val.pay_at.nil? }
@@ -14,10 +13,6 @@ child(:teacher) {
 
 child(:train_field => :train_field){
   attributes :id, :name, :area_word, :address, :longitude, :latitude, :good_tags, :bad_tags
-}
-
-child(:user_coupon => :coupon) {
-  attributes :id, :code, :money
 }
 child(:school){
   attributes :id, :city_name, :name, :address, :phone, :profile, :is_vip, :master,:logo, :found_at, :latitude, :longitude

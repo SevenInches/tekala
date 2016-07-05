@@ -6,8 +6,8 @@ class Order
 
   #VIP订单 1 普通订单 0,2 需要支付给教练 0, 无需支付给教练 2
   VIPTYPE       = 1
-  NORMALTYPE    = [0,2]
-  PAYTOTEACHER  = 0
+  NORMALTYPE    = [1,2]
+  PAYTOTEACHER  = 1
   FREETOTEACHER = 2
 
   STATUS_CANCEL     = 7   # 取消状态
@@ -97,11 +97,10 @@ class Order
   has 1, :insure
 
   after :create do |order|
-    if order.status == 102 && Order::should_record_hours.include?(type)
-      plan = user.user_plan
+    if order.status == 2 && Order::should_record_hours.include?(type)
       user_plan_increase
       learn_hours_increase 
-      teacher_tech_increase if type == 0 #如果非绑定教练的话 才给教练+1
+      teacher_tech_increase
       create_user_schedule
     end
   end
@@ -121,21 +120,21 @@ class Order
       end
 
       #更新学车计划 统计学车时间 订单支付 +1 (测试通过) 
-      if self.before_status < 102 && status == 102 &&  Order::should_record_hours.include?(type)
+      if self.before_status < 1 && status == 2 &&  Order::should_record_hours.include?(type)
         user_plan_increase
         learn_hours_increase 
         teacher_tech_increase if type == 0 #如果非绑定教练的话 才给教练+1
       end
 
       #订单取消或者退款 则学时数 -1 (测试通过)
-      if Order::pay_or_done.include?(self.before_status) && (status == 0 || status == 2) &&  Order::should_record_hours.include?(type)
+      if Order::pay_or_done.include?(self.before_status) && (status == 6 || status == 6) &&  Order::should_record_hours.include?(type)
         # user_plan_decrease
         # learn_hours_decrease 
         # teacher_tech_decrease if type == 0 #如果非绑定教练的话 才给教练-1
       end
 
       #生成学车进度 && 推送给教练 (通过测试)
-      if self.before_status < 102 && status == 102 && Order::should_record_hours.include?(type)
+      if self.before_status < 2 && status == 2 && Order::should_record_hours.include?(type)
         create_user_schedule
       end
 
@@ -440,7 +439,7 @@ class Order
   end
 
   def self.pay_or_done 
-    [102,103,104]
+    [2,3,4]
   end
 
   def self.normal_order
