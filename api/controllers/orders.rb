@@ -279,7 +279,6 @@ Szcgs::Api.controllers :v1, :orders do
         @signup.status = 2
         @signup.save
         #支付成功 推送
-        @signup.push_to_teacher
       end
     else
       p '找不到'
