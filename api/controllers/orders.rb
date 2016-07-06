@@ -29,12 +29,6 @@ Szcgs::Api.controllers :v1, :orders do
     render 'v1/orders'
   end
 
-  get :index_signup, :map => '/v1/orders/signup', :provides => [:json] do
-    @orders = @user.signups.all
-    @total  = @orders.count
-    render 'v1/order_signups'
-  end
-
   get :theme, :provides => [:json] do 
     if @user.status_flag < 7
       { :status => :success,
@@ -277,9 +271,9 @@ Szcgs::Api.controllers :v1, :orders do
         #付款时间
         @signup.pay_at = Time.now
         @signup.status = 2
-        @signup.save
-        #支付成功 推送
-
+        if @signup.save
+          {:status => :success }.to_json
+        end
       end
     end #order
   end #post :pay_done

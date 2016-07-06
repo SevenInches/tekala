@@ -86,7 +86,7 @@ class Teacher
   property :status_flag , Integer, :default => 1
   
   #'待审核'=>1, '审核通过'=>2, '审核不通过'=>3, '报名' => 4
-  property :status, Integer, :default => 200
+  property :status, Integer, :default => 1
   
   #用户区域
   #   {:龙岗 => 1, :宝安 => 2, :罗湖 => 3, :福田 => 4, :南山 => 5, :盐田 => 6, :其他 => 0}

@@ -19,7 +19,7 @@ class Signup
   property :city_id, Integer
   property :product_id, Integer
   property :pay_channel, String
-  #0=>未付款,1=>已付款,2=>申请退款,3=>退款中
+  #1=>未付款,2=>已付款,3=>退款中,4=>已退款
   property :status, Integer, :default => 0
   #1=>C1,2=>C2
   property :exam_type, Integer, :default => 1
@@ -30,5 +30,18 @@ class Signup
   belongs_to :product, :model => 'Product'
   belongs_to :school
   belongs_to :city
+
+  def status_word
+    case self.status
+      when 1
+        return '待支付'
+      when 2
+        return '已支付'
+      when 3
+        return '退款中'
+      when 4
+        return '已退款'
+    end
+  end
 
 end

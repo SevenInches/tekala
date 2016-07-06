@@ -49,7 +49,7 @@ class Order
   property :ch_id, String #ping++ ch_id
 
 
-  #'未支付'=>1, '已支付'=>2, '已完成'=>3, '已确定'=>4, '退款中' => 5, '已退款' => 6, '取消'=>7
+  #'未支付'=>1, '已预约'=>2, '已完成'=>3, '已确定'=>4, '退款中' => 5, '已退款' => 6, '取消'=>7
   property :status, Integer, :default => 1
 
   #'练车预约订单' => 1, '打包订单' => 2, '活动预付款' => 3
@@ -293,68 +293,48 @@ class Order
 
   def set_status
     case self.status
-    when 101
-      return '未支付'
-    when 102
-      return '已支付'
-    when 103
-      return '已完成'
-    when 104
-      return '已确定'
-    when 2
-      return '退款中'
     when 1
+      return '未支付'
+    when 2
+      return '已预约'
+    when 3
+      return '已完成'
+    when 4
+      return '已确定'
+    when 5
+      return '退款中'
+    when 6
       return '已退款'
-    when 0
+    when 7
       return '已取消'
     end
   end
 
   def status_word
     case self.status
-    when 101
+    when 1
       return '待支付'
-    when 102
+    when 2
       return '等待接单'
-    when 103
+    when 3
       if can_comment && !user_has_comment
        return '待评价'
       else
        return '已完成'
       end
-    when 104
+    when 4
       return '已接单'
-    when 2
+    when 5
       return '退款中'
-    when 1
+    when 6
       return '已退款'
-    when 0
+    when 7
       if accept_status == 2
         return '教练繁忙'
       else
         return '已取消'
       end
     end
-  end
-
-  def status_color 
-    case self.status
-    when 101
-      return 'danger'
-    when 102
-      return 'success'
-    when 103
-      return 'info'
-    when 104
-      return 'info'
-    when 2
-      return 'danger'
-    when 1
-      return 'warning'
-    when 0
-      return 'warning'
-    end
-
   end
 
   def device_color
