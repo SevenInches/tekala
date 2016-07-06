@@ -262,7 +262,7 @@ Szcgs::Api.controllers :v1, :orders do
       if @signup
         @user = @signup.user
         @user.product_id = @signup.product_id
-        @user.save
+        @user.save!
 
         #付款成功 发短信通知用户
 
@@ -275,7 +275,7 @@ Szcgs::Api.controllers :v1, :orders do
         #付款时间
         @signup.pay_at = Time.now
         @signup.status = 2
-        if @signup.save
+        if @signup.save!
           {:status => :success }.to_json
         end
       end
