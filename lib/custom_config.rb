@@ -40,7 +40,7 @@ class CustomConfig
     EXAMLISTPAGE = 'reportout_getddPdListNew.action'
 	
 	def self.pingxx
-      Pingpp.api_key = (Padrino.env == :production) ? PINGTEST : PINGTEST
+      Pingpp.api_key = (Padrino.env == :production) ? PINGLIVE : PINGTEST
   end
 
 end
