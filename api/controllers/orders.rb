@@ -164,7 +164,7 @@ Szcgs::Api.controllers :v1, :orders do
 
     result = JSON.parse(order_result.to_s)
     @signup.ch_id = result['id']
-    @signup.pay_channel = channel
+    @signup.pay_channel = result['channel']
     if @signup.save
       return {:status => :success,
               :data => {
