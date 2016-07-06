@@ -275,11 +275,11 @@ Szcgs::Api.controllers :v1, :orders do
         #OptMessage.order(content, :order)
 
         #付款时间
-        @order.pay_at = Time.now
-        @order.status = 2
-        @order.save
+        @signup.pay_at = Time.now
+        @signup.status = 2
+        @signup.save
         #支付成功 推送
-        @order.push_to_teacher
+        @signup.push_to_teacher
       end
     else
       p '找不到'
