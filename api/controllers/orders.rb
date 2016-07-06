@@ -328,6 +328,5 @@ Szcgs::Api.controllers :v1, :orders do
         @order.save
       end
     end
-
-  end
+  
 end
