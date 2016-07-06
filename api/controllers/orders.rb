@@ -258,10 +258,9 @@ Szcgs::Api.controllers :v1, :orders do
   post :pay_done, :provides => [:json] do
     notify = request.body.read
     ping_result = JSON.parse(notify.to_s)
-    #付款成功 && 该订单为包过班订单 => 用户设定为包过班
+    #付款成功
     if ping_result['data']['object']['id'] && ping_result['type'] == 'charge.succeeded'
       @signup = Signup.first(:ch_id => ping_result['data']['object']['id'])
-
       if @signup
         @user = @signup.user
         @user.product_id = @signup.product_id
@@ -273,22 +272,7 @@ Szcgs::Api.controllers :v1, :orders do
                         :member_mobile  => "#{@user.mobile}")
         sms.signup
 
-        content = "订单|#{@user.name},报名#{@order.note}"
-        # 推送消息武汉或深圳
-
         #OptMessage.order(content, :order)
-
-        #标识用户的类型
-        if @signup.product_id.present?
-          product = @signup.product
-          if product
-            user             = @signup.user
-            user.product_id  = product.id
-            user.city_id        = product.city_id
-            user.save
-          end
-
-        end
 
         #付款时间
         @order.pay_at = Time.now
@@ -297,6 +281,8 @@ Szcgs::Api.controllers :v1, :orders do
         #支付成功 推送
         @order.push_to_teacher
       end
+    else
+      p '找不到'
     end #order
   end #post :pay_done
 
@@ -328,5 +314,5 @@ Szcgs::Api.controllers :v1, :orders do
         @order.save
       end
     end
-  
+
 end
