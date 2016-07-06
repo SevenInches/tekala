@@ -253,7 +253,7 @@ Szcgs::Api.controllers :v1, :orders do
   # \"created\":1435302444,
   # \"livemode\":false,\"type\":\"charge.succeeded\",
   # \"data\":{\"object\":{\"id\":\"ch_jTyzP4qrnj18WrXbnHePGiPC\",\"object\":\"charge\",\"created\":1435302441,\"livemode\":false,\"paid\":true,\"refunded\":false,\"app\":\"app_jz580OWvPGaTXTKK\",\"channel\":\"wx\",\"order_no\":\"20150626150718662273\",\"client_ip\":\"183.17.253.246\",\"amount\":11900,\"amount_settle\":0,\"currency\":\"cny\",\"subject\":\"empty\",\"body\":\"empty\",\"extra\":{},\"time_paid\":1435302444,\"time_expire\":1435388841,\"time_settle\":null,\"transaction_no\":\"1273950615201506262524717344\",\"refunds\":{\"object\":\"list\",\"url\":\"/v1/charges/ch_jTyzP4qrnj18WrXbnHePGiPC/refunds\",\"has_more\":false,\"data\":[]},\"amount_refunded\":0,\"failure_code\":null,\"failure_msg\":null,\"metadata\":{},\"credential\":{},\"description\":null}},\"object\":\"event\",\"pending_webhooks\":0,\"request\":\"iar_nX5OePvHKyvH1CKGG844mDiD\"}"
-  post :pay_done, :provides => [:json] do
+  post :pay_done, :map => '/v1/signups/pay_done', :provides => [:json] do
     notify = request.body.read
     ping_result = JSON.parse(notify.to_s)
     #付款成功
@@ -264,18 +264,17 @@ Szcgs::Api.controllers :v1, :orders do
         @user.product_id = @signup.product_id
         @user.save
 
+        #付款时间
+        @signup.pay_at = Time.now
+        @signup.status = 2
+        @signup.save!
+
         #付款成功 发短信通知用户
 
         sms = Sms.new(:content        => "#{@user.name}学员，您已报名#{@signup.school.name}，并支付成功。如有疑问，请通过微信公众号进行咨询。祝您学车愉快。",
                       :member_mobile  => "#{@user.mobile}")
         sms.signup
-
-        #付款时间
-        @signup.pay_at = Time.now
-        @signup.status = 2
-        if @signup.save!
-          {:status => :success }.to_json
-        end
+        
       end
     end #order
   end #post :pay_done
