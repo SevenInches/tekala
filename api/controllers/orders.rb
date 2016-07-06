@@ -248,4 +248,86 @@ Szcgs::Api.controllers :v1, :orders do
       {:status => :failure, :msg => '该产品暂不能购买' }.to_json
     end
   end
+
+  # ping++ 请求 template
+  #
+  # "{\"id\":\"evt_Y1o7j5OQFEJQlS5eClV62qP6\",
+  # \"created\":1435302444,
+  # \"livemode\":false,\"type\":\"charge.succeeded\",
+  # \"data\":{\"object\":{\"id\":\"ch_jTyzP4qrnj18WrXbnHePGiPC\",\"object\":\"charge\",\"created\":1435302441,\"livemode\":false,\"paid\":true,\"refunded\":false,\"app\":\"app_jz580OWvPGaTXTKK\",\"channel\":\"wx\",\"order_no\":\"20150626150718662273\",\"client_ip\":\"183.17.253.246\",\"amount\":11900,\"amount_settle\":0,\"currency\":\"cny\",\"subject\":\"empty\",\"body\":\"empty\",\"extra\":{},\"time_paid\":1435302444,\"time_expire\":1435388841,\"time_settle\":null,\"transaction_no\":\"1273950615201506262524717344\",\"refunds\":{\"object\":\"list\",\"url\":\"/v1/charges/ch_jTyzP4qrnj18WrXbnHePGiPC/refunds\",\"has_more\":false,\"data\":[]},\"amount_refunded\":0,\"failure_code\":null,\"failure_msg\":null,\"metadata\":{},\"credential\":{},\"description\":null}},\"object\":\"event\",\"pending_webhooks\":0,\"request\":\"iar_nX5OePvHKyvH1CKGG844mDiD\"}"
+  post :pay_done, :provides => [:json] do
+    notify = request.body.read
+    ping_result = JSON.parse(notify.to_s)
+    #付款成功 && 该订单为包过班订单 => 用户设定为包过班
+    if ping_result['data']['object']['id'] && ping_result['type'] == 'charge.succeeded'
+      @signup = Signup.first(:ch_id => ping_result['data']['object']['id'])
+
+      if @signup
+        @user = @signup.user
+        @user.product_id = @signup.product_id
+        @user.save
+
+        #付款成功 发短信通知用户
+
+        sms = Sms.new(:content        => "#{@user.name}学员，您已报名#{@order.note}，并支付成功。如有疑问，请通过微信公众号进行咨询。祝您学车愉快。",
+                        :member_mobile  => "#{@user.mobile}")
+        sms.signup
+
+        content = "订单|#{@user.name},报名#{@order.note}"
+        # 推送消息武汉或深圳
+
+        #OptMessage.order(content, :order)
+
+        #标识用户的类型
+        if @signup.product_id.present?
+          product = @signup.product
+          if product
+            user             = @signup.user
+            user.product_id  = product.id
+            user.city_id        = product.city_id
+            user.save
+          end
+
+        end
+
+        #付款时间
+        @order.pay_at = Time.now
+        @order.status = 2
+        @order.save
+        #支付成功 推送
+        @order.push_to_teacher
+      end
+    end #order
+  end #post :pay_done
+
+
+  ############
+  #
+  ## ping++ hook 报名 回调 退款
+  ## REFUND && PAY_DONE
+  #
+  #############
+
+  post :refund, :provides => [:json] do
+    notify = request.body.read
+    ping_result = JSON.parse(notify.to_s)
+    #退款功能  退款成功
+    if ping_result['data']['object']['id'] && ping_result['type'] == 'refund.succeeded'
+      @signup = Signup.first(:ch_id => ping_result['data']['object']['charge'])
+
+      if @signup
+        @user = @order.user
+        @user.type = 0
+
+
+        @user.save
+        end
+
+        @order.cancel_at = Time.now
+        @order.status = 6
+        @order.save
+      end
+    end
+
+  end
 end

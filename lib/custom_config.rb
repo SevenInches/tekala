@@ -12,7 +12,7 @@ class CustomConfig
 	# HOST    = 'http://172.168.1.120:9000'
 	PINGLIVE  = "sk_live_wesz5JuMZxfVLO1GNI57K9x9"
 	PINGTEST  = "sk_test_vzbPqTG0GqT8LqLCyPHmf9mL"
-	PINGAPPID = "app_jz580OWvPGaTXTKK"
+	PINGAPPID = "app_H8Se90L8mLaDWPWn"
 	
 	#极光推送
 	JPKEYTEST = '5b07a33a8316d8fa9015e419'
@@ -40,7 +40,7 @@ class CustomConfig
     EXAMLISTPAGE = 'reportout_getddPdListNew.action'
 	
 	def self.pingxx
-      Pingpp.api_key = (Padrino.env == :production) ? PINGLIVE : PINGTEST
+      Pingpp.api_key = (Padrino.env == :production) ? PINGTEST : PINGTEST
   end
 
 end
