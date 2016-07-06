@@ -163,9 +163,10 @@ Szcgs::Api.controllers :v1, :orders do
     )
 
     result = JSON.parse(order_result.to_s)
-    @signup.ch_id = result['id']
-    @signup.pay_channel = result['channel']
-    if @signup.save
+
+    @signup.ch_id = result['id'].to_s
+    @signup.pay_channel = result['channel'].to_s
+    if @signup.save!
       return {:status => :success,
               :data => {
                   :result     => order_result.to_s,
@@ -174,8 +175,9 @@ Szcgs::Api.controllers :v1, :orders do
                   :pay_status => @signup.status
               }
       }.to_json
+    else
+      return {:status => :error, :msg => '报名订单状态未改变'}.to_json
     end
-    return {:status => :error, :msg => '报名订单状态未改变'}.to_json
   end
 
   #app端支付 请求返回的charge内容
