@@ -13,6 +13,7 @@
       <td class=list-column> <%= question.title %> </td>
       <td class=list-column> <%= question.tag %> </td>
       <td class=list-column> <%= question.set_type if question.type %> </td>
+      <td class=list-column> <%= question.weight %> </td>
       <td class="list-column" > 
 
       <%=link_to question.show_word, :href => url(:questions, :show, :id => question.id, :back => request.url), :style=> question.show ? '' : 'color:red;' %>
