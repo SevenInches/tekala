@@ -24,10 +24,6 @@ class School
 
   belongs_to :city
 
-  has n, :product_bindings
-
-  has n, :signups
-
   after :create do |school|
     tid = school.demo_teacher
     fid = school.demo_train_field

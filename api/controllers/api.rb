@@ -142,12 +142,6 @@ Szcgs::Api.controllers :v1 do
       render 'v1/static_pages/about'
     end
 
-    get :hospitals, :provides => [:json] do 
-      @hospitals = Hospital.all
-      @total     = @hospitals.count
-      @hospitals = @hospitals.paginate(:page => params[:page], :per_page => 20) 
-      render 'v1/hospitals'
-    end
 
     #个人的历史进度
     get :history, :provides => [:html] do 
@@ -165,7 +159,7 @@ Szcgs::Api.controllers :v1 do
     end
 
     get :questions, :provides => [:json] do 
-      @questions = Question.all(:city => params[:city], :show => true)
+      @questions = Question.all
       render 'v1/questions'
     end
 

@@ -31,16 +31,11 @@ class User
   #{"注册" => 0, "已付费" => 1, "拍照" => 2, "体检" => 3, "录指纹" => 4, "科目一" => 5, "科目二" => 6, "科目三" => 7, "考长途" => 8, "科目四" => 9, "已拿驾照" => 10, "已离开" => 11, "已入网" => 12}
   property :status_flag, Integer, :default => 0
 
-  # property :last_login, DateTime
-  property :last_login_at, DateTime
-  property :device, String
-  property :version, String
-
   property :motto, String, :default => ''
 
   property :created_at, DateTime
   property :updated_at, DateTime
-  # {:普通班 => 0, :包过班 => 1} 订单交付类型 2015-07-20 mok
+
   property :type, Integer, :default => 0
 
   property :address, String
@@ -53,27 +48,14 @@ class User
 
   property :pay_type_id, Integer
 
-  #邀请码
-  property :invite_code, String
-  property :from_code, String
-
-  property :product_id, Integer, :default => 11
-
   # 驾校ID
   property :school_id, Integer, :default => 0
   
-  #登陆次数
-  property :login_count, Integer, :default => 0
-
-  property :signup_at, Date
-
   has n, :orders
 
-  has n, :comments, :model => 'UserComment', :child_key =>'user_id' , :constraint => :destroy
-  
   has n, :user_cycle, :constraint => :destroy
 
-  belongs_to :product, :model => 'Product'
+  #belongs_to :product, :model => 'Product'
 
   belongs_to :school, :model => 'School'
 
