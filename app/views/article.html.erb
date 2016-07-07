@@ -2,9 +2,9 @@
 <div class="at-container">
     <div class="at-title">
         <h1><%= @article.title %></h1>
-        <p><%= @article.created_at.strftime('%Y-%m-%d %H:%c') %> 发表</p>
+        <p><%= @article.created_at.strftime('%Y-%m-%d %H:%M') %> 发表</p>
     </div>
     <div class="at-content">
-        <%= p @article.content %>
+        <%= p @article.content.html_safe %>
     </div>
 </div>
