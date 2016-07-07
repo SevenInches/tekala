@@ -262,6 +262,7 @@ Szcgs::Api.controllers :v1, :orders do
       if @signup
         @user = @signup.user
         @user.product_id = @signup.product_id
+        @user.status_flag = 1
         @user.save
 
         #付款时间
@@ -296,7 +297,7 @@ Szcgs::Api.controllers :v1, :orders do
 
       if @signup
         @user = @order.user
-        @user.type = 0
+        @user.status_flag = 0
         @user.save
 
         @signup.cancel_at = Time.now
