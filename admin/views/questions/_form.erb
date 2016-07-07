@@ -1,0 +1,51 @@
+<% error = @question.errors.key?(:tag) && @question.errors[:tag].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '标签', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :tag, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:tag) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @question.errors.key?(:title) && @question.errors[:title].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '问题', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :title, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:title) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @question.errors.key?(:content) && @question.errors[:content].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '答案', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_area :content, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:content) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="form-group">
+  <%= f.label '对象', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select :type, :options => Question.get_type,:class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="form-actions">
+    <div class="col-sm-8 col-sm-offset-4">
+        <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+          &nbsp;
+       
+        <%= link_to pat(:cancel), url(:questions, :index), :class => 'btn btn-default' %>
+    </div>
+  
+</div>

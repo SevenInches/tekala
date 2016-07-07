@@ -1,0 +1,38 @@
+<a class="btn btn-default" href="?<%=params_string(params, 'show')%>">全部</a>
+&nbsp;&nbsp;
+<a class="btn btn-success" href="?show=1<%=params_string(params, 'show')%>">显示</a>
+&nbsp;&nbsp;
+<a class="btn btn-danger" href="?show=0<%=params_string(params, 'show')%>">隐藏</a>
+<tbody>
+  <% @questions.each do |question| %>
+    <tr class=list-row>
+      <td class="list-column list-selectable">
+        <%= check_box_tag 'question_ids[]', :value => question.id, :class => 'list-selectable-checkbox' %>
+       </td>
+      <td class=list-column> <%= question.id %> </td>
+      <td class=list-column> <%= question.title %> </td>
+      <td class=list-column> <%= question.tag %> </td>
+      <td class=list-column> <%= question.set_type if question.type %> </td>
+      <td class="list-column" > 
+
+      <%=link_to question.show_word, :href => url(:questions, :show, :id => question.id, :back => request.url), :style=> question.show ? '' : 'color:red;' %>
+      </td>
+      <td class="list-column list-row-action">
+        <div class='list-row-action-wrapper'>
+           <%= link_to tag_icon(:edit), :href => url(:questions, :edit, :id => question.id), :rel => :tooltip, :title => "#{pat(:edit)} question", :class => 'list-row-action-wrapper-link' %>
+           <%= link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} question", :class => 'list-row-action-delete-one list-row-action-wrapper-link' %>
+           <div class="popover list-row-action-popover-delete-one left">
+             <div class=arrow> </div>
+             <h3 class=popover-title><%= pat(:delete, :model => "question") %></h3>
+             <div class=popover-content>
+               <%- form_tag url(:questions, :destroy, :id => question.id), :method => :delete do %>
+                 <%= submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small' %>
+                 <div class="btn btn-default btn-small cancel"><%= pat(:cancel) %></div>
+               <% end %>
+             </div>
+           </div>
+         </div>
+      </td>
+    </tr>
+  <% end %>
+</tbody>

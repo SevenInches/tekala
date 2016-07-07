@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name=viewport content='width=device-width,initial-scale=1' />
+    <title>萌萌学车管理系统</title>
+    <%= favicon_tag "favicon.ico" %>
+    <!-- https://www.google.com/jsapi -->
+    
+    <%= stylesheet_link_tag 'font-awesome', 'metisMenu', 'animate', 'bootstrap', 'select2', 'select2-bootstrap', 'bootstrap-datepicker3.min', 'dataTables.bootstrap', 'summernote', 'summernote-bs3','style', 'application' %>
+    <%= javascript_include_tag 'jquery-1.11.0.min' %>
+    <!-- include libraries(jQuery, bootstrap, fontawesome) -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> 
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+    <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js"></script>
+    <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+
+    <!-- include summernote css/js-->
+    <script src="http://summernote.org/bower_components/summernote/dist/summernote.js"></script>
+
+
+  </head>
+  <body>
+
+    <!-- Header -->
+    <%= partial 'layouts/header' %>
+   
+    <!-- Navigation -->
+    <%= partial 'layouts/nav' %>
+    <!-- Main Wrapper -->
+    <div id="wrapper">
+
+      <div class='tabs-content' style='width:93%;margin:0 auto;'>
+
+        <ul class="breadcrumb" style='background-color:#ffffff;'>
+          <li><%= link_to '文章列表', url(params[:back])%> </li> 
+          <li><a href="#">编辑【<%=@article.title%>】</a> </li> 
+        </ul>
+        <%=link_to '预览', :href => "http://www.mmxueche.com/m/weixin_public/article/#{@article.id}",  :class=>'btn btn-info',:target=>"_blank", :style=>'width:100%;margin-bottom:8px;' %>
+        <br >
+        <div class="content"><%=@article.content.to_s.html_safe%></div>
+        
+        <div class="form-actions">
+          
+        <button class="btn btn-info save-btn" ><i class='fa fa-spinner fa-spin hide'></i> &nbsp;保存</button>
+          <%= link_to pat(:cancel), url(:articles, :index), :class => 'btn btn-default' %>
+        </div>
+
+    </div>
+     
+   <script type="text/javascript">
+    $('.content').summernote({
+      height: 400
+   });
+    // $('.content').code();
+    $('.save-btn').click(function(){
+        $('.save-btn').html("<i class='fa fa-spinner fa-spin hide'></i> &nbsp;保存");
+      //取值
+      //同一页面多个summernote时，取第二个的值
+      // var sHTML = $('.content').eq(1).code();
+      //赋值
+      // alert($('.content').code(sHTML));
+      // console.log($('.content').code(sHTML));
+      $.post('<%=url(:articles, :content)%>', {content: $('.content').summernote('code'), id:"<%=@article.id%>" })
+       .done(function(data){
+        $('.hide').css('display','none');
+        alert('保存成功');
+        $('.save-btn').html("保存");
+       })
+       .fail(function(){
+        $('.save-btn').html("保存");
+
+       })
+      // $('#content').val();
+
+    })
+
+  </script>
+
+  </body>
+</html>

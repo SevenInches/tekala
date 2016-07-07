@@ -8,8 +8,8 @@ class Signup
   property :train_field_id, Integer
   property :school_id, Integer
   property :order_no, String
-  property :amount, Float, :default => 0.0
-  property :discount, Float, :default => 0.0
+  property :amount, Float
+  property :discount, Float
   property :pay_at, DateTime
   property :done_at, DateTime
   property :cancel_at, DateTime
@@ -20,9 +20,9 @@ class Signup
   property :product_id, Integer
   property :pay_channel, String
   #1=>未付款,2=>已付款,3=>退款中,4=>已退款
-  property :status, Integer, :default => 0
+  property :status, Integer
   #1=>C1,2=>C2
-  property :exam_type, Integer, :default => 1
+  property :exam_type, Integer
 
   belongs_to :user
   belongs_to :teacher

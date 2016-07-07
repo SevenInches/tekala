@@ -29,19 +29,22 @@ module Szcgs
     end
 
     get :question do
+      @xy_questions = Question.all(:show=>1, :type=>1)
+      @jl_questions = Question.all(:show=>1, :type=>2)
+      @jx_questions = Question.all(:show=>1, :type=>3)
       render 'question'
     end
 
-    get :enroll do
-      new_enroll = Enroll.new
-      if params.present?
-        new_enroll.school = params[:school] if params[:school].present?
-        new_enroll.name = params[:name] if params[:name].present?
-        new_enroll.phone = params[:phone] if params[:phone].present?
-        if new_enroll.save
-          [true].to_json
-        end
-      end
-    end
+    # get :enroll do
+    #   new_enroll = Enroll.new
+    #   if params.present?
+    #     new_enroll.school = params[:school] if params[:school].present?
+    #     new_enroll.name = params[:name] if params[:name].present?
+    #     new_enroll.phone = params[:phone] if params[:phone].present?
+    #     if new_enroll.save
+    #       [true].to_json
+    #     end
+    #   end
+    # end
   end
 end

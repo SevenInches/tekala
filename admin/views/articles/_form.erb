@@ -1,0 +1,97 @@
+<!-- include libraries(jQuery, bootstrap, fontawesome) -->
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script> 
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"> 
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script> 
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css" />
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
+
+
+<!-- include summernote css/js-->
+<link href="http://summernote.org/bower_components/summernote/dist/summernote.css" />
+<script src="http://summernote.org/bower_components/summernote/dist/summernote.js"></script>
+
+<%= stylesheet_link_tag '../../stylesheets/wysiwyg-editor' %>
+<%=javascript_include_tag '../../javascripts/wysiwyg', '../../javascripts/wysiwyg-editor' %>
+
+<% error = @article.errors.key?(:title) && @article.errors[:title].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label '标题', :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :title, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+  </div>
+</fieldset>
+<br>
+
+<% error = @article.errors.key?(:tag) && @article.errors[:tag].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label '标签', :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :tag, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+<span>标签间隔用英文半形符 ","</span>
+<br>
+
+<% error = @article.errors.key?(:author) && @article.errors[:author].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label '作者', :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :author, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+<br>
+
+<% error = @article.errors.key?(:description) && @article.errors[:description].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label '描述', :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :description, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+<br>
+
+<% error = @article.errors.key?(:read_count) && @article.errors[:read_count].count > 0 %>
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label '初始阅读人数', :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.text_field :read_count, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</fieldset>
+<br>
+
+<fieldset class='control-group <%= error ? 'has-error' : ''%>'>
+  <%= f.label '内容', :class => 'control-label' %>
+  <div class='controls'>
+    <textarea id="editor1" name="content" placeholder="请在这里键入你想输入的...">
+    </textarea>
+  </div>
+</fieldset>
+<br>
+<!--<fieldset class='control-group'>
+   f.label '类型', :class => 'control-label'
+  <div class='controls'>
+    <!-- f.select :type, :options => Article::type, :class => "js-source-states form-control"
+  </div>
+</fieldset>-->
+
+<div class="form-actions">
+  
+  <%= f.submit pat(:save), :class => 'btn btn-info', :name => 'save_and_continue' %>
+  &nbsp;
+  <%= link_to pat(:cancel), url(:articles, :index), :class => 'btn btn-default' %>
+</div>
+
+<script type="text/javascript">
+  $('.summernote').summernote({
+    height: 150,   //set editable area's height
+    codemirror: { // codemirror options
+      theme: 'monokai'
+    }
+  });
+
+</script>

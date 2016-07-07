@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name=viewport content='width=device-width,initial-scale=1' />
+    <title><%= @title.present? ? "#{@title} | Padrino Admin" : "Padrino Admin" %></title>
+    <%= favicon_tag "../../admin/images/favicon.ico" %>
+    <link href='http://fonts.googleapis.com/css?family=Varela' rel=stylesheet />
+    <%= stylesheet_link_tag '../../admin/stylesheets/bootstrap', '../../admin/stylesheets/application' %>
+  </head>
+  <body>
+
+    <div class='container main'>
+      <div class='main-wrapper'>
+        <%= {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info'}.map { |type, class_name| flash_tag(type, :class => "alert alert-#{class_name} fade in", :bootstrap => true) }.join.html_safe %>
+        <div class='row'><%= yield %></div>
+        <div class='main-wrapper-push'></div>
+      </div>
+    </div>
+
+    <footer>
+      <div class='footer-wrapper container'>
+        <p class='pull-left'>Copyright &copy; 2016 Your Site - Powered by Padrino v.0.13.2</p>
+        <ul class='pull-right footer-links'>
+          <li><%= link_to tag_icon(:home, 'web'), 'http://www.padrinorb.com', :target => :_blank, :class => 'footer-links-link' %></li>
+          <li><%= link_to tag_icon(:heart, 'blog'), 'http://www.padrinorb.com/blog', :target => :_blank, :class => 'footer-links-link' %></li>
+          <li><%= link_to tag_icon(:github, 'code'), 'https://github.com/padrino/padrino-framework', :target => :_blank, :class => 'footer-links-link' %></li>
+          <li><%= link_to tag_icon(:twitter, 'twitter'), 'http://twitter.com/padrinorb', :target => :_blank, :class => 'footer-links-link' %></li>
+        </ul>
+      </div>
+    </footer>
+
+    <%= javascript_include_tag '../../admin/javascripts/jquery-1.11.0.min', (Padrino.env == :production ? '../../admin/javascripts/bootstrap/bootstrap.min' : %w[../../admin/javascripts/bootstrap/affix ../../admin/javascripts/bootstrap/alert ../../admin/javascripts/bootstrap/button ../../admin/javascripts/bootstrap/carousel ../../admin/javascripts/bootstrap/collapse ../../admin/javascripts/bootstrap/dropdown  ../../admin/javascripts/bootstrap/tooltip ../../admin/javascripts/bootstrap/transition  ../../admin/javascripts/bootstrap/modal ../../admin/javascripts/bootstrap/popover ../../admin/javascripts/bootstrap/scrollspy ../../admin/javascripts/bootstrap/tab]), '../../admin/javascripts/application' %>
+  </body>
+</html>

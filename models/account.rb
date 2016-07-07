@@ -1,17 +1,17 @@
-# -*- encoding : utf-8 -*-
 class Account
   include DataMapper::Resource
   include DataMapper::Validate
   attr_accessor :password, :password_confirmation
 
+  # Properties
   property :id,               Serial
   property :name,             String
   property :surname,          String
   property :email,            String
   property :crypted_password, String, :length => 70
   property :role,             String
-  property :city,             String
 
+  # Validations
   validates_presence_of      :email, :role
   validates_presence_of      :password,                          :if => :password_required
   validates_presence_of      :password_confirmation,             :if => :password_required
@@ -22,53 +22,31 @@ class Account
   validates_format_of        :email,    :with => :email_address
   validates_format_of        :role,     :with => /[A-Za-z]/
 
+  # Callbacks
   before :save, :encrypt_password
 
-  def self.get_role
-    {"超级管理员" => 'admin', "运营" => "operation", "商务" => "business", "城市经理" => "city_manager", '财务' => 'finance' }
-  end
-
-  def role_word
-    case self.role
-    when "admin"
-      return '超级管理员'
-    when 'operation'
-      return '运营'
-    when "business"
-      return '商务'
-    when "finance"
-      return '财务'
-    when 'city_manager'
-      return '城市经理'
-    end
-
-  end
-  def self.city
-    return {'深圳' => '0755', '武汉' => '027', '重庆' => '023'}
-  end
-  def city_word
-    case self.city
-    when '0755'
-      return '深圳'
-    when '027'
-      return '武汉'
-    when '023'
-      return '重庆'
-    end
-  end
- 
+  ##
+  # This method is for authentication purpose.
+  #
   def self.authenticate(email, password)
     account = first(:conditions => ["lower(email) = lower(?)", email]) if email.present?
     account && account.has_password?(password) ? account : nil
   end
 
-
+  ##
+  # This method is used by AuthenticationHelper
+  #
   def self.find_by_id(id)
     get(id) rescue nil
   end
 
   def has_password?(password)
     ::BCrypt::Password.new(crypted_password) == password
+  end
+
+  def password=(password)
+    self.crypted_password = nil if password.present?
+    @password = password
   end
 
   private
