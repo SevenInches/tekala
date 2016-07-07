@@ -298,11 +298,11 @@ Szcgs::Api.controllers :v1, :orders do
         @user = @order.user
         @user.type = 0
         @user.save
-      end
 
-      @signup.cancel_at = Time.now
-      @signup.status = 6
-      @signup.save!
+        @signup.cancel_at = Time.now
+        @signup.status = 6
+        @signup.save!
+      end
     end
   end
 
