@@ -14,38 +14,12 @@ class Teacher
            :messages => {:presence => '请填写姓名'}
   property :age, Integer
   property :sex, Integer, :default => 1#性别 1男 0女
-  # property :id_card, String, :unique => true, :required => true,
-  #          :messages => {:is_unique => "身份证号码已经存在", 
-  #                        :presence => '请填写身份证号码'}
-  # property :drive_card, String, :unique => true, :required => true,
-  #          :messages => {:is_unique => "驾驶证号码已经存在",
-  #                        :presence => '请填写驾驶证号码'}
-  # property :teach_card, String, :unique => true,
-  #          :messages => {:is_unique => "教师证号码已经存在",
-  #                        :presence => '请填写教师证号码'}
   property :id_card, String
-  property :drive_card, String
-  property :teach_card, String
   property :bank_card, String, :default => ''
-  
-  property :start_drive, DateTime
-  property :start_teach, DateTime
-  property :skill, String
-  property :profile, Text, :lazy => false, :default => ''
+
   property :hometown, String
   property :avatar, String, :auto_validation => false
-  property :id_card_photo, String, :auto_validation => false
-  property :id_card_back_photo, String, :auto_validation => false
-  property :drive_card_photo, String, :auto_validation => false
-  property :car_lincese_photo, String, :auto_validation => false #车牌照
-  property :livecard_front_photo, String, :auto_validation => false
-  property :livecard_back_photo, String, :auto_validation => false
-  property :lincese_front_photo, String, :auto_validation => false
-  property :lincese_back_photo, String, :auto_validation => false
   property :bank_card_photo, String, :auto_validation => false
-
-  property :tech_hours, Integer, :default => 0
-  property :earn_money, Integer, :default => 0
   
   # 结算类型，默认是按天结算，合作久的教练改为按周结算
   property :pay_type, String, :default => 'day'
@@ -64,13 +38,11 @@ class Teacher
   property :mobile, String, :unique => true, :required => true,
            :messages => {:is_unique => "手机号已经存在",
                           :presence => '请填写联系电话'}
+
   property :wechat, String, :default => ''
   property :email,  String, :default => ''
   property :address, String, :default => ''
-  property :remark,  String, :default => ''
-
-  property :referee, String, :default => ''
-
+  
   #教练教学科目 0 科目二/科目三 2 科目二 3 科目三
   property :subject, Integer, :default => 0
 
@@ -107,69 +79,21 @@ class Teacher
   # property :has_hour, Integer, :default => 0
   property :login_count, Integer, :default => 0
 
-  property :vip, Integer, :default => 0#收入是否已超3万元
-
   property :school_id, Integer, :default => 0
 
   has n, :comments, :model => 'TeacherComment', :child_key =>'teacher_id' , :constraint => :destroy
 
   has n, :orders
 
-  has n, :signups
-
   has n, :train_fields, 'TrainField', :through => :teacher_field, :via => :train_field
-
-  has 1, :teacher_audit, 'TeacherAudit', :child_key => 'teacher_id', :constraint => :destroy
-
-  #教练接单
-  has n, :order_confirms, :model => 'OrderConfirm', :child_key => 'teacher_id', :constraint => :destroy
 
 
   # 教练钱包
-  has 1, :teacher_wallet, :constraint => :destroy
-  has n, :users
-
   belongs_to :school
-
-  belongs_to :city
-
-  def city_name
-    city.nil? ? '--' : city.name
-  end
-  
-  mount_uploader :drive_card_photo, DrivePhoto
-
-  mount_uploader :teach_card_photo, TeachPhoto
 
   mount_uploader :avatar, TeacherAvatar
 
-  mount_uploader :id_card_photo, IdCardPhoto
-
-  mount_uploader :id_card_back_photo, IdCardPhoto
-
-  mount_uploader :car_lincese_photo, CarPhoto
-
-  mount_uploader :livecard_front_photo, LiveCardPhoto
-
-  mount_uploader :livecard_back_photo, LiveCardPhoto
-
-  mount_uploader :lincese_front_photo, TeachPhoto #教练证正面
-
-  mount_uploader :lincese_back_photo, TeachPhoto #教练证反面
-
-  mount_uploader :bank_card_photo, BankPhoto
-
-  mount_uploader :map, MapPhoto
-
-  after :create, :push_manager
-  # Callbacks
   before :save, :encrypt_password
-
-  def push_manager
-    #创建教练验证
-    TeacherAudit.create(:teacher_id => id)
-    #JPush.send
-  end
 
   def rate 
     return 5.0  if comments.size < 1
@@ -182,21 +106,7 @@ class Teacher
     # comments.avg(:rate).round(1)
   end
 
-  def week_money
-    return orders.all(:status => Order::pay_or_done, :type => Order::PAYTOTEACHER, :created_at => ((Date.today-6.day)..(Date.today+1.day)) ).sum(:quantity).to_i * price
-  end
 
-  def all_money
-    return orders.all(:status => Order::pay_or_done, :type => Order::PAYTOTEACHER).sum(:quantity).to_i * price
-  end
-
-  def has_hour
-    
-    hour = orders.all(:status => Order::pay_or_done, :type => Order::PAYTOTEACHER).sum(:quantity).to_i
-    return hour-50 if id == 170
-    return hour-30 if id == 278
-    return hour
-  end
 
   def avatar_thumb_url
      avatar.thumb && avatar.thumb.url ? CustomConfig::HOST + avatar.thumb.url : CustomConfig::HOST + '/m/images/default_teacher_avatar.png' 
@@ -207,120 +117,16 @@ class Teacher
      avatar && avatar.url ? CustomConfig::HOST + avatar.url : CustomConfig::HOST + '/m/images/teacher_default_photo.png' 
   end
 
-  def id_card_thumb_url
-     id_card_photo.thumb && id_card_photo.thumb.url ? CustomConfig::HOST + id_card_photo.thumb.url : CustomConfig::HOST + '/images/icon180.png'
-  end 
-
-  def id_card_url
-     id_card_photo && id_card_photo.url ? CustomConfig::HOST + id_card_photo.url : ''
-  end
-
-  def id_card_back_thumb_url
-     id_card_back_photo.thumb && id_card_back_photo.thumb.url ? CustomConfig::HOST + id_card_back_photo.thumb.url : ''
-  end 
-
-  def id_card_back_url
-     id_card_back_photo && id_card_back_photo.url ? CustomConfig::HOST + id_card_back_photo.url : ''
-  end
-
-  def teach_thumb_url
-     teach_card_photo.thumb && teach_card_photo.thumb.url ? CustomConfig::HOST + teach_card_photo.thumb.url : ''
-  end 
-
-  def teach_url
-     teach_card_photo && teach_card_photo.url ? CustomConfig::HOST + teach_card_photo.url : ''
-  end
-
-  def drive_thumb_url
-     drive_card_photo.thumb && drive_card_photo.thumb.url ? CustomConfig::HOST + drive_card_photo.thumb.url : ''
-  end 
-
-  def drive_url
-     drive_card_photo && drive_card_photo.url ? CustomConfig::HOST + drive_card_photo.url : ''
-  end
-
-  def car_thumb_url
-     car_lincese_photo.thumb && car_lincese_photo.thumb.url ? CustomConfig::HOST + car_lincese_photo.thumb.url : ''
-  end 
-
-  def car_url
-     car_lincese_photo && car_lincese_photo.url ? CustomConfig::HOST + car_lincese_photo.url : ''
-  end
-
-  def livecard_front_thumb_url
-     livecard_front_photo.thumb && livecard_front_photo.thumb.url ? CustomConfig::HOST + livecard_front_photo.thumb.url : ''
-  end 
-
-  def livecard_front_url
-     livecard_front_photo && livecard_front_photo.url ? CustomConfig::HOST + livecard_front_photo.url : ''
-  end
-
-  def livecard_back_thumb_url
-     livecard_back_photo.thumb && livecard_back_photo.thumb.url ? CustomConfig::HOST + livecard_back_photo.thumb.url : ''
-  end 
-
-  def livecard_back_url
-     livecard_back_photo && livecard_back_photo.url ? CustomConfig::HOST + livecard_back_photo.url : ''
-  end
-
-  def lincese_front_thumb_url
-     lincese_front_photo.thumb && lincese_front_photo.thumb.url ? CustomConfig::HOST + lincese_front_photo.thumb.url : ''
-  end 
-
-  def lincese_front_url
-     lincese_front_photo && lincese_front_photo.url ? CustomConfig::HOST + lincese_front_photo.url : ''
-  end
-
-  def lincese_back_thumb_url
-     lincese_back_photo.thumb && lincese_back_photo.thumb.url ? CustomConfig::HOST + lincese_back_photo.thumb.url : ''
-  end 
-
-  def lincese_back_url
-     lincese_back_photo && lincese_back_photo.url ? CustomConfig::HOST + lincese_back_photo.url : ''
-  end
-
-  def bank_card_photo_thumb_url
-     bank_card_photo.thumb && bank_card_photo.thumb.url ? CustomConfig::HOST + bank_card_photo.thumb.url : ''
-  end 
-
-  def bank_card_photo_url
-     bank_card_photo && bank_card_photo.url ? CustomConfig::HOST + bank_card_photo.url : ''
-  end
-
-  def map_thumb_url
-     # avatar.thumb && avatar.thumb.url ? CustomConfig::HOST + avatar.thumb.url : ''
-     map && map.file ? MapPhoto::qiniu_bucket_domain + map.file.path : ''
-
-  end 
-
-  def map_url
-     map && map.file ? MapPhoto::qiniu_bucket_domain + map.file.path+'?imageMogr2/thumbnail/100x100' : ''
-  end
+  
 
   def driving_age 
-    start_drive ? ((DateTime.now - start_drive)/365).to_i  : 5
+    5
   end
 
   def teaching_age 
-    start_teach ? ((DateTime.now - start_teach)/365).to_i  : 1
+    5
   end
 
-  def self.get_status
-    return {'待审核'=>'200', '审核通过'=>'201', '审核不通过'=>'0', '已经报名，待审核' => '100'}
-  end
-
-  def set_status
-    case self.status
-    when 200
-      return '待审核'
-    when 201
-      return '审核通过'
-    when 0
-      return '审核不通过'
-    when 100
-      return '已经报名，待审核'
-    end
-  end
 
   def self.get_flag
     {'正常使用' => 1, '休假' => 0}
@@ -328,15 +134,6 @@ class Teacher
 
   def self.get_vip
     {'VIP' => 1, '普通' => 0}
-  end
-
-  def set_flag
-    case self.status_flag
-    when 1
-      return '正常使用'
-    when 0
-      return '休假'
-    end
   end
 
   def self.status_flag 
@@ -355,7 +152,6 @@ class Teacher
       {'科目二' => 'exam_two', '科目三' => 'exam_three'}
     when '023'   
       {'科目二' => 'exam_two', '科目三' => 'exam_three'}
-
     end
   end
 
@@ -395,38 +191,6 @@ class Teacher
     end
   end
 
-  def rate_color
-    case 
-    when self.rate < 4
-      return 'danger'
-    else
-    return 'success'
-    end
-  end
-
-  def app_color
-    case
-    when self.login_count > 0
-      return 'success'
-    else
-      return 'danger'
-    end
-  end
-
-  def is_login
-    case
-    when self.login_count > 0
-      return '有'
-    else
-      return '未'
-    end
-  end
-
-  def self.has_app
-    {"未" => 0, "有" => 1}
-  end
-
-
   def self.exam_type
     {"未知" => 0, "C1" => 1, "C2" => 2, "C1/C2" => 3}
   end
@@ -444,32 +208,12 @@ class Teacher
     end
   end
 
-  # def self.area 
-  #   {:龙岗 => '001', :宝安 => '002', :罗湖 => '003', :福田 => '004', :南山 => '005', :盐田 => '006', :其他 => "000"}
-  # end
-
-  def msg
-    i = 0
-    return 0 if teacher_audit.nil? 
-
-    i += 1 if teacher_audit.photo == 1
-    i += 1 if teacher_audit.id_card == 1
-    i += 1 if teacher_audit.bank_card == 1
-    i += 1 if teacher_audit.mobile == 1
-    i += 1 if teacher_audit.place_confirm == 1
-
-    return i
-  end
-
+ 
   def self.authenticate(mobile, password)
     teacher = first(:conditions => ["lower(mobile) = lower(?)", mobile]) if mobile.present?
 
     teacher && teacher.has_password?(password) ? teacher : nil
 
-  end
-
-  def self.find_by_id(id)
-    get(id) rescue nil
   end
 
   def has_password?(password)

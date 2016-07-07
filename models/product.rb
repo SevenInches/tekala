@@ -23,8 +23,6 @@ class Product
   mount_uploader :photo, ProductPhoto
   mount_uploader :info_photo, ProductInfoPhoto
 
-  has n, :users, :model => 'User'
-
   def photo_thumb_url
      photo.thumb && photo.thumb.url ? CustomConfig::HOST + photo.thumb.url : ''
   end
@@ -43,7 +41,7 @@ class Product
 
   #产品介绍
   def link
-    CustomConfig::HOST + "/api/v2/product_info?product_id=#{id}"
+    CustomConfig::HOST + "/api/v1/product_info?product_id=#{id}"
   end
 
   def info_img 
