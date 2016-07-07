@@ -229,3 +229,20 @@
 [06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Installing Rack::Builder middleware instrumentation
 [06/30/16 20:54:42 +0800 7hao.local (11501)] INFO : Finished instrumentation
 [06/30/16 20:54:49 +0800 7hao.local (11501)] INFO : Doing deferred library-detection before Rack startup
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Starting the OneApm agent in "development" environment.
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Reading configuration from ./config/oneapm.yml (/Users/smartweb/Desktop/ChaMobile/Coding/MMXueChe/tekala)
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Using JSON marshaller (json)
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Environment: development
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : No known dispatcher detected.
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Application: mmxueche
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Creating Ruby Agent worker thread.
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Installing Sidekiq instrumentation
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Installing Sinatra instrumentation
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Installing Padrino instrumentation
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Installing Curb instrumentation
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Installing Net instrumentation
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Installing Redis Instrumentation
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Installing deferred Rack instrumentation
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Installing Rack::Builder middleware instrumentation
+[07/07/16 22:24:53 +0800 SamdeMacBook.local (22267)] INFO : Finished instrumentation
+[07/07/16 22:25:01 +0800 SamdeMacBook.local (22267)] INFO : Doing deferred library-detection before Rack startup

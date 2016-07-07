@@ -85,13 +85,6 @@ class User
 
   property :referer, String
 
-  #用户车管所预约数据
-  property :photo_receipt, String
-  property :book_account, String
-  property :book_password, String
-  property :id_card_address, String
-  property :fee_receipt, String
-
   #邀请码
   property :invite_code, String
   property :from_code, String
@@ -99,25 +92,10 @@ class User
   property :product_id, Integer, :default => 11
 
   property :school_id, Integer, :default => 0
-  #用户意见，用于售前跟进
-  # 0 = 待跟进
-  # 1 = 强烈意向
-  # 2 = 有意向
-  # 3 = 只是想了解
-  # 4 = 不感兴趣
-
-  property :purpose, Integer, :default => 0
-
+  
   #登陆次数
   property :login_count, Integer, :default => 0
 
-  property :teacher_id, Integer
-  property :train_field_id, Integer
-
-  property :cash_name, String
-  property :cash_mobile, String
-  property :cash_bank_name, String
-  property :cash_bank_card, String
   property :signup_at, Date
 
   has n, :orders
@@ -126,11 +104,7 @@ class User
   has n, :user_schedule, :model => 'UserSchedule', :child_key =>'user_id' , :constraint => :destroy
 
   has n, :comments, :model => 'UserComment', :child_key =>'user_id' , :constraint => :destroy
-  #提现记录
-  has n, :cash_logs, :model => 'UserWithdrawsCash', :child_key =>'user_id' , :constraint => :destroy
-  #优惠券
-  has n, :user_coupons
-
+  
   has 1, :promotion_user, :constraint => :destroy
 
   #用户指导
