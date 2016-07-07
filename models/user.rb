@@ -570,14 +570,6 @@ class User
     order
   end
 
-  # 获得推荐人名字
-  def referer_name
-    return '' if referer.to_s == ''
-    target = User.first(:mobile=>referer.to_s)
-    return target.nil? ? '' : target.name
-  end
-
-
   def invite_url
     CustomConfig::HOST+"/invite/#{invite_code}"
   end

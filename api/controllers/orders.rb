@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
-Szcgs::Api.controllers :v1, :orders do  
+Szcgs::Api.controllers :v1, :orders do
 	register WillPaginate::Sinatra
   enable :sessions
   current_url = '/api/v1'
 
-  before do 
+  before :except => [:pay_done, :refund] do
     @user = User.get(session[:user_id])
     redirect_to("#{current_url}/unlogin") if @user.nil?
   end
@@ -274,7 +274,7 @@ Szcgs::Api.controllers :v1, :orders do
         sms = Sms.new(:content        => "#{@user.name}学员，您已报名#{@signup.school.name}，并支付成功。如有疑问，请通过微信公众号进行咨询。祝您学车愉快。",
                       :member_mobile  => "#{@user.mobile}")
         sms.signup
-        
+
       end
     end #order
   end #post :pay_done
@@ -287,7 +287,7 @@ Szcgs::Api.controllers :v1, :orders do
   #
   #############
 
-  post :refund, :provides => [:json] do
+  post :refund, :map => '/v1/signups/refund',:provides => [:json] do
     notify = request.body.read
     ping_result = JSON.parse(notify.to_s)
     #退款功能  退款成功
@@ -297,15 +297,13 @@ Szcgs::Api.controllers :v1, :orders do
       if @signup
         @user = @order.user
         @user.type = 0
-
-
         @user.save
-        end
-
-        @order.cancel_at = Time.now
-        @order.status = 6
-        @order.save
       end
+
+      @signup.cancel_at = Time.now
+      @signup.status = 6
+      @signup.save!
     end
+  end
 
 end
