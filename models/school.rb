@@ -31,7 +31,12 @@ class School
   after :create do |school|
     tid = school.demo_teacher
     fid = school.demo_train_field
-    TeacherTrainField.new(:teacher_id=>tid, :train_field_id=>fid).save
+    if tid.present?
+      tid.each do |teacher|
+        Teacher.get(teacher).update(:train_field_id=>fid)
+        TeacherTrainField.new(:teacher_id=>teacher, :train_field_id=>fid).save
+      end
+    end
   end
 
   def city_name

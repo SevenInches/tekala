@@ -12,7 +12,7 @@ class TrainField
   property :type, Enum[0, 1, 2], :default => 0
   property :display, Boolean, :default => true
 
-  property :area, Integer, :default => 0
+  property :area, Integer
 
   property :city_id, Integer
 
@@ -22,8 +22,8 @@ class TrainField
   property :users_count, Integer, :default => 0
   property :orders_count, Integer, :default => 0
 
-  property :good_tags, String, :default => ''
-  property :bad_tags, String, :default => ''
+  property :good_tags, String
+  property :bad_tags, String
   property :subject, Integer, :default => 2
   property :school_id, Integer,:default => 0
   
@@ -43,7 +43,7 @@ class TrainField
   end
 
   def area_name
-    City.get(area).name if area.present?
+    City.get(area).name if area.present? && area.to_i!= 0
   end
 
   def teacher_count
