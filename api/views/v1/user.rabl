@@ -8,7 +8,6 @@ child(@user => :data){
 	attributes :birthday,    :if => lambda { |val| !val.birthday.nil? }
 	attributes :started_at,  :if => lambda { |val| !val.started_at.nil? }
 	attributes :last_login,  :if => lambda { |val| !val.last_login.nil? }
-	node(:invite_text){ @invite_text }
 	if @order.present?
 		child(@order){
 		  attributes :id, :order_no, :amount, :discount, :teacher_id, :user_id, :school_id , :status, :created_at, :exam_type

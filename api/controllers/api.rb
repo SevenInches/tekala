@@ -32,8 +32,7 @@ Szcgs::Api.controllers :v1 do
         
         @school = @user.school
 
-        @invite_text = "使用我的邀请码 #{@user.invite_code}，获得萌萌学车 50 元学车优惠，深圳考驾照只需 5630。点击链接立即报名：http://www.mmxueche.com/invite/#{@user.invite_code}"
-  			render 'v1/user'
+        render 'v1/user'
   		else
   			msg = User.first(:mobile => params[:mobile]) ? '密码错误' : '用户名错误'
   			{:status => :failure, :msg => msg}.to_json

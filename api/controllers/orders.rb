@@ -272,7 +272,7 @@ Szcgs::Api.controllers :v1, :orders do
 
         #付款成功 发短信通知用户
 
-        sms = Sms.new(:content        => "#{@user.name}学员，您已报名#{@signup.school.name}，并支付成功。如有疑问，请通过微信公众号进行咨询。祝您学车愉快。",
+        sms = Sms.new(:content        => "#{@user.name}学员，您已报名萌萌学车，并支付成功。如有疑问，请通过微信公众号进行咨询。祝您学车愉快。",
                       :member_mobile  => "#{@user.mobile}")
         sms.signup
 
