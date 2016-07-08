@@ -3,7 +3,7 @@ class Product
 
   property :id, Serial
   property :name, String
-  property :price, Integer #单位 分
+  property :price, Integer
   property :detail, Text
   property :deadline, Date, :default => '2050-01-01' #截止日期
   property :created_at, DateTime

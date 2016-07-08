@@ -4,8 +4,7 @@ Szcgs::Api.controllers :v1, :products do
   enable :sessions
 
   get :index, :provides => [:json] do
-    @product_bindings = ProductBinding.all(:show => true)
-    @product_bindings = @product_bindings.all(:city_id => params[:city]) if params[:city]
+    @product_bindings = ProductBinding.all(:school_id => params[:school_id])
     @total = @product_bindings.count
     render 'v1/product_bindings'
   end
@@ -13,6 +12,7 @@ Szcgs::Api.controllers :v1, :products do
   #产品详情
   get :product_info, :map => '/v1/products/:product_id', :provides => [:json] do
     @product_binding = ProductBinding.get(params[:product_id])
-    render 'v1/product_binding'
+    render 'v1/product_info'
   end
+
 end

@@ -34,6 +34,16 @@ class School
     city.nil? ? '--' : city.name
   end
 
+  def add_product(name, price)
+    product = Product.create(:school_id => id, :name=>name, :price=>price)
+    binding = ProductBinding.create(:school_id => id, :title => name,
+                                            :show=>1, 
+                                            :c1_product_id => product.id,
+                                            :c2_product_id => product.id,
+                                            :c1_price => price,
+                                            :c2_price => price)
+  end
+
   def demo_teacher
     names = ChineseName.generate(num = 3)
     teacher_array = []

@@ -4,12 +4,13 @@ Szcgs::Api.controllers :v1, :teachers do
   enable :sessions
   current_url = '/api/v1'
 
-  default_latitude = '24.0000'
+  default_latitude  = '24.0000'
   default_longitude = '100.333'
 
   before do 
     @city      = params[:city] || '0755'
     @user      = User.get(session[:user_id])
+
     if @user.nil?
       @sql_exam_type_where = ''
       @sql_city_where      = "and city = '#{@city}'"
@@ -94,7 +95,6 @@ Szcgs::Api.controllers :v1, :teachers do
     end
 
     render 'v1/teachers'
-
   end 
 
   get :area, :provides => [:json] do 

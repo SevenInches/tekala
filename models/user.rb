@@ -14,6 +14,8 @@ class User
   property :crypted_password, String, :length => 70
   property :cookie, Text, :lazy => false
   property :name, String, :default => ''
+  property :nickname, String, :default => ''
+
 
   property :mobile, String, :required => true, :unique => true,
            :messages => {
@@ -147,9 +149,9 @@ class User
 
   def encrypt_password
     self.crypted_password  = ::BCrypt::Password.create(password) if password.present?
-    current_user = User.get id
-    self.before_product_id = current_user ? current_user.product_id : nil
-    self.exam_type = 1 if self.exam_type.nil?
+    #current_user = User.get id
+    #self.before_product_id = current_user ? current_user.product_id : nil
+    #self.exam_type = 1 if self.exam_type.nil?
   end
 
   def self.type
