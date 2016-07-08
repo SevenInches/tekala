@@ -165,7 +165,7 @@ Szcgs::Api.controllers :v1 do
     end
 
     get :questions, :provides => [:json] do 
-      @questions = Question.all(:city => params[:city], :show => true)
+      @questions = Question.all(:order=>:weight.asc, :show => true)
       render 'v1/questions'
     end
 
