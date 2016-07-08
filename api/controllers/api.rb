@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Szcgs::Api.controllers :v1 do  
+Tekala::Api.controllers :v1 do  
 	register WillPaginate::Sinatra
   	enable :sessions
     current_url = '/api/v1'

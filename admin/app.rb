@@ -1,4 +1,4 @@
-module Szcgs
+module Tekala
   class Admin < Padrino::Application
     register Padrino::Mailer
     register Padrino::Helpers

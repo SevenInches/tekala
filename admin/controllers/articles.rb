@@ -1,4 +1,4 @@
-Szcgs::Admin.controllers :articles do
+Tekala::Admin.controllers :articles do
   get :index do
     @title = "Articles"
     @articles = Article.all

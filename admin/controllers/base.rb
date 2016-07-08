@@ -1,4 +1,4 @@
-Szcgs::Admin.controllers :base do
+Tekala::Admin.controllers :base do
   get :index, :map => "/" do
     render "base/index"
   end

@@ -24,6 +24,15 @@ class School
 
   belongs_to :city
 
+
+  has n, :maps  # 训练场数字地图
+  
+  has n, :shops # 门店
+  has n, :finances          # 财务记录
+  has n, :finance_reports   # 财务报告
+  has n, :logs  # 操作日志
+  
+
   after :create do |school|
     tid = school.demo_teacher
     fid = school.demo_train_field

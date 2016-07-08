@@ -5,6 +5,6 @@
 :script: none
 :renderer: erb
 :stylesheet: none
-:namespace: Szcgs
+:namespace: Tekala
 :migration_format: number
 :admin_renderer: erb

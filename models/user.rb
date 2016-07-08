@@ -427,4 +427,10 @@ class User
     return true
   end
 
+
+  # 用户添加日志
+  def add_log(type, content, target=nil)
+    Log.add(self, school_id, type, content, target)
+  end
+
 end

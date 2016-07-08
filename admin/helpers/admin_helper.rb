@@ -1,5 +1,5 @@
 
-module Szcgs
+module Tekala
   class Admin
 
     def params_string(hash, except = '')
