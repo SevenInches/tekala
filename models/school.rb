@@ -10,7 +10,7 @@ class School
   property :phone, String
   property :profile, Text
   property :is_vip, Integer
-  property :is_open, Integer
+  property :is_open, Boolean, :default => 1
   property :weight, Integer
   property :master, String
   property :logo, String
@@ -33,7 +33,6 @@ class School
     fid = school.demo_train_field
     if tid.present?
       tid.each do |teacher|
-        Teacher.get(teacher).update(:train_field_id=>fid)
         TeacherTrainField.new(:teacher_id=>teacher, :train_field_id=>fid).save
       end
     end
@@ -75,6 +74,10 @@ class School
     last_names = %w(路 村 湖 山 庙 公园 体育馆 门 宫 庄 里 桥 科技园 大街)
     last = last_names.sample
     first+last+'训练场'
+  end
+
+  def open_word
+    is_open ? '开放' : '关闭'
   end
 
 end

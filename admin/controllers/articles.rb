@@ -56,7 +56,7 @@ Szcgs::Admin.controllers :articles do
       if @article.update(params[:article])
         @article.update(:content => params[:content]) if params[:content].present?
         flash[:success] = pat(:update_success, :model => 'Article', :id =>  "#{params[:id]}")
-        params[:save_and_continue] ? redirect(url(:articles, :index)) : redirect(url(:articles, :edit, :id => @article.id))
+        redirect(url(:articles, :index))
       else
         flash.now[:error] = pat(:update_error, :model => 'article')
         render 'articles/edit'

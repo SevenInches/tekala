@@ -32,5 +32,6 @@ class Question
 
   def show_word
       show ? '显示' : '隐藏'
-    end
+  end
+
 end

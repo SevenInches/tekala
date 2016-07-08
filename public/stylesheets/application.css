@@ -240,7 +240,7 @@ ul li{
     color: #fff;
 }
 
-.app-nav li:hover a{
+.app-nav li:hover a, .app-nav li .active{
     border-top: .25rem solid #0086FF;
     border-bottom: .25rem solid #0086FF;
 }

@@ -67,8 +67,7 @@
 <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
   <%= f.label '内容', :class => 'control-label' %>
   <div class='controls'>
-    <textarea id="content" name="content" placeholder="请在这里键入你想输入的...">
-    </textarea>
+    <%= f.text_area :content, :id => 'content', :placeholder=>"请在这里键入你想输入的..." %>
   </div>
 </fieldset>
 <br>
