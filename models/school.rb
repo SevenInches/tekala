@@ -46,7 +46,7 @@ class School
     names = ChineseName.generate(num = 3)
     teacher_array = []
     names.each do |name|
-      new_teacher = Teacher.new(:password=>'123456', :open=>1, :status_flag=>2, :exam_type=>4)
+      new_teacher = Teacher.new(:password=>'123456', :open=>1, :status_flag=>1, :exam_type=>4)
       new_teacher.name = name[0]
       new_teacher.sex = (name[1]=='女')?0:1
       new_teacher.age = Date.today.year - name[2].to_i

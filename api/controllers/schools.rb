@@ -56,8 +56,8 @@ Szcgs::Api.controllers :v1, :schools do
   end
 
   get :products, :map => '/v1/products_via_school/:school_id', :provides => [:json] do
-    @product_bindings = ProductBinding.all(:school_id => params[:school_id])
-    @total  = @product_bindings.count
-    render 'v1/product_bindings'
+    @products = Product.all(:school_id => params[:school_id])
+    @total  = @products.count
+    render 'v1/products'
   end
 end

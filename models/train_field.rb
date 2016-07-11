@@ -9,6 +9,7 @@ class TrainField
   property :latitude, String, :default => '0.0'
   property :remark, String
   property :count, Integer, :default => 0
+
   property :type, Enum[0, 1, 2], :default => 0
   property :display, Boolean, :default => true
 
@@ -58,6 +59,10 @@ class TrainField
     {'挂靠/直营' => 0, "挂靠" => 1, '直营' => 2}
   end
 
+  def teacher_num
+    teachers.count
+  end
+
   def type_word 
     case type
     when 1
@@ -67,10 +72,6 @@ class TrainField
     else
     return '挂靠/直营'
     end 
-  end
-
-  def self.city
-    return {'深圳' => '0755', '武汉' => '027', '重庆' => '023'}
   end
 
   def self.open
