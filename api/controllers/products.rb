@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Szcgs::Api.controllers :v1, :products do  
+Tekala::Api.controllers :v1, :products do  
 	register WillPaginate::Sinatra
   enable :sessions
 

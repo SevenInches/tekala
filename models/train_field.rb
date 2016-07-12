@@ -30,10 +30,6 @@ class TrainField
   
   has n, :teachers, 'Teacher', :through => :teacher_field, :via => :teachers
 
-  has n, :users
-
-  has n, :signups
-
   belongs_to :school
 
   belongs_to :city
@@ -77,13 +73,7 @@ class TrainField
   def self.open
     return {'开' => 1, '关' => 0}
   end
-  def update_users_and_orders
-    orders = Order.all(:status => Order::pay_or_done, :train_field_id => id, :type => 0)
-    users = orders.all(:fields => [:user_id], :unique => true).to_a
-    self.users_count = users.count
-    self.orders_count = orders.count
-    self.save
-  end
+
 
   def self.sort_icon(param)
     case param
@@ -98,18 +88,6 @@ class TrainField
 
   def self.subject 
     {'科目二' => 2, '科目三' => 3}
-  end
-
-  def subject_word 
-    case subject 
-    when 2
-      '科目二'
-    when 3
-      '科目三'
-    else 
-      ''
-    end
-
   end
 
 

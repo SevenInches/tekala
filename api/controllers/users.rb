@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Szcgs::Api.controllers :v1, :users do  
+Tekala::Api.controllers :v1, :users do  
 	register WillPaginate::Sinatra
   enable :sessions
   default_latitude  = '24.0000'

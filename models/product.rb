@@ -3,7 +3,7 @@ class Product
 
   property :id, Serial
   property :name, String
-  property :price, Integer #单位 分
+  property :price, Integer
   property :detail, Text
   property :deadline, Date, :default => '2050-01-01' #截止日期
   property :created_at, DateTime
@@ -30,8 +30,6 @@ class Product
 
   belongs_to :school
 
-  has n, :users, :model => 'User'
-
   def photo_thumb_url
      photo.thumb && photo.thumb.url ? CustomConfig::HOST + photo.thumb.url : ''
   end
@@ -50,7 +48,7 @@ class Product
 
   #产品介绍
   def link
-    CustomConfig::HOST + "/api/v2/product_info?product_id=#{id}"
+    CustomConfig::HOST + "/api/v1/product_info?product_id=#{id}"
   end
 
   def self.colors

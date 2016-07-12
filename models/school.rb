@@ -24,9 +24,14 @@ class School
 
   belongs_to :city
 
-  has n, :product_bindings
 
-  has n, :signups
+  has n, :maps  # 训练场数字地图
+  
+  has n, :shops # 门店
+  has n, :finances          # 财务记录
+  has n, :finance_reports   # 财务报告
+  has n, :logs  # 操作日志
+  
 
   after :create do |school|
     tid = school.demo_teacher
@@ -42,13 +47,23 @@ class School
     city.nil? ? '--' : city.name
   end
 
+  def add_product(name, price)
+    product = Product.create(:school_id => id, :name=>name, :price=>price)
+    binding = ProductBinding.create(:school_id => id, :title => name,
+                                            :show=>1, 
+                                            :c1_product_id => product.id,
+                                            :c2_product_id => product.id,
+                                            :c1_price => price,
+                                            :c2_price => price)
+  end
+
   def demo_teacher
     names = ChineseName.generate(num = 3)
     teacher_array = []
     names.each do |name|
       new_teacher = Teacher.new(:password=>'123456', :open=>1, :status_flag=>1, :exam_type=>4)
       new_teacher.name = name[0]
-      new_teacher.sex = (name[1]=='女')?0:1
+      new_teacher.sex = (name[1]=='女')? 0 : 1
       new_teacher.age = Date.today.year - name[2].to_i
       new_teacher.school_id = id
       new_teacher.mobile = '138'+rand.to_s[2..9]

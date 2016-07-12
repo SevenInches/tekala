@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Szcgs::Api.controllers :v1 do  
+Tekala::Api.controllers :v1 do  
 	register WillPaginate::Sinatra
   	enable :sessions
     current_url = '/api/v1'
@@ -141,12 +141,6 @@ Szcgs::Api.controllers :v1 do
       render 'v1/static_pages/about'
     end
 
-    get :hospitals, :provides => [:json] do 
-      @hospitals = Hospital.all
-      @total     = @hospitals.count
-      @hospitals = @hospitals.paginate(:page => params[:page], :per_page => 20) 
-      render 'v1/hospitals'
-    end
 
     #个人的历史进度
     get :history, :provides => [:html] do 
