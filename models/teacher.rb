@@ -76,7 +76,7 @@ class Teacher
   property :weight, Integer, :default => 0
   
   property :open, Integer, :default => 1
-  # property :has_hour, Integer, :default => 0
+
   property :login_count, Integer, :default => 0
 
   property :school_id, Integer, :default => 0
@@ -127,6 +127,13 @@ class Teacher
     5
   end
 
+  def has_hour
+
+    hour = orders.all(:status => Order::pay_or_done, :type => Order::PAYTOTEACHER).sum(:quantity).to_i
+    return hour-50 if id == 170
+    return hour-30 if id == 278
+    return hour
+  end
 
   def self.get_flag
     {'正常使用' => 1, '休假' => 0}

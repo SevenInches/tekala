@@ -12,12 +12,12 @@ class User
   property :id_card, String, :default => ''
 
   property :crypted_password, String, :length => 70
-  property :cookie, Text, :lazy => false
+  property :cookie, Text, :lazy => false                         #??
   property :name, String, :default => ''
   property :nickname, String, :default => ''
 
 
-  property :mobile, String, :required => true, :unique => true,
+  property :mobile, String, :required => true, :unique => true,  #手机号
            :messages => {
                :presence  => "手机号不能为空",
                :is_unique => "手机号已被注册"
@@ -26,33 +26,31 @@ class User
   property :city_id, Integer
   property :sex, Integer, :default => 0
   property :age, Integer
-  property :avatar, String
+  property :avatar, String                                        #头像
 
-  property :exam_type, Integer, :default => 1 #报名类型
+  property :exam_type, Integer, :default => 1                     #报名类型
 
   #{"注册" => 0, "已付费" => 1, "拍照" => 2, "体检" => 3, "录指纹" => 4, "科目一" => 5, "科目二" => 6, "科目三" => 7, "考长途" => 8, "科目四" => 9, "已拿驾照" => 10, "已离开" => 11, "已入网" => 12}
-  property :status_flag, Integer, :default => 0
+  property :status_flag, Integer, :default => 0                   #学员状态
 
-  property :motto, String, :default => ''
+  property :motto, String, :default => ''                         #宣言
 
-  property :last_login_at, DateTime
-  property :device, String
-  property :version, String
+  property :last_login_at, DateTime                               #最后一次登录时间
+  property :device, String                                        #设备
+  property :version, String                                       #版本
 
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  property :type, Integer, :default => 0
+  property :type, Integer, :default => 0                          #学员类型
 
   property :address, String
 
-  property :email, String
+  property :email, String                                          #电子邮件
   #用户区域
 
   property :latitude, String
   property :longitude, String
-
-  property :pay_type_id, Integer
 
   property :login_count, Integer, :default => 0
 
@@ -62,10 +60,10 @@ class User
   property :teacher_id, Integer
   property :train_field_id, Integer
 
-  property :cash_name, String
-  property :cash_mobile, String
-  property :cash_bank_name, String
-  property :cash_bank_card, String
+  property :cash_name, String                                    #付款姓名??
+  property :cash_mobile, String                                  #付款手机??
+  property :cash_bank_name, String                               #付款银行名称??
+  property :cash_bank_card, String                               #付款银行卡号??
   property :signup_at, Date
   
   has n, :orders
