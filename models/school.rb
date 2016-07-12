@@ -77,7 +77,7 @@ class School
   end
 
   def demo_field
-    field = Field.new(:display=>1,:open=>1)
+    field = TrainField.new(:display=>1,:open=>1)
     field.name = self.generate_field
     field.city_id = city_id
     field.school_id = id

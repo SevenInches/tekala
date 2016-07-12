@@ -50,7 +50,7 @@ Tekala::Api.controllers :v1, :schools do
   end
 
   get :fields, :map => '/v1/fields_via_school/:school_id', :provides => [:json] do
-    @train_fields = Field.all(:school_id => params[:school_id], :open => 1)
+    @train_fields = TrainField.all(:school_id => params[:school_id], :open => 1)
     @total  = @train_fields.count
     render 'v1/train_fields'
   end
