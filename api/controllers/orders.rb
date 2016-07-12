@@ -154,7 +154,7 @@ Szcgs::Api.controllers :v1, :orders do
         extra = {
             :phone => @user.mobile,
             :id_no => params[:id_no],
-            :name => @user.name
+            :name  => params[:name].present? ? params[:name] : @user.name
         }
         if amount<200000 || amount >2000000
           return {:status => :failure, :msg => '么么贷分期金额错误'}.to_json
