@@ -30,6 +30,11 @@ module Szcgs
       render 'information'
     end
 
+    get :price do
+
+      render 'price'
+    end
+
     get :question do
       @xy_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>1)
       @jl_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>2)
