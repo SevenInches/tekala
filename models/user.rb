@@ -55,7 +55,7 @@ class User
   
   has n, :orders
 
-  has n, :signups
+  has 1, :signup
 
   has n, :user_cycle, :constraint => :destroy
 
