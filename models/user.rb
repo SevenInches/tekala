@@ -74,9 +74,11 @@ class User
 
   has n, :user_cycle, :constraint => :destroy
 
-  #belongs_to :product, :model => 'Product'
+  belongs_to :product, :model => 'Product'
 
   belongs_to :school, :model => 'School'
+
+  belongs_to :city, :model => 'City'
 
   # Callbacks
   before :save, :encrypt_password
@@ -102,9 +104,7 @@ class User
   end
 
   def city_name
-    if city_id.present?
-      city.nil? ? '--' : city.name
-    end
+    city.nil? ? '--' : city.name
   end
 
   def avatar_url
@@ -113,7 +113,6 @@ class User
     else
       CustomConfig::HOST + '/images/icon180.png'
     end
-
   end
 
 
