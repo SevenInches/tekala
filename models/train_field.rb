@@ -1,4 +1,4 @@
-class Field
+class TrainField
   include DataMapper::Resource
   attr :distance, true
   # property <name>, <type>
@@ -28,7 +28,7 @@ class Field
   property :subject, Integer, :default => 2                     #科目二/科目三
   property :school_id, Integer,:default => 0
   
-  has n, :teachers, 'Teacher', :through => :teacher_field, :via => :teacher
+  has n, :teachers, 'Teacher', :through => :teacher_field, :via => :teachers
 
   belongs_to :school
 
