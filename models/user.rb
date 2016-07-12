@@ -36,7 +36,9 @@ class User
   property :motto, String, :default => ''
 
   property :last_login_at, DateTime
-  
+  property :device, String
+  property :version, String
+
   property :created_at, DateTime
   property :updated_at, DateTime
 
