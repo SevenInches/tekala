@@ -102,7 +102,9 @@ class User
   end
 
   def city_name
-    city.nil? ? '--' : city.name if city_id.present?
+    if city_id.present?
+      city.nil? ? '--' : city.name
+    end
   end
 
   def avatar_url
