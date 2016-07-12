@@ -55,6 +55,8 @@ class User
   
   has n, :orders
 
+  has n, :signups
+
   has n, :user_cycle, :constraint => :destroy
 
   #belongs_to :product, :model => 'Product'
@@ -149,9 +151,6 @@ class User
 
   def encrypt_password
     self.crypted_password  = ::BCrypt::Password.create(password) if password.present?
-    #current_user = User.get id
-    #self.before_product_id = current_user ? current_user.product_id : nil
-    #self.exam_type = 1 if self.exam_type.nil?
   end
 
   def self.type
