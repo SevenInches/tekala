@@ -1,4 +1,4 @@
-class TrainField
+class Field
   include DataMapper::Resource
   attr :distance, true
   # property <name>, <type>
@@ -7,28 +7,28 @@ class TrainField
   property :address, String
   property :longitude, String, :default => '0.0'
   property :latitude, String, :default => '0.0'
-  property :remark, String
-  property :count, Integer, :default => 0
+  property :remark, String                                    #评语
+  property :count, Integer, :default => 0                     #??
 
-  property :type, Enum[0, 1, 2], :default => 0
-  property :display, Boolean, :default => true
+  property :type, Enum[0, 1, 2], :default => 0                 #类型,挂靠/直营
+  property :display, Boolean, :default => true                 #展示
 
   property :area, Integer
 
   property :city_id, Integer
 
-  property :open, Integer, :default => 1
-  property :c1, Integer, :default => 0
-  property :c2, Integer, :default => 0
-  property :users_count, Integer, :default => 0
-  property :orders_count, Integer, :default => 0
+  property :open, Integer, :default => 1                        #开放
+  property :c1, Integer, :default => 0                          #应该是要去掉的
+  property :c2, Integer, :default => 0                          #应该是要去掉的
+  property :users_count, Integer, :default => 0                 #学员数量
+  property :orders_count, Integer, :default => 0                #订单数量
 
-  property :good_tags, String
-  property :bad_tags, String
-  property :subject, Integer, :default => 2
+  property :good_tags, String                                   #优点标签
+  property :bad_tags, String                                    #缺点标签
+  property :subject, Integer, :default => 2                     #科目二/科目三
   property :school_id, Integer,:default => 0
   
-  has n, :teachers, 'Teacher', :through => :teacher_field, :via => :teachers
+  has n, :teachers, 'Teacher', :through => :teacher_field, :via => :teacher
 
   belongs_to :school
 

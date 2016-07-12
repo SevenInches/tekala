@@ -148,6 +148,8 @@ Tekala::Api.controllers :v1, :orders do
 
     return {:status => :failure, :msg => '未选择支付金额'}.to_json if @signup.amount == 0.0
 
+    amount = @signup.amount*100
+
     extra = {}
     if channel == 'mmdpay_wap'
       if params[:id_no].present?
@@ -168,7 +170,7 @@ Tekala::Api.controllers :v1, :orders do
 
     order_result = Pingpp::Charge.create(
         :order_no  => @signup.order_no,
-        :amount    => @signup.amount*100,
+        :amount    => amount,
         :subject   => subject,
         :body      => subject,
         :channel   => channel,
