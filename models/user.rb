@@ -54,9 +54,19 @@ class User
 
   property :pay_type_id, Integer
 
+  property :login_count, Integer, :default => 0
 
   # 驾校ID
   property :school_id, Integer, :default => 0
+
+  property :teacher_id, Integer
+  property :train_field_id, Integer
+
+  property :cash_name, String
+  property :cash_mobile, String
+  property :cash_bank_name, String
+  property :cash_bank_card, String
+  property :signup_at, Date
   
   has n, :orders
 
@@ -87,27 +97,19 @@ class User
     if avatar
       CustomConfig::QINIUURL+avatar.to_s+'?imageView2/1/w/200/h/200'
     else
-      if promotion_user && promotion_user.wechat_avatar.present?
-        promotion_user.wechat_avatar
-      else
-        CustomConfig::HOST + '/images/icon180.png'
-      end
+      CustomConfig::HOST + '/images/icon180.png'
     end
   end
 
   def city_name
-    city.nil? ? '--' : city.name
+    city.nil? ? '--' : city.name if city_id.present?
   end
 
   def avatar_url
     if avatar
       CustomConfig::QINIUURL+avatar.to_s
     else
-      if promotion_user && promotion_user.wechat_avatar.present?
-        promotion_user.wechat_avatar
-      else
-        CustomConfig::HOST + '/images/icon180.png'
-      end
+      CustomConfig::HOST + '/images/icon180.png'
     end
 
   end

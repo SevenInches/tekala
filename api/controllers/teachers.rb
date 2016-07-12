@@ -66,7 +66,7 @@ Tekala::Api.controllers :v1, :teachers do
     @total        = @train_fields ? @train_fields.size : 0 
     #如果查到的数据为空 返回全部训练场
     if @total == 0
-      @train_fields = TrainField.all(:count.gt => 0, :display => true, :open => 1,
+      @train_fields = Field.all(:count.gt => 0, :display => true, :open => 1,
                                      :city  => @city)
       @train_fields = @train_fields.all(:order => @exam_type.to_sym.desc, 
                                         @exam_type.to_sym.gt => 0, ) if @exam_type
@@ -79,7 +79,7 @@ Tekala::Api.controllers :v1, :teachers do
     end
 
     #通过repository 获得的数据是 array 不是 Collection 所以再查一次数据库
-    @train_fields = TrainField.all(:id => @train_fields.map(&:id)) 
+    @train_fields = Field.all(:id => @train_fields.map(&:id))
     # 训练场正常使用的教练
     @teachers = @train_fields.teachers(:open => 1, :status_flag => 1).reverse
     @teachers = @teachers.all(:exam_type => [3, @user.exam_type]) if @user
@@ -101,7 +101,7 @@ Tekala::Api.controllers :v1, :teachers do
     area_num = params[:area_num]
     city_num = params[:city_num]
 
-    @train_fields = TrainField.all(:count.gt => 0, :display => true, :open => 1)
+    @train_fields = Field.all(:count.gt => 0, :display => true, :open => 1)
     @train_fields = @train_fields.all(:order => @exam_type.to_sym.desc, 
                                         @exam_type.to_sym.gt => 0) if @exam_type
 

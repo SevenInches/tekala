@@ -15,5 +15,4 @@ child(@teachers => :data){
 	  child(:train_fields => :train_fields){
 	  	attributes :id, :name, :address, :longitude, :latitude, :area, :teacher_count, :good_tags, :bad_tags, :area_word, :subject, :subject_word
 	  }
-	  
 }
