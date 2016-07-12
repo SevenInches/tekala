@@ -10,7 +10,7 @@ class School
   property :phone, String
   property :profile, Text
   property :is_vip, Integer
-  property :is_open, Integer
+  property :is_open, Boolean, :default => 1
   property :weight, Integer
   property :master, String
   property :logo, String
@@ -36,7 +36,11 @@ class School
   after :create do |school|
     tid = school.demo_teacher
     fid = school.demo_train_field
-    TeacherTrainField.new(:teacher_id=>tid, :train_field_id=>fid).save
+    if tid.present?
+      tid.each do |teacher|
+        TeacherTrainField.new(:teacher_id=>teacher, :train_field_id=>fid).save
+      end
+    end
   end
 
   def city_name
@@ -57,7 +61,7 @@ class School
     names = ChineseName.generate(num = 3)
     teacher_array = []
     names.each do |name|
-      new_teacher = Teacher.new(:password=>'123456', :open=>1, :status_flag=>2, :exam_type=>4)
+      new_teacher = Teacher.new(:password=>'123456', :open=>1, :status_flag=>1, :exam_type=>4)
       new_teacher.name = name[0]
       new_teacher.sex = (name[1]=='女')? 0 : 1
       new_teacher.age = Date.today.year - name[2].to_i
@@ -85,6 +89,10 @@ class School
     last_names = %w(路 村 湖 山 庙 公园 体育馆 门 宫 庄 里 桥 科技园 大街)
     last = last_names.sample
     first+last+'训练场'
+  end
+
+  def open_word
+    is_open ? '开放' : '关闭'
   end
 
 end

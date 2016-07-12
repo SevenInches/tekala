@@ -2,7 +2,7 @@
 Tekala::Admin.controllers :questions do
 
   get :index do
-    @questions = Question.all
+    @questions = Question.all(:order=>:weight.asc)
     @questions = @questions.all(:type => params[:type]) if params[:type].present?
     @questions = @questions.all(:show => params[:show]) if params[:show].present?
     @questions = @questions.paginate(:page => params[:page], :per_page => 20)
@@ -55,7 +55,7 @@ Tekala::Admin.controllers :questions do
       else
         flash[:error]   = pat(:delete_error, :model => 'question')
       end
-      redirect url(:questions, :index, :city => '0755')
+      redirect url(:questions, :index)
     else
       flash[:warning] = pat(:delete_warning, :model => 'question', :id => "#{params[:id]}")
       halt 404

@@ -8,7 +8,7 @@ migration 1, :create_schools do
       column :phone, DataMapper::Property::String, :length => 255
       column :profile, DataMapper::Property::Text
       column :is_vip, DataMapper::Property::Integer
-      column :is_open, DataMapper::Property::Integer
+      column :is_open, DataMapper::Property::Boolean
       column :weight, DataMapper::Property::Integer
       column :master, DataMapper::Property::String, :length => 255
       column :logo, DataMapper::Property::String, :length => 255

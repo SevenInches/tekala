@@ -10,6 +10,8 @@ class Product
   property :updated_at, DateTime
   property :show, Integer, :default => 0
   property :photo, String, :auto_validation => false
+  property :description, String
+  property :introduction, Text
 
   property :info_photo, String, :auto_validation => false
   property :exam_two_standard, Integer, :default => 0
@@ -20,8 +22,13 @@ class Product
 
   property :school_id, Integer, :default => 0
 
-  mount_uploader :photo, ProductPhoto
-  mount_uploader :info_photo, ProductInfoPhoto
+  property :color, String
+  property :city_id, Integer, :default => 0
+  property :show, Boolean, :default => false
+
+  belongs_to :city
+
+  belongs_to :school
 
   def photo_thumb_url
      photo.thumb && photo.thumb.url ? CustomConfig::HOST + photo.thumb.url : ''
@@ -44,8 +51,8 @@ class Product
     CustomConfig::HOST + "/api/v1/product_info?product_id=#{id}"
   end
 
-  def info_img 
-
+  def self.colors
+    {"紫色" => '#967ADC', "橙色" => "#EE6439", '蓝色' => '#4A89DC', '绿色' => '#8CC152'}
   end
 
   def can_buy 

@@ -114,7 +114,6 @@ Tekala::Api.controllers :v1, :train_fields do
 
   get :teachers, :map => '/v1/train_fields/:id/teachers', :provides => [:json] do 
     train_field  = TrainField.get params[:id].to_i
-
     if train_field.present?
       teacher_ids = TeacherTrainField.all(:train_field_id => train_field.id)
       if teacher_ids

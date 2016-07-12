@@ -9,10 +9,11 @@ class TrainField
   property :latitude, String, :default => '0.0'
   property :remark, String
   property :count, Integer, :default => 0
+
   property :type, Enum[0, 1, 2], :default => 0
   property :display, Boolean, :default => true
 
-  property :area, Integer, :default => 0
+  property :area, Integer
 
   property :city_id, Integer
 
@@ -22,8 +23,8 @@ class TrainField
   property :users_count, Integer, :default => 0
   property :orders_count, Integer, :default => 0
 
-  property :good_tags, String, :default => ''
-  property :bad_tags, String, :default => ''
+  property :good_tags, String
+  property :bad_tags, String
   property :subject, Integer, :default => 2
   property :school_id, Integer,:default => 0
   
@@ -31,6 +32,16 @@ class TrainField
 
   belongs_to :school
 
+  belongs_to :city
+
+
+  def city_name
+    city.nil? ? '--' : city.name
+  end
+
+  def area_name
+    City.get(area).name if area.present? && area.to_i!= 0
+  end
 
   def teacher_count
     count
@@ -44,6 +55,10 @@ class TrainField
     {'挂靠/直营' => 0, "挂靠" => 1, '直营' => 2}
   end
 
+  def teacher_num
+    teachers.count
+  end
+
   def type_word 
     case type
     when 1
@@ -53,10 +68,6 @@ class TrainField
     else
     return '挂靠/直营'
     end 
-  end
-
-  def self.city
-    return {'深圳' => '0755', '武汉' => '027', '重庆' => '023'}
   end
 
   def self.open

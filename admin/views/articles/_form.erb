@@ -15,8 +15,8 @@
 <link href="http://summernote.org/bower_components/summernote/dist/summernote.css" />
 <script src="http://summernote.org/bower_components/summernote/dist/summernote.js"></script>
 
-<%= stylesheet_link_tag '../../stylesheets/wysiwyg-editor' %>
-<%=javascript_include_tag '../../javascripts/wysiwyg', '../../javascripts/wysiwyg-editor' %>
+<%=javascript_include_tag '../../editor/js/froala_editor.min' %>
+<%=stylesheet_link_tag '../../editor/css/font-awesome.min', '../../editor/css/froala_editor.min' %>
 
 <% error = @article.errors.key?(:title) && @article.errors[:title].count > 0 %>
 <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
@@ -48,7 +48,7 @@
 
 <% error = @article.errors.key?(:description) && @article.errors[:description].count > 0 %>
 <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-  <%= f.label '描述', :class => 'control-label' %>
+  <%= f.label '摘要', :class => 'control-label' %>
   <div class='controls'>
     <%= f.text_field :description, :class => 'form-control input-xlarge input-with-feedback' %>
   </div>
@@ -67,8 +67,7 @@
 <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
   <%= f.label '内容', :class => 'control-label' %>
   <div class='controls'>
-    <textarea id="editor1" name="content" placeholder="请在这里键入你想输入的...">
-    </textarea>
+    <%= f.text_area :content, :id => 'content', :placeholder=>"请在这里键入你想输入的..." %>
   </div>
 </fieldset>
 <br>
@@ -85,8 +84,9 @@
   &nbsp;
   <%= link_to pat(:cancel), url(:articles, :index), :class => 'btn btn-default' %>
 </div>
-
 <script type="text/javascript">
+  $('#content').editable({inlineMode: false, alwaysBlank: true});
+
   $('.summernote').summernote({
     height: 150,   //set editable area's height
     codemirror: { // codemirror options

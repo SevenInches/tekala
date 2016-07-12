@@ -1,0 +1,97 @@
+<% error = @school.errors.key?(:name) && @school.errors[:name].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '名称', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:name) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @school.errors.key?(:city_id) && @school.errors[:city_id].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '城市id', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :city_id, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:city_id) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @school.errors.key?(:phone) && @school.errors[:phone].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '电话', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :phone, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:phone) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @school.errors.key?(:master) && @school.errors[:master].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '校长', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :master, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:master) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @school.errors.key?(:found_at) && @school.errors[:found_at].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '成立日期', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :found_at, :class => 'form-control input-xlarge input-with-feedback',:placeholder =>'格式:YYYY-MM-DD'%>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:found_at) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @school.errors.key?(:address) && @school.errors[:address].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '地址', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_area :address, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:address) : "" %></span>
+  </div>
+</div>
+<div class="hr-line-dashed"></div>
+
+<% error = @school.errors.key?(:profile) && @school.errors[:profile].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '简介', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_area :profile, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:profile) : "" %></span>
+  </div>
+</div>
+
+
+<div class="hr-line-dashed"></div>
+
+<% error = @school.errors.key?(:weight) && @school.errors[:weight].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '权重', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :weight, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:weight) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="form-actions">
+    <div class="col-sm-8 col-sm-offset-4">
+        <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+          &nbsp;
+       
+        <%= link_to pat(:cancel), url(:schools, :index), :class => 'btn btn-default' %>
+    </div>
+  
+</div>

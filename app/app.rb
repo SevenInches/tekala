@@ -20,18 +20,25 @@ module Tekala
       render 'aboutUs'
     end
 
-    get :article do
+    get :article, :with => :id do
+      @article= Article.get(params[:id])
       render 'article'
     end
 
-    get :info do
+    get :articles do
+      @articles = Article.all(:order =>:created_at.desc)
       render 'information'
     end
 
+    get :price do
+
+      render 'price'
+    end
+
     get :question do
-      @xy_questions = Question.all(:show=>1, :type=>1)
-      @jl_questions = Question.all(:show=>1, :type=>2)
-      @jx_questions = Question.all(:show=>1, :type=>3)
+      @xy_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>1)
+      @jl_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>2)
+      @jx_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>3)
       render 'question'
     end
 

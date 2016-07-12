@@ -3,14 +3,12 @@
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta name=viewport content='width=device-width,initial-scale=1' />
-    <title>萌萌学车管理系统</title>
-    <%= favicon_tag "favicon.ico" %>
     <%= stylesheet_link_tag  'bootstrap.min'%>
     <%= stylesheet_link_tag 'bootstrap.min', 'application' %>
   </head>
   <body>
     <div class="container" style='margin:0 auto;'>
-    	<%=@product_binding.introduction.html_safe%>
+    	<%=@product.introduction.html_safe if @product.introduction.present?%>
     </div>
     <style type="text/css">
     body{

@@ -1,6 +1,6 @@
 node(:status) { 'success' }
 child(@user => :data){
-	attributes :id, :name, :nickname, :mobile, :city_name, :sex, :score, :avatar_url, :avatar_thumb_url, :motto, :type, :type_word, :status_flag_word, :status_flag, :exam_type, :exam_type_word, :has_hour, :invite_code, :invite_url, :login_count, :has_assign, :address
+	attributes :id, :name, :nickname, :mobile, :city_name, :sex, :score, :avatar_url, :avatar_thumb_url, :motto, :type, :type_word, :status_flag_word, :status_flag, :exam_type, :exam_type_word, :has_hour, :login_count, :has_assign, :address
 
 	node(:pass_first_exam) {  5531 }
 	node(:pass_second_exam) { 2240 }
@@ -8,7 +8,6 @@ child(@user => :data){
 	attributes :birthday,    :if => lambda { |val| !val.birthday.nil? }
 	attributes :started_at,  :if => lambda { |val| !val.started_at.nil? }
 	attributes :last_login,  :if => lambda { |val| !val.last_login.nil? }
-	node(:invite_text){ @invite_text }
 	if @order.present?
 		child(@order){
 		  attributes :id, :order_no, :amount, :discount, :teacher_id, :user_id, :school_id , :status, :created_at, :exam_type

@@ -12,7 +12,8 @@ class Question
   property :created_at, DateTime
   #   {:学员 => 1, :教练 => 2, :驾校 =>3}
   property :type, Integer
-  property :show, Boolean
+  property :weight, Integer
+  property :show, Boolean, :default =>1
 
   def self.get_type
       return {'学员'=>1, '教练'=>2,'驾校'=>3}
@@ -31,5 +32,6 @@ class Question
 
   def show_word
       show ? '显示' : '隐藏'
-    end
+  end
+
 end
