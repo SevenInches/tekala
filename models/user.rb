@@ -35,6 +35,8 @@ class User
 
   property :motto, String, :default => ''
 
+  property :last_login_at, DateTime
+  
   property :created_at, DateTime
   property :updated_at, DateTime
 
@@ -49,6 +51,7 @@ class User
   property :longitude, String
 
   property :pay_type_id, Integer
+
 
   # 驾校ID
   property :school_id, Integer, :default => 0
