@@ -41,7 +41,7 @@ Tekala::Api.controllers :v1, :users do
 	    @user.id_card       = params[:id_card]        if params[:id_card]
       @user.sex           = params[:sex]            if params[:sex]
 	    @user.address       = params[:address]        if params[:address]
-	    @user.city          = params[:city]           if params[:city]
+	    @user.city_id       = params[:city]           if params[:city]
 	    @user.motto         = params[:motto]          if params[:motto]
 	    @user.birthday      = params[:birthday]       if params[:birthday]
 	    @user.longitude     = params[:longitude]      if params[:longitude]
@@ -49,9 +49,7 @@ Tekala::Api.controllers :v1, :users do
     	@user.avatar        = params[:avatar]     		if params[:avatar]
       if !empty?(params[:product_id])
         product = Product.get(params[:product_id])
-        if !@user.product_id.present?
-          @user.product_id = params[:product_id]
-        end
+        @user.product_id = params[:product_id]
         if @request_user.signup.present?
           @request_user.signup.destroy
         end
