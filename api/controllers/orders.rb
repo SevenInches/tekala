@@ -293,6 +293,7 @@ Tekala::Api.controllers :v1, :orders do
         if ping_result['data']['object']['extra']['id_no'].present?
           @user.id_card = ping_result['data']['object']['extra']['id_no']
         end
+        @user.signup_at = Time.now
         @user.save
 
         #付款时间

@@ -92,6 +92,7 @@ class Order
   belongs_to :city
 
   has 1, :teacher_comment
+  has 1, :user_comment
 
   #教练接单
   has 1, :order_confirm, :constraint => :destroy
