@@ -49,6 +49,9 @@ Tekala::Api.controllers :v1, :users do
     	@user.avatar        = params[:avatar]     		if params[:avatar]
       if !empty?(params[:product_id])
         product = Product.get(params[:product_id])
+        if !@user.product_id.present?
+          @user.product_id = params[:product_id]
+        end
         if @request_user.signup.present?
           @request_user.signup.destroy
         end

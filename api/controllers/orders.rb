@@ -81,12 +81,15 @@ Tekala::Api.controllers :v1, :orders do
 
     @order                = Order.new
     @order.user_id        = @user.id
-    @order.teacher_id     = params[:teacher_id]  ? params[:teacher_id] : 404
+    if params[:teacher_id].present?
+      @order.teacher_id     = params[:teacher_id]
+    else
+      {:status => :failure, :msg =>'教练不能为空'}.to_json
+    end
     if params[:train_field_id] && params[:train_field_id] != '0'
       @order.train_field_id     = params[:train_field_id]
     else
-      last_order = Order.last(:teacher_id => @order.teacher_id, :user_id => @order.user_id, :status => Order::pay_or_done)
-      @order.train_field_id     = last_order ? last_order.train_field_id : ''
+      {:status => :failure, :msg =>'训练场不能为空'}.to_json
     end
     @order.school_id        = @user.school_id
     @order.quantity       = quantity
