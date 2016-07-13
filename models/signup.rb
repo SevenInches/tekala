@@ -27,7 +27,7 @@ class Signup
   belongs_to :user
   belongs_to :teacher
   belongs_to :train_field
-  belongs_to :product, :model => 'Product'
+  belongs_to :product
   belongs_to :school
   belongs_to :city
 
