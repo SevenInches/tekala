@@ -67,7 +67,7 @@ class Order
   property :latitude, String
   property :longitude, String
 
-  property :has_sms, Integer, :default => 0
+  property :has _sms, Integer, :default => 0
 
   #mok 产品id号 2015-09-30
   property :product_id, Integer, :default => 0
@@ -91,20 +91,20 @@ class Order
 
     
   #推送给教练 是否接单
-  # def push_to_teacher
-  #   #预订的日期
-  #   if status == 2 && Order::should_record_hours.include?(type)
-  #     current_confirm = OrderConfirm.create(:order_id   => id,
-  #                                           :user_id    => user_id, 
-  #                                           :teacher_id => teacher_id, 
-  #                                           :user_id    => user_id,
-  #                                           :start_at   => book_time,
-  #                                           :end_at     => book_time + quantity.hour,
-  #                                           :status     => 0)
-  #     #如果是订单教练为内部员工 测试 则不发送推送
-  #     JPush::order_confirm(current_confirm.order_id) if teacher_id != 477
-  #   end
-  # end
+  def push_to_teacher
+    #预订的日期
+    if status == 2 && Order::should_record_hours.include?(type)
+      current_confirm = OrderConfirm.create(:order_id   => id,
+                                            :user_id    => user_id,
+                                            :teacher_id => teacher_id,
+                                            :user_id    => user_id,
+                                            :start_at   => book_time,
+                                            :end_at     => book_time + quantity.hour,
+                                            :status     => 0)
+      #如果是订单教练为内部员工 测试 则不发送推送
+      JPush::order_confirm(current_confirm.order_id) if teacher_id != 477
+    end
+  end
 
   # 判断是否可退款
   def can_refund?
