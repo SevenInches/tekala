@@ -105,7 +105,7 @@ class Order
                                             :end_at     => book_time + quantity.hour,
                                             :status     => 0)
       #如果是订单教练为内部员工 测试 则不发送推送
-      JPush::order_confirm(current_confirm.order_id)
+      #JPush::order_confirm(current_confirm.order_id)
     end
   end
 

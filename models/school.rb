@@ -39,7 +39,7 @@ class School
   has n, :finances          # 财务记录
   has n, :finance_reports   # 财务报告
   has n, :logs  # 操作日志
-  
+  has n, :products #产品
 
   after :create do |school|
     tid = school.demo_teacher
