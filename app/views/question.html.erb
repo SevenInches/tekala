@@ -1,67 +1,45 @@
 <%=stylesheet_link_tag 'common', 'question' %>
 <div class="qt-container">
-    <ul class="qt-nav">
-        <li class="active">学员</li>
-        <li>教练</li>
-        <li>驾校</li>
-    </ul>
+    <!--<ul class="qt-nav">-->
+        <!--<li class="active">学员</li>-->
+        <!--<li>教练</li>-->
+        <!--<li>驾校</li>-->
+    <!--</ul>-->
     <!--学员列表-->
-      <% if @xy_questions.present? %>
+      <% if @questions.present? %>
       <ul class="qt-list student" >
-          <% @xy_questions.each do |xy| %>
+          <% @questions.each do |question| %>
             <li>
-                <p class="qt-title"><%= xy.title %></p>
-                <p class="qt-answer"><%= xy.content %></p>
+                <p class="qt-title"><%= question.title %></p>
+                <p class="qt-answer"><%= question.content %></p>
             </li>
           <% end%>
       </ul>
       <% end %>
-    <!--教练列表-->
-    <% if @jl_questions.present? %>
-      <ul class="qt-list coach" style="display: none;">
-        <% @jl_questions.each do |jl| %>
-            <li>
-              <p class="qt-title"><%= jl.title %></p>
-              <p class="qt-answer"><%= jl.content %></p>
-            </li>
-        <% end%>
-      </ul>
-    <% end %>
-    <!--驾校列表-->
-    <% if @jx_questions.present? %>
-      <ul class="qt-list school" style="display: none;">
-        <% @jx_questions.each do |jx| %>
-            <li>
-              <p class="qt-title"><%= jx.title %></p>
-              <p class="qt-answer"><%= jx.content %></p>
-            </li>
-        <% end%>
-      </ul>
-    <% end %>
 </div>
 <script>
-    $(document).ready(function () {
-        var stuList = $('.student'),
-            coachList = $('.coach'),
-            schoolList = $('.school'),
-            navLi = $('.qt-nav li');
-        $(document).on('click','.qt-nav li',function () {
-            var index = $(this).index();
-            if(index == 0){
-                stuList.show();
-                coachList.hide();
-                schoolList.hide();
-            }else if(index == 1){
-                stuList.hide();
-                coachList.show();
-                schoolList.hide();
-            }else{
-                stuList.hide();
-                coachList.hide();
-                schoolList.show();
-            }
-            navLi.removeClass('active');
-            $(this).addClass('active');
-        })
-    });
+//    $(document).ready(function () {
+//        var stuList = $('.student'),
+//            coachList = $('.coach'),
+//            schoolList = $('.school'),
+//            navLi = $('.qt-nav li');
+//        $(document).on('click','.qt-nav li',function () {
+//            var index = $(this).index();
+//            if(index == 0){
+//                stuList.show();
+//                coachList.hide();
+//                schoolList.hide();
+//            }else if(index == 1){
+//                stuList.hide();
+//                coachList.show();
+//                schoolList.hide();
+//            }else{
+//                stuList.hide();
+//                coachList.hide();
+//                schoolList.show();
+//            }
+//            navLi.removeClass('active');
+//            $(this).addClass('active');
+//        })
+//    });
 </script>

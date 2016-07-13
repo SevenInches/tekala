@@ -72,24 +72,17 @@ class User
 
   has n, :user_cycle, :constraint => :destroy
 
-  belongs_to :product, :model => 'Product'
+  belongs_to :school
 
-  belongs_to :school, :model => 'School'
-
-  belongs_to :city, :model => 'City'
+  belongs_to :city
 
   # Callbacks
   before :save, :encrypt_password
 
-  after :create, :create_promotion
-
-  def product_name
-    product ? product.name : 'Error未指定产品'
-  end
 
   #已完成学时
   def has_hour
-    return orders.all(:status => Order::pay_or_done, :type => Order::should_record_hours).sum(:quantity).to_i
+    return orders.all(:status => Order::pay_or_done).sum(:quantity).to_i
   end
 
 
