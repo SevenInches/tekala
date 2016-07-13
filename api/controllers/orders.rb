@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Szcgs::Api.controllers :v1, :orders do
+Tekala::Api.controllers :v1, :orders do
 	register WillPaginate::Sinatra
   enable :sessions
   current_url = '/api/v1'
@@ -148,13 +148,15 @@ Szcgs::Api.controllers :v1, :orders do
 
     return {:status => :failure, :msg => '未选择支付金额'}.to_json if @signup.amount == 0.0
 
+    amount = @signup.amount*100
+
     extra = {}
     if channel == 'mmdpay_wap'
       if params[:id_no].present?
         extra = {
             :phone => @user.mobile,
             :id_no => params[:id_no],
-            :name => @user.name
+            :name  => params[:name].present? ? params[:name] : @user.name
         }
         if amount<200000 || amount >2000000
           return {:status => :failure, :msg => '么么贷分期金额错误'}.to_json
@@ -168,7 +170,7 @@ Szcgs::Api.controllers :v1, :orders do
 
     order_result = Pingpp::Charge.create(
         :order_no  => @signup.order_no,
-        :amount    => @signup.amount*100,
+        :amount    => amount,
         :subject   => subject,
         :body      => subject,
         :channel   => channel,

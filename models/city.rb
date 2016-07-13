@@ -6,7 +6,4 @@ class City
   property :name, String
   property :keys, Integer
 
-  has n, :products
-  has n, :schools
-
 end

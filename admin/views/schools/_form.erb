@@ -20,12 +20,12 @@
 
 <div class="hr-line-dashed"></div>
 
-<% error = @school.errors.key?(:phone) && @school.errors[:phone].count > 0 %>
+<% error = @school.errors.key?(:contact_phone) && @school.errors[:contact_phone].count > 0 %>
 <div class="form-group <%= error ? 'has-error' : ''%>">
   <%= f.label '电话', :class => 'col-sm-2 control-label' %>
   <div class="col-sm-10">
-    <%= f.text_field :phone, :class => 'form-control input-xlarge input-with-feedback' %>
-    <span class='help-block m-b-none'><%= error ? f.error_message_on(:phone) : "" %></span>
+    <%= f.text_field :contact_phone, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:v) : "" %></span>
   </div>
 </div>
 

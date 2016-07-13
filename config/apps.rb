@@ -20,8 +20,8 @@ end
 
 # Mounts the core application for this project
 
-Padrino.mount('Szcgs::Api',   	  :app_file => Padrino.root('api/app.rb')).to('/api')
-Padrino.mount('Szcgs::Admin',   	:app_file => Padrino.root('admin/app.rb')).to('/tekala_admin')
-Padrino.mount('Szcgs::App',   	  :app_file => Padrino.root('app/app.rb')).to('/') #官网
+Padrino.mount('Tekala::Api',   	  :app_file => Padrino.root('api/app.rb')).to('/api')
+Padrino.mount('Tekala::Admin',   	:app_file => Padrino.root('admin/app.rb')).to('/tekala_admin')
+Padrino.mount('Tekala::App',   	  :app_file => Padrino.root('app/app.rb')).to('/') #官网
 
 

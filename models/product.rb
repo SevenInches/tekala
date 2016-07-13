@@ -3,34 +3,31 @@ class Product
 
   property :id, Serial
   property :name, String
-  property :price, Integer #单位 分
+  property :price, Integer
   property :detail, Text
-  property :deadline, Date, :default => '2050-01-01' #截止日期
+  property :deadline, Date, :default => '2050-01-01'                  #截止日期
   property :created_at, DateTime
   property :updated_at, DateTime
-  property :show, Integer, :default => 0
-  property :photo, String, :auto_validation => false
-  property :description, String
-  property :introduction, Text
+  property :photo, String, :auto_validation => false                  #图片
+  property :description, String                                       #描述
+  property :introduction, Text                                        #简介
 
-  property :info_photo, String, :auto_validation => false
-  property :exam_two_standard, Integer, :default => 0
-  property :exam_three_standard, Integer, :default => 0
-  property :total_quantity,  Integer, :default => 0
+  property :info_photo, String, :auto_validation => false             #简介图片
+  property :exam_two_standard, Integer, :default => 0                 #科二标准时长
+  property :exam_three_standard, Integer, :default => 0               #科三标准时长
+  property :total_quantity,  Integer, :default => 0                   #限制总学时
   #"c1"=>1,"c2"=>2
-  property :exam_type, Integer, :default => 0
+  property :exam_type, Integer, :default => 0                         #驾考类型
 
   property :school_id, Integer, :default => 0
 
-  property :color, String
+  property :color, String                                             #颜色??
   property :city_id, Integer, :default => 0
-  property :show, Boolean, :default => false
+  property :show, Boolean, :default => false                          #是否展示
 
   belongs_to :city
 
   belongs_to :school
-
-  has n, :users, :model => 'User'
 
   def photo_thumb_url
      photo.thumb && photo.thumb.url ? CustomConfig::HOST + photo.thumb.url : ''
@@ -50,7 +47,7 @@ class Product
 
   #产品介绍
   def link
-    CustomConfig::HOST + "/api/v2/product_info?product_id=#{id}"
+    CustomConfig::HOST + "/api/v1/product_info?product_id=#{id}"
   end
 
   def self.colors

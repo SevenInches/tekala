@@ -58,6 +58,10 @@ class Tweet
   end
 
 
+  # 添加日志
+  def add_log(type, content, target=nil)
+    user.add_log(type, content, target)
+  end
 
 
 end

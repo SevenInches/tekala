@@ -1,4 +1,4 @@
-Szcgs::Admin.controllers :schools do
+Tekala::Admin.controllers :schools do
   get :index do
     @title = "Schools"
     @schools = School.all(:order =>[:is_open.desc,:weight.desc])

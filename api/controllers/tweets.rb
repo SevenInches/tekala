@@ -1,4 +1,4 @@
-Szcgs::Api.controllers :v1, :tweets do  
+Tekala::Api.controllers :v1, :tweets do  
 	register WillPaginate::Sinatra
   enable :sessions
   current_url = '/api/v1'

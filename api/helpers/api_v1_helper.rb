@@ -1,4 +1,4 @@
-Szcgs::Api.helpers do
+Tekala::Api.helpers do
   def empty?(data) ;data.to_s.empty? ? true : false ;end
 
   def city_list

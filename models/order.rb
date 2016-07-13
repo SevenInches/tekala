@@ -87,176 +87,29 @@ class Order
   belongs_to :school
   belongs_to :city
 
-  has 1, :user_coupon
   has 1, :teacher_comment
-  has 1, :user_comment
 
-  #教练接单
-  has 1, :order_confirm, :constraint => :destroy
-
-  has 1, :insure
-
-  after :create do |order|
-    if order.status == 2 && Order::should_record_hours.include?(type)
-      user_plan_increase
-      learn_hours_increase 
-      teacher_tech_increase
-      create_user_schedule
-    end
-  end
-  
-  before :save do |order|
-    #判断order的类型
-      o = Order.get order.id
-      self.before_status = o ? o.status : nil 
-  end
- 
-  after :save do  
-
-    if !self.before_status.nil?
-      #完成订单记录时间
-      if self.before_status < 103 && status == 103
-        self.update(:done_at => Time.now)
-      end
-
-      #更新学车计划 统计学车时间 订单支付 +1 (测试通过) 
-      if self.before_status < 1 && status == 2 &&  Order::should_record_hours.include?(type)
-        user_plan_increase
-        learn_hours_increase 
-        teacher_tech_increase if type == 0 #如果非绑定教练的话 才给教练+1
-      end
-
-      #订单取消或者退款 则学时数 -1 (测试通过)
-      if Order::pay_or_done.include?(self.before_status) && (status == 6 || status == 6) &&  Order::should_record_hours.include?(type)
-        # user_plan_decrease
-        # learn_hours_decrease 
-        # teacher_tech_decrease if type == 0 #如果非绑定教练的话 才给教练-1
-      end
-
-      #生成学车进度 && 推送给教练 (通过测试)
-      if self.before_status < 2 && status == 2 && Order::should_record_hours.include?(type)
-        create_user_schedule
-      end
-
-    end
-  end
-
-  #更新学车计划 统计学车时间 订单支付 +1
-  def user_plan_increase 
-    plan = user.user_plan
-    plan.exam_two   += quantity if user.status_flag < 7
-    plan.exam_three += quantity if user.status_flag > 6
-    plan.save
-  end
-
-  #订单取消或者退款 则学时数 -1
-  def user_plan_decrease
-    plan = user.user_plan
-
-    # 若已经开始练科目三学时，则退科目三，否则退科目二
-    if plan.exam_three > 0
-      plan.exam_three -= quantity
-    else
-      plan.exam_two   -= quantity
-    end
-
-    plan.save
-  end
     
   #推送给教练 是否接单
-  def push_to_teacher
-    #预订的日期
-    if status == 2 && Order::should_record_hours.include?(type)
-      current_confirm = OrderConfirm.create(:order_id   => id,
-                                            :user_id    => user_id, 
-                                            :teacher_id => teacher_id, 
-                                            :user_id    => user_id,
-                                            :start_at   => book_time,
-                                            :end_at     => book_time + quantity.hour,
-                                            :status     => 0)
-      #如果是订单教练为内部员工 测试 则不发送推送
-      JPush::order_confirm(current_confirm.order_id) if teacher_id != 477
-    end
-
-  end
+  # def push_to_teacher
+  #   #预订的日期
+  #   if status == 2 && Order::should_record_hours.include?(type)
+  #     current_confirm = OrderConfirm.create(:order_id   => id,
+  #                                           :user_id    => user_id, 
+  #                                           :teacher_id => teacher_id, 
+  #                                           :user_id    => user_id,
+  #                                           :start_at   => book_time,
+  #                                           :end_at     => book_time + quantity.hour,
+  #                                           :status     => 0)
+  #     #如果是订单教练为内部员工 测试 则不发送推送
+  #     JPush::order_confirm(current_confirm.order_id) if teacher_id != 477
+  #   end
+  # end
 
   # 判断是否可退款
   def can_refund?
     ([2,3,4].include? status) && pay_at != nil
   end
-
-  #统计来源 状态为支付 类型是 4800包过班 通过微信支付渠道
-  def update_channel_data
-
-    promotion = PromotionUser.first(:user_id => user_id)
-    if promotion && !promotion.wechat_unionid.nil?
-
-      promotion_channel = PromotionChannel.first(:from => promotion.wechat_unionid)
-      
-      if !promotion_channel.nil?
-      
-        data = ChannelData.first_or_create(:event_key => promotion_channel.event_key, :date => Date.today.strftime('%Y%m%d'))
-        data.pay_count = data.pay_count.to_i + 1
-        data.save
-      
-      end
-
-    end
-    
-  end
-
-  #统计用户学时
-  def learn_hours_increase
-    user.learn_hours += quantity
-    user.save
-  end
-
-  def learn_hours_decrease
-    user.learn_hours -= quantity
-    user.save
-  end
-
-
-  #更新教练已教学时
-  def teacher_tech_increase
-    return unless teacher
-    teacher.tech_hours += quantity
-    teacher.save
-  end
-
-  def teacher_tech_decrease
-    return unless teacher
-    teacher.tech_hours -= quantity
-    teacher.save
-  end
-
-  #退回代金券
-  def return_coupon 
-
-    coupon = UserCoupon.first(:order_id => id)
-    if coupon
-      coupon.status = 1
-      coupon.order_id = nil
-      coupon.save
-    end
-
-  end
-  
-  #创建进度记录
-  def create_user_schedule
-    record = UserSchedule.new
-    record.user_id   = user_id
-    record.quantity  = quantity
-    record.book_time = book_time
-    record.theme     = theme
-    record.status    = 1
-    record.save
-  end
-
-  def has_coupon 
-    user_coupon ? true : false
-  end
-
   
   def generate_order_no
     year    = Time.now.year
@@ -337,27 +190,6 @@ class Order
     end
   end
 
-  def device_color
-    case self.device.downcase
-    when /android/
-      return 'primary'
-    when /ios/, /iphone/
-      return 'info'
-    else
-      return 'success'
-    end
-  end
-
-  def device_type
-    case self.device.downcase
-    when /android/
-      return '安卓'
-    when /ios/, /iphone/
-      return '苹果'
-    else
-      return '微信'
-    end
-  end
 
   def created_at_format
     created_at.strftime('%Y-%m-%d %H:%M')
@@ -367,53 +199,6 @@ class Order
    pay_at ? pay_at.strftime('%Y-%m-%d %H:%M') : ''
   end
 
-  def promotion_amount 
-
-    promotion = amount.to_f-discount.to_f
-    # promotion += (quantity*1.5) if has_insure == 1
-    if promotion > 0
-      #self.update(:vip => 0)
-      promotion
-    else
-      #self.update(:vip => 1)
-      0
-    end 
-  end
-
-  def self.type
-    {'普通班' => 0, '包过班' => 1}
-  end
-
-  def type_word
-    case type
-    when 1
-      '包过班'
-    else
-      '普通班'
-    end
-  end
-
-  #是否可评论 status > 101 && 已经练完车 && 未评论过
-  def can_comment 
-    status > 101 && book_time < Time.now && teacher_comment.nil? 
-  end
-
-  def teacher_can_comment 
-    return  status == 103 && user_comment.nil? ? true : false
-  end
-
-  def user_has_comment 
-    !user_comment.nil? 
-  end
-
-  def self.has_comment_color(status)
-    case status
-    when true
-      return 'success'
-    when false
-      return 'warning'
-    end
-  end
   def train_field_name
     train_field ? train_field.name :  teacher.training_field
   end
@@ -630,6 +415,12 @@ class Order
     JPush.order_cancel order.id
 
     true
+  end
+
+
+   # 添加日志
+  def add_log(type, content, target=nil)
+    user.add_log(type, content, target)
   end
 
 end

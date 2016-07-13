@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Szcgs::Admin.controllers :questions do
+Tekala::Admin.controllers :questions do
 
   get :index do
     @questions = Question.all(:order=>:weight.asc)

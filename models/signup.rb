@@ -1,6 +1,5 @@
 class Signup
   include DataMapper::Resource
-
   # property <name>, <type>
   property :id, Serial
   property :user_id, Integer
@@ -19,6 +18,7 @@ class Signup
   property :city_id, Integer
   property :product_id, Integer
   property :pay_channel, String
+
   #1=>未付款,2=>已付款,3=>退款中,4=>已退款
   property :status, Integer
   #1=>C1,2=>C2
@@ -44,4 +44,7 @@ class Signup
     end
   end
 
+  def product_name
+    product.name
+  end
 end

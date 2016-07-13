@@ -10,7 +10,7 @@ child(@user => :data){
 	attributes :last_login,  :if => lambda { |val| !val.last_login.nil? }
 	if @order.present?
 		child(@order){
-		  attributes :id, :order_no, :amount, :discount, :teacher_id, :user_id, :school_id , :status, :created_at, :exam_type
+		  attributes :id, :order_no, :amount, :discount, :teacher_id, :user_id, :school_id , :status, :created_at, :exam_type, product_name
 		}
 	end
 	if @has_assign.present?

@@ -1,15 +1,16 @@
 # -*- encoding : utf-8 -*-
-Szcgs::Api.controllers :v1, :teachers do  
+Tekala::Api.controllers :v1, :teachers do  
 	register WillPaginate::Sinatra
   enable :sessions
   current_url = '/api/v1'
 
-  default_latitude = '24.0000'
+  default_latitude  = '24.0000'
   default_longitude = '100.333'
 
   before do 
     @city      = params[:city] || '0755'
     @user      = User.get(session[:user_id])
+
     if @user.nil?
       @sql_exam_type_where = ''
       @sql_city_where      = "and city = '#{@city}'"
@@ -78,7 +79,7 @@ Szcgs::Api.controllers :v1, :teachers do
     end
 
     #通过repository 获得的数据是 array 不是 Collection 所以再查一次数据库
-    @train_fields = TrainField.all(:id => @train_fields.map(&:id)) 
+    @train_fields = TrainField.all(:id => @train_fields.map(&:id))
     # 训练场正常使用的教练
     @teachers = @train_fields.teachers(:open => 1, :status_flag => 1).reverse
     @teachers = @teachers.all(:exam_type => [3, @user.exam_type]) if @user
@@ -94,7 +95,6 @@ Szcgs::Api.controllers :v1, :teachers do
     end
 
     render 'v1/teachers'
-
   end 
 
   get :area, :provides => [:json] do 
