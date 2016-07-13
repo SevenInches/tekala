@@ -96,7 +96,7 @@ class Order
   #推送给教练 是否接单
   def push_to_teacher
     #预订的日期
-    if status == 2 && Order::should_record_hours.include?(type)
+    if status == 2
       current_confirm = OrderConfirm.create(:order_id   => id,
                                             :user_id    => user_id,
                                             :teacher_id => teacher_id,
@@ -105,7 +105,7 @@ class Order
                                             :end_at     => book_time + quantity.hour,
                                             :status     => 0)
       #如果是订单教练为内部员工 测试 则不发送推送
-      JPush::order_confirm(current_confirm.order_id) if teacher_id != 477
+      JPush::order_confirm(current_confirm.order_id)
     end
   end
 
@@ -311,11 +311,6 @@ class Order
       "<label class='label label-warning'>#{pay_channel}</label>"
 
     end
-  end
-
-  #记录学时的订单
-  def self.should_record_hours
-     [0, 2]
   end
 
   def self.pay_become_finish
