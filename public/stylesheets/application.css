@@ -66,7 +66,7 @@ ul li{
     background-color: #474747;
     text-align: center;
     padding: 50px 0 23px;
-    overflow: hidden;
+    position: relative;
 }
 .footer .ft_item_tit {
     color: #FFF;
@@ -270,19 +270,134 @@ ul li{
     }
 }
 
-#gopng_contact_outer {
-    height: 61px;
+.clear{
+    clear:both;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+}
+
+.wx_box{
+    position: relative;
+    width: 100px;
+    height: 70px;
+    margin: 0 auto;
+}
+
+@media (min-width: 992px){
+    .wx_box{
+        float: left;
+    }
+}
+
+#contact_outer {
+    height: 62px;
     width: 220px;
     overflow: hidden;
+    margin: 0 auto 10px;
 }
-#gopng_contact {
-    background: url('../images/sprite.png') -11px -184px no-repeat;
+#contact {
+    background: url('../images/sprite.png') -149px -0px no-repeat;
     width: 100%;
     height: 100%;
     _background: none;
-    _padding-left: 11px;
-    _margin-left: -11px;
-    _padding-top: 184px;
-    _margin-top: -184px;
-    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="http://gopng/static/images/sprite.png");
+    _padding-left: 149px;
+    _margin-left: -149px;
+    _padding-top: 0px;
+    _margin-top: -0px;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="");
 }
+
+#footer_outer {
+    height: 12px;
+    width: 281px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+#footer {
+    background: url('../images/sprite.png') -149px -62px no-repeat;
+    width: 100%;
+    height: 100%;
+    _background: none;
+    _padding-left: 149px;
+    _margin-left: -149px;
+    _padding-top: 62px;
+    _margin-top: -62px;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="");
+}
+
+#footer_wx_outer_active {
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    position: absolute;
+    opacity: 0;
+    transition: all .5s ease;
+    left: 0;
+    top: 0;
+}
+
+#footer_wx_active {
+    background: url('../images/sprite.png') -409px -0px no-repeat;
+    width: 100%;
+    height: 100%;
+    _background: none;
+    _padding-left: 409px;
+    _margin-left: -409px;
+    _padding-top: 0px;
+    _margin-top: -0px;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="");
+}
+
+#footer_wx_outer {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    left: 30px;
+    top: 12px;
+}
+#footer_wx {
+    background: url('../images/sprite.png') -369px -0px no-repeat;
+    width: 100%;
+    height: 100%;
+    _background: none;
+    _padding-left: 369px;
+    _margin-left: -369px;
+    _padding-top: 0px;
+    _margin-top: -0px;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="");
+}
+
+#erweima_outer {
+    height: 156px;
+    width: 149px;
+    overflow: hidden;
+    position: absolute;
+    top: -153px;
+    left: -25px;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+#erweima {
+    background: url('../images/sprite.png') -0px -0px no-repeat;
+    width: 100%;
+    height: 100%;
+    _background: none;
+    _padding-left: 0px;
+    _margin-left: -0px;
+    _padding-top: 0px;
+    _margin-top: -0px;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="");
+}
+
+#footer_wx_outer:hover+#erweima_outer{
+    opacity: 1;
+}
+
+#footer_wx_outer:hover #footer_wx_outer_active{
+    opacity: 1;
+    transform: translateY(45px);
+}
+
+
