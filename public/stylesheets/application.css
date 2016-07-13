@@ -65,7 +65,7 @@ ul li{
 .footer{
     background-color: #474747;
     text-align: center;
-    padding: 50px 0;
+    padding: 50px 0 23px;
     overflow: hidden;
 }
 .footer .ft_item_tit {
@@ -268,4 +268,21 @@ ul li{
     .job-btn{
         width: 56px;
     }
+}
+
+#gopng_contact_outer {
+    height: 61px;
+    width: 220px;
+    overflow: hidden;
+}
+#gopng_contact {
+    background: url('../images/sprite.png') -11px -184px no-repeat;
+    width: 100%;
+    height: 100%;
+    _background: none;
+    _padding-left: 11px;
+    _margin-left: -11px;
+    _padding-top: 184px;
+    _margin-top: -184px;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="http://gopng/static/images/sprite.png");
 }
