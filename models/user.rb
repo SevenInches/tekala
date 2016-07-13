@@ -374,9 +374,9 @@ class User
   def send_sms(type)
     if Padrino.env == :production
       if type == :signup
-        # content = "#{name}学员，恭喜您已经成功注册特快拉帐号。您的登录帐号为：#{mobile}。祝您学车愉快。"
-        # sms = Sms.new(:content => content, :member_mobile  => mobile)
-        # sms.signup
+        content = "#{name}学员，恭喜您已经成功注册特快拉帐号。您的登录帐号为：#{mobile}。祝您学车愉快。"
+        sms = Sms.new(:content => content, :member_mobile  => mobile)
+        sms.signup
       end
     end
 
