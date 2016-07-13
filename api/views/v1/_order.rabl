@@ -1,4 +1,4 @@
-attributes :id, :order_no, :note, :subject, :price, :amount, :quantity, :promotion_amount, :discount, :type, 
+attributes :id, :order_no, :note, :subject, :price, :amount, :quantity, :promotion_amount, :discount, :type, :progress,
 :teacher_id, :user_id,  :status, :status_word, :created_at, :book_time, :has_coupon, :can_comment, :user_has_comment
 
 attribute :pay_at,      :if => lambda { |val| !val.pay_at.nil? }

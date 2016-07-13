@@ -429,7 +429,34 @@ class User
   #
   ##########
   def can_book_order(env, order, book_time)
-    return true
+    teacher     = order.teacher
+    train_field = order.train_field
+
+    #判断教练是否存在
+    return {:status => :failure, :msg => '未能找到该教练', :err_code => 1001}  if teacher.nil?
+    if teacher.train_fields.first(:id => train_field.id).nil?
+      return {:status => :failure, :msg => '该教练已不在该训练场', :err_code => 1002}
+    end
+    #/*预订的日期
+    book_time_first = (book_time.to_time).strftime('%Y-%m-%d %k:00')
+    book_time_second = (book_time.to_time + 1.hours).strftime('%Y-%m-%d %k:00') if order.quantity == 2
+
+    tmp1 = []
+    Order.all(:teacher_id => teacher.id, :status => Order::pay_or_done, :book_time => ((Date.today+1)..(Date.today+8.day))).each do |order|
+      tmp1 << order.book_time.strftime('%Y-%m-%d %k:00')
+      tmp1 << (order.book_time+1.hour).strftime('%Y-%m-%d %k:00') if order.quantity == 2
+    end
+    # 预订的日期 */
+
+
+    #limit
+    #/*如果该时段被预约 返回failure
+    return {:status => :failure, :msg => '第一个时段已被预约'} if tmp1.include?(book_time_first)
+    return {:status => :failure, :msg => '第二个时段已被预约'} if tmp1.include?(book_time_second)
+    #如果该时段被预约 返回failure */
+    #limit
+
+    return {:status => :success}
   end
 
 

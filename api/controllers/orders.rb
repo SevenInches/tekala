@@ -81,12 +81,15 @@ Tekala::Api.controllers :v1, :orders do
 
     @order                = Order.new
     @order.user_id        = @user.id
-    @order.teacher_id     = params[:teacher_id]  ? params[:teacher_id] : 404
+    if params[:teacher_id].present?
+      @order.teacher_id     = params[:teacher_id]
+    else
+      {:status => :failure, :msg =>'教练不能为空'}.to_json
+    end
     if params[:train_field_id] && params[:train_field_id] != '0'
       @order.train_field_id     = params[:train_field_id]
     else
-      last_order = Order.last(:teacher_id => @order.teacher_id, :user_id => @order.user_id, :status => Order::pay_or_done)
-      @order.train_field_id     = last_order ? last_order.train_field_id : ''
+      {:status => :failure, :msg =>'训练场不能为空'}.to_json
     end
     @order.school_id        = @user.school_id
     @order.quantity       = quantity
@@ -95,6 +98,12 @@ Tekala::Api.controllers :v1, :orders do
     @book_info.to_json
     if @book_info[:status] == :failure
       return @book_info.to_json
+    end
+
+    if params[:progress].present?
+      @order.progress = params[:progress].to_i
+    else
+      {:status => :failure, :msg =>'科目类别不能为空'}.to_json
     end
 
     @order.subject    = params[:subject]
@@ -111,7 +120,7 @@ Tekala::Api.controllers :v1, :orders do
     @order.status     = 2
     @order.theme      = @user.status_flag > 6 ? 7 : params[:theme]
     @order.book_time  = book_time
-    #
+
     if @order.save
       @order.generate_order_no
       @order.push_to_teacher #推送通知教练
