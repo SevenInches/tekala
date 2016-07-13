@@ -65,7 +65,7 @@ ul li{
 .footer{
     background-color: #474747;
     text-align: center;
-    padding: 50px 0 23px;
+    padding: 50px 0px 25px 260px;
     position: relative;
 }
 .footer .ft_item_tit {
@@ -288,6 +288,9 @@ ul li{
     .wx_box{
         float: left;
     }
+    .foot_text{
+        text-align: left;
+    }
 }
 
 #contact_outer {
@@ -399,5 +402,7 @@ ul li{
     opacity: 1;
     transform: translateY(45px);
 }
+
+
 
 
