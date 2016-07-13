@@ -100,6 +100,12 @@ Tekala::Api.controllers :v1, :orders do
       return @book_info.to_json
     end
 
+    if params[:progress].present?
+      @order.progress = params[:progress].to_i
+    else
+      {:status => :failure, :msg =>'科目类别不能为空'}.to_json
+    end
+
     @order.subject    = params[:subject]
     @order.quantity   = quantity
     @order.price      = @order.teacher.price
@@ -114,13 +120,6 @@ Tekala::Api.controllers :v1, :orders do
     @order.status     = 2
     @order.theme      = @user.status_flag > 6 ? 7 : params[:theme]
     @order.book_time  = book_time
-
-    if @user.status_flag == 6
-      @order.progress = 1
-    else if @user.status_flag == 7
-        @order.progress = 2
-      end     
-    end
 
     if @order.save
       @order.generate_order_no
