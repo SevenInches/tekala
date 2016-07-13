@@ -67,7 +67,7 @@ class Order
   property :latitude, String
   property :longitude, String
 
-  property :has _sms, Integer, :default => 0
+  property :has_sms, Integer, :default => 0
 
   #mok 产品id号 2015-09-30
   property :product_id, Integer, :default => 0
