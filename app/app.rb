@@ -36,9 +36,9 @@ module Tekala
     end
 
     get :question do
-      @xy_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>1)
-      @jl_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>2)
-      @jx_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>3)
+      @questions = Question.all(:order=>:weight.asc, :show=>1)
+      #@jl_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>2)
+      #@jx_questions = Question.all(:order=>:weight.asc, :show=>1, :type=>3)
       render 'question'
     end
 
