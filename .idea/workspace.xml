@@ -2,159 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b38accfd-7cb5-49c1-9ca8-940fa90a97ba" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/views/v1/product_info.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/006_create_question_categories.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/007_create_user_logins.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/008_create_managers.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/009_create_finance_categories.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/010_create_notification_logs.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/011_create_sms_logs.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/012_create_app_home_ads.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/013_create_app_launch_ads.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/014_create_logs.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/015_create_finance_reports.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/016_create_finances.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/017_create_shops.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/018_create_blocks.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/019_create_maps.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/020_add_contact_phone_to_school.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/app_home_ad.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/app_launch_ad.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/block.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/finance.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/finance_report.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/log.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/manager.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/map.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/notification_log.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/shop.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/sms_log.rb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/controllers/coupons.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/002_add_school_to_product.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/003_add_exam_type_to_product.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/005_create_signups.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/log/oneapm_agent.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/ad.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/award.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/award_log.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/award_mobile_tmp.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/book.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/business_channel.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/calculate_list.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/calculate_results.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/channel.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/channel_data.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/comment_photo.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/cooperation.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/coupon.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/department.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/exam_list.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/exam_page.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/feedback.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/group.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/hospital.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/insure.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/jpush.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/meeting.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/news.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/odd.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/params_config.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/pay_record.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/pay_type.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/product_binding.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/product_binding_photo.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/promotion_channel.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/promotion_company.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/promotion_info_collection.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/promotion_score.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/promotion_user.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/promotion_user_four.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/promotion_user_vol5.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/promotion_vol5_vote_log.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/push_record.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/recommend.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/reservation_success.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/score.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/second_sub_list.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/seller.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/service.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/sms.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/sms_record.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/statistics.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/sys_config.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/system_wallet.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/system_wallet_log.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/teacher_audit.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/teacher_daily_pay.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/teacher_notice.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/teacher_rank.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/teacher_wallet.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/teacher_wallet_log.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/teacher_week_pay.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/temp_order.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/ticket.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/timeline.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/tmp_award.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/tmp_award_record.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_change.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_coupon.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_group.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_grown.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_guide.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_plan.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_schedule.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_score_log.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_statistics.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_wallet_log.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/user_withdraws_cash.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/visitor.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/visitor_score.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/vote_user_four.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/weixin_message.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/weixin_user.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/yungo.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/yungo_log.rb" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/models/enroll.rb" afterPath="$PROJECT_DIR$/models/question_category.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/models/tmp_license.rb" afterPath="$PROJECT_DIR$/models/finance_category.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/models/user_comment.rb" afterPath="$PROJECT_DIR$/models/teacher_comment.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/models/user_wallet.rb" afterPath="$PROJECT_DIR$/models/user_login.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.components" afterPath="$PROJECT_DIR$/.components" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/app.rb" afterPath="$PROJECT_DIR$/admin/app.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controllers/articles.rb" afterPath="$PROJECT_DIR$/admin/controllers/articles.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controllers/base.rb" afterPath="$PROJECT_DIR$/admin/controllers/base.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controllers/questions.rb" afterPath="$PROJECT_DIR$/admin/controllers/questions.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controllers/schools.rb" afterPath="$PROJECT_DIR$/admin/controllers/schools.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/helpers/admin_helper.rb" afterPath="$PROJECT_DIR$/admin/helpers/admin_helper.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/views/schools/_form.erb" afterPath="$PROJECT_DIR$/admin/views/schools/_form.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/app.rb" afterPath="$PROJECT_DIR$/api/app.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/api.rb" afterPath="$PROJECT_DIR$/api/controllers/api.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/orders.rb" afterPath="$PROJECT_DIR$/api/controllers/orders.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/products.rb" afterPath="$PROJECT_DIR$/api/controllers/products.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/schools.rb" afterPath="$PROJECT_DIR$/api/controllers/schools.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/teachers.rb" afterPath="$PROJECT_DIR$/api/controllers/teachers.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/train_fields.rb" afterPath="$PROJECT_DIR$/api/controllers/train_fields.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/tweets.rb" afterPath="$PROJECT_DIR$/api/controllers/tweets.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/controllers/users.rb" afterPath="$PROJECT_DIR$/api/controllers/users.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/helpers/api_v1_helper.rb" afterPath="$PROJECT_DIR$/api/helpers/api_v1_helper.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/views/v1/school.rabl" afterPath="$PROJECT_DIR$/api/views/v1/school.rabl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/views/v1/schools.rabl" afterPath="$PROJECT_DIR$/api/views/v1/schools.rabl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/views/v1/teachers.rabl" afterPath="$PROJECT_DIR$/api/views/v1/teachers.rabl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/views/v1/user.rabl" afterPath="$PROJECT_DIR$/api/views/v1/user.rabl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.rb" afterPath="$PROJECT_DIR$/app/app.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/apps.rb" afterPath="$PROJECT_DIR$/config/apps.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.rb" afterPath="$PROJECT_DIR$/config/database.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/city.rb" afterPath="$PROJECT_DIR$/models/city.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/message.rb" afterPath="$PROJECT_DIR$/models/message.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/order.rb" afterPath="$PROJECT_DIR$/models/order.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/product.rb" afterPath="$PROJECT_DIR$/models/product.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/school.rb" afterPath="$PROJECT_DIR$/models/school.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/signup.rb" afterPath="$PROJECT_DIR$/models/signup.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/teacher.rb" afterPath="$PROJECT_DIR$/models/teacher.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/train_field.rb" afterPath="$PROJECT_DIR$/models/train_field.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/tweet.rb" afterPath="$PROJECT_DIR$/models/tweet.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/user.rb" afterPath="$PROJECT_DIR$/models/user.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/sprite.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tekala.iml" afterPath="$PROJECT_DIR$/.idea/tekala.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/application.css" afterPath="$PROJECT_DIR$/public/stylesheets/application.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/price.css" afterPath="$PROJECT_DIR$/public/stylesheets/price.css" />
     </list>
     <ignored path="tekala.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -175,11 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="application.html.erb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="application.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.25089607">
+              <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/stylesheets/application.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.142858">
+              <caret line="279" column="16" selection-start-line="279" selection-start-column="16" selection-end-line="279" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -188,18 +50,18 @@
       <file leaf-file-name="price.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/price.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.490909">
-              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+            <state vertical-scroll-proportion="24.428572">
+              <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="price.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="price.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/stylesheets/price.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79569894">
-              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+            <state vertical-scroll-proportion="3.8214285">
+              <caret line="154" column="18" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -208,7 +70,7 @@
       <file leaf-file-name="aboutUs.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/aboutUs.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
@@ -271,13 +133,13 @@
         <option value="$PROJECT_DIR$/public/stylesheets/article.css" />
         <option value="$PROJECT_DIR$/public/stylesheets/aboutUs.css" />
         <option value="$PROJECT_DIR$/public/stylesheets/common.css" />
-        <option value="$PROJECT_DIR$/public/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/views/aboutUs.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/price.html" />
         <option value="$PROJECT_DIR$/app/app.rb" />
         <option value="$PROJECT_DIR$/app/views/price.erb" />
+        <option value="$PROJECT_DIR$/public/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/public/stylesheets/price.css" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
       </list>
     </option>
   </component>
@@ -334,6 +196,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tekala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tekala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tekala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tekala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -348,6 +242,11 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="CucumberRunConfigurationType" factoryName="Cucumber">
@@ -488,9 +387,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="977" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16347177" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16506922" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -526,6 +425,46 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/price.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/price.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/aboutUs.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/information.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/information.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -761,13 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/application.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.01894317">
-          <caret line="65" column="30" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/common.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64007974">
@@ -803,14 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/aboutUs.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/app.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.39185256">
@@ -826,26 +750,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/price.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.490909">
-          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+        <state vertical-scroll-proportion="24.428572">
+          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/price.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79569894">
-          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+        <state vertical-scroll-proportion="3.8214285">
+          <caret line="154" column="18" selection-start-line="154" selection-start-column="18" selection-end-line="154" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/aboutUs.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/application.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.142858">
+          <caret line="279" column="16" selection-start-line="279" selection-start-column="16" selection-end-line="279" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25089607">
+          <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
           <folding />
         </state>
       </provider>
