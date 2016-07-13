@@ -12,6 +12,7 @@ class Order
 
   STATUS_CANCEL     = 7   # 取消状态
   STATUS_REFUNDING  = 5   # 退款中
+  STATUS_DONE       = 3    # 已经完成
   #补贴
 
   C2_ALLOWANCE = 10
@@ -92,7 +93,9 @@ class Order
 
   has 1, :teacher_comment
 
-    
+  #教练接单
+  has 1, :order_confirm, :constraint => :destroy
+  
   #推送给教练 是否接单
   def push_to_teacher
     #预订的日期
@@ -144,7 +147,7 @@ class Order
   end
 
   def self.get_status
-    return {'未支付'=>'101', '已支付'=>'102', '已确定'=>'104', '已完成'=>'103', '退款中'=>'2', '退款'=>'1', '取消'=>'0'}
+    return {'未支付'=>'1', '等待接单'=>'2', '已确定'=>'4', '已完成'=>'3', '退款中'=>'5', '退款'=>'6', '取消'=>'7'}
   end
 
   def set_status
@@ -152,7 +155,7 @@ class Order
     when 1
       return '未支付'
     when 2
-      return '已预约'
+      return '等待接单'
     when 3
       return '已完成'
     when 4
@@ -231,21 +234,6 @@ class Order
   def accept_status
     return 0 if order_confirm.nil? 
     order_confirm.status 
-  end
-
-  def self.city
-    return {'深圳' => '0755', '武汉' => '027', '重庆' => '023'}
-  end
-
-  def self.city_word(city)
-    case city
-    when '0755'
-      return '深圳'
-    when '027'
-      return '武汉'
-    when '023'
-      return '重庆'
-    end
   end
 
   def self.theme 
