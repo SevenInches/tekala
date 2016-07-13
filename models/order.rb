@@ -95,7 +95,7 @@ class Order
 
   #教练接单
   has 1, :order_confirm, :constraint => :destroy
-  
+
   #推送给教练 是否接单
   def push_to_teacher
     #预订的日期
@@ -196,6 +196,26 @@ class Order
     end
   end
 
+  def can_comment
+    status == 3 && book_time < Time.now && teacher_comment.nil?
+  end
+
+  def teacher_can_comment
+    return  status == 3 && user_comment.nil? ? true : false
+  end
+
+  def user_has_comment
+    !user_comment.nil?
+  end
+
+  def self.has_comment_color(status)
+    case status
+      when true
+        return 'success'
+      when false
+        return 'warning'
+    end
+  end
 
   def created_at_format
     created_at.strftime('%Y-%m-%d %H:%M')
@@ -218,11 +238,11 @@ class Order
   end
 
   def self.signup_status
-    {'未支付' => 101, '已支付' => 200, '退款中'=>'2', '退款'=>'1', '取消'=>'0'}
+    {'未支付' => 1, '已支付' => 2, '退款中'=> 5, '退款'=> 6, '取消'=> 7}
   end
 
   def self.unpay 
-    Order.all(:status => 101)
+    Order.all(:status => 1)
   end
 
   #是否显示包过班优惠款
