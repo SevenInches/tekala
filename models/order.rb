@@ -61,6 +61,9 @@ class Order
   #'普通订单' => 1, '会员的订单' =>2
   property :vip, Integer, :default => 1
 
+  #学车进度 {"科目二" => 1, "科目三" => 2}
+  property :progress, Integer
+
   property :remark, String
 
   # mok 经纬度 2015-09-07

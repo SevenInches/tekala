@@ -114,7 +114,14 @@ Tekala::Api.controllers :v1, :orders do
     @order.status     = 2
     @order.theme      = @user.status_flag > 6 ? 7 : params[:theme]
     @order.book_time  = book_time
-    #
+
+    if @user.status_flag == 6
+      @order.progress = 1
+    else if @user.status_flag == 7
+        @order.progress = 2
+      end     
+    end
+
     if @order.save
       @order.generate_order_no
       @order.push_to_teacher #推送通知教练
