@@ -65,7 +65,7 @@ ul li{
 .footer{
     background-color: #474747;
     text-align: center;
-    padding: 50px 0px 25px 260px;
+    padding: 50px 0px 0px 25px;
     position: relative;
 }
 .footer .ft_item_tit {
@@ -251,7 +251,7 @@ ul li{
 
 @media screen and (max-device-width: 414px){
     .app-nav{
-        width: 215px;
+        width: 245px;
         padding: 0.5rem 0;
     }
     .inner-top {
@@ -280,7 +280,7 @@ ul li{
 .wx_box{
     position: relative;
     width: 100px;
-    height: 70px;
+    height: 72px;
     margin: 0 auto;
 }
 
@@ -291,24 +291,9 @@ ul li{
     .foot_text{
         text-align: left;
     }
-}
-
-#contact_outer {
-    height: 62px;
-    width: 220px;
-    overflow: hidden;
-    margin: 0 auto 10px;
-}
-#contact {
-    background: url('../images/sprite.png') -149px -0px no-repeat;
-    width: 100%;
-    height: 100%;
-    _background: none;
-    _padding-left: 149px;
-    _margin-left: -149px;
-    _padding-top: 0px;
-    _margin-top: -0px;
-    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="");
+    .footer{
+        padding: 50px 0px 0px 18%;
+    }
 }
 
 #footer_outer {
@@ -357,7 +342,7 @@ ul li{
     width: 40px;
     position: absolute;
     left: 30px;
-    top: 12px;
+    top: -13px;
 }
 #footer_wx {
     background: url('../images/sprite.png') -369px -0px no-repeat;
@@ -376,7 +361,7 @@ ul li{
     width: 149px;
     overflow: hidden;
     position: absolute;
-    top: -153px;
+    top: -177px;
     left: -25px;
     opacity: 0;
     transition: opacity .5s ease;
