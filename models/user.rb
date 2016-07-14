@@ -74,10 +74,14 @@ class User
   has n, :user_cycle, :constraint => :destroy
 
   has n, :messages, :model => 'Message', :child_key => 'user_id', :constraint => :destroy
-  
+
   belongs_to :school
 
   belongs_to :city
+
+  belongs_to :teacher
+
+  belongs_to :train_field
 
   # Callbacks
   before :save, :encrypt_password
