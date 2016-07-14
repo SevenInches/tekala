@@ -26,8 +26,9 @@ class User
   property :city_id, Integer
   property :sex, Integer, :default => 0
   property :age, Integer
-  property :avatar, String                                        #头像
+  property :avatar, String #头像
 
+  #{"未知" => 0, "C1" => 1, "C2" => 2}
   property :exam_type, Integer, :default => 1                     #报名类型
 
   #{"注册" => 0, "已付费" => 1, "拍照" => 2, "体检" => 3, "录指纹" => 4, "科目一" => 5, "科目二" => 6, "科目三" => 7, "考长途" => 8, "科目四" => 9, "已拿驾照" => 10, "已离开" => 11, "已入网" => 12}
@@ -72,6 +73,8 @@ class User
 
   has n, :user_cycle, :constraint => :destroy
 
+  has n, :messages, :model => 'Message', :child_key => 'user_id', :constraint => :destroy
+  
   belongs_to :school
 
   belongs_to :city
