@@ -10,4 +10,8 @@ child(@messages => :data){
   child(:reply_user => :reply_user){
     attributes :id, :name, :nickname, :avatar_url
   }
+
+  child(:user){
+    attributes :id, :name, :nickname, :avatar_url
+  }
 }
