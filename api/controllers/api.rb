@@ -26,9 +26,9 @@ Tekala::Api.controllers :v1 do
         @user.save
 
         session[:user_id] = @user.id
-        if @has_assign = @user.has_assign
-        	@train_field = @user.train_field
-        end
+
+        @train_field = @user.train_field if @user.train_field.present?
+        @teacher = @user.teacher  if @user.teacher.present?
         
         @school = @user.school
 
