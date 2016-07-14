@@ -249,7 +249,7 @@ Tekala::Api.controllers :v1, :teachers do
       end
 
       #完成评论 推送给教练
-      JPush::order_comment params[:order_id]
+      #JPush::order_comment params[:order_id]
       render 'v1/teacher_comment'
     else
       {:status => :failure, :msg => @comment.errors.full_messages.join(',') }.to_json

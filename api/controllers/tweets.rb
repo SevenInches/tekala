@@ -90,7 +90,7 @@ Tekala::Api.controllers :v1, :tweets do
       tweet.updated_at = Time.now
       tweet.save
      
-      JPush::tweet_comment(params[:tweet_id], @user.id, params[:reply_user_id], @comment.content)
+      #JPush::tweet_comment(params[:tweet_id], @user.id, params[:reply_user_id], @comment.content)
   		render 'v1/tweet_comment'
   	else
   		{:status => :failure}.to_json
@@ -125,7 +125,7 @@ Tekala::Api.controllers :v1, :tweets do
 	      tweet   = Tweet.get(params[:tweet_id])
 	      tweet.updated_at = Time.now
 	      tweet.save
-	      JPush::tweet_like(params[:tweet_id], user_id)
+	      #JPush::tweet_like(params[:tweet_id], user_id)
 	      {:status => :success, :liked => true }.to_json
       else
       	{:status => :failure}.to_json
