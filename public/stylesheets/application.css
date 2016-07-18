@@ -320,10 +320,10 @@ ul li{
     width: 40px;
     overflow: hidden;
     position: absolute;
-    opacity: 0;
     transition: all .5s ease;
-    left: 0;
-    top: 0;
+    left: 30px;
+    top: -13px;
+    opacity: .5;
 }
 
 #footer_wx_active {
@@ -380,13 +380,12 @@ ul li{
     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="");
 }
 
-#footer_wx_outer:hover+#erweima_outer{
+#footer_wx_outer_active:hover+#erweima_outer{
     opacity: 1;
 }
 
-#footer_wx_outer:hover #footer_wx_outer_active{
+#footer_wx_outer_active:hover{
     opacity: 1;
-    transform: translateY(45px);
 }
 
 
