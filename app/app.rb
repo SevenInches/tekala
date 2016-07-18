@@ -42,6 +42,26 @@ module Tekala
       render 'question'
     end
 
+    get :school do
+      render 'school', :layout => false
+    end
+
+    post :demo do
+      if params[:name].present? && params[:phone].present?
+        school = School.new(:name => params[:name], :is_open => 1, :is_vip =>1 ,:password => '123456', :city_id => 236)
+        school.contact_phone = params[:phone]
+        school.address       = params[:address]  if params[:address].present?
+        if school.save
+          @name = school.name
+          render 'success', :layout => false
+        else
+          redirect_to url(:school)
+        end
+      else
+        redirect_to url(:school)
+      end
+    end
+
     # get :enroll do
     #   new_enroll = Enroll.new
     #   if params.present?

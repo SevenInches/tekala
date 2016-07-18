@@ -26,8 +26,8 @@ class CustomConfig
 	
 	#发送短信
 	SMSADD    = "http://www.jc-chn.cn/smsSend.do"
-	SMSNAME   = 'mmxc'
-	SMSPWD    = '123456'
+	SMSNAME   = 'tkl'
+	SMSPWD    = 'rju978ju'
 	
 	QINIUURL    = 'http://7xlvuu.com1.z0.glb.clouddn.com/'
 	QINIUBUCKET = "mmxueche"
@@ -36,8 +36,8 @@ class CustomConfig
 	SENDCLOUDKEY  = "ZfJF6wvqa3zKkfgN"
 
 	EXAMLISTMAIN = 'http://app.stc.gov.cn:8090/kszzyy/'
-    VERIFYCODE   = 'verifyCode.action'
-    EXAMLISTPAGE = 'reportout_getddPdListNew.action'
+	VERIFYCODE   = 'verifyCode.action'
+	EXAMLISTPAGE = 'reportout_getddPdListNew.action'
 	
 	def self.pingxx
       Pingpp.api_key = (Padrino.env == :production) ? PINGLIVE : PINGTEST

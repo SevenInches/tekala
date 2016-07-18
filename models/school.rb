@@ -2,6 +2,8 @@ class School
   include DataMapper::Resource
   require 'chinese_name'
 
+  attr_accessor :password
+
   # property <name>, <type>
   property :id, Serial
   property :city_id, Integer
@@ -21,6 +23,7 @@ class School
   property :note, String
   property :created_at, DateTime
   property :updated_at, DateTime
+  property :crypted_password, String, :length => 70
 
   #新增字段
   #property :contact_user, String
@@ -41,9 +44,12 @@ class School
   has n, :logs  # 操作日志
   has n, :products #产品
 
+  before :save, :encrypt_password
+
   after :create do |school|
     tid = school.demo_teacher
-    fid = school.demo_train_field
+    fid = school.demo_field
+    school.demo_product
     if tid.present?
       tid.each do |teacher|
         TeacherTrainField.new(:teacher_id=>teacher, :train_field_id=>fid).save
@@ -56,7 +62,7 @@ class School
   end
 
   def add_product(name, price)
-    product = Product.create(:school_id => id, :name=>name, :price=>price)
+    Product.create(:school_id => id, :name=>name, :price=>price).save
   end
 
   def demo_teacher
@@ -85,6 +91,19 @@ class School
     field.id
   end
 
+  def demo_product
+    products = [{:name => '普通班', :price => 5999}, {:name => 'VIP班', :price => 6999}]
+    products.each do |product|
+      new_product      = Product.new(:show => 1)
+      new_product.name      = product[:name]
+      new_product.price     = product[:price]
+      new_product.school_id = id
+      new_product.city_id   = city_id
+      new_product.deadline = '2016-10-31'
+      new_product.save
+    end
+  end
+
   def generate_field
     first_names = %w(春 夏 秋 东 梅 兰 竹 菊 东 南 西 北 人民 解放 民主 团结 中山 少年 北京 上海 天津 南京 凤凰)
     first = first_names.sample
@@ -95,6 +114,10 @@ class School
 
   def open_word
     is_open ? '开放' : '关闭'
+  end
+
+  def encrypt_password
+    self.crypted_password = ::BCrypt::Password.create(password) if password.present?
   end
 
 end
