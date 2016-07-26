@@ -1,4 +1,5 @@
 node(:status) { 'success' }
 child(@ad => :data){
-  attributes :id, :title, :image, :value, :type, :url, :city_name
+  attributes :id, :cover_url, :route, :value, :type, :start_time, :end_time
+
 }

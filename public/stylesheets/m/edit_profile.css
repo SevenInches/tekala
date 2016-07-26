@@ -1,0 +1,248 @@
+html,
+body,
+.container {
+  font-size: 14px;
+  width: 100%;
+  height: 100%;
+}
+body {
+  background-color: #f2f2f2;
+}
+.clear {
+  clear: both;
+}
+.nav {
+  padding: 10px 0;
+  /*border:1px red solid;*/
+  color: #FFAA26;
+  text-align: center;
+  height: 48px;
+  padding: 6px;
+  background-color: #FFCC07;
+}
+.nav img {
+  height: 100%;
+  margin: 0 auto;
+}
+.footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+a {
+  color: #FFAA26!important;
+}
+.active {
+  background-color: #FFDD58;
+}
+.active a {
+  color: #ffffff!important;
+}
+.gray {
+  color: #777777;
+}
+.black {
+  color: #333333;
+}
+.header {
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  background-color: #FFC300;
+  height: 50px;
+  border-bottom: 2px #fad322 solid;
+}
+.clear {
+  clear: both;
+}
+.header-content {
+  padding-top: 5px;
+}
+.header-content p {
+  line-height: 40px;
+  font-size: 1.4em;
+  color: #ffffff;
+}
+.center {
+  text-align: center;
+  margin-bottom: 4px;
+}
+.logo {
+  height: 40px;
+}
+hr {
+  border-bottom: 1px #cccccc solid;
+}
+/* --------------  */
+/*  custom-select  */
+/* --------------  */
+.custom-select {
+  position: relative;
+}
+.custom-select select {
+  float: right;
+  width: 30%;
+  margin: 0;
+  background: none;
+  border: 1px solid transparent;
+  outline: none;
+  /* Prefixed box-sizing rules necessary for older browsers */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /* Remove select styling */
+  appearance: none;
+  -webkit-appearance: none;
+  /* Font size must the 16px or larger to prevent iOS page zoom on focus */
+  /* General select styles: change as needed */
+  font-family: helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  color: #444;
+  padding: 0px 15px 0px 10px;
+  line-height: 1.3;
+  direction: rtl;
+  margin-top: 20px;
+  flex: 1;
+}
+.custom-select::after {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  top: 50%;
+  right: 8px;
+  margin-top: -4px;
+  border: 8px solid #929497;
+  border-width: 8px 5px 8px;
+  border-color: #929497 transparent transparent transparent;
+  z-index: 2;
+  pointer-events: none;
+}
+/* Set options to normal weight */
+.custom-select option {
+  font-weight: normal;
+  direction: inherit;
+}
+x:-o-prefocus,
+.custom-select::after {
+  display: none;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .custom-select select::-ms-expand {
+    display: none;
+  }
+}
+@-moz-document url-prefix() {
+  .custom-select {
+    overflow: hidden;
+  }
+  .custom-select select {
+    width: 120%;
+    width: -moz-calc(103%);
+    width: calc(100% em);
+  }
+}
+.card-button {
+  height: 19px!important;
+  width: 40px!important;
+  background-size: 100% 200%;
+  background-position: bottom;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-top: 20px;
+  float: right;
+}
+.card-no {
+  background-image: url('/m/images/vol4/btn_no.png');
+}
+.card-yes {
+  background-position: top;
+  background-image: url('/m/images/vol4/btn_yes.png');
+}
+.back {
+  font-size: 20px;
+  background-color: #FFD24C;
+  height: 44px;
+  padding: 0px;
+  line-height: 44px;
+  text-align: center;
+  position: fixed;
+  z-index: 100;
+}
+.back .icon {
+  float: left;
+  padding-left: 10px;
+  font-size: 30px;
+}
+a .back {
+  color: #666666;
+}
+.main {
+  width: 100%;
+  padding: 0px;
+}
+ul {
+  list-style-type: decimal;
+  padding: 15px;
+}
+ul li {
+  text-align: justify;
+}
+.text-field {
+  height: 60px;
+  background-color: #ffffff;
+  border-bottom: #BBBBBB 1px solid;
+  width: 100%;
+  text-align: center;
+  display: flex;
+}
+.text-field:first-child {
+  border-top: #BBBBBB 1px solid;
+}
+.text-field input {
+  background-color: #ffffff;
+  margin: auto;
+  width: 70%;
+  height: 100%;
+  border: 0px;
+  font-size: 18px;
+  outline: none;
+  text-align: right;
+  color: #333333;
+  padding-right: 0px;
+}
+.left-placeholder {
+  float: left;
+  width: 80px;
+  font-size: 15px;
+  color: #777777;
+  text-align: left;
+  padding-left: 15px;
+  padding-top: 17px;
+}
+.btn {
+  margin: auto;
+  margin-top: 15px;
+  display: block;
+  width: 70% !important;
+  border: 0;
+  height: 45px;
+  line-height: 30px;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 5px;
+  color: #765039;
+  background: #FFCC07;
+  color: #4cae4c!important;
+  font-size: 1.2em;
+  border: 1px #4cae4c solid;
+}
+.button {
+  border-bottom: 1px solid #bbb;
+  border-radius: 1px;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  background: white;
+}
