@@ -249,26 +249,6 @@ ul li{
     text-decoration: none;
 }
 
-@media screen and (max-device-width: 414px){
-    .app-nav{
-        width: 245px;
-        padding: 0.5rem 0;
-    }
-    .inner-top {
-        overflow: hidden;
-        padding: 20px 0;
-    }
-
-    .app-nav li a {
-        font-size: 12px;
-    }
-    .navbar-header{
-        width: 85px;
-    }
-    .job-btn{
-        width: 56px;
-    }
-}
 
 .clear{
     clear:both;
@@ -280,7 +260,7 @@ ul li{
 .wx_box{
     position: relative;
     width: 100px;
-    height: 72px;
+    height: 62px;
     margin: 0 auto;
 }
 
@@ -320,10 +300,10 @@ ul li{
     width: 40px;
     overflow: hidden;
     position: absolute;
-    opacity: 0;
     transition: all .5s ease;
-    left: 0;
-    top: 0;
+    left: 30px;
+    top: -13px;
+    opacity: .5;
 }
 
 #footer_wx_active {
@@ -380,15 +360,167 @@ ul li{
     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=crop,src="");
 }
 
-#footer_wx_outer:hover+#erweima_outer{
+#footer_wx_outer_active:hover+#erweima_outer{
     opacity: 1;
 }
 
-#footer_wx_outer:hover #footer_wx_outer_active{
+#footer_wx_outer_active:hover{
     opacity: 1;
-    transform: translateY(45px);
 }
 
+/*download*/
+.dl-box{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 50px auto 0 ;
+    padding: 0;
+}
 
+.dl-box li:hover>div:nth-child(1){
+    display: none
+}
 
+.dl-box li:hover>div:nth-child(2){
+    opacity: 1;
+}
 
+.dl-box li:hover>div:nth-child(3){
+    opacity: 1;
+    transform: scale(.8);
+}
+
+.icon-channel_outer{
+    height: 240px;
+    width: 160px;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity .5s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.icon-student {
+    background: url('../images/sprite_dl.png') -0px -720px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.icon-teacher {
+    background: url('../images/sprite_dl.png') -0px -240px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.icon-shop {
+    background: url('../images/sprite_dl.png') -0px -480px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.icon-channel {
+    background: url('../images/sprite_dl.png') -0px -0px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.icon-drivingSchool {
+    background: url('../images/sprite_dl.png') -0px -960px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+/*二维码*/
+.QRcode-student_outer {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    position: absolute;
+    top:0;
+    left: 50%;
+    margin-left: -75px;
+    transition: all .3s ease;
+    opacity: 0;
+}
+.QRcode-student {
+    background: url('../images/sprite_dl.png') -0px -1200px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.QRcode-teacher {
+    background: url('../images/sprite_dl.png') -150px -1200px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+/*背景*/
+.bg-student,.bg-techer,.bg-shop,.bg-channel,.bg-drivingSchool {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: opacity .3s ease;
+    top: 0;
+    opacity: 0;
+}
+.bg-student{
+    background: url('../images/sprite_dl.png') -160px -480px no-repeat;
+}
+.bg-techer {
+    background: url('../images/sprite_dl.png') -160px -240px no-repeat;
+}
+.bg-shop {
+    background: url('../images/sprite_dl.png') -160px -0px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-channel {
+    background: url('../images/sprite_dl.png') -160px -720px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.bg-drivingSchool {
+    background: url('../images/sprite_dl.png') -160px -960px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+.download-btn{
+    font-size: 18px;
+    color: #fff;
+    width: 286px;
+    height: 50px;
+    line-height: 50px;
+    margin: 43px auto 0;
+    border-radius: 4px;
+    border: none;
+    z-index: 2;
+    background: #37adff;
+    cursor: pointer;
+    display: none;
+}
+.download-btn:hover{
+    text-decoration: none;
+
+}
+
+@media screen and (max-device-width: 414px) {
+    .app-nav {
+        width: 245px;
+        padding: 0.5rem 0;
+    }
+
+    .inner-top {
+        overflow: hidden;
+        padding: 20px 0;
+    }
+
+    .app-nav li a {
+        font-size: 12px;
+    }
+
+    .navbar-header {
+        width: 85px;
+    }
+
+    .job-btn {
+        width: 56px;
+    }
+}

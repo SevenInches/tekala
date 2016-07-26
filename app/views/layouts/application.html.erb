@@ -18,9 +18,6 @@
   <![endif]-->
 </head>
 <body>
-<script type="text/javascript">
-  $('body').fadeOut(0).fadeIn(500);
-</script>
 <header>
   <div class="container nav-top" >
     <div class="inner-top">
@@ -56,17 +53,9 @@
     <div class="col-md-3 contact text-left">
       <p>西南区 张经理 159-2350-3857</p>
     </div>
-    <!--<div class="rows">-->
-      <!--<div class="clear"></div>-->
-      <!---->
-      <!--</div>-->
-    <!--</div>-->
   <div class="wx_box">
-    <div id="footer_wx_outer">
-      <div id="footer_wx"></div>
-      <div id="footer_wx_outer_active">
-        <div id="footer_wx_active"></div>
-      </div>
+    <div id="footer_wx_outer_active">
+      <div id="footer_wx_active"></div>
     </div>
     <div id="erweima_outer">
       <div id="erweima"></div>
@@ -81,5 +70,14 @@
     <div id="footer"></div>
   </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+  $('body').fadeOut(0).fadeIn(500);
+
+    var _isMobile = navigator.userAgent.toLowerCase().indexOf('mobile');
+    if(_isMobile != -1 ){
+      $('.dl-box').hide();
+      $('.download-btn').css('display','block');
+    }
+</script>
 </body>
 </html>
