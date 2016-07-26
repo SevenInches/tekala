@@ -388,6 +388,114 @@ ul li{
     opacity: 1;
 }
 
+/*download*/
+.dl-box{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 50px auto 0 ;
+}
 
+.dl-box li:hover>div:nth-child(1){
+    display: none
+}
 
+.dl-box li:hover>div:nth-child(2){
+    opacity: 1;
+}
 
+.dl-box li:hover>div:nth-child(3){
+    opacity: 1;
+    transform: scale(.8);
+}
+
+.icon-channel_outer{
+    height: 240px;
+    width: 160px;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity .5s ease;
+    position: relative;
+}
+
+.icon-student {
+    background: url('../images/sprite_dl.png') -0px -720px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.icon-teacher {
+    background: url('../images/sprite_dl.png') -0px -240px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.icon-shop {
+    background: url('../images/sprite_dl.png') -0px -480px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.icon-channel {
+    background: url('../images/sprite_dl.png') -0px -0px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.icon-drivingSchool {
+    background: url('../images/sprite_dl.png') -0px -960px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+/*二维码*/
+.QRcode-student_outer {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    position: absolute;
+    top:0;
+    left: 50%;
+    margin-left: -75px;
+    transition: all .3s ease;
+    opacity: 0;
+}
+.QRcode-student {
+    background: url('../images/sprite_dl.png') -0px -1200px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.QRcode-teacher {
+    background: url('../images/sprite_dl.png') -150px -1200px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+/*背景*/
+.bg-student,.bg-techer,.bg-shop,.bg-channel,.bg-drivingSchool {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: opacity .3s ease;
+    top: 0;
+    opacity: 0;
+}
+.bg-student{
+    background: url('../images/sprite_dl.png') -160px -480px no-repeat;
+}
+.bg-techer {
+    background: url('../images/sprite_dl.png') -160px -240px no-repeat;
+}
+.bg-shop {
+    background: url('../images/sprite_dl.png') -160px -0px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-channel {
+    background: url('../images/sprite_dl.png') -160px -720px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.bg-drivingSchool {
+    background: url('../images/sprite_dl.png') -160px -960px no-repeat;
+    width: 100%;
+    height: 100%;
+}
