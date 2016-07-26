@@ -249,26 +249,6 @@ ul li{
     text-decoration: none;
 }
 
-@media screen and (max-device-width: 414px){
-    .app-nav{
-        width: 245px;
-        padding: 0.5rem 0;
-    }
-    .inner-top {
-        overflow: hidden;
-        padding: 20px 0;
-    }
-
-    .app-nav li a {
-        font-size: 12px;
-    }
-    .navbar-header{
-        width: 85px;
-    }
-    .job-btn{
-        width: 56px;
-    }
-}
 
 .clear{
     clear:both;
@@ -280,7 +260,7 @@ ul li{
 .wx_box{
     position: relative;
     width: 100px;
-    height: 72px;
+    height: 62px;
     margin: 0 auto;
 }
 
@@ -395,6 +375,7 @@ ul li{
     justify-content: space-between;
     width: 70%;
     margin: 50px auto 0 ;
+    padding: 0;
 }
 
 .dl-box li:hover>div:nth-child(1){
@@ -417,6 +398,7 @@ ul li{
     opacity: 1;
     transition: opacity .5s ease;
     position: relative;
+    cursor: pointer;
 }
 
 .icon-student {
@@ -498,4 +480,47 @@ ul li{
     background: url('../images/sprite_dl.png') -160px -960px no-repeat;
     width: 100%;
     height: 100%;
+}
+
+.download-btn{
+    font-size: 18px;
+    color: #fff;
+    width: 286px;
+    height: 50px;
+    line-height: 50px;
+    margin: 43px auto 0;
+    border-radius: 4px;
+    border: none;
+    z-index: 2;
+    background: #37adff;
+    cursor: pointer;
+    display: none;
+}
+.download-btn:hover{
+    text-decoration: none;
+
+}
+
+@media screen and (max-device-width: 414px) {
+    .app-nav {
+        width: 245px;
+        padding: 0.5rem 0;
+    }
+
+    .inner-top {
+        overflow: hidden;
+        padding: 20px 0;
+    }
+
+    .app-nav li a {
+        font-size: 12px;
+    }
+
+    .navbar-header {
+        width: 85px;
+    }
+
+    .job-btn {
+        width: 56px;
+    }
 }

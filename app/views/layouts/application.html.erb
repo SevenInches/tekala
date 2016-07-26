@@ -18,9 +18,6 @@
   <![endif]-->
 </head>
 <body>
-<script type="text/javascript">
-  $('body').fadeOut(0).fadeIn(500);
-</script>
 <header>
   <div class="container nav-top" >
     <div class="inner-top">
@@ -73,5 +70,14 @@
     <div id="footer"></div>
   </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+  $('body').fadeOut(0).fadeIn(500);
+
+    var _isMobile = navigator.userAgent.toLowerCase().indexOf('mobile');
+    if(_isMobile != -1 ){
+      $('.dl-box').hide();
+      $('.download-btn').css('display','block');
+    }
+</script>
 </body>
 </html>
