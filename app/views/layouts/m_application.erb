@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="author" content="特快拉">
+    <meta name="description" content="特快拉">
+    <meta name="keywords" content="特快拉">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="icon" href="/images/icon.png">
+    <meta name="format-detection" content="telephone=no">
+    <title>特快拉</title>
+    <%=javascript_include_tag 'jquery-1.11.0.min', 'sweetalert.min', 'bootstrap.min', 'less.min.js' %>
+    <%=stylesheet_link_tag 'bootstrap.min', 'font-awesome.min', 'm/sweetalert.css'%>
+    <% if current_page?('login')%>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/m/login.css" />
+    <%elsif current_page?('signup') %>stylesheets
+      <link rel="stylesheet" type="text/css" href="/stylesheets/m/signup.css" />
+    <%elsif current_page?('mine') %>
+      <link rel="stylesheet" type="text/css" href="/stylesheets/m/mine.css" />
+    <%elsif current_page?('products') %>
+      <link rel="stylesheet" type="text/css" href="/stylesheets/m/products.css" />
+    <%elsif current_page?('detail') %>
+      <link rel="stylesheet" type="text/css" href="/stylesheets/m/detail.css" />
+    <%elsif current_page?('edit_profile') %>
+      <link rel="stylesheet" type="text/css" href="/stylesheets/m/edit_profile.css" />
+    <%elsif current_page?('/') %>
+      <link rel="stylesheet" type="text/css" href="/stylesheets/m/index.css" />
+    <%end%>
+    </head>
+    <body>
+    <script type="text/javascript">
+      $('body').fadeOut(0).fadeIn(1000);
+    </script>
+      <%if @header != 'hidden'%>
+        <div class="rows header">
+          <div class="col-xs-12 header-content">
+            <p class='center'>
+              <% if @back  %>
+                <span class='icon' style='float:left;'> <a style='color:#000000!important;font-size:1.5em;' href='<%=@back%>'><i class="fa fa-arrow-circle-o-left"></i> </a> 
+                </span>
+              <%end%>
+              <% if @logout != false %>
+                <% if session[:user_id] %>
+                  <span class='icon' style='float:right;font-size:1.4em;'> <a style='color:#000000!important;font-size:0.8em;' href='<%=url(:m, :login)%>'>退出 </a> </span>
+                <%elsif !current_page?('login') %>
+                  <span class='icon' style='float:right;font-size:1.4em;'> <a style='color:#333333!important;font-size:0.8em;' href='<%=url(:m, :login, :back => URI::encode(request.url) )%>'> 登录 </a> </span>
+                <%end%>
+              <%end%>
+
+              <p style='text-align:center;margin-top:-3px;'> <%=@title%> &nbsp;&nbsp;&nbsp;</p>
+            </p>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div style='height:50px;'></div>
+      <%end%>
+
+      <div class='container main'>
+        <%=yield%>
+        <div style='height:45px;'></div>
+      </div>
+      
+      <% if @tab_nav != 'hidden'%>
+        <div class="rows footer">
+          <div class="clear"></div>
+        </div>
+      <%end%>
+    </body>
+    <div style='display:none'>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255409445'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255409445%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    </div>
+
+</html>

@@ -1,0 +1,19 @@
+<div class="products">
+	<% @products.each do |product| %>
+	<a href="<%=url(:m, :detail, product.id, :back => request.url )%>">
+	<div class="row cube purple" style='background-color:<%=product.color%>'>
+		<div class="col-xs-9">
+			<h4><%=product.name%></h4>
+			<p><%=product.description%></p>
+		</div>
+		<div class="col-xs-3" style='padding-left:0px;'>
+			<%=image_tag '/images/m/course_bg_car.png', :style=> 'width:80px;float:right;' %>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="row signup-btn">
+		立即报名 <i class="fa fa-chevron-circle-right"></i>
+	</div>
+	</a>
+	<%end%>
+</div>

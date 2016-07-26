@@ -1,0 +1,66 @@
+<script type="text/javascript" src='/javascripts/jquery.mobile.custom.min.js'></script>
+<div class="detail">
+	<!--/*介绍图片-->
+	<div class="row">
+		<div class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		  <!-- Wrapper for slides -->
+		  <div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<%=image_tag @product.photo %>
+				</div>
+		  </div>
+		</div>
+	</div>
+	<div class="row module">
+		<p class='font-mid'> <%=@product.name%> </p>
+		<p class='font-min' style='margin-bottom:10px;'> <%=@product.description%> </p>
+		<a  class='font-mid promotion_price'>￥<%= @product.price%></a>
+		<span class='font-min price' style='text-decoration: line-through;'><%="￥ #{@product.price.to_i}" if @product.price > 0%></span>
+		<br>
+	</div>
+
+	<div class="row module">
+		<h5 style='text-align:center;'>班别介绍</h5>
+		<%=@product.introduction.html_safe if @product.introduction.present?%>
+	</div>
+	<div style='height:40px;'>
+	</div>
+	<% if @user.nil? %>
+		<div class="row module button" style='max-width:680px;'>
+	 		<a class='btn btn-info' style='width:100%;color:#ffffff!important;' href='<%=url(:m, :login, :back => request.url)%>'>立即登录购买</a>
+		</div>
+	<%elsif @user.signup.present? && @user.signup.status == 2%>
+		<div class="row module button" style='max-width:680px;'>
+	 		<button class='btn btn-warning' style='width:100%;'>您已是会员，无须购买</button>
+		</div>
+	<% else %>
+		<div class="row module button" style='max-width:680px;'>
+			<form method='post' action='<%=url(:m, :buy)%>'>
+				<input type='text' name='product_id' id='product_id' value='<%= @product.id %>' style='display:none;' />
+				<button class='btn btn-success' style='width:100%;font-size:1.2em;'>马上下单</button>
+			</form>
+		</div>
+	<%end%>
+</div>
+
+<%= javascript_include_tag "carousel","transition" %>
+
+ <script type="text/javascript">
+ 	$('.carousel').carousel({
+	  interval: 4000
+	});
+
+	$(document).ready(function() {
+  
+		$(".carousel").swiperight(function() {
+		    $(this).carousel('prev');
+		});
+		$(".carousel").swipeleft(function() {  
+		    $(this).carousel('next');
+		});
+		 
+	}); /* END document ready */
+
+
+ </script>

@@ -1,27 +1,26 @@
 class Product
+
   include DataMapper::Resource
 
   property :id, Serial
-  property :name, String
-  property :price, Integer
-  property :detail, Text
-  property :deadline, Date, :default => '2050-01-01'                  #截止日期
+  property :name, String, :default => ''
+  property :price, Integer, :default => 0
+  property :detail, Text, :default => ''
+  property :deadline, Date                  #截止日期
   property :created_at, DateTime
   property :updated_at, DateTime
   property :photo, String, :auto_validation => false                  #图片
-  property :description, String                                       #描述
-  property :introduction, Text                                        #简介
+  property :description, String, :default => ''                       #描述
+  property :introduction, Text, :default => ''                        #简介
 
-  property :info_photo, String, :auto_validation => false             #简介图片
-  property :exam_two_standard, Integer, :default => 0                 #科二标准时长
-  property :exam_three_standard, Integer, :default => 0               #科三标准时长
-  property :total_quantity,  Integer, :default => 0                   #限制总学时
+  property :info_photo, String, :auto_validation => false, :default => ''  #简介图片
+
   #"c1"=>1,"c2"=>2
   property :exam_type, Integer, :default => 0                         #驾考类型
 
   property :school_id, Integer, :default => 0
 
-  property :color, String                                             #颜色??
+  property :color, String, :default => ''                             #颜色
   property :city_id, Integer, :default => 0
   property :show, Boolean, :default => false                          #是否展示
 
@@ -56,6 +55,22 @@ class Product
 
   def can_buy 
     show == 1 && deadline > Date.today if deadline.present?
+  end
+
+  def self.demo
+    markdown = "|返回字段|字段的值|注解|\n|:-:|:-:|:-:|"
+    demo = self.new
+    demo.attributes.each do |key, value|
+      if key == 'exam_type'
+        note = 'c1=>1,c2=>2'
+      else
+        note = ''
+      end
+      line = "\n|#{key}|#{value}|#{note}|"
+      markdown += line
+    end
+     doc = Maruku.new(markdown)
+     return doc.to_html_document
   end
 
 end

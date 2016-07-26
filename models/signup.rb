@@ -44,6 +44,19 @@ class Signup
     end
   end
 
+  def status_color
+    case self.status
+      when 1
+        return 'danger'
+      when 2
+        return 'success'
+      when 3
+        return 'info'
+      when 4
+        return 'warning'
+    end
+  end
+
   def product_name
     product.name if product.present?
   end

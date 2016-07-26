@@ -1,0 +1,96 @@
+<% if @orders.count <= 0%>
+	<div class='row' style='margin-top:80px;'>
+		<div class="col-xs-12">
+			<%=image_tag 'dispointed.jpg', :class => 'img-responsive', :style => 'width:40%;margin:20px auto;'%>
+			<p class='font-mid gray'>您尚未购买我们的产品</p>
+		</div>
+		<br>
+		<div class="col-xs-12"  style='margin-top:20px;'>
+		<%=link_to '立即购买', :href=>url(:member, :products), :class=> 'btn btn-success store' %>
+			
+		</div>
+	</div>
+<%end%>
+<% @orders.each do |order| %>
+ <div class='cell'>
+	<div class="status rows gray">
+	订单状态：<span class="label label-<%=order.status_color%>"> <%=order.status_word%></span> &nbsp;&nbsp;<%=order.order_no %>
+	</div>
+	<a href="<%= url(:m, :detail, order.product_id, :back => request.url) %>">
+		<div class='rows rank'>
+			<div class='info'>
+				<p>
+					<%=order.product.name%>
+					<span style='float:right;'>
+						<i class="fa fa-2x fa-angle-right"></i>
+					</span>
+				</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</a>
+	<div class="rows count">
+		<span class='money'>金额：<span class='red'>￥<%=order.amount%><%= '(已经优惠'+ order.discount.to_s+')' if order.discount.to_i>0 %> 元</span></span>
+		<div class="clear"></div>
+	</div>
+
+	<hr style='border-bottom:#eeeeee solid 1px;'>
+	<div class="rows count">
+	   <div class="col-xs-9"  style='padding:0;'>
+		 	<span class='time' >下单时间：<%=order.created_at.strftime('%m-%d %H:%M')%></span>
+	   </div>
+	  <!--/* 是否可评论-->
+	  <div class="col-xs-3" style='padding-right: 0;'>
+	  	
+	  	<%if order.status==1 %>
+	  		<button data-order-no="<%=order.order_no%>" class='btn btn-danger btn-outline btn-pay'>支付</button>
+	  	<%end%>
+
+	  </div>
+	  <!--是否可评论 */-->
+		<div class="clear"></div>
+	</div>
+	<!-- pay_at_format -->
+	</div>
+
+<%end%>
+
+<%=javascript_include_tag 'pingpp_pay' %>
+
+<script type="text/javascript">
+	function wap_pay(data) {
+        var params = "channel=wx_pub&order_no="+data.order_no+"&is_live=1&open_id=<%=@open_id%>&user_id=<%=@user.id%>";
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/m/pay_web", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Content-length", params.length);
+        xhr.send(params);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText);
+                pingpp.createPayment(xhr.responseText, function(result, err) {
+                    if (result == "success") {
+                      window.location.reload();
+                    } else if (result == "fail") {
+                       alert('订单支付失败,请截图并联系小萌'+params+',error' + err.extra);
+
+                    } else if (result == "cancel") {
+                       // alert('订单支付取消');
+                    }
+
+                });
+            }
+        }
+    }
+
+	$(function(){
+		$('.btn-pay').click(function(){
+			var order_no = $(this).data('order-no');
+			wap_pay({order_no: order_no });
+		})
+	})
+
+</script>
+
+

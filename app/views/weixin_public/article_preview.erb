@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="author" content="萌萌学车">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="icon" href="/images/icon.png">
+
+    <title>萌萌学车</title>
+    <%=javascript_include_tag 'jquery-1.11.0.min' %>
+
+    <!-- Bootstrap core CSS -->
+    <%=stylesheet_link_tag 'bootstrap.min', 'font-awesome.min'%>
+
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </head>
+
+    <body>
+    <script type="text/javascript">
+      $('body').fadeOut(0).fadeIn(1000);
+    </script>
+
+
+<!--添加微信签名 by Sam-->
+<script type="text/javascript" src='http://res.wx.qq.com/open/js/jweixin-1.0.0.js' ></script>
+
+<% 
+
+  mm_app_id     = CustomConfig.APPID
+  mm_app_secret = CustomConfig.SECRET
+  
+  begin 
+    ticket_config  = ParamsConfig.first_or_create(:name => 'jsapi_ticket')
+    if ticket_config.value.nil? || ticket_config.updated_at.to_i+200 < Time.now().to_i
+       access_token = WeixinJsSDK::AccessToken.new(
+          app_id:     mm_app_id,
+          app_secret: mm_app_secret
+        ).fetch
+
+        ticket = WeixinJsSDK::Ticket.new(access_token: access_token).fetch
+        #保存ticket 防止过期
+        ticket_config.remark = (ticket_config.remark.to_i)+1
+        ticket_config.value = ticket
+        ticket_config.save
+    else
+       @ticket = ticket_config.value
+        
+    end
+  rescue => err 
+    puts err 
+
+  ensure
+
+    @url       = request.url    #当前页面URL
+    @timestamp = Time.now.to_i
+    @nonce_str = 'mmxueche'
+
+    @signature = WeixinJsSDK::Signature.new(
+      ticket: @ticket,
+      nonce_str: @nonce_str,
+      timestamp: @timestamp,
+      url: URI.encode(@url)
+    ).sign
+
+  end 
+ %>
+ <style type="text/css">
+        .header{
+          width: 100%;
+          position: fixed;
+          z-index: 100;
+          top:0;
+          background-color: #FFC300;
+          height: 50px;
+          border-bottom: 2px #fad322 solid;
+        }
+        .clear{
+          clear: both;
+        }
+        .header-content{
+          padding-top: 5px;
+
+        }
+        .header-content p{
+          line-height: 40px;
+          font-size: 1.4em;
+          color:#ffffff;
+        }
+        .center{
+          text-align: center;
+          margin-bottom: 4px;
+        }
+        .logo{
+          height:40px;
+        }
+        hr{
+          border-bottom:1px #cccccc solid;
+        }
+      </style>
+
+  <%if @header != 'hidden'%>
+    <div class="rows header">
+
+      <div class="col-xs-12 header-content">
+        <p class='center'><img src="/images/icon180.png" class='img-circle logo'> 萌萌学车
+          <% if current_page?("me") %>
+          <a href="<%=url(:setting, :back => @back_url)%>">
+            <span style='float:right;color:#ffffff;'>
+            <i class="fa fa-cog fa-1x margin-bottom" style='font-size:1.2em;'></i>
+            </span> 
+          </a>
+          <%end%>
+        </p>
+        <div class="clear"></div>
+
+      </div>
+
+    </div>
+
+    <div style='height:40px;'></div>
+    <%end%>
+
+  <div class='container main' >
+  	<h2 style='margin:30px 0 0 0;'>
+  	<%=@article.title%>
+  	<hr >
+  	</h2>
+  	<div style='font-size:1.2em;color:#777777;margin-bottom:15px;'>
+  	 <span><%=@article.date_format%>&nbsp;&nbsp;&nbsp;</span>
+  	 <span style='color:#444444;'><%=@article.author%></span>
+
+  	</div>
+	<%=@article.content.to_s.html_safe%>
+  <br />
+  </div>
+
+  <style type="text/css">
+  .main{
+  	max-width:690px;
+  	margin:0 auto;
+  	padding: 0 10px;
+
+
+  }
+  img{
+  	max-width: 98%!important;
+  }
+  div,section, img{
+  	max-width: 100%;
+  }
+  ol,ul{
+  	padding-left: 12px;
+  }
+  li{
+  	margin-left: 0px;
+  	padding-left: 0px;
+  }
+  </style>
+    
+
+<script type="text/javascript">
+
+    
+    $(function(){
+      wx.config({
+          debug: false,
+          appId: '<%=mm_app_id%>', // 必填，公众号的唯一标识
+          timestamp: "<%=@timestamp%>", // 必填，生成签名的时间戳
+          nonceStr: "<%=@nonce_str%>", // 必填，生成签名的随机串
+          signature: '<%=@signature%>',// 必填，签名，见附录1
+          jsApiList: [
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage'
+          ]
+      });
+
+      wx.ready(function () {
+        wx.onMenuShareAppMessage({
+          title:  '<%=@article.title%>',
+          desc:   '<%=@article.description%>',
+          link:   '<%=URI.encode(request.url)%>',
+          imgUrl: '<%=@article.thumb_url%>',
+          trigger: function (res) {
+              //alert('用户点击发送给朋友');
+          },
+          success: function (res) {
+              // alert('已分享');
+          },
+          cancel: function (res) {
+              // alert('已取消');
+          },
+          fail: function (res) {
+              // alert(JSON.stringify(res));
+          } 
+        });
+      
+      // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareTimeline({
+          title:  '<%=@article.title%>',
+          link:   '<%=URI.encode(request.url)%>',
+          imgUrl: '<%=@article.thumb_url%>',
+          trigger: function (res) {
+              //alert('用户点击分享到朋友圈');
+          },
+          success: function (res) {
+              //alert('已分享');
+          },
+          cancel: function (res) {
+              //alert('已取消');
+          },
+          fail: function (res) {
+            // alert(JSON.stringify(res));
+          }
+        });
+
+    })
+
+    })
+    </script>
+
+
+    <div style='display:none'>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255409445'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255409445%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    </div>
+
+    </body>
+</html>

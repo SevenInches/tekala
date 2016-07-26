@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="author" content="萌萌学车">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="icon" href="/images/icon.png">
+
+    <title>特快拉</title>
+    <%=javascript_include_tag 'jquery-1.11.0.min' %>
+
+    <!-- Bootstrap core CSS -->
+    <%=stylesheet_link_tag 'bootstrap.min', 'font-awesome.min'%>
+    <%=javascript_include_tag 'modal' %>
+    <%=stylesheet_link_tag 'modal' %>
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </head>
+
+    <body>
+    <script type="text/javascript">
+      $('body').fadeOut(0).fadeIn(1000);
+    </script>
+      <div class='container main'>
+        <%=image_tag 'qrcode_bg.png' , :class => 'img-responsive ' %>
+
+        <p style='text-align:center;width:100%;'> 
+        <a class='introduction' href="#introduction" >包过班详情</a>
+        <br>
+        <a href="<%=url(:weixin_public, :signup)%>">
+          <p style='text-align:center;'> <%=image_tag 'btn_sign_up.png' ,:style=>'width:160px;margin:20px auto;' %></p>
+        </a> 
+      </div>
+    </body>
+    <style type="text/css">
+    html,body,.container{
+      font-size: 14px;
+      width: 100%;
+      height:100%;
+    }
+    body{
+      background-color: #F7C000;
+    }
+    .clear{
+      clear:both;
+    }
+    .main{
+      max-width: 750px;
+      margin:0 auto;
+      padding:0;
+    }
+    .introduction, .introduction:hover{
+      color:#000000;
+      text-decoration: none;
+    }
+    
+    </style>
+
+    <%=partial('weixin_public/introduction')%>
+    <div style='display:none'>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255409445'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255409445%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    </div>
+    
+</html>

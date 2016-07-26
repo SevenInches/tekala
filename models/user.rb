@@ -11,11 +11,10 @@ class User
   property :id, Serial
   property :id_card, String, :default => ''
 
-  property :crypted_password, String, :length => 70
-  property :cookie, Text, :lazy => false                         #??
+  property :crypted_password, String
+  property :cookie, Text, :lazy => false
   property :name, String, :default => ''
   property :nickname, String, :default => ''
-
 
   property :mobile, String, :required => true, :unique => true,  #手机号
            :messages => {
@@ -66,6 +65,8 @@ class User
   property :cash_bank_name, String                               #付款银行名称??
   property :cash_bank_card, String                               #付款银行卡号??
   property :signup_at, Date
+
+  property :product_id, Integer
   
   has n, :orders
 
@@ -91,7 +92,6 @@ class User
   def has_hour
     return orders.all(:status => Order::pay_or_done).sum(:quantity).to_i
   end
-
 
   def avatar_thumb_url
     if avatar
@@ -157,19 +157,6 @@ class User
 
   def encrypt_password
     self.crypted_password  = ::BCrypt::Password.create(password) if password.present?
-  end
-
-  def self.type
-    {'普通班' => 0, '包过班' => 1}
-  end
-
-  def type_word
-    case type
-      when 1
-        '包过班'
-      else
-        '普通班'
-    end
   end
 
   def self.status_flag
@@ -365,10 +352,6 @@ class User
     num
   end
 
-  def vip?
-    type == 1
-  end
-
   def self.vip
     all(:type => 1)
   end
@@ -386,7 +369,6 @@ class User
         sms.signup
       end
     end
-
   end
 
   # 根据产品，创建报名订单
@@ -401,6 +383,7 @@ class User
     order.amount     = product.price
     order.status     = 1
     order.school_id  = product.school_id
+
     order.save
     order
   end
@@ -458,7 +441,6 @@ class User
 
     return {:status => :success}
   end
-
 
   # 用户添加日志
   def add_log(type, content, target=nil)

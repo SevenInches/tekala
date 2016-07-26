@@ -330,12 +330,6 @@ class Order
         order.save
       end
     end
-
-  end
-
-  def product_bind_id 
-    pb = ProductBinding.first(:c1_product_id => product_id) || ProductBinding.first(:c1_product_id => product_id)
-    pb ? pb.id : nil
   end
 
   def confirm?
@@ -398,7 +392,7 @@ class Order
   def return_money
     update(:status=>STATUS_REFUNDING)
 
-    return if promotion_amount <= 0
+    return if amount <= 0
 
     if pay_channel == 'alipay' #支付宝支付的
       content = "#{user.name.to_s}学员(手机:#{user.mobile})申请支付宝退款，金额:#{amount}"
@@ -412,7 +406,7 @@ class Order
     reason  = "原因：用户自主取消订单 (by #{user.name})"
 
     re = ch.refunds.create(
-        :amount => promotion_amount * 100,
+        :amount => amount * 100,
         :description => reason
     )
 
@@ -424,10 +418,28 @@ class Order
     true
   end
 
-
    # 添加日志
   def add_log(type, content, target=nil)
     user.add_log(type, content, target)
+  end
+
+  def status_color
+    case self.status
+      when 1
+        return 'danger'
+      when 2
+        return 'success'
+      when 3
+        return 'info'
+      when 4
+        return 'info'
+      when 5
+        return 'danger'
+      when 6
+        return 'warning'
+      when 7
+        return 'warning'
+    end
   end
 
 end
