@@ -111,7 +111,7 @@ class JPush
     end
   end
 
-  def self.send_version(version, msg, key, sec)
+  def self.send_version(version, msg)
     Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
         req=Net::HTTP::Post.new(URL.path)
         req.basic_auth KEY,SEC

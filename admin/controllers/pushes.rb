@@ -109,9 +109,6 @@ Tekala::Admin.controllers :pushes do
   end
 
   get :test do
-    key = JPush::KEY
-    sec = JPush::SEC
-    puts key, sec
-    JPush.send_version('0.0.1', '啦啦啦啦', key, sec)
+    JPush.send_version('0.0.1', '啦啦啦啦')
   end
 end
