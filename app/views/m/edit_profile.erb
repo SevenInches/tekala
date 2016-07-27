@@ -1,0 +1,59 @@
+
+<form id='edit_form' method="post">
+<div class="rows">
+  <div class="col-xs-12 text-field" >
+    <div class="left-placeholder">姓名</div>
+    <input type='text' name='name' id='name' value="<%=@user.name%>" />
+  </div>
+
+  <div class="col-xs-12 text-field" >
+    <div class="left-placeholder">邮箱</div>
+    <input type='email' name='email' id="email" value="<%=@user.email%>" />
+  </div>
+
+  <div class="col-xs-12 text-field">
+    <div class="left-placeholder">身份证号</div>
+    <input type='text' name='id_card' id='id_card' value="<%=@user.id_card%>"  />
+  </div>
+
+  <div class="col-xs-12 text-field">
+    <div class="left-placeholder">地址</div>
+    <input type='text' name='address' id='address' value="<%=@user.address%>"   />
+  </div>
+  <span style='color:red;font-size:0.9em;padding-left:15px;line-height:40px;'>*请完善资料，方便我们为您服务</span>
+  <div class="rows" style='margin-top:10px;'>
+    <div class="col-xs-12">
+      <button  href='<%=url(:weixin_public, :signup)%>' style='width:100%;background-color:#f2f2f2;', class ='btn btn-success btn-outline'>提交</button>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+</div>
+</form>
+
+<script type="text/javascript">
+
+  $(function(){
+  
+  $('.btn').click(function(event) {
+    event.preventDefault();
+    
+    if($('#id_card').val().length != 18){
+      swal({   title: "",   text: "身份证号码必须是18位数字",   timer: 2000,   showConfirmButton: false });
+      return false;
+    }else if($('#email').val() == ''){
+      swal({   title: "",   text: "请填写您的邮箱",   timer: 2000,   showConfirmButton: false });
+      return false;
+    }else if($('#name').val() == ''){
+       swal({   title: "",   text: "请填写您的名字",   timer: 2000,   showConfirmButton: false });
+      return false;
+    }
+
+    $('#edit_form').submit();
+
+  });
+})
+</script>

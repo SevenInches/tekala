@@ -3,9 +3,15 @@ Tekala::Api.controllers :v1 do
 	register WillPaginate::Sinatra
   	enable :sessions
     current_url = '/api/v1'
-    before :except => [:login, :logout, :unlogin, :signup, :hospitals, :history, :city_list, :questions, :exam_info] do 
+    before :except => [:launch_ad, :login, :logout, :unlogin, :signup, :hospitals, :history, :city_list, :questions, :exam_info] do
       @user = User.get(session[:user_id])
       redirect_to("#{current_url}/unlogin") if @user.nil?
+    end
+
+    get :launch_ad, :provides => [:json] do
+      channel = params[:channel].present? ? params[:channel] : 0
+      @ad = AppLaunchAd.first(:channel => channel, :status=> 1)
+      render 'v1/ad'
     end
 
     #####

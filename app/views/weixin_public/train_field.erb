@@ -1,0 +1,305 @@
+
+<style type="text/css">
+	hr{
+		margin:0px 0;
+	}
+	body{
+		font-size: 14px;
+	}
+	div{
+		text-align: center;
+		vertical-align: center;
+	}
+	.main{
+		padding:0px;
+	}
+	
+	.clear{
+		clear: both;
+	}
+	
+	a, a:hover{
+		color:#000000!important;
+		text-decoration: none;
+	}
+	a.teacher_cell{
+		text-decoration: none;
+	}
+	a.tag-link, a.tag-link:hover{
+		color:#aaaaaa!important;
+	}
+	.tag{
+		height: 40px;
+		line-height: 40px;
+	}
+	.tag:hover{
+		color:#FFAA26;
+    border-bottom:2px solid #FFAA26;
+	}
+	.train_cell{
+		width:100%;
+		height: 100px;
+		background-size: cover;
+		background-position: bottom;
+		color:#ffffff;
+
+	}
+  a div.active{
+    border-bottom:2px solid #FFAA26;
+    color:#FFAA26;
+    background-color: #f2f2f2;
+  }
+  .btn-cell{
+    float: right;
+  }
+</style>
+
+<div id="content">
+  <%@train_fields.each do |train_field| %>
+  
+  	<div class="rows train_cell" style="background-image: url('/m/images/training_field_<%=rand(5)+1%>.png');" >
+  		<div class="col-xs-4 btn-cell">
+          <button class='distance btn'><%="--"%>  公里</button>
+  		</div>
+   		<div class="col-xs-12 name">
+  			<%=train_field.name%>
+  		</div>
+      <div class="col-xs-12 address">
+        <%=train_field.address%>
+      </div>
+      <div class="col-xs-12 count">
+        教练：<%=train_field.teacher_count%> 位
+      </div>
+  	</div>
+  <hr>
+  <%end%>
+</div>
+
+<style type="text/css">
+  .distance, .navigation{
+    float: right;
+  }
+  .btn, .btn:hover, .btn:focus{
+      color: #FFAA26;
+      border: 1px #FFAA26 solid;
+      border-radius: 100px;
+      font-size: 1.1em;
+      padding:0px 10px;
+      background-color:rgba(0,0,0,0);
+      margin-top: 8px;
+      position: absolute;
+      top:5px;
+      right:4px;
+      z-index: 50;
+    }
+  .navigation, .navigation:hover, .navigation:focus{
+      color: #FFAA26!important;
+      border: 1px #FFAA26 solid;
+      border-radius: 100px;
+      font-size: 1.1em;
+      padding:3px 10px;
+      background-color:rgba(0,0,0,0);
+      margin-top: 8px;
+      position: absolute;
+      top:55px;
+      right:4px;
+      z-index: 50;
+    }
+  .train_cell .name{
+    color:#ffffff!important;
+    font-size: 1.2em;
+    text-align: left;
+    padding:0 8px;
+    margin-top: 20px;
+  }
+
+  .train_cell .address,.train_cell .count{
+    color:#ffffff!important;
+    font-size: 0.9em;
+    text-align: left;
+    padding:0 8px;
+  }
+  .footer{
+    z-index: 100;
+  }
+
+</style>
+
+<!--添加微信签名 by Sam-->
+<script type="text/javascript" src='http://res.wx.qq.com/open/js/jweixin-1.0.0.js' ></script>
+<%=javascript_include_tag 'underscore-min.js' %>
+
+<% 
+
+  mm_app_id     = CustomConfig::APPID
+  mm_app_secret = CustomConfig::SECRET
+
+  begin 
+    ticket_config  = ParamsConfig.first_or_create(:name => 'jsapi_ticket')
+    if ticket_config.value.nil? || ticket_config.updated_at.to_i+200 < Time.now().to_i
+       access_token = WeixinJsSDK::AccessToken.new(
+          app_id:     mm_app_id,
+          app_secret: mm_app_secret
+        ).fetch
+
+        ticket = WeixinJsSDK::Ticket.new(access_token: access_token).fetch
+        #保存ticket 防止过期
+        ticket_config.remark = (ticket_config.remark.to_i)+1
+        ticket_config.value = ticket
+        ticket_config.save
+    else
+       @ticket = ticket_config.value
+        
+    end
+  rescue => err 
+    puts err 
+
+  ensure
+
+    @url       = request.url    #当前页面URL
+    @timestamp = Time.now.to_i
+    @nonce_str = 'mmxueche'
+
+    @signature = WeixinJsSDK::Signature.new(
+      ticket: @ticket,
+      nonce_str: @nonce_str,
+      timestamp: @timestamp,
+      url: URI.encode(@url)
+    ).sign
+
+  end 
+ %>
+<script id='field_cell' type="text/template">
+      <div class="rows train_cell" style="background-image: url('/m/images/training_field_{{Math.ceil(Math.random()*4+1)}}.png');" >
+        <div class="col-xs-4 btn-cell" >
+            <button class='distance btn'>{{distance.toFixed(2)}}  公里</button>
+        </div>
+        <a >
+        <div class="col-xs-12 name">
+          {{name}}
+        </div>
+        <div class="col-xs-12 address">
+          {{address}}
+        </div>
+        <div class="col-xs-12 count">
+          教练：{{teacher_count}} 位
+        </div>
+        </a>
+      </div>
+    </a>
+    <hr>
+</script>
+
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+<script>
+        function init() {
+            //转换百度坐标为腾讯坐标
+            qq.maps.convertor.translate(new qq.maps.LatLng(39.911082, 116.396135), 3, function(res) {
+                latlng = res[0];
+            });
+        }
+      init();
+    </script>
+
+
+<script type="text/javascript">
+
+    _.templateSettings = {
+       interpolate: /\{\{(.+?)\}\}/g, //输出  {{   }}
+       evaluate: /\{\%(.+?)\%\}/g //js语句 {% alert(); %}
+         };
+
+
+   wx.config({
+            debug: false,
+            appId: '<%=mm_app_id%>', // 必填，公众号的唯一标识
+            timestamp: "<%=@timestamp%>", // 必填，生成签名的时间戳
+            nonceStr: "<%=@nonce_str%>", // 必填，生成签名的随机串
+            signature: '<%=@signature%>',// 必填，签名，见附录1
+            jsApiList: [
+              'openLocation',
+              'getLocation'
+            ]
+        });
+
+        wx.ready(function () {
+          wx.getLocation({
+            success: function (res) {
+
+              var obj = JSON.parse(JSON.stringify(res));
+              if(!!obj.longitude && !!obj.latitude){
+
+                var $location = Convert_GCJ02_To_BD09(obj.longitude,obj.latitude);//转换腾讯坐标到百度坐标
+                $.get('/m/near_train_field?type=position&longitude='+$location[1]+'&latitude='+$location[0], function(data){
+                       var obj = JSON.parse(data)
+                       if(obj.data.length > 0){
+                        $('#content').html('');
+                       }
+
+                       var arr = [];
+                       
+                       for(var i = 0; i < obj.data.length ;i++){
+                          arr.push(new qq.maps.LatLng(obj.data[i].latitude, obj.data[i].longitude));
+                       }
+
+                       qq.maps.convertor.translate(arr, 3, function(res) {
+                                for(var j=0; j < res.length; j++){
+                                  var template = _.template($('#field_cell').html());
+                                  $('#content').append(template(
+                                    {name: obj.data[j].name,
+                                   latitude: res[j].lat,
+                                   longitude: res[j].lng,
+                                   distance: obj.data[j].distance,
+                                   address: obj.data[j].address,
+                                   id: obj.data[j].id,
+                                   teacher_count: obj.data[j].teacher_count,
+                                    }));
+                                  }
+                  
+
+                            });
+
+                })
+
+              }
+
+            },
+            cancel: function (res) {
+              alert('未能获得您当前的地理位置');
+            }
+          });
+
+       })
+
+      $(function(){
+        $('body').on('click', '.navigation', function(){
+            var latitude  = $(this).data('latitude');
+            var longitude = $(this).data('longitude');
+            var name     = $(this).data('name');
+            var address  = $(this).data('address');
+
+            wx.openLocation({
+              latitude: parseFloat(latitude),
+              longitude: parseFloat(longitude),
+              name: name,
+              address: address,
+              scale: 14,
+              infoUrl: 'http://weixin.qq.com'
+            });
+          });
+      })
+
+
+      function Convert_GCJ02_To_BD09($lat,$lng){
+              $x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+              $x = $lng;
+              $y = $lat;
+              $z =Math.sqrt($x * $x + $y * $y) + 0.00002 * Math.sin($y * $x_pi);
+              $theta = Math.atan2($y, $x) + 0.000003 * Math.cos($x * $x_pi);
+              $lng = $z * Math.cos($theta) + 0.0065;
+              $lat = $z * Math.sin($theta) + 0.006;
+              return [$lng, $lat];
+      }
+    
+
+    </script>

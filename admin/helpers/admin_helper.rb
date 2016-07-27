@@ -11,5 +11,30 @@ module Tekala
       str
     end
 
+    def send_picture(temp, ext)
+      target = "images/qiniu_ad#{ext}"
+      if File.open('public/'+target, 'wb') {|f| f.write temp.read }
+        target
+      end
+    end
+
+    def upload_qiniu(key, filename)
+      #构建上传策略
+      put_policy = Qiniu::Auth::PutPolicy.new(CustomConfig::QINIUBUCKET)
+
+      #生成上传 Token
+      uptoken = Qiniu::Auth.generate_uptoken(put_policy)
+
+      #要上传文件的本地路径
+      filePath = 'public/'+key
+
+      #调用upload_with_token_2方法上传
+      code, result, response_headers = Qiniu::Storage.upload_with_token_2(
+          uptoken,
+          filePath,
+          filename
+      )
+      result
+    end
   end
 end

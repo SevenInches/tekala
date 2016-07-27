@@ -8,9 +8,8 @@ class TrainField
   property :longitude, String, :default => '0.0'
   property :latitude, String, :default => '0.0'
   property :remark, String                                    #评语
-  property :count, Integer, :default => 0                     #??
 
-  property :type, Enum[0, 1, 2], :default => 0                 #类型,挂靠/直营
+  property :type, Integer, :default => 0                 #类型,挂靠/直营
   property :display, Boolean, :default => true                 #展示
 
   property :area, Integer
@@ -18,8 +17,7 @@ class TrainField
   property :city_id, Integer
 
   property :open, Integer, :default => 1                        #开放
-  property :c1, Integer, :default => 0                          #应该是要去掉的
-  property :c2, Integer, :default => 0                          #应该是要去掉的
+
   property :users_count, Integer, :default => 0                 #学员数量
   property :orders_count, Integer, :default => 0                #订单数量
 
@@ -44,7 +42,7 @@ class TrainField
   end
 
   def teacher_count
-    count
+    teachers.count
   end
 
   def exam_type_count(type = 'c1')
@@ -52,7 +50,7 @@ class TrainField
   end
 
   def self.type 
-    {'挂靠/直营' => 0, "挂靠" => 1, '直营' => 2}
+    {'挂靠/直营' => 0, '挂靠' => 1, '直营' => 2}
   end
 
   def teacher_num

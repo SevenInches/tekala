@@ -7,10 +7,11 @@ migration 13, :create_app_launch_ads do
       column :start_time, DataMapper::Property::DateTime
       column :end_time, DataMapper::Property::DateTime
       column :cover_url, DataMapper::Property::String, :length => 255
-      column :type, DataMapper::Property::String, :length => 255
+      column :type, DataMapper::Property::Integer
       column :route, DataMapper::Property::String, :length => 255
       column :status, DataMapper::Property::Integer
       column :value, DataMapper::Property::String, :length => 255
+      column :channel, DataMapper::Property::Integer
     end
   end
 

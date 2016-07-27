@@ -1,0 +1,75 @@
+<div class="signup">
+  <div class='container main'>
+    <%=image_tag '/images/m/banner.png', :class=>'img-responsive'%>
+    <% form_tag url(:m, :signup), :id => 'signup_form' do %>
+      <input type='hidden' id='back' name='back' value='<%=params[:back] %>' />
+      <div class=" text-field mobile"  >
+        <label class="left-placeholder" for='mobile'>手机号</label>
+        <input type='text' name='mobile' id='mobile' value="<%=params[:mobile]%>" />
+      </div>
+      <div class=" text-field name"  >
+        <label class="left-placeholder" for='name'>姓名</label>
+        <input type='text' name='name' id='name' value="<%=params[:name]%>" />
+      </div>
+      <div class="text-field">
+        <label class="left-placeholder" for='password'>密码</label>
+        <input type='password' id='password' name='password' />
+      </div>
+      <div class="text-field">
+        <label class="left-placeholder" for='confirm_password'>重复密码</label>
+        <input type='password' id='confirm_password' name='confirm_password' />
+      </div>
+      <div class="clear"></div>
+      <br>
+      <button class='btn btn-warning btn-signup'>完成</button>
+      <br>
+      <br>
+      <div class="signup">
+        <a href="<%=url(:m,:login, :back => params[:back])%>">已经有账号了？></a>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+
+  $('.btn-signup').click(function(event) {
+    event.preventDefault();
+    if ($('#mobile').val().length != 11) {
+      swal({   title: "",   text: "手机号必须是11位数字",   timer: 2000,   showConfirmButton: false });
+      return false;
+
+
+    }else if($('#name').val() == ''){
+       swal({   title: "",   text: "请填写您的名字",   timer: 2000,   showConfirmButton: false });
+      return false;
+    }else if($('#password').val() == ''){
+       swal({   title: "",   text: "请设置登录密码",   timer: 2000,   showConfirmButton: false });
+      return false;
+    }else if($('#password').val().length < 5){
+       swal({   title: "",   text: "密码必须多于6位",   timer: 2000,   showConfirmButton: false });
+      return false;
+    }else if($('#password').val() != $('#confirm_password').val() ){
+       swal({   title: "",   text: "密码设置不一致",   timer: 2000,   showConfirmButton: false });
+      return false;
+    }else{
+
+    }
+
+    $('#signup_form').submit();
+
+  });
+})
+
+
+</script>
+<% if @error_msg %>
+    <script type="text/javascript">
+    $(function(){
+      swal({   title: "",   text: "<%=@error_msg%>",   timer: 2000,   showConfirmButton: false });
+    })
+    </script>
+    
+<%end%>

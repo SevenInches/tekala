@@ -12,16 +12,24 @@ class JPush
   #pwd  pVh7tnAViy6F
 
   #学员版本
-  KEY = "3223ea1d02356c749f8f1ab4"
-  SEC = "35767888b32145700282e76b"
-
-  #管理版
-  MKEY = "e972c4b8c7f259d8514cd9b9"
-  MSEC = "3aa1f47c652f24adcd0d323f"
+  KEY = "164d07f0e6d086a219295841"
+  SEC = "07850c205a6b60c8ab7a0543"
 
   #教练版
-  TEACHERKEY = (Padrino.env != :development) ? "611e0382f950c821198e38e6" : ''
-  TEACHERSEC = (Padrino.env != :development) ? "aeeda231ba8d901b39d70dcc" : ''
+  TEACHERKEY = "666bfd915856f8db083da084"
+  TEACHERSEC = "db8e69cb1c8a6458d91c6f02"
+
+  #驾校版
+  SCHOOLKEY = "53b5400b0cddd0a1082b4c7c"
+  SCHOOLSEC = "ece89cbac8c32d2e7697737f"
+
+  #门店版
+  SHOPKEY = "9a33f3b03cdd83373b357414"
+  SHOPSEC = "9af36422b37bc459adc6fe2c"
+
+  #代理版
+  CHANNELKEY = "56c1a0a82735f9baea8bb629"
+  CHANNELSEC = "25d896b5d83189aea9c3d042"
 
   APNS_PRODUCTION = "true"
 
@@ -50,7 +58,6 @@ class JPush
         req.body = jpush.join("&")
         resp=http.request(req)
         p resp.body
-    
     end
   end
 
@@ -102,12 +109,12 @@ class JPush
         resp=http.request(req)
         
     end
-
   end
-  def self.send_version(version, msg)
+
+  def self.send_version(version, msg, key, sec)
     Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
         req=Net::HTTP::Post.new(URL.path)
-        req.basic_auth KEY,SEC
+        req.basic_auth key, sec
         jpush =[]
         jpush << 'platform=all'
         jpush << 'audience={"alias" : ["'+version.to_s+'"]}'
@@ -122,9 +129,70 @@ class JPush
         jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'
         req.body = jpush.join("&")
         resp=http.request(req)
-        
     end
+  end
 
+  def self.send_school(school_id, msg, key, sec)
+    Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
+      req=Net::HTTP::Post.new(URL.path)
+      req.basic_auth key, sec
+      jpush =[]
+      jpush << 'platform=all'
+      jpush << 'audience={"alias" : ["school_'+school_id.to_s+'"]}'
+
+      jpush << 'notification={
+            "alert":"'+msg+'",
+            "ios":{
+                 "content-available":1,
+                 "extras":{"type": "message", "msg": "'+msg+'" }
+                   }
+                }'
+      jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'
+      req.body = jpush.join("&")
+      resp=http.request(req)
+    end
+  end
+
+  def self.send_channel(channel_id, msg, key, sec)
+    Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
+      req=Net::HTTP::Post.new(URL.path)
+      req.basic_auth key, sec
+      jpush =[]
+      jpush << 'platform=all'
+      jpush << 'audience={"alias" : ["channel_'+channel_id.to_s+'"]}'
+
+      jpush << 'notification={
+            "alert":"'+msg+'",
+            "ios":{
+                 "content-available":1,
+                 "extras":{"type": "message", "msg": "'+msg+'" }
+                   }
+                }'
+      jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'
+      req.body = jpush.join("&")
+      resp=http.request(req)
+    end
+  end
+
+  def self.send_status(status,msg,key, sec)
+    Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
+      req=Net::HTTP::Post.new(URL.path)
+      req.basic_auth key, sec
+      jpush =[]
+      jpush << 'platform=all'
+      jpush << 'audience={"alias" : ["status_'+status.to_s+'"]}'
+
+      jpush << 'notification={
+            "alert":"'+msg+'",
+            "ios":{
+                 "content-available":1,
+                 "extras":{"type": "message", "msg": "'+msg+'" }
+                   }
+                }'
+      jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'
+      req.body = jpush.join("&")
+      resp=http.request(req)
+    end
   end
 
   #新预约通知 您有一个新订单，立即处理
@@ -454,8 +522,17 @@ class JPush
         #添加消息通知
         message = Message.create(:type => 'tweet_like', :user_id => tweet.user_id, :from_user_id => from_user_id, :tweet_id => tweet.id, :status => 0, :content => '你有一个新点赞')
       end
-
     end 
+  end
+
+  def self.get_edition(edition)
+    case edition
+      when 1 then KEY SEC
+      when 2 then TEACHERKEY TEACHERSEC
+      when 3 then SCHOOLKEY SCHOOLSEC
+      when 4 then SHOPKEY SHOPSEC
+      when 5 then CHANNELKEY CHANNELSEC
+    end
   end
 
 end

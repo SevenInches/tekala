@@ -1,0 +1,55 @@
+<script type="text/javascript" src='/javascripts/jquery.mobile.custom.min.js'></script>
+<div class="index">
+	<div class="row">
+		<div class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		  <ol class="carousel-indicators">
+			 <% @school.products.each_with_index do |value, index| %>
+		    	<li data-target="#carousel-example-generic" data-slide-to="<%=index%>" class="active"></li>
+		   <%end%>
+		  </ol>
+		  <!-- Wrapper for slides -->
+		  <div class="carousel-inner" role="listbox">
+			 <% @school.products.each_with_index do |value, index|%>
+			    <div class="item <%='active' if index==0 %>">
+			 	  <a href="<%=url(:m, :detail, :id => value[:id])%>">
+			      	<%=image_tag value[:photo] %>
+			      </a>
+			    </div>
+			  <%end%>
+		  </div>
+		</div>
+	</div>
+	<div class="row module">
+		<a class='black-font' href="<%=url(:m, @school.id, :products, :back => request.url)%>">
+			<div class="col-xs-6">
+					<%=image_tag '/images/m/icn_all_course.png', :class=> 'icon' %> 所有班别
+			</div>
+		</a>
+		<a class='black-font' href="http://a.app.qq.com/o/simple.jsp?pkgname=com.mmxueche.app">
+			<div class="col-xs-6">
+				<%=image_tag '/images/m/icn_app_download.png', :class=> 'icon' %> App下载
+			</div>
+		</a>
+	</div>
+</div>
+
+<%= javascript_include_tag "carousel","transition" %>
+
+ <script type="text/javascript">
+ 	$('.carousel').carousel({
+	  interval: 4000
+	})
+
+	$(document).ready(function() {
+  
+		$(".carousel").swiperight(function() {
+		    $(this).carousel('prev');
+		});
+		$(".carousel").swipeleft(function() {  
+		    $(this).carousel('next');
+		});
+		 
+	}); /* END document ready */
+
+ </script>

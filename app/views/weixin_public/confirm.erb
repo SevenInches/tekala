@@ -1,0 +1,267 @@
+<div class='rows'>
+  <div class="col-xs-12 back" style='padding-left:0px;'>
+    <%= @nav_word %>
+  </div>
+</div>
+<div class="clear"></div>
+<div class='top-back' style='height:40px;'></div>
+
+<style>
+ .back{
+    font-size: 20px;
+    background-color:#FFD24C;
+    height: 44px;
+    padding:0px;
+    line-height: 44px;
+    text-align: center;
+    position: fixed;
+    z-index: 100;
+
+
+  }
+  .back .icon{
+    float: left;
+    padding-left:10px;
+    font-size: 30px;
+  }
+  a .back{
+    color:#666666;
+  }
+  .main{
+    width: 100%;
+    padding:0px;
+  }
+</style>
+
+<style type="text/css">
+	hr{
+		margin:0px 0;
+
+	}
+	body{
+		font-size: 14px;
+	}
+	div{
+		text-align: center;
+		vertical-align: center;
+	}
+	.main{
+		padding:0px;
+	}
+	.rank{
+		width: 100%;
+	    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+	    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+	    display: -ms-flexbox;      /* TWEENER - IE 10 */
+	    display: -webkit-flex;     /* NEW - Chrome */
+	    display: flex; 
+		padding:8px;
+		background-color:#f2f2f2;
+	}
+	.rank, .count, .status{
+		padding:12px 15px;
+	}
+
+	.status{
+		text-align: left;
+	}
+	
+	.clear{
+		clear: both;
+	}
+	.num{
+		width: 30px;
+		font-size: 1.4em;
+		padding-top: 20px;
+		color:#FFAA26;
+	}
+	.avatar{
+		width: 85px;
+		padding:0 8px 0 0;
+		margin-top: 0px;
+	}
+	.rank .info{
+		flex: 1;
+		-webkit-flex: 1;
+  		-moz-flex: 1;
+  		-webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+  		-moz-box-flex: 1;
+  		-ms-flex: 1; 
+		padding:0px 4px;
+	}
+	
+	.rank .fee{
+		position: absolute;
+		right:0;
+
+	}
+	
+	.info .name{
+		font-size: 1.2em;
+		color:#444444;
+	}
+	.count{
+		font-size: 1.1em;
+	}
+	.info .addr{
+		font-size: 1.15em;
+		color:#777777;
+	}
+	.info,.fee{
+		padding:15px;
+		padding-top: 5px;
+	}
+	.info p{
+		text-align: left;
+	}
+	.fee p{
+		text-align: right;
+	}
+	.info p, .fee p{
+		margin-bottom: 5px;
+	}
+	
+	.fee .value{
+		font-size: 1.0em;
+    color:#333333!important;
+		
+	}
+	a, a:hover{
+		color:#000000!important;
+		text-decoration: none;
+	}
+	a.teacher_cell{
+		text-decoration: none;
+	}
+	.red{
+		color:red;
+	}
+  	
+</style>
+
+<div class='cell'>
+	
+		<div class='rows rank'>
+			<div class='avatar'>
+				<%=image_tag '/m/images/photo_3800.png' , :class=>'img-responsive img-circle' %>
+			</div>
+			
+			<div class='info'>
+				<p class='name'>&nbsp;</p>
+				<p class='addr'>4800元全包班</p>
+			</div>
+
+			<div class='fee'>
+				<p class='value'>&nbsp;</p>
+			</div>
+			<div class="clear"></div>
+		</div>	
+
+		<div class="rows count">
+			<span class='time' >所需支付金额</span> <span class='money'>金额：<span class='red'>￥ <%=@order.amount%> 元</span></span>
+			<div class="clear"></div>
+		</div>
+		<hr style='border-bottom:#eeeeee solid 1px;'>
+		
+</div>
+
+<div class='col-xs-12'>
+    
+	<a class='potocol' href="http://mp.weixin.qq.com/s?__biz=MzA3MjkzODU5NA==&mid=206982169&idx=1&sn=a8cf2500c3e6f836dba63c6e5b080be3&scene=1&key=dffc561732c22651ba2b1edcae3092fb0919fc3f881b213a21bf317f8936f37394f92b3ade3808a936afd91dd6b2f5b0&ascene=0&uin=MTE2NDI0MjU0MQ%3D%3D&devicetype=iMac+MacBookPro11%2C1+OSX+OSX+10.10.3+build(14D136)&version=11020113&pass_ticket=p8avHmHEVHxdWV5mAeqoZjzqiYBD9L2lWaCgFhK4Qqku9fnLjHqucjRzTQ%2BHnZ9%2F" >
+	用户协议
+	</a>
+	<div class="clear"></div>
+	<p style='text-align:left;'>说明: </p>
+	
+	<p style='text-align:left;'> 1）必须同时符合以下三个条件：30岁(含30岁）以下；有深圳户口或居住证；住在福田、罗湖、南山或宝安区</p>
+	<p style='text-align:left;'> 2）支付成功之后，会加入包过班的专有微信群</p>
+    <p style='text-align:left;'> 3）报名成功后，凭微信支付记录可以随时退款，不收取任何手续费</p>
+    <p style='text-align:left;'> 4）欢迎添加小萌微信mmxueche01了解更多信息</p>
+    <p style='text-align:left;'> 5）公司地址：深圳南山区科发路1号富利臻大厦3楼</p>
+	<br>
+	<br>
+	<%=link_to '立即支付', :href=>url(:weixin_public, :wechat_login, :order_id => @order.id), :style=>'width:100%;background-color:#ffffff;', :class => 'btn btn-success btn-outline' %>
+</div>
+
+<style>
+	.potocol{
+		text-align: left!important;
+		float:left;
+		margin-top: 20px;
+		margin-bottom: 5px;
+	}
+	.main{
+      padding: 0px;
+      margin-top:0px;
+      background-color: #f2f2f2;
+    }
+    .count .time{
+    	float: left;
+    	color:#333333!important;
+
+    }
+    .count .money{
+    	float: right;
+    	color:#333333!important;
+
+    }
+    .cell{
+    	background-color: #ffffff;
+    	border-top:1px #dddddd solid;
+    	border-bottom:1px #dddddd solid;
+    	margin-top: 15px;
+    }
+    
+    .word{
+		color:#ffffff;
+		padding:10px;
+		font-size: 15px;
+		text-align: center;
+		position: fixed;
+		bottom: 50%;
+		width: 60%;
+		left:20%;
+	}
+
+	.btn, .btn:hover, .btn:focus{
+		color: #FFAA26!important;
+		border: 1px #FFAA26 solid;
+		border-radius: 5px;
+		font-size: 1.4em;
+		padding: 10px 8px;
+
+	}
+	.btn-danger, .btn-danger:hover, .btn-danger:focus{
+		color: #d9534f!important;
+		border: 1px #d9534f solid;
+	}
+	.choose-coupon{
+		text-align: left;
+		padding:5px 15px;
+	}
+	.coupon{
+		float: left;
+		vertical-align: middle;
+		text-align: center;
+		font-size: 15px;
+	}
+
+	.coupon-choose{
+		height: 60px;
+		padding-top: 15px;
+		font-size: 18px;
+	}
+	.fa-check, .fa-money{
+		color:#FFD24C;
+	}
+	.coupon-choose{
+		cursor: pointer;
+	}
+	.total{
+		float: right;
+		font-size:18px;
+	}
+	.hidden-input{
+		display: none;
+	}
+</style>

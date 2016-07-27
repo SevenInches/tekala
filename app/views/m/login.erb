@@ -1,0 +1,33 @@
+<div class="login">
+  <div class='container main'>
+    <%=image_tag '/images/m/banner.png', :class=>'img-responsive'%>
+    <% form_tag url(:m,:login) do %>
+        <input type='hidden' id='back' name='back' value='<%=params[:back] %>' />
+      <div class=" text-field mobile"  >
+        <label class="left-placeholder" for='mobile'>手机号</label>
+        <input type='text' name='mobile' id='mobile' value="<%=params[:mobile]%>" />
+      </div>
+      <div class="text-field">
+        <label class="left-placeholder" for='password'>密码</label>
+        <input type='password' id='password' name='password' />
+      </div>
+      <div class="clear"></div>
+      <br>
+      <button class='btn btn-warning btn-login'>登录</button>
+      <br>
+      <br>
+      <div class="signup">
+        <a href="<%=url(:m,:signup, :back => params[:back])%>">还没注册？></a>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<% if @error_msg %>
+    <script type="text/javascript">
+    $(function(){
+      swal({   title: "",   text: "<%=@error_msg%>",   timer: 2000,   showConfirmButton: false });
+    })
+    </script>
+    
+<%end%>

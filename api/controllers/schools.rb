@@ -45,19 +45,22 @@ Tekala::Api.controllers :v1, :schools do
 
   get :teachers, :map => '/v1/teachers_via_school/:school_id', :provides => [:json] do
     @teachers = Teacher.all(:school_id => params[:school_id], :open => 1)
-    @total  = @teachers.count
+    @total    = @teachers.count
+    @teachers = @teachers.paginate(:per_page => 20, :page => params[:page])
     render 'v1/teachers'
   end
 
   get :fields, :map => '/v1/fields_via_school/:school_id', :provides => [:json] do
     @train_fields = TrainField.all(:school_id => params[:school_id], :open => 1)
-    @total  = @train_fields.count
+    @total        = @train_fields.count
+    @train_fields = @train_fields.paginate(:per_page => 20, :page => params[:page])
     render 'v1/train_fields'
   end
 
   get :products, :map => '/v1/products_via_school/:school_id', :provides => [:json] do
     @products = Product.all(:school_id => params[:school_id])
-    @total  = @products.count
+    @total    = @products.count
+    @products = @products.paginate(:per_page => 20, :page => params[:page])
     render 'v1/products'
   end
 end

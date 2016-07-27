@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="author" content="萌萌学车">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="icon" href="/images/icon.png">
+
+    <title>萌萌学车</title>
+    <%=javascript_include_tag 'jquery-1.11.0.min' %>
+
+    <!-- Bootstrap core CSS -->
+    <%=stylesheet_link_tag 'bootstrap.min', 'font-awesome.min'%>
+
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </head>
+
+    <body>
+
+	<style type="text/css">
+		html, body, .box{
+			height: 100%;
+			background-color: #93D058;
+
+		}
+		
+		.word{
+			color:#ffffff;
+			padding:10px;
+			font-size: 15px;
+			text-align: center;
+			position: fixed;
+			bottom: 5%;
+			max-width: 900px;
+		}
+		
+		.box{
+			margin:0 auto;
+			width: 100%;
+			max-width: 800px;
+			height: 100%;
+			background-image: url('/m/images/vol4/sign_up_success_bg.png');
+			background-size:100%;
+			background-repeat: no-repeat;
+			background-color: #93D058;
+			margin-bottom: 50px;
+			font-size: 1.1em;
+			color:#000000;
+		}
+		.box img{
+			width:46%;
+			margin-top: 20px;
+			margin-left:26%;
+
+		}
+		.main{
+			padding:0;
+		}
+		.desc{
+			font-size: 1.3em;
+			color: #ffffff;
+			text-align: center;
+
+		}
+		.first{
+			padding-top: 20px;
+			
+		}
+		
+		span{
+			font-size: 1.4em;
+		}
+		.col-xs-12 a{
+			color:#ffffff!important;
+			text-decoration: underline;
+			font-size: 1em;
+		}
+	</style>
+
+	<div class="rows box">
+		<br>
+		<br>
+
+		<img src="/m/images/vol4/word_sign_up_sucess.png">
+		<!-- <img src="/m/images/weixin_group.png" style='margin-top:40px;'> 
+		<p class='desc first'>长按上方二维码</p>
+		<p class='desc'>立即加入萌萌学车包过班微信群</p>
+		<p class='desc'>了解下一步的学车流程</p> -->
+		<div class="clear"></div>
+		<br>
+		<div class="col-xs-12" >
+			<h4 style='text-align:center;'>报名成功后的操作</h4>
+
+			<p>第1步：非深户请先查询居住证是否已过期，若已过期请及时补办。</p>
+			<p> 以下链接可以查询</p>
+			<a href="http://dwz.cn/mmcheck">http://dwz.cn/mmcheck</a>
+			<hr>
+
+			<p>第2步：找一家照相馆拍照（任何一家，说是考驾照就秒懂）</p>
+			<hr>
+
+			<p>第3步：找一家医院体检（很简单的体检，不需要空腹，10分钟搞定），上班族建议周六去</p>
+			<p>医院列表：<a href='http://dwz.cn/mmxctj'>http://dwz.cn/mmxctj</a></p>
+			<hr>
+
+			<p>第4步：网上报名预约录指纹</p>
+			<a href='http://create.maka.im/k/97OR7CKD'>http://create.maka.im/k/97OR7CKD</a>
+			<hr>
+
+			<p>第5步：网上报名后的下个月前五个工作日到南山西丽车管所现场录指纹</p>
+			
+			<hr>
+
+			<p>第6步：下载App，预约教练，开始学车</p>
+
+			<p style='color:#ffffff;'>如有疑问，请在公众号中联系我们</p>
+			<br>
+			<br>
+			<br>
+		</div>
+		
+	</div>
+
+	</body>
+
+</html>

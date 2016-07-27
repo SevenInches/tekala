@@ -4,8 +4,8 @@ class CustomConfig
 	APPID     = 'wx2518632f280d206d'
 	SECRET    = "b0d8eda74319a5984cfce9f230eab6b9"
 	
-	WHAPPID   = 'wx04b233f0063d55a9'
-  WHSECRET  = 'dbe6583cba45831e85da06d6fafae137'
+	WHAPPID   = 'wxc4f49bfef9b7c698'
+  WHSECRET  = 'bb7b995d7d7d130e19d3a96986a46ddc'
 
 	INSURE    = "http://121.15.1.122:9001/ThirdPartPlat/execute.action"
 	
@@ -38,6 +38,9 @@ class CustomConfig
 	EXAMLISTMAIN = 'http://app.stc.gov.cn:8090/kszzyy/'
 	VERIFYCODE   = 'verifyCode.action'
 	EXAMLISTPAGE = 'reportout_getddPdListNew.action'
+
+	PAY_APPID = 'wxbf810e4e6d170b3f'
+	PAY_SECRET= "4e7bf1de38c0f2242cc46f1e58c4a4cd"
 	
 	def self.pingxx
       Pingpp.api_key = (Padrino.env == :production) ? PINGLIVE : PINGTEST

@@ -65,16 +65,50 @@ module Tekala
       end
     end
 
-    # get :enroll do
-    #   new_enroll = Enroll.new
-    #   if params.present?
-    #     new_enroll.school = params[:school] if params[:school].present?
-    #     new_enroll.name = params[:name] if params[:name].present?
-    #     new_enroll.phone = params[:phone] if params[:phone].present?
-    #     if new_enroll.save
-    #       [true].to_json
-    #     end
-    #   end
-    # end
+    #web端支付 ajax请求返回的charge内容 v3 -d
+    post :pay_web, :provides => [:json] do
+
+      api_key = (params[:is_live] == '1' && Padrino.env == :production ) ? CustomConfig::PINGLIVE : CustomConfig::PINGTEST
+
+      app_id  = CustomConfig::PINGAPPID #应用id
+
+      @order  = Signup.first(:order_no => params[:order_no], :user_id => params[:user_id], :status.lt => 2)
+
+      return {:status => :failure, :msg => '没有该订单'}.to_json if @order.nil?
+
+      amount  = @order.amount * 100.to_i
+
+      subject = @order.subject
+
+      return {:status => :failure, :msg => '未选择支付金额'}.to_json if @order == 0
+
+      begin
+
+        CustomConfig.pingxx
+        order_result = Pingpp::Charge.create(
+            :order_no  => @order.order_no,
+            :amount    => amount,
+            :subject   => subject,
+            :body      => subject,
+            :channel   => "wx_pub",
+            :currency  => "cny",
+            :client_ip => request.ip,
+            :app       => { :id => app_id },
+            :extra     => { :open_id => params[:open_id]}
+        )
+
+        result = JSON.parse(order_result.to_s)
+        @order.ch_id = result['id']
+        @order.pay_channel = 'wx_pub'
+        @order.save
+
+        return order_result.to_json
+
+      rescue => err
+        puts err
+      ensure
+      end
+
+    end
   end
 end
