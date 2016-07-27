@@ -135,10 +135,12 @@ class JPush
     end
   end
 
-  def self.send_message(tags, msg)
+  def self.send_message(tags, msg, edition)
+    puts edition
+    key, sec= convert_edition(edition)
     Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
       req=Net::HTTP::Post.new(URL.path)
-      req.basic_auth KEY,SEC
+      req.basic_auth key, sec
       jpush =[]
       jpush << 'platform=all'
       jpush << 'audience={"tag_and" : '+tags.to_s+'}'
@@ -449,6 +451,7 @@ class JPush
     end
 
   end #tweet_comment end
+
   def self.tweet_like(tweet_id, from_user_id)
     tweet = Tweet.get tweet_id
     return false if tweet.nil?
@@ -485,4 +488,15 @@ class JPush
       end
     end 
   end
+
+  def self.convert_edition(key)
+    case key.to_i
+      when 1 then return KEY,SEC
+      when 2 then return TEACHERKEY,TEACHERSEC
+      when 3 then return SCHOOLKEY,SCHOOLSEC
+      when 4 then return SHOPKEY,SHOPSEC
+      when 5 then return CHANNELKEY,CHANNELSEC
+    end
+  end
+
 end

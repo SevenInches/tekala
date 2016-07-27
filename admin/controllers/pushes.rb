@@ -94,12 +94,14 @@ Tekala::Admin.controllers :pushes do
     @title = pat(:send_title, :model => "Push #{params[:id]}")
     push = Push.get(params[:id])
     tags = []
-    if push.present?
-      tags << 'channel_' + push.channel_id.to_s if push.channel_id.present?
-      tags << push.version if push.version.present?
-      tags << 'school_' + push.school_id.to_s if push.school_id.present?
-      tags << 'status_' + push.user_status.to_s if push.user_status.present?
-      JPush.send_message(tags, push.message)
+    if push.present? && push.editions.present?
+        push.editions.split(':').each do |edition|
+        tags << 'channel_' + push.channel_id.to_s if push.channel_id.present?
+        tags << push.version if push.version.present?
+        tags << 'school_' + push.school_id.to_s if push.school_id.present?
+        tags << 'status_' + push.user_status.to_s if push.user_status.present?
+        JPush.send_message(tags, push.message, edition)
+      end
       flash[:success] = pat(:send_success, :model => 'Push', :id => "#{params[:id]}")
       redirect url(:pushes, :index)
     end
