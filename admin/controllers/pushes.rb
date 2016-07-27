@@ -90,7 +90,7 @@ Tekala::Admin.controllers :pushes do
     redirect url(:pushes, :index)
   end
 
-  get :send, :with => :id do
+  post :send, :with => :id do
     @title = pat(:send_title, :model => "Push #{params[:id]}")
     push = Push.get(params[:id])
     if push.present?
