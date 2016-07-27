@@ -114,7 +114,7 @@ class JPush
   def self.send_version(version, msg, key, sec)
     Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
         req=Net::HTTP::Post.new(URL.path)
-        req.basic_auth key, sec
+        req.basic_auth KEY,SEC
         jpush =[]
         jpush << 'platform=all'
         jpush << 'audience={"alias" : ["'+version.to_s+'"]}'
@@ -126,9 +126,12 @@ class JPush
                  "extras":{"type": "message", "msg": "'+msg+'" }
                    }
                 }'
+
+        jpush << 'message={ "msg_content" : "'+msg+'", "title": "'+msg+'", "extras": {"type": "message", "msg": "'+msg+'" }}'
+
         jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'
         req.body = jpush.join("&")
-        resp=http.request(req)
+        resp = http.request(req)
     end
   end
 
@@ -527,11 +530,11 @@ class JPush
 
   def self.get_edition(edition)
     case edition
-      when 1 then KEY SEC
-      when 2 then TEACHERKEY TEACHERSEC
-      when 3 then SCHOOLKEY SCHOOLSEC
-      when 4 then SHOPKEY SHOPSEC
-      when 5 then CHANNELKEY CHANNELSEC
+      when 1 then return KEY SEC
+      when 2 then return TEACHERKEY TEACHERSEC
+      when 3 then return SCHOOLKEY SCHOOLSEC
+      when 4 then return SHOPKEY SHOPSEC
+      when 5 then return CHANNELKEY CHANNELSEC
     end
   end
 

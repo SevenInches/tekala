@@ -90,7 +90,7 @@ Tekala::Admin.controllers :pushes do
     redirect url(:pushes, :index)
   end
 
-  post :send, :with => :id do
+  get :send, :with => :id do
     @title = pat(:send_title, :model => "Push #{params[:id]}")
     push = Push.get(params[:id])
     if push.present?
@@ -106,5 +106,12 @@ Tekala::Admin.controllers :pushes do
       end
       redirect url(:pushes, :index)
     end
+  end
+
+  get :test do
+    key = JPush::KEY
+    sec = JPush::SEC
+    puts key, sec
+    JPush.send_version('0.0.1', '啦啦啦啦', key, sec)
   end
 end
