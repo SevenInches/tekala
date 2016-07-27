@@ -42,7 +42,7 @@ class TrainField
   end
 
   def teacher_count
-    count
+    teachers.count
   end
 
   def exam_type_count(type = 'c1')
