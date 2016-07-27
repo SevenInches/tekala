@@ -95,16 +95,24 @@ Tekala::Admin.controllers :pushes do
     push = Push.get(params[:id])
     if push.present?
       if push.editions.present?
-        push.editions.each do |edition|
-          key, src= JPush.get_edition(edition)
-          JPush.send_channel(push.channel_id, push.message, key, src) if push.channel_id.present?
-          JPush.send_version(push.version, push.message, key, src)    if push.version.present?
-          JPush.send_school(push.school_id, push.message, key, src)   if push.school_id.present?
-          JPush.send_status(push.user_status, push.message, key, src) if push.user_status.present?
+        if push.editions.is_a?
+          push.editions.each do |edition|
+            send_message(push, edition)
+          end
+        else
+          send_message(push, push.editions)
         end
-      flash[:success] = pat(:send_success, :model => 'Push', :id => "#{params[:id]}")
+        flash[:success] = pat(:send_success, :model => 'Push', :id => "#{params[:id]}")
+      end
+      redirect url(:pushes, :index)
     end
-    redirect url(:pushes, :index)
-    end
+  end
+
+  def send_message(push, edition)
+    key, src= JPush.get_edition(edition)
+    JPush.send_channel(push.channel_id, push.message, key, src) if push.channel_id.present?
+    JPush.send_version(push.version, push.message, key, src)    if push.version.present?
+    JPush.send_school(push.school_id, push.message, key, src)   if push.school_id.present?
+    JPush.send_status(push.user_status, push.message, key, src) if push.user_status.present?
   end
 end
