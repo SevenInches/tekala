@@ -8,10 +8,10 @@ class AppLaunchAd
   property :start_time, DateTime
   property :end_time, DateTime
   property :cover_url, String
-  property :type, Integer
+  property :type, Integer, :auto_validation => false
   property :route, String
-  property :status, Boolean, :default => true
-  property :value, String, :default => ''
+  property :status, Boolean, :default => true, :auto_validation => false
+  property :value, String, :default => '', :auto_validation => false
   #0=>所有all、1=>学员student、2=>教练teacher、3=>驾校school、4=>门店shop、5=>渠道channel
   property :channel, Integer
 

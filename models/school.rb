@@ -120,4 +120,8 @@ class School
     self.crypted_password = ::BCrypt::Password.create(password) if password.present?
   end
 
+  def self.schools
+    self.all.collect { |sch| [sch.name, sch.id] }
+  end
+
 end
