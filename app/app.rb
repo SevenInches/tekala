@@ -31,8 +31,11 @@ module Tekala
     end
 
     get :price do
-
       render 'price'
+    end
+
+    get :robot do
+      render 'robot'
     end
 
     get :question do

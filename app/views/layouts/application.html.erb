@@ -9,7 +9,7 @@
   <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;">
   <link rel="icon" href="/images/favicon.ico">
   <title>特快拉 - 用技术提升驾培行业效率，让学车更简单</title>
-  <%=javascript_include_tag 'jquery-1.11.0.min', 'jquery-ui.min', 'smoothscroll' %>
+  <%=javascript_include_tag 'jquery-1.11.0.min', 'jquery-ui.min', 'smoothscroll','bootstrap.min.js' %>
   <!-- Bootstrap core CSS -->
   <%=stylesheet_link_tag 'bootstrap.min', 'font-awesome.min', 'application' %>
   <!--[if lt IE 9]>
@@ -25,12 +25,14 @@
         <a href="/" class=" "><%=image_tag 'logo.png', :class=>'img-responsive logo'%></a>
       </div>
       <ul class="app-nav">
-        <li class=""><a href="/">首页</a></li>
-        <li class=""><a href="/articles" class="<%= "active" if current_page?(["articles"]) %>">行业资讯</a></li>
-        <li class=""><a href="/question" class="<%= "active" if current_page?(["question"]) %>">常见问题</a></li>
-        <li class=""><a href="/price" class="<%= "active" if current_page?(["price"]) %>">价格</a></li>
-        <li class=""><a href="/about" class="<%= "active" if current_page?(["about"]) %>">关于我们</a></li>
+        <li class=""><a href="/robot">驾培机器人</a><div class=""></div></li>
+        <li class=""><a href="/">SAAS平台</a><div class=""></div></li>
+        <li class=""><a href="/articles" class="<%= "active" if current_page?(["articles"]) %>">行业资讯</a><div class=""></div></li>
+        <li class=""><a href="/question" class="<%= "active" if current_page?(["question"]) %>">常见问题</a><div class=""></div></li>
+        <li class=""><a href="/price" class="<%= "active" if current_page?(["price"]) %>">价格</a><div class=""></div></li>
+        <li class=""><a href="/about" class="<%= "active" if current_page?(["about"]) %>">关于我们</a><div class=""></div></li>
       </ul>
+      <div class="nav-mask"></div>
     </div>
   </div>
 </header>
