@@ -2,8 +2,8 @@
 #  file:    jpush.rb
 #  desc:    极光推送
 #
-#  Created by 萌萌学车 on 2015-12-15.
-#  Copyright (c) 2015年 萌萌学车. All rights reserved.
+#  Created by 特快拉 on 2016-07-27.
+#  Copyright (c) 2016年 特快拉. All rights reserved.
 #  ==================================================      
     
 # 极光推送
@@ -117,7 +117,7 @@ class JPush
         req.basic_auth KEY,SEC
         jpush =[]
         jpush << 'platform=all'
-        jpush << 'audience={"alias" : ["'+version.to_s+'"]}'
+        jpush << 'audience={"tag" : ["'+version.to_s+'"]}'
 
         jpush << 'notification={
             "alert":"'+msg+'",
@@ -135,14 +135,13 @@ class JPush
     end
   end
 
-  def self.send_school(school_id, msg, key, sec)
+  def self.send_message(tags, msg)
     Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
       req=Net::HTTP::Post.new(URL.path)
-      req.basic_auth key, sec
+      req.basic_auth KEY,SEC
       jpush =[]
       jpush << 'platform=all'
-      jpush << 'audience={"alias" : ["school_'+school_id.to_s+'"]}'
-
+      jpush << 'audience={"tag_and" : '+tags.to_s+'}'
       jpush << 'notification={
             "alert":"'+msg+'",
             "ios":{
@@ -150,48 +149,7 @@ class JPush
                  "extras":{"type": "message", "msg": "'+msg+'" }
                    }
                 }'
-      jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'
-      req.body = jpush.join("&")
-      resp=http.request(req)
-    end
-  end
-
-  def self.send_channel(channel_id, msg, key, sec)
-    Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
-      req=Net::HTTP::Post.new(URL.path)
-      req.basic_auth key, sec
-      jpush =[]
-      jpush << 'platform=all'
-      jpush << 'audience={"alias" : ["channel_'+channel_id.to_s+'"]}'
-
-      jpush << 'notification={
-            "alert":"'+msg+'",
-            "ios":{
-                 "content-available":1,
-                 "extras":{"type": "message", "msg": "'+msg+'" }
-                   }
-                }'
-      jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'
-      req.body = jpush.join("&")
-      resp=http.request(req)
-    end
-  end
-
-  def self.send_status(status,msg,key, sec)
-    Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
-      req=Net::HTTP::Post.new(URL.path)
-      req.basic_auth key, sec
-      jpush =[]
-      jpush << 'platform=all'
-      jpush << 'audience={"alias" : ["status_'+status.to_s+'"]}'
-
-      jpush << 'notification={
-            "alert":"'+msg+'",
-            "ios":{
-                 "content-available":1,
-                 "extras":{"type": "message", "msg": "'+msg+'" }
-                   }
-                }'
+      jpush << 'message={ "msg_content" : "'+msg+'", "content_type": "text", "title": "消息推送" }'
       jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'
       req.body = jpush.join("&")
       resp=http.request(req)
@@ -527,15 +485,4 @@ class JPush
       end
     end 
   end
-
-  def self.get_edition(edition)
-    case edition
-      when 1 then return KEY SEC
-      when 2 then return TEACHERKEY TEACHERSEC
-      when 3 then return SCHOOLKEY SCHOOLSEC
-      when 4 then return SHOPKEY SHOPSEC
-      when 5 then return CHANNELKEY CHANNELSEC
-    end
-  end
-
 end

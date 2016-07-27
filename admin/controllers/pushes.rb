@@ -93,22 +93,16 @@ Tekala::Admin.controllers :pushes do
   get :send, :with => :id do
     @title = pat(:send_title, :model => "Push #{params[:id]}")
     push = Push.get(params[:id])
+    tags = []
     if push.present?
-      if push.editions.present?
-          push.editions.split(":").each do |edition|
-            key, src= JPush.get_edition(edition)
-            JPush.send_channel(push.channel_id, push.message, key, src) if push.channel_id.present?
-            JPush.send_version(push.version, push.message, key, src)    if push.version.present?
-            JPush.send_school(push.school_id, push.message, key, src)   if push.school_id.present?
-            JPush.send_status(push.user_status, push.message, key, src) if push.user_status.present?
-          end
-        flash[:success] = pat(:send_success, :model => 'Push', :id => "#{params[:id]}")
-      end
+      tags << 'channel_' + push.channel_id.to_s if push.channel_id.present?
+      tags << push.version if push.version.present?
+      tags << 'school_' + push.school_id.to_s if push.school_id.present?
+      tags << 'status_' + push.user_status.to_s if push.user_status.present?
+      JPush.send_message(tags, push.message)
+      flash[:success] = pat(:send_success, :model => 'Push', :id => "#{params[:id]}")
       redirect url(:pushes, :index)
     end
   end
 
-  get :test do
-    JPush.send_version('0.0.1', '啦啦啦啦')
-  end
 end
