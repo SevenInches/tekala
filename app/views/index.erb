@@ -1,6 +1,20 @@
 <div id='home' class="section container first">
-  <%=image_tag 'content.png', :class => 'first_photo' %>
-  <a class="smoothScroll center-btn" href="#invite"></a>
+  <div id="myCarousel" class="carousel slide">
+    <!-- 轮播（Carousel）指标 -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+    <!-- 轮播（Carousel）项目 -->
+    <div class="carousel-inner">
+      <div class="item banner-img2 active">
+        <%=image_tag 'banner-text-1.png', :class => 'banner-text' %>
+      </div>
+      <div class="item banner-img1">
+        <%=image_tag 'banner-text-2.png', :class => 'banner-text' %>
+      </div>
+    </div>
+  </div>
 </div>
 <div id='student' class="section container container_2 second">
   <%=image_tag 'student.png', :class => 'photo' %>
