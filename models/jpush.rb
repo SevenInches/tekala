@@ -41,7 +41,7 @@ class JPush
     Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
       @count = Teacher.count
       req=Net::HTTP::Post.new(URL.path)
-      req.basic_auth MKEY,MSEC
+      req.basic_auth KEY,SEC
       jpush =[]
       jpush << 'platform=all'
       jpush << 'audience=all'
