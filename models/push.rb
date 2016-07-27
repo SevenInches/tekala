@@ -4,11 +4,11 @@ class Push
   # property <name>, <type>
   property :id, Serial
   property :message, String
-  property :type, Integer, :default => 0, :auto_validation => false
+  property :type, Integer, :auto_validation => false
   property :value, String
-  property :channel_id, Integer, :default => 0, :auto_validation => false
+  property :channel_id, Integer, :auto_validation => false
   property :version, String
-  property :school_id, Integer, :default => 0, :auto_validation => false
+  property :school_id, Integer, :auto_validation => false
   property :user_status, Boolean, :auto_validation => false
   property :editions, String, :auto_validation => false
 
