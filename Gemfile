@@ -1,5 +1,5 @@
 #source 'https://rubygems.org/'
-source 'http://gems.ruby-china.org/'
+source 'https://gems.ruby-china.org/'
 # 使用ruby-china的源，不需要ssh证书，就可以更新Gem
 
 # Distribute your app as a gem
