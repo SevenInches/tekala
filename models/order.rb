@@ -323,10 +323,10 @@ class Order
   end
 
   def self.pay_become_finish
-    o = Order.all(:status =>104, :type => Order::NORMALTYPE)
+    o = Order.all(:status =>4, :type => Order::NORMALTYPE)
     o.each do |order|
       if order.book_time + (order.quantity).hours < Time.now
-        order.status = 103
+        order.status = 3
         order.save
       end
     end
