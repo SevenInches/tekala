@@ -46,10 +46,14 @@ Tekala::Admin.controllers :pushes do
       if params[:editions].present?
         params[:push][:editions] = params[:editions].join(":")
       end
-      if @push.update(params[:push])
+      params[:push].each do |index,push|
+        @push[index] = push if push.present?
+      end
+      if @push.save
         flash[:success] = pat(:update_success, :model => 'Push', :id =>  "#{params[:id]}")
-        redirect(url(:ads, :index))
+        redirect(url(:pushes, :index))
       else
+        puts @push.errors.to_json
         flash.now[:error] = pat(:update_error, :model => 'Push')
         render 'pushes/edit'
       end
