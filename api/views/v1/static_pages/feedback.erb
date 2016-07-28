@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;">
+  <title>特快拉--用户反馈</title>
+  <%= stylesheet_link_tag '/stylesheets/bootstrap.min', '/stylesheets/feedback' %>
+</head>
+<body>
+<h1 class='title'>意见反馈</h1>
+<form class="form-box" method="post" href="<%= url(:v1,:feedbacks) %>">
+  <div class="form-group">
+    <textarea name="content" rows="8" cols="40" class="form-textarea" placeholder="请输入反馈内容"></textarea>
+  </div>
+  <input type="submit" name="submit" value="提交" class="form-submit">
+</form>
+</body>
+</html>

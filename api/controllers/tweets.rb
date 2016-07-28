@@ -25,7 +25,7 @@ Tekala::Api.controllers :v1, :tweets do
   	@tweet = Tweet.new
     @tweet.user_id = @user.id
     @tweet.content = params[:content]
-    @tweet.city    = @user.city_id
+    @tweet.city    = @user.city_id if @user.city_id.present?
     if !params[:content].nil? && @tweet.save
 	    (1..9).each do |i|
 	    	TweetPhoto.create(:tweet_id => @tweet.id, :user_id => @user.id, :url => params["photo#{i}"]) if params["photo#{i}"]  
