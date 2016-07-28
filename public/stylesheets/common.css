@@ -11,29 +11,16 @@ body{
 }
 
 header{
-    background: #474747;
-    height: 120px;
+    height: 80px;
 }
 
 .navbar-header{
     float: left;
 }
 
-.app-nav{
-    float: right;
-    padding: 1.1rem 0;
-    display: flex;
-    justify-content: space-between;
-}
-
-.app-nav li{
-    float: left;
-    margin-right: 10px;
-}
 .app-nav li a{
     position: relative;
     display: block;
-    padding: 10px 0;
     color: #fff;
 }
 
@@ -78,6 +65,11 @@ header{
         width: 88%;
     }
 }
+
+.nav-mask{
+    opacity: 1;
+}
+
 
 
 
