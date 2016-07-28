@@ -1,0 +1,88 @@
+<h1>特快拉学员版测试</h1>
+
+<!-- 注册尚未写 -->
+<table border=0>
+  <tr>
+    <th>测试内容</th>
+    <th>测试结果</th>
+  </tr>
+  <tr>
+    <td>输入合法的账号和密码来登录，登录成功</td>
+    <td><%= result 1 %></td>
+  </tr>
+  <tr>
+    <td>输入不存在的账号来登录，登录失败</td>
+    <td><%= result 2 %></td>
+  </tr>
+  <tr>
+    <td>输入密码错误的账号来登录，登录失败</td>
+    <td><%= result 3 %></td>
+  </tr>
+  <tr>
+    <td>登录后登出，登出成功</td>
+    <td><%= result 4 %></td>
+  </tr>
+  <tr>
+    <td>获取问题列表，显示成功</td>
+    <td><%= result 5 %></td>
+  </tr>
+  <tr>
+    <td>修改个人资料，修改成功</td>
+    <td><%= result 6 %></td>
+  </tr>
+  <tr>
+    <td>修改密码，若输入错误的原密码，修改失败</td>
+    <td><%= result 7 %></td>
+  </tr>
+  <tr>
+    <td>修改密码，若输入正确的原密码，修改失败</td>
+    <td><%= result 8 %></td>
+  </tr>
+  <tr>
+    <td>意见反馈，提交成功</td>
+    <td><%= result 9 %></td>
+  </tr>
+  <tr>
+    <td>获取驾校列表，显示成功</td>
+    <td><%= result 10 %></td>
+  </tr>
+  <tr>
+    <td>班别列表，显示成功</td>
+    <td><%= result 11 %></td>
+  </tr>
+  <tr>
+    <td>首页动态列表，显示成功</td>
+    <td><%= result 12 %></td>
+  </tr>
+  <tr>
+    <td>获取评论，显示成功</td>
+    <td><%= result 13 %></td>
+  </tr>
+  <tr>
+    <td>发表评论，发表成功</td>
+    <td><%= result 14 %></td>
+  </tr>
+  <tr>
+    <td>发表动态，发表成功</td>
+    <td><%= result 15 %></td>
+  </tr>
+  <tr>
+    <td>动态未曾点赞状态下对其点赞，点赞数加一</td>
+    <td><%= result 16 %></td>
+  </tr>
+  <tr>
+    <td>动态曾点赞状态下对其取消点赞，点赞数减一</td>
+    <td><%= result 17 %></td>
+  </tr>
+  <tr>
+    <td>发表动态后且本动态是本人所发，对其进行删除，删除成功</td>
+    <td><%= result 18 %></td>
+  </tr>
+  <tr>
+    <td>发表评论后且本评论是本人所发，对其进行删除，删除成功</td>
+    <td><%= result 19 %></td>
+  </tr>
+</table>
+
+<p><%= button_to '开始测试', '/test_for_student/login_with_valid_account' %></p>
+<p><%= button_to '清除测试结果', '/test_for_student/clear_test' %></p>

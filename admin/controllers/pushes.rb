@@ -112,7 +112,23 @@ Tekala::Admin.controllers :pushes do
     end
   end
 
-  get :test do
-    JPush.order_confirm 54
+  get :test_1 do
+    JPush.order_remind 54
+  end
+
+  get :test_2 do
+    JPush.order_comment 54
+  end
+
+  get :test_3 do
+    JPush.tweet_comment 547, 3440, 3464, 'xyz'
+  end
+
+  get :test_4 do
+    JPush.tweet_like 547, 3440
+  end
+
+  get :test_5 do
+    JPush.order_cancel 54
   end
 end

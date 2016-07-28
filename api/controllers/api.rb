@@ -3,7 +3,7 @@ Tekala::Api.controllers :v1 do
 	register WillPaginate::Sinatra
   	enable :sessions
     current_url = '/api/v1'
-    before :except => [:launch_ad, :login, :logout, :unlogin, :signup, :hospitals, :history, :city_list, :questions, :exam_info] do
+    before :except => [:launch_ad, :login, :logout, :unlogin, :signup, :hospitals, :history, :city_list, :questions, :exam_info, :feedbacks] do
       @user = User.get(session[:user_id])
       redirect_to("#{current_url}/unlogin") if @user.nil?
     end
@@ -132,13 +132,16 @@ Tekala::Api.controllers :v1 do
       {:uptoken => token_item.value, :expired => (token_item.updated_at+50.minute).strftime('%Y-%m-%d %H:%I:%S') }.to_json
     end
 
+    get :feedbacks, :provides => [:html] do
+      render 'v1/static_pages/feedback'
+    end
+
     #学员反馈
-    post :feedbacks, :provides => [:json] do 
-      @feedback = Feedback.first_or_create(:user_id => @user.id, :content => params[:content])
+    post :feedbacks, :provides => [:html] do
+      @feedback = Feedback.create(:user_id => session[:user_id].to_i, :content => params[:content])
       if @feedback
-        {:status => :success, :content => @feedback.content}.to_json
-      else
-        {:status => :failure, :msg => @feedback.errors.full_messages.join(','), :err_code => 4001}.to_json
+        @success = true
+        render 'v1/static_pages/feedback'
       end
     end
 
