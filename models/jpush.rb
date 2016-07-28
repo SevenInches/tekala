@@ -136,7 +136,6 @@ class JPush
   end
 
   def self.send_message(tags, msg, edition)
-    puts edition
     key, sec= convert_edition(edition)
     Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
       req=Net::HTTP::Post.new(URL.path)
