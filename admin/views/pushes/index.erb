@@ -65,7 +65,7 @@
                       <td class=list-column> <%= push.channel.name  if push.channel.present? %> </td>
                       <td class=list-column> <%= push.version %> </td>
                       <td class=list-column> <%= push.school.name  if push.school.present? %> </td>
-                      <td class=list-column> <%= Push.get_user_status(push.user_status) if push.user_status.present? %> </td>
+                      <td class=list-column> <%= Push.get_user_status(push.user_status) if !push.user_status.nil? %> </td>
                       <td class=list-column> <%= push.editions_name if push.editions.present? %> </td>
                       <td class="list-column list-row-action">
                         <div class='list-row-action-wrapper'>

@@ -36,7 +36,7 @@ class Push
         0 => '未报名',
         1 => '已报名'
     }
-    if key.present?
+    if !key.nil?
       key ? words[1] : words[0]
     else
       words

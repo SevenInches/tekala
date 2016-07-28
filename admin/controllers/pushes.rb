@@ -48,6 +48,7 @@ Tekala::Admin.controllers :pushes do
       end
       params[:push].each do |index,push|
         @push[index] = push if push.present?
+        @push[index] = nil if push.empty?
       end
       if @push.save
         flash[:success] = pat(:update_success, :model => 'Push', :id =>  "#{params[:id]}")
@@ -103,8 +104,8 @@ Tekala::Admin.controllers :pushes do
         tags << 'channel_' + push.channel_id.to_s if push.channel_id.present?
         tags << 'version_' + push.version if push.version.present?
         tags << 'school_'  + push.school_id.to_s if push.school_id.present?
-        tags << 'status_'  + push.user_status.to_s if push.user_status.present?
-        JPush.send_message(tags, push.message, edition)
+        tags << 'status_'  + push.user_status.to_s if !push.user_status.nil?
+        #JPush.send_message(tags, push.message, edition)
       end
       flash[:success] = pat(:send_success, :model => 'Push', :id => "#{params[:id]}")
       redirect url(:pushes, :index)
