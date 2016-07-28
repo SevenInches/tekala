@@ -105,11 +105,14 @@ Tekala::Admin.controllers :pushes do
         tags << 'version_' + push.version if push.version.present?
         tags << 'school_'  + push.school_id.to_s if push.school_id.present?
         tags << 'status_'  + push.user_status.to_s if !push.user_status.nil?
-        #JPush.send_message(tags, push.message, edition)
+        JPush.send_message(tags, push.message, edition)
       end
       flash[:success] = pat(:send_success, :model => 'Push', :id => "#{params[:id]}")
       redirect url(:pushes, :index)
     end
   end
 
+  get :test do
+    JPush.order_confirm 54
+  end
 end
