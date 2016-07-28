@@ -66,8 +66,15 @@ ul li{
 .footer{
     background-color: #474747;
     text-align: center;
-    padding: 50px 0px 0px 25px;
+    padding: 50px 0px 0px 0;
     position: relative;
+}
+.footer-box{
+    width: 60%;
+    margin: 0 auto;
+    height: 30px;
+    position: relative;
+
 }
 .footer .ft_item_tit {
     color: #FFF;
@@ -262,7 +269,6 @@ ul li{
     float: right;
     display: flex;
     justify-content: space-between;
-    width: 480px;
     position: relative;
     z-index: 10;
     padding: 0;
@@ -318,21 +324,15 @@ ul li{
 }
 
 .wx_box{
-    position: relative;
+    position: absolute;
     width: 100px;
     height: 62px;
-    margin: 0 auto;
+    right: -120px;
 }
 
 @media (min-width: 992px){
-    .wx_box{
-        float: left;
-    }
     .foot_text{
         text-align: left;
-    }
-    .footer{
-        padding: 50px 0px 0px 18%;
     }
 }
 
@@ -562,14 +562,9 @@ ul li{
 }
 
 @media screen and (max-device-width: 414px) {
-    .app-nav {
-        width: 245px;
-        padding: 0.5rem 0;
-    }
-
     .inner-top {
         overflow: hidden;
-        padding: 20px 0;
+        padding: 0 5px;
     }
 
     .app-nav li a {
@@ -582,5 +577,8 @@ ul li{
 
     .job-btn {
         width: 56px;
+    }
+    .app-nav li {
+        margin-right: 5px;
     }
 }

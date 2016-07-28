@@ -38,40 +38,35 @@
 </header>
 <%=yield%>
 <footer class="footer">
-  <div class="col-md-3 contact text-left">
-      <!--<div class="ft_item_tit text-left">客服热线</div>-->
-      <!--<div class="ft_contact_tel clearfix">-->
-        <!--<span class="ico_tel"></span>-->
-        <!--<span class="txt">400-845-6866</span>-->
-      <!--</div>-->
-      <!--<div id="contact_outer">-->
-        <!--<div id="contact"></div>-->
-      <!--</div>-->
-    <p class="foot_text">华南区 杨经理 136-8688-0484</p>
-  </div>
-    <div class="col-md-3 contact text-left">
-      <p class="foot_text">华北区 江经理 136-5720-1230</p>
+  <div class="footer-box">
+    <div class="col-md-4 contact text-left">
+      <p class="foot_text">华南区 杨经理 136-8688-0484</p>
     </div>
-    <div class="col-md-3 contact text-left">
-      <p>西南区 张经理 159-2350-3857</p>
-    </div>
-  <div class="wx_box">
-    <div id="footer_wx_outer_active">
-      <div id="footer_wx_active"></div>
-    </div>
-    <div id="erweima_outer">
-      <div id="erweima"></div>
+      <div class="col-md-4 contact text-left">
+        <p class="foot_text">华北区 江经理 136-5720-1230</p>
+      </div>
+      <div class="col-md-4 contact text-left">
+        <p>西南区 张经理 159-2350-3857</p>
+      </div>
+    <div class="wx_box">
+      <div id="footer_wx_outer_active">
+        <div id="footer_wx_active"></div>
+      </div>
+      <div id="erweima_outer">
+        <div id="erweima"></div>
+      </div>
     </div>
   </div>
 
-  <div class="clear"></div>
-</footer>
-<div class="col-md-12" style="text-align:center;padding-bottom:20px;background-color: #474747;">
-  <!--<a class="bei an" target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备15043995号 (C)深圳萌萌车生活科技有限公司</a>-->
-  <div id="footer_outer">
-    <div id="footer"></div>
+  <div class="col-md-12" style="text-align:center;background-color: #474747;padding: 10px 0 10px;">
+    <!--<a class="bei an" target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备15043995号 (C)深圳萌萌车生活科技有限公司</a>-->
+    <div id="footer_outer">
+      <div id="footer"></div>
+    </div>
   </div>
-</div>
+  <div class="clear"></div>
+
+</footer>
 <script type="text/javascript" charset="utf-8">
   $('body').fadeOut(0).fadeIn(500);
 
@@ -79,6 +74,14 @@
     if(_isMobile != -1 ){
       $('.dl-box').hide();
       $('.download-btn').css('display','block');
+    }
+
+    if(location.pathname == '/articles' || location.pathname == '/question' || location.pathname == '/about'){
+      $('.footer').css({
+        position : 'fixed',
+        width : '100%',
+        bottom : 0
+      })
     }
 </script>
 </body>
