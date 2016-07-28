@@ -68,7 +68,7 @@
   <div class="col-sm-10">
     <% Push.get_editions.each do |value| %>
         <%= f.label value[1] %>
-        <%= check_box_tag "editions[]", :value => value[0], :class => 'list-selectable-checkbox', :checked => @push.editions.split(':').include?(value[0].to_s) %>
+        <%= check_box_tag "editions[]", :value => value[0], :class => 'list-selectable-checkbox', :checked => @push.editions.split(':').include?(value[0].to_s) if @push.editions.present? %>
         &nbsp;
     <% end %>
     <span class='help-block m-b-none'><%= error ? f.error_message_on(:edition) : "" %></span>
