@@ -1,5 +1,5 @@
 <div id='home' class="section container first">
-  <div id="myCarousel" class="carousel slide">
+  <div id="myCarousel" class="carousel slide" data-interval="5000">
     <!-- 轮播（Carousel）指标 -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -69,7 +69,16 @@
   </ul>
   <a class="download-btn">立即下载</a>
 </div>
-<!--<div id='invite' class="section container container_2 fifth">-->
-  <!--<div class="container">-->
-  <!--</div>-->
-<!--</div>-->
+<script>
+  $(function(){
+    $('#myCarousel').carousel('cycle');
+
+    $(document).on('mouseover','#myCarousel',function(){
+      $('#myCarousel').carousel('pause');
+    })
+
+    $(document).on('mouseout','#myCarousel',function(){
+      $('#myCarousel').carousel('cycle');
+    })
+  })
+</script>
