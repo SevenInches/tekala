@@ -22,7 +22,16 @@
 <div id='partner' class="section container container_2 sixth">
   <%=image_tag 'partner.png', :class => 'photo' %>
 </div>
-<!--<div id='invite' class="section container container_2 fifth">-->
-<!--<div class="container">-->
-<!--</div>-->
-<!--</div>-->
+<script>
+  $(function(){
+    $('#myCarousel').carousel('cycle');
+
+    $(document).on('mouseover','#myCarousel',function(){
+      $('#myCarousel').carousel('pause');
+    })
+
+    $(document).on('mouseout','#myCarousel',function(){
+      $('#myCarousel').carousel('cycle');
+    })
+  })
+</script>
