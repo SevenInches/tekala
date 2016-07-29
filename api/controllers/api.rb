@@ -140,8 +140,9 @@ Tekala::Api.controllers :v1 do
     post :feedbacks, :provides => [:html] do
       @feedback = Feedback.create(:user_id => session[:user_id].to_i, :content => params[:content])
       if @feedback
-        @success = true
-        render 'v1/static_pages/feedback'
+        render 'v1/static_pages/success'
+      else
+        redirect(:v1, :feedbacks)
       end
     end
 

@@ -97,7 +97,7 @@ class User
     if avatar
       CustomConfig::QINIUURL+avatar.to_s+'?imageView2/1/w/200/h/200'
     else
-      CustomConfig::HOST + '/images/icon180.png'
+      '/images/icon180.png'
     end
   end
 
@@ -109,7 +109,7 @@ class User
     if avatar
       CustomConfig::QINIUURL+avatar.to_s
     else
-      CustomConfig::HOST + '/images/icon180.png'
+      '/images/icon180.png'
     end
   end
 
