@@ -17,7 +17,7 @@ Tekala::Admin.controllers :ads do
       pid = AppLaunchAd.max(:id).nil? ? 1 : AppLaunchAd.max(:id)+1
       tempfile = params[:pic][:tempfile]
       ext = File.extname(params[:pic][:filename])
-      pic = send_picture(tempfile, ext)
+      pic = send_picture(tempfile, ext, 'qiniu_ad')
       a = upload_qiniu(pic, 'app_launch_ad_'+pid.to_s)
       @ad.cover_url =  CustomConfig::QINIUURL+ a['key'].to_s
     end
@@ -45,6 +45,14 @@ Tekala::Admin.controllers :ads do
     @ad = AppLaunchAd.get(params[:id])
     if @ad
       if @ad.update(params[:ad])
+        if params[:pic].present?
+          pid = AppLaunchAd.max(:id).nil? ? 1 : AppLaunchAd.max(:id)+1
+          tempfile = params[:pic][:tempfile]
+          ext = File.extname(params[:pic][:filename])
+          pic = send_picture(tempfile, ext, 'qiniu_ad')
+          a = upload_qiniu(pic, 'app_launch_ad_'+pid.to_s)
+          @ad.updata(:cover_url => CustomConfig::QINIUURL+ a['key'].to_s)
+        end
         flash[:success] = pat(:update_success, :model => 'AppLaunchAd', :id =>  "#{params[:id]}")
         redirect(url(:ads, :index))
       else

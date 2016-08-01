@@ -75,8 +75,7 @@ Tekala::Api.controllers :v1, :orders do
     end
   end
 
-  post :index, :provides => [:json] do 
-    env            = request.env
+  post :index, :provides => [:json] do
     quantity       = params[:quantity].to_i
 
     @order                = Order.new
@@ -86,7 +85,7 @@ Tekala::Api.controllers :v1, :orders do
     else
       {:status => :failure, :msg =>'教练不能为空'}.to_json
     end
-    if params[:train_field_id] && params[:train_field_id] != '0'
+    if params[:train_field_id].present?
       @order.train_field_id     = params[:train_field_id]
     else
       {:status => :failure, :msg =>'训练场不能为空'}.to_json
@@ -94,7 +93,7 @@ Tekala::Api.controllers :v1, :orders do
     @order.school_id        = @user.school_id
     @order.quantity       = quantity
     book_time             = "#{params[:book_date]} #{params[:book_time]}"
-    @book_info            = @user.can_book_order(env, @order, book_time)
+    @book_info            = @user.can_book_order(@order, book_time)
     @book_info.to_json
     if @book_info[:status] == :failure
       return @book_info.to_json

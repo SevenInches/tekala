@@ -100,16 +100,14 @@ class Order
   #推送给教练 是否接单
   def push_to_teacher
     #预订的日期
-    if status == 2
-      current_confirm = OrderConfirm.create(:order_id   => id,
-                                            :user_id    => user_id,
-                                            :teacher_id => teacher_id,
-                                            :user_id    => user_id,
-                                            :start_at   => book_time,
-                                            :end_at     => book_time + quantity.hour,
-                                            :status     => 0)
-      JPush::order_confirm(current_confirm.order_id)
-    end
+    current_confirm = OrderConfirm.create(:order_id   => id,
+                                          :user_id    => user_id,
+                                          :teacher_id => teacher_id,
+                                          :user_id    => user_id,
+                                          :start_at   => book_time,
+                                          :end_at     => book_time + quantity.hour,
+                                          :status     => 0)
+    JPush::order_confirm(current_confirm.order_id)
   end
 
   # 判断是否可退款

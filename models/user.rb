@@ -9,9 +9,9 @@ class User
   validates_presence_of  :password,   :if => :password_required
 
   property :id, Serial
-  property :id_card, String, :default => ''
+  property :id_card, String
 
-  property :crypted_password, String
+  property :crypted_password, String, :length => 70
   property :cookie, Text, :lazy => false
   property :name, String, :default => ''
   property :nickname, String, :default => ''
@@ -28,12 +28,12 @@ class User
   property :avatar, String #头像
 
   #{"未知" => 0, "C1" => 1, "C2" => 2}
-  property :exam_type, Integer, :default => 1                     #报名类型
+  property :exam_type, Integer, :default => 1, :auto_validation => false  #报名类型
 
   #{"注册" => 0, "已付费" => 1, "拍照" => 2, "体检" => 3, "录指纹" => 4, "科目一" => 5, "科目二" => 6, "科目三" => 7, "考长途" => 8, "科目四" => 9, "已拿驾照" => 10, "已离开" => 11, "已入网" => 12}
   property :status_flag, Integer, :default => 0                   #学员状态
 
-  property :motto, String, :default => ''                         #宣言
+  property :motto, String                                         #宣言
 
   property :last_login_at, DateTime                               #最后一次登录时间
   property :device, String                                        #设备
@@ -42,7 +42,7 @@ class User
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  property :type, Integer, :default => 0                          #学员类型
+  property :type, Integer, :default => 0                                         #学员类型
 
   property :address, String
 
@@ -55,7 +55,7 @@ class User
   property :login_count, Integer, :default => 0
 
   # 驾校ID
-  property :school_id, Integer, :default => 0
+  property :school_id, Integer, :auto_validation => false
 
   property :teacher_id, Integer
   property :train_field_id, Integer
@@ -66,7 +66,7 @@ class User
   property :cash_bank_card, String                               #付款银行卡号??
   property :signup_at, Date
 
-  property :product_id, Integer
+  property :product_id, Integer, :auto_validation => false
   
   has n, :orders
 
@@ -107,7 +107,7 @@ class User
 
   def avatar_url
     if avatar
-      CustomConfig::QINIUURL+avatar.to_s
+      avatar.to_s
     else
       '/images/icon180.png'
     end
@@ -411,7 +411,7 @@ class User
   #book_time:string 预约时间
   #
   ##########
-  def can_book_order(env, order, book_time)
+  def can_book_order(order, book_time)
     teacher     = order.teacher
     train_field = order.train_field
 

@@ -11,8 +11,8 @@ module Tekala
       str
     end
 
-    def send_picture(temp, ext)
-      target = "images/qiniu_ad#{ext}"
+    def send_picture(temp, ext, prefix)
+      target = "images/#{prefix}#{ext}"
       if File.open('public/'+target, 'wb') {|f| f.write temp.read }
         target
       end

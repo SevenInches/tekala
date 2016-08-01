@@ -1,0 +1,83 @@
+<% error = @user.errors.key?(:name) && @user.errors[:name].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '姓名', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:name) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @user.errors.key?(:mobile) && @user.errors[:mobile].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '手机', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :mobile, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:mobile) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @user.errors.key?(:status_flag) && @user.errors[:status_flag].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '阶段', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select :status_flag, :options => User::status_flag, :include_blank => true, :class => 'form-control' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:status_flag) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @user.errors.key?(:exam_type) && @user.errors[:exam_type].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '驾考类型', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select 'exam_type', :options => User.exam_type, :include_blank => true, :class => 'form-control' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:exam_type) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @user.errors.key?(:school_id) && @user.errors[:school_id].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '驾校', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select 'school_id', :options => School.schools, :include_blank => true, :class => 'form-control' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:school_id) : "" %></span>
+  </div>
+</div>
+<div class="hr-line-dashed"></div>
+
+<% error = @user.errors.key?(:product_id) && @user.errors[:product_id].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '产品', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select :product_id, :options => Product.collect {|p| [ p.name, p.id ]}, :include_blank => true, :class => 'form-control' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:product_id) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="form-group">
+  <label class="col-sm-2 control-label">头像</label>
+  <div class="col-sm-10">
+    <%= file_field_tag :avatar, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="form-actions">
+    <div class="col-sm-8 col-sm-offset-4">
+        <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+          &nbsp;
+       
+        <%= link_to pat(:cancel), url(:users, :index), :class => 'btn btn-default' %>
+    </div>
+  
+</div>
