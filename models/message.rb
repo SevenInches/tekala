@@ -13,4 +13,5 @@ class Message
 
   belongs_to :from_user, :model => 'User', :child_key =>'from_user_id'
   belongs_to :reply_user, :model => 'User', :child_key =>'reply_user_id'
+
 end
