@@ -2,7 +2,7 @@ node(:status) { 'success' }
 node(:total) { @total }
 child(@teachers => :data){
 
-	 attributes :id, :rate, :name, :profile, :driving_age, :teaching_age, :avatar_thumb_url, :avatar_url, :status, :status_flag, :exam_type, :tech_type, :exam_type_word, :date_setting_filter, :mobile, :subject, :subject_word
+	 attributes :id, :rate, :name, :profile, :driving_age, :teaching_age, :avatar_thumb_url, :avatar_url, :status, :status_flag, :exam_type, :tech_type, :exam_type_word, :date_setting_filter, :mobile
 	  attributes :age,        :if => lambda { |val| !val.age.nil? }
 	  attributes :sex,        :if => lambda { |val| !val.sex.nil? }
 	  attributes :price,      :if => lambda { |val| !val.price.nil?  }

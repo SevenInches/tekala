@@ -284,28 +284,6 @@ class Teacher
     vip == 1
   end
 
-  def subject_word
-    case subject 
-    when 2
-      '科目二'
-    when 3
-      '科目三'
-    else
-      '科目二/科目三'
-    end
-  end
-
-  def reset_subject
-    subject_arr = train_fields.map(&:subject).uniq
-    if subject_arr == [2]
-      code = 2
-    elsif subject_arr == [3]
-      code = 3
-    else
-      code = 0
-    end
-    self.update(:subject => code)
-  end
 
   #学员可预约时间
   def time_can_book 
