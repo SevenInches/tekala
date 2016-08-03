@@ -4,11 +4,11 @@ child(@comment => :data){
 	node(:is_reply ) { |val| val.reply_user_id.nil? ? false :  true  }
 	
 	child(:user) {
-		attributes :id, :name, :nickname, :avatar_url
+		attributes :id, :name, :nickname, :avatar_url, :avatar_thumb_url
 	}
 	
 	child(:reply_user => :reply_user){
-		attributes :id, :name, :nickname, :avatar_url
+		attributes :id, :name, :nickname, :avatar_url, :avatar_thumb_url
 	}
 
 }
