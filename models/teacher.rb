@@ -42,9 +42,6 @@ class Teacher
   property :wechat, String, :default => ''
   property :email,  String, :default => ''
   property :address, String, :default => ''
-  
-  #教练教学科目 0 科目二/科目三 2 科目二 3 科目三
-  property :subject, Integer, :default => 0
 
   property :price, Integer, :default => 119, :min => 0
   property :promo_price, Integer, :default => 119, :min => 0
@@ -114,7 +111,7 @@ class Teacher
   end 
 
   def avatar_url
-     avatar && avatar.url ? CustomConfig::HOST + avatar.url : CustomConfig::HOST + '/m/images/teacher_default_photo.png' 
+     avatar && avatar.url ? CustomConfig::HOST + avatar.url : '/images/teacher_default_photo.png'
   end
 
   
@@ -128,7 +125,6 @@ class Teacher
   end
 
   def has_hour
-
     hour = orders.all(:status => Order::pay_or_done, :type => Order::PAYTOTEACHER).sum(:quantity).to_i
     return hour-50 if id == 170
     return hour-30 if id == 278
@@ -199,23 +195,33 @@ class Teacher
   end
 
   def self.exam_type
-    {"未知" => 0, "C1" => 1, "C2" => 2, "C1/C2" => 3}
+    {"未知" => 1, "C1" => 2, "C2" => 3, "C1/C2" => 4}
   end
 
   def exam_type_word 
     case exam_type
-    when 1
-      return 'C1'
     when 2
-      return 'C2'
-    when 3
-      return 'C1/C2'
-    else
       return 'C1'
+    when 3
+      return 'C2'
+    when 4
+      return 'C1/C2'
     end
   end
 
- 
+  def self.status
+    {'待审核'=>1, '审核通过'=>2, '审核不通过'=>3, '报名' => 4}
+  end
+
+  def status_word
+    case status
+      when 1 then '待审核'
+      when 2 then '审核通过'
+      when 3 then '审核不通过'
+      when 4 then '报名'
+    end
+  end
+
   def self.authenticate(mobile, password)
     teacher = first(:conditions => ["lower(mobile) = lower(?)", mobile]) if mobile.present?
 
@@ -245,6 +251,7 @@ class Teacher
   def self.open
     return {'开' => 1, '关' => 0}
   end
+
   def self.tech_type
     return {'科目二/科目三' => 0, '科目二' => 1, '科目三' => 2}
   end
@@ -261,17 +268,6 @@ class Teacher
     end
   end
 
-
-  def tech_type_name
-    case self.tech_type
-    when 0
-      return '科目二/科目三'
-    when 1
-      return '科目二' 
-    when 2
-      return '科目三' 
-    end
-  end
   #更新旧数据
   def refresh_tech_hours
     if self.tech_hours != self.has_hour
@@ -358,5 +354,22 @@ class Teacher
   def add_log(type, content, target=nil)
     Log.add(self, school_id, type, content, target)
   end
-  
+
+  def self.status_reverse(status)
+    statuses = {'待审核'=>1, '审核通过'=>2, '审核不通过'=>3, '报名' => 4}
+    statuses[status] if statuses[status]
+  end
+
+  def self.tech_type_reverse(tech_type)
+    types = {'科目二/科目三' => 0, '科目二' => 1, '科目三' => 2}
+    types[tech_type] if types[tech_type]
+  end
+
+  def self.exam_type_reverse(exam_type)
+    if exam_type == 'C2'
+      2
+    else
+      1
+    end
+  end
 end

@@ -6,10 +6,8 @@ Tekala::Admin.controllers :users do
     @users = @users.all(:name.like => "%#{params[:name]}%")    if params[:name].present?
     @users = @users.all(:mobile => params[:mobile])            if params[:mobile].present?
     @users = @users.all(:school_id => params[:school_id])      if params[:school_id].present?
-    @users = @users.all(:product_id => params[:product_id])    if params[:product_id].present?
     @users = @users.all(:status_flag => params[:status_flag])  if params[:status_flag].present?
     @users = @users.all(:exam_type => params[:exam_type])      if params[:exam_type].present?
-
     @users  = @users.paginate(:page => params[:page], :per_page => 10)
     render 'users/index'
   end
@@ -105,14 +103,12 @@ Tekala::Admin.controllers :users do
     users = User.all(:id => ids)
 
     if users.destroy
-
       flash[:success] = pat(:destroy_many_success, :model => 'Users', :ids => "#{ids.to_sentence}")
     end
     redirect url(:users, :index)
   end
 
   get :export do
-
     @users  = User.all(:order => :id.desc)
     @users  = @users.all(:name.like => "%#{params[:name]}%")    if params[:name].present?
     @users  = @users.all(:mobile  => params[:mobile])           if params[:mobile].present?
@@ -154,7 +150,45 @@ Tekala::Admin.controllers :users do
     book.write "public/uploads/#{output_file_name}"
 
     redirect "/uploads/#{output_file_name}"
-
   end
+
+  post :inport do
+    if params['file'].present?
+      excel_name   = 'public/uploads/excels/'+params['file'][:filename]
+
+      File.open(excel_name, "w") do |f|
+        f.write(params['file'][:tempfile].read.force_encoding('utf-8'))
+      end
+
+      xlsx  = Roo::Excelx.new(excel_name)
+      sheet = xlsx.sheet('Worksheet1')
+
+      puts sheet.count
+      #遍历excel列
+      (2..(sheet.count)).each do |row|
+        name          = sheet.cell("B", row)
+        mobile        = sheet.cell("C", row).to_i
+        status_flag   = sheet.cell("D", row)
+        exam_type     = sheet.cell("E", row)
+        school        = sheet.cell("F", row)
+
+        #创建一个学员
+        user = User.first(:mobile => mobile)
+        if !user.present?
+          user = User.new(:mobile => mobile)
+        end
+        user.name        = name
+        user.exam_type   = User.exam_type_reverse(exam_type)
+        user.status_flag = User.status_flag_reverse(status_flag)
+        user.school_id   = School.first_school_id(school)
+        user.password    = '123456'
+        if user.save
+          flash[:success] = pat(:inport_success, :model => 'User')
+        end
+      end
+    end
+    redirect(url(:users, :index))
+  end
+
 
 end

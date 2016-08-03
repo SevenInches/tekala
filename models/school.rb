@@ -124,4 +124,9 @@ class School
     self.all.collect { |sch| [sch.name, sch.id] }
   end
 
+  def self.first_school_id(school)
+    current = self.first(:name.like => "%#{school}%")
+    current.id if current.present?
+  end
+
 end

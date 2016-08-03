@@ -6,4 +6,9 @@ class City
   property :name, String
   property :keys, Integer
 
+
+  def self.first_city_id(city)
+    current = self.first(:name.like => "%#{city}%")
+    current.id if current.present?
+  end
 end

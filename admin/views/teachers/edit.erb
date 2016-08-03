@@ -1,0 +1,35 @@
+
+<div class="hpanel">
+    <div class="panel-body">
+        <a class="small-header-action" href="">
+            <div class="clip-header">
+                <i class="fa fa-arrow-up"></i>
+            </div>
+        </a>
+
+        <div id="hbreadcrumb" class="pull-right m-t-lg">
+            <ol class="hbreadcrumb breadcrumb">
+                <li><%= link_to '主页', url(:base, :index)%></li>
+                <li><%= link_to '教练列表', url(:teachers, :index)%></li>
+                <li class="active">
+                    <span>编辑</span>
+                </li>
+            </ol>
+        </div>
+        <h2 class="font-light m-b-xs">
+            教练
+        </h2>
+        <small>教练编辑</small>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="hpanel">
+            <div class="panel-body">
+                <% form_for :teacher, url(:teachers, :update, :id => @teacher.id), :method => :put, :class => 'form-horizontal', :enctype =>'multipart/form-data', :style => 'margin:auto; width: 50%' do |f| %>
+                    <%= partial 'teachers/form', :locals => { :f => f } %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

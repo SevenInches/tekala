@@ -115,19 +115,20 @@ Tekala::Api.controllers :v1, :tweets do
   		else
         {:status => :failure}.to_json
   		end
-  	else
+    else
       @like = TweetLike.new
       @like.tweet_id = params[:tweet_id]
       @like.user_id  = @user.id
 
       if @like.save
-	      user_id = Tweet.get(params[:tweet_id]).user_id
 	      tweet   = Tweet.get(params[:tweet_id])
 	      tweet.updated_at = Time.now
-	      tweet.save
-	      JPush::tweet_like(params[:tweet_id], user_id)
-	      {:status => :success, :liked => true }.to_json
+	      if tweet.save
+	        JPush::tweet_like(params[:tweet_id], @user.id)
+	        {:status => :success, :liked => true }.to_json
+        end
       else
+        puts 'e'
       	{:status => :failure}.to_json
       end
   	end

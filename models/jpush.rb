@@ -370,8 +370,6 @@ class JPush
         resp=http.request(req)
         
         TeacherNotice.create(:teacher_id => order.teacher_id, :type => 'order_comment', :note => "学员评价了您，戳进来看看", :value => order.id )
-
-        
     end
 
   end #order_comment
@@ -454,9 +452,7 @@ class JPush
   def self.tweet_like(tweet_id, from_user_id)
     tweet = Tweet.get tweet_id
     return false if tweet.nil?
-
     if from_user_id != tweet.user_id
-
       current_alias = "user_"+tweet.user_id.to_s
 
       Net::HTTP.start(URL.host, URL.port,:use_ssl => URL.scheme == 'https') do |http|
@@ -475,7 +471,6 @@ class JPush
                 }'
 
         jpush << 'message={ "msg_content" : "你捕获了一个赞，戳进来看看", "title": "你捕获了一个赞，戳进来看看", "extras": {"type": "tweet_like", "msg": "你捕获了一个赞，戳进来看看", "tweet_id": "'+tweet.id.to_s+'" }
-
         }'
 
         jpush << 'options={"time_to_live":60,"apns_production" : '+APNS_PRODUCTION+'}'

@@ -1,0 +1,83 @@
+<% error = @teacher.errors.key?(:name) && @teacher.errors[:name].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '姓名', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:name) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @teacher.errors.key?(:mobile) && @teacher.errors[:mobile].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '手机', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.text_field :mobile, :class => 'form-control input-xlarge input-with-feedback' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:mobile) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @teacher.errors.key?(:status_flag) && @teacher.errors[:status_flag].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '状态', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select :status_flag, :options => Teacher.status, :include_blank => true, :class => 'form-control' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:status_flag) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @teacher.errors.key?(:exam_type) && @teacher.errors[:exam_type].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '驾考类型', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select 'exam_type', :options => Teacher.exam_type, :include_blank => true, :class => 'form-control' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:exam_type) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<% error = @teacher.errors.key?(:school_id) && @teacher.errors[:school_id].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '驾校', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select 'school_id', :options => School.schools, :include_blank => true, :class => 'form-control' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:school_id) : "" %></span>
+  </div>
+</div>
+<div class="hr-line-dashed"></div>
+
+<% error = @teacher.errors.key?(:tech_type) && @teacher.errors[:tech_type].count > 0 %>
+<div class="form-group <%= error ? 'has-error' : ''%>">
+  <%= f.label '教学科目', :class => 'col-sm-2 control-label' %>
+  <div class="col-sm-10">
+    <%= f.select :tech_type, :options => Teacher.tech_type, :include_blank => true, :class => 'form-control' %>
+    <span class='help-block m-b-none'><%= error ? f.error_message_on(:tech_type) : "" %></span>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="form-group">
+  <label class="col-sm-2 control-label">头像</label>
+  <div class="col-sm-10">
+    <%= file_field_tag :avatar, :class => 'form-control input-xlarge input-with-feedback' %>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+
+<div class="form-actions">
+    <div class="col-sm-8 col-sm-offset-4">
+        <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+          &nbsp;
+       
+        <%= link_to pat(:cancel), url(:teachers, :index), :class => 'btn btn-default' %>
+    </div>
+  
+</div>
