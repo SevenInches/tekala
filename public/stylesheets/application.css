@@ -49,6 +49,7 @@ ul li{
 .logo{
     float:left;
 }
+
 .nav-name{
     padding:0 1rem;
 }
@@ -573,7 +574,6 @@ ul li{
 }
 .download-btn:hover{
     text-decoration: none;
-
 }
 
 @media screen and (max-device-width: 414px) {

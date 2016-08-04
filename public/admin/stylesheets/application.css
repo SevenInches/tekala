@@ -325,6 +325,104 @@ footer p {
   margin: 5px auto;
   vertical-align: middle;
 }
+
+.btn-purple {
+  color: #ffffff;
+  background-color: #CC66CC;
+  border-color: #CC66CC;
+}
+
+.btn-purple:hover,
+.btn-purple:focus,
+.btn-purple:active,
+.btn-purple.active,
+.open .dropdown-toggle.btn-purple {
+  color: #ffffff;
+  background-color: #99389f;
+  border-color: #99389f;
+}
+
+.btn-purple:active,
+.btn-purple.active,
+.open .dropdown-toggle.btn-purple {
+  background-image: none;
+}
+
+.btn-purple.disabled,
+.btn-purple[disabled],
+fieldset[disabled] .btn-purple,
+.btn-purple.disabled:hover,
+.btn-purple[disabled]:hover,
+fieldset[disabled] .btn-purple:hover,
+.btn-purple.disabled:focus,
+.btn-purple[disabled]:focus,
+fieldset[disabled] .btn-purple:focus,
+.btn-purple.disabled:active,
+.btn-purple[disabled]:active,
+fieldset[disabled] .btn-purple:active,
+.btn-purple.disabled.active,
+.btn-purple[disabled].active,
+fieldset[disabled] .btn-purple.active {
+  background-color: #CC66CC;
+  border-color: #CC66CC;
+}
+
+.btn-grass {
+  color: #ffffff;
+  background-color: #8fcf00;
+  border-color: #8fcf00;
+}
+
+.btn-grass:hover,
+.btn-grass:focus,
+.btn-grass:active,
+.btn-grass.active,
+.open .dropdown-toggle.btn-grass {
+  color: #ffffff;
+  background-color: #7db500;
+  border-color: #7db500;
+}
+
+.btn-grass:active,
+.btn-grass.active,
+.open .dropdown-toggle.btn-grass {
+  background-image: none;
+}
+
+.btn-grass.disabled,
+.btn-grass[disabled],
+fieldset[disabled] .btn-grass,
+.btn-grass.disabled:hover,
+.btn-grass[disabled]:hover,
+fieldset[disabled] .btn-grass:hover,
+.btn-grass.disabled:focus,
+.btn-grass[disabled]:focus,
+fieldset[disabled] .btn-grass:focus,
+.btn-grass.disabled:active,
+.btn-grass[disabled]:active,
+fieldset[disabled] .btn-grass:active,
+.btn-grass.disabled.active,
+.btn-grass[disabled].active,
+fieldset[disabled] .btn-grass.active {
+  background-color: #8fcf00;
+  border-color: #8fcf00;
+}
+
+
+.btn-purple .caret,
+.btn-grass .caret
+{
+  border-top-color: #fff;
+}
+
+
+
+.dropup .btn-purple .caret,
+.dropup .btn-grass .caret
+{
+  border-bottom-color: #fff;
+}
+
 /* --- End Application::Base --- */
 /* Android Google Galaxy Nexus, add others! */
 @media (-webkit-device-pixel-ratio: 2) {

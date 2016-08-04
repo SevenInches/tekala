@@ -21,18 +21,19 @@ module Tekala
     #
 
     set :admin_model, 'Account'
+    set :login_page,  '/sessions/new'
 
     enable  :sessions
     disable :store_location
 
-    # access_control.roles_for :any do |role|
-    #   role.protect '/'
-    #   role.allow   '/sessions'
-    # end
-    #
-    # access_control.roles_for :admin do |role|
-    #   role.project_module :accounts, '/accounts'
-    # end
+    access_control.roles_for :any do |role|
+      role.protect '/'
+      role.allow   '/sessions'
+    end
+
+    access_control.roles_for :admin do |role|
+      role.project_module :accounts, '/accounts'
+    end
 
     # Custom error management 
     error(403) { @title = "Error 403"; render('errors/403', :layout => :error) }
