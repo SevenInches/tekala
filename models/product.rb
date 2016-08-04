@@ -5,6 +5,7 @@ class Product
   property :id, Serial
   property :name, String, :default => ''
   property :price, Integer, :default => 0
+  property :commission, Integer, :default => 0 # 代理佣金
   property :detail, Text, :default => ''
   property :deadline, Date                  #截止日期
   property :created_at, DateTime

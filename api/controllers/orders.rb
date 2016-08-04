@@ -119,6 +119,7 @@ Tekala::Api.controllers :v1, :orders do
     @order.status     = 2
     @order.theme      = @user.status_flag > 6 ? 7 : params[:theme]
     @order.book_time  = book_time
+    @order.commission = @order.product.commission.nil? ? 0 : @order.product.commission # 待测试，commission是代理佣金
 
     if @order.save
       @order.generate_order_no
