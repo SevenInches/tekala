@@ -56,8 +56,9 @@ class Channel
   def sales_this_month(channel_id)
     month_beginning = Date.strptime(Time.now.beginning_of_month.to_s, '%Y-%m-%d')
     this_month = month_beginning  .. Date.tomorrow
-    orders = Order.all(:created_at => this_month, :channel_id => channel_id, :status.gt => 1)
-    return orders ? orders.sum(:commision) : 0
+    pay_status = [2, 3, 4] # 2, 3, 4是付款了的状态。涉及到'经济伦理'
+    orders = Order.all(:created_at => this_month, :channel_id => channel_id, :status => pay_status)
+    return orders.blank? ? 0 : orders.sum(:commision)
   end
 
 end
