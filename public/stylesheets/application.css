@@ -37,6 +37,7 @@ ul li{
     top: 0;
     opacity:0.75;
     z-index: 99;
+    left: 0;
 }
 .inner-top{
     overflow: hidden;
@@ -313,6 +314,7 @@ ul li{
     opacity: .4;
     left: 0;
     top:0;
+    filter:alpha(opacity=40);
 }
 
 
@@ -406,6 +408,7 @@ ul li{
     left: -25px;
     opacity: 0;
     transition: opacity .5s ease;
+    filter:alpha(opacity=0);
 }
 
 #erweima {
@@ -426,16 +429,16 @@ ul li{
 
 #footer_wx_outer_active:hover{
     opacity: 1;
+    filter:alpha(opacity=100);
 }
 
 /*download*/
 .dl-box{
     list-style: none;
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
     margin: 50px auto 0 ;
     padding: 0;
+    overflow: hidden;
+    display: inline-block;
 }
 
 .dl-box li:hover>div:nth-child(1){
@@ -459,30 +462,32 @@ ul li{
     transition: opacity .5s ease;
     position: relative;
     cursor: pointer;
+    float: left;
+    margin-right: 10px;
 }
 
 .icon-student {
-    background: url('../images/sprite_dl.png') -0px -720px no-repeat;
+    background: url('../images/sprite_dl1.png') -160px -0px no-repeat;
     width: 100%;
     height: 100%;
 }
 .icon-teacher {
-    background: url('../images/sprite_dl.png') -0px -240px no-repeat;
+    background: url('../images/sprite_dl1.png') -0px -240px no-repeat;
     width: 100%;
     height: 100%;
 }
 .icon-shop {
-    background: url('../images/sprite_dl.png') -0px -480px no-repeat;
+    background: url('../images/sprite_dl1.png') -0px -480px no-repeat;
     width: 100%;
     height: 100%;
 }
 .icon-channel {
-    background: url('../images/sprite_dl.png') -0px -0px no-repeat;
+    background: url('../images/sprite_dl1.png') -160px -720px no-repeat;
     width: 100%;
     height: 100%;
 }
 .icon-drivingSchool {
-    background: url('../images/sprite_dl.png') -0px -960px no-repeat;
+    background: url('../images/sprite_dl1.png') -0px -960px no-repeat;
     width: 100%;
     height: 100%;
 }
@@ -498,18 +503,28 @@ ul li{
     margin-left: -75px;
     transition: all .3s ease;
     opacity: 0;
+    filter:alpha(opacity=0);
 }
 .QRcode-student {
-    background: url('../images/sprite_dl.png') -0px -1200px no-repeat;
+    background: url('../images/sprite_dl1.png') -0px -1200px no-repeat;
     width: 100%;
     height: 100%;
 }
 .QRcode-teacher {
-    background: url('../images/sprite_dl.png') -150px -1200px no-repeat;
+    background: url('../images/sprite_dl1.png') -150px -1200px no-repeat;
     width: 100%;
     height: 100%;
 }
-
+.QRcode-shop {
+    background: url('../images/sprite_dl1.png') -0px -1350px no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.QRcode-school {
+    background: url('../images/sprite_dl1.png') -150px -1350px no-repeat;
+    width: 100%;
+    height: 100%;
+}
 /*背景*/
 .bg-student,.bg-techer,.bg-shop,.bg-channel,.bg-drivingSchool {
     width: 100%;
@@ -518,26 +533,27 @@ ul li{
     transition: opacity .3s ease;
     top: 0;
     opacity: 0;
+    filter:alpha(opacity=0);
 }
 .bg-student{
-    background: url('../images/sprite_dl.png') -160px -480px no-repeat;
+    background: url('../images/sprite_dl1.png') -160px -480px no-repeat;
 }
 .bg-techer {
-    background: url('../images/sprite_dl.png') -160px -240px no-repeat;
+    background: url('../images/sprite_dl1.png') -160px -240px no-repeat;
 }
 .bg-shop {
-    background: url('../images/sprite_dl.png') -160px -0px no-repeat;
+    background: url('../images/sprite_dl1.png') -0px -720px no-repeat;
     width: 100%;
     height: 100%;
 }
 
 .bg-channel {
-    background: url('../images/sprite_dl.png') -160px -720px no-repeat;
+    background: url('../images/sprite_dl1.png') -0px -0px no-repeat;
     width: 100%;
     height: 100%;
 }
 .bg-drivingSchool {
-    background: url('../images/sprite_dl.png') -160px -960px no-repeat;
+    background: url('../images/sprite_dl1.png') -160px -960px no-repeat;
     width: 100%;
     height: 100%;
 }

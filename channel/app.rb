@@ -1,10 +1,8 @@
-# -*- encoding : utf-8 -*-
 module Tekala
-  class Api < Padrino::Application
+  class Channel < Padrino::Application
     register Padrino::Mailer
     register Padrino::Helpers
-    enable  :sessions
+    enable :sessions
     Rabl.register!
-    
   end
 end
