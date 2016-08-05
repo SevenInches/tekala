@@ -42,6 +42,7 @@ Tekala::Channel.controllers :v1 do
   end
 
   get :index, :provides => [:json] do
+    @channel_id = @channel.id
     render 'channel'
   end
 
