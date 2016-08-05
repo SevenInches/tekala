@@ -92,7 +92,7 @@ Tekala::App.controllers :m do
     @title    = '班别列表'
     @tab_nav  = 'hidden'
     @logout   = false
-    @back    = params[:back].present? ? params[:back] : url(:m, :products)
+    @back     = params[:back].present? ? params[:back] : url(:m, :products)
     school    = School.get(params[:id])
     if school.present?
       @products = school.products.all(:show => true)
@@ -108,7 +108,6 @@ Tekala::App.controllers :m do
     @logout  = false
     @product = Product.get(params[:id])
     @back    = params[:back].present? ? params[:back] : url(:m, :products)
-    puts session[:user_id]
     @user    = User.get(session[:user_id]) if session[:user_id].present?
     render 'm/detail', :layout => 'layouts/m_application'
   end
@@ -257,12 +256,16 @@ Tekala::App.controllers :m do
   end
 
   get :index, :map => '/m/:id' do
-    @school = School.get(params[:id])
-    if @school.present?
-      session[:school_id] = @school.id
+    if params[:id].present? && params[:id].to_i>0
+      @school = School.get(params[:id])
+      if @school.present?
+        session[:school_id] = @school.id
+      end
+      @title    = '特快拉 -- '+@school.name
+      render 'm/index', :layout => 'layouts/m_application'
+    else
+      halt 404
     end
-    @title    = '特快拉 -- '+@school.name
-    render 'm/index', :layout => 'layouts/m_application'
   end
 
 end
