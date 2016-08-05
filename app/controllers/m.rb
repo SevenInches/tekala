@@ -92,7 +92,7 @@ Tekala::App.controllers :m do
     @title    = '班别列表'
     @tab_nav  = 'hidden'
     @logout   = false
-    @back     = params[:back] || url(:m, :index)
+    @back    = params[:back].present? ? params[:back] : url(:m, :products)
     school    = School.get(params[:id])
     if school.present?
       @products = school.products.all(:show => true)
@@ -107,7 +107,7 @@ Tekala::App.controllers :m do
     @tab_nav = 'hidden'
     @logout  = false
     @product = Product.get(params[:id])
-    @back    = params[:back] || url(:m, :products)
+    @back    = params[:back].present? ? params[:back] : url(:m, :products)
     puts session[:user_id]
     @user    = User.get(session[:user_id]) if session[:user_id].present?
     render 'm/detail', :layout => 'layouts/m_application'
@@ -142,8 +142,7 @@ Tekala::App.controllers :m do
     @tab_nav   = 'hidden'
     @title     = '个人详情'
     @logout    = false
-    @back       = params[:back] || url(:member, :index)
-
+    @back    = params[:back].present? ? params[:back] : url(:member, :index)
     key        = "20150607mm"
     @token     = Digest::MD5.hexdigest("#{@user.id}#{key}")
     @has_learn = (up = @user.user_plan) ? up.exam_two + up.exam_three  : 0
