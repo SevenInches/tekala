@@ -44,6 +44,7 @@ Tekala::Channel.controllers :v1 do
     render 'channel'
   end
 
+  # 这里功能错了
   get :income_details, :provides => [:json] do
     if params[:start_date].present? && params[:end_date].present?
       start_date = params[:start_date].to_date
