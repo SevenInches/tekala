@@ -126,6 +126,10 @@ Tekala::Api.controllers :v1, :orders do
       channel = @order.channel
       channel.total_earn += @order.commission
       channel.save
+      
+      agency = Agency.first(:channel_id => channel.id, :product_id => @order.product.id)
+      agency.amount += 1
+      agency.save
     end
 
     if @order.save
