@@ -23,7 +23,6 @@ class Channel
   property :total_earn, Integer, :default => 0
   property :signup_count, Integer, :default => 0
   property :pay_count, Integer, :default => 0
-  property :sales_this_month, Integer, :default => 0
 
   has n, :orders
 
@@ -52,6 +51,13 @@ class Channel
 
   def conversion_rate
     signup_count == 0 ? 0 : pay_count.to_f / signup_count
+  end
+
+  def sales_this_month(channel_id)
+    pay_status = [2, 3, 4]
+    month_beginning = Date.strptime(Time.now.beginning_of_month.to_s, '%Y-%m-%d')
+    this_month = month_beginning .. Date.tomorrow
+    return Order.all(:created_at => this_month, :status => pay_status, :channel_id => channel_id).blank? ? 0 : Order.all(:created_at => this_month, :status => pay_status, :channel_id => channel_id).sum(:commission)
   end
 
 end

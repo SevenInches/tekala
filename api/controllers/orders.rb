@@ -121,6 +121,13 @@ Tekala::Api.controllers :v1, :orders do
     @order.book_time  = book_time
     @order.commission = @order.product.commission.nil? ? 0 : @order.product.commission # 待测试，commission是代理佣金
 
+    # 下面这个 if 待测试，付款后代理人的收入增加
+    if @order.channel
+      channel = @order.channel
+      channel.total_earn += @order.commission
+      channel.save
+    end
+
     if @order.save
       @order.generate_order_no
       @order.push_to_teacher #推送通知教练

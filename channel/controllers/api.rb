@@ -44,17 +44,17 @@ Tekala::Channel.controllers :v1 do
     render 'channel'
   end
 
-  # 这里功能错了
   get :income_details, :provides => [:json] do
+    pay_status = [2, 3, 4]
     if params[:start_date].present? && params[:end_date].present?
       start_date = params[:start_date].to_date
       end_date = params[:end_date].to_date
       date_range = start_date .. end_date
-      @orders = Order.all(:created_at => date_range, :channel_id => @channel.id, :status.gt => 1)
+      @orders = Order.all(:created_at => date_range, :channel_id => @channel.id, :status => pay_status)
     else
       month_beginning = Date.strptime(Time.now.beginning_of_month.to_s, '%Y-%m-%d')
       this_month = month_beginning .. Date.tomorrow
-      @orders = Order.all(:created_at => this_month, :channel_id => @channel.id, :status.gt => 1)
+      @orders = Order.all(:created_at => this_month, :channel_id => @channel.id, :status => pay_status)
     end
 
     if @orders
