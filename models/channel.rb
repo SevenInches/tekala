@@ -33,7 +33,7 @@ class Channel
   end
 
   def self.authenticate(phone, password)
-    school = first(:conditions => ["lower(contact_phone) = lower(?)", phone]) if phone.present?
+    school = first(:conditions => ["lower(contact_phone) = lower(?)", phone]) if phone.present?d
     school && school.has_password?(password) ? school : nil
   end
 
