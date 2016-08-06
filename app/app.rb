@@ -12,8 +12,8 @@ module Tekala
     end
 
     get :index do 
-      @path = 'index'
-      render 'index'
+      @path = 'robot'
+      render 'robot'
     end
 
     get :about do
@@ -34,8 +34,8 @@ module Tekala
       render 'price'
     end
 
-    get :robot do
-      render 'robot'
+    get :saas do
+      render 'index'
     end
 
     get :question do
