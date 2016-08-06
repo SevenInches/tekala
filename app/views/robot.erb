@@ -7,17 +7,27 @@
     </ol>
     <!-- 轮播（Carousel）项目 -->
     <div class="carousel-inner">
-      <div class="item banner-img2 active">
-        <%=image_tag 'banner-text-1.png', :class => 'banner-text' ,:style => 'margin-left: -442px;margin-top: -55px;'%>
+      <div class="item banner-img2 active" >
+        <!--<%=image_tag 'banner-text-1.png', :class => 'banner-text' ,:style => 'margin-left: -442px;margin-top: -55px;'%>-->
+        <h1 style="color: #fff">特快拉,全球首家无人教学机器人</h1>
+        <h2>查分定位 3D演示 实时纠错 学考合一 AEB自动刹车</h2>
       </div>
       <div class="item banner-img1">
-        <%=image_tag 'banner-text-2.png', :class => 'banner-text' ,:style => 'margin-left: -289px;margin-top: -177px;'%>
+        <!--<%=image_tag 'banner-text-2.png', :class => 'banner-text' ,:style => 'margin-left: -289px;margin-top: -177px;'%>-->
+        <h1>帮助驾校和教练高效管理</h1>
+        <h2 style="margin-bottom: 210px;">提供学员报名、预约、教练管理的一站式服务</h2>
+        <h2>学员轻松约 教练省心接</h2>
+        <h2>学车有效率,特快拉</h2>
       </div>
     </div>
   </div>
 </div>
-<div>
-  <video class="publicity-video" loop="" preload="metadata" preload controls>
+<div class="vedio-box">
+  <div class="vedio-mask"></div>
+  <%=image_tag 'play.png', :class => 'robot-btn play'%>
+  <%=image_tag 'pause.png', :class => 'robot-btn pause'%>
+  <%=image_tag 'close.png', :class => 'robot-btn-close'%>
+  <video class="publicity-video" id="video" preload="metadata" autoplay muted>
     <source src="http://7xlvuu.com1.z0.glb.clouddn.com/Tekala.mp4">
   </video>
 </div>
@@ -38,5 +48,31 @@
     $(document).on('mouseout','#myCarousel',function(){
       $('#myCarousel').carousel('cycle');
     })
+
+    var video = document.getElementById('video'),
+        $mask = $('.vedio-mask'),
+        $playBtn = $('.robot-btn.play'),
+        $pauseBtn = $('.robot-btn.pause'),
+        $closeBtn = $('.robot-btn-close');
+
+
+    $(document).on('click','.robot-btn.play', function () {
+      video.currentTime = 0;
+      video.muted = false;
+      video.controls = true;
+      $playBtn.hide();
+      $mask.hide();
+      $closeBtn.show();
+    });
+
+    $(document).on('click','.robot-btn-close', function () {
+      video.currentTime = 0;
+      video.muted = true;
+      video.controls = false;
+      $playBtn.show();
+      $mask.show();
+      $closeBtn.hide();
+    });
+
   })
 </script>
