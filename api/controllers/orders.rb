@@ -121,12 +121,15 @@ Tekala::Api.controllers :v1, :orders do
     @order.status     = 2
     @order.theme      = @user.status_flag > 6 ? 7 : params[:theme]
     @order.book_time  = book_time
-    @order.commission = @order.product.commission.nil? ? 0 : @order.product.commission # 待测试，commission是代理佣金
 
-    # 下面这个 if 待测试，付款后代理人的收入增加，下午改动此处！
-    if @order.channel
+    # 下面这个 if 待测试，付款后代理人的收入增加，付款人数增加
+    if @order.user.channel
+      @order.commission = @order.product.commission.nil? ? 0 : @order.product.commission # 待测试，commission是代理佣金
+
+      @order.channel = @order.user.channel
       channel = @order.channel
       channel.total_earn += @order.commission
+      channel.pay_count += 1
       channel.save
       
       agency = Agency.first(:channel_id => channel.id, :product_id => @order.product.id)

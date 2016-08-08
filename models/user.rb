@@ -69,7 +69,7 @@ class User
   property :product_id, Integer, :auto_validation => false
 
   property :password, String
-  property :channel_id, String
+  property :channel_id, Integer
 
   has n, :orders
 
