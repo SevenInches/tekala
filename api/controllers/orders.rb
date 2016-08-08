@@ -14,9 +14,11 @@ Tekala::Api.controllers :v1, :orders do
     #筛选类型
     tab = params[:tab]
     if tab
-      case tab 
+      case tab
+      when 'yet'
+        @orders = @orders.all(:status => [1, 2])
       when 'learning'
-        @orders = @orders.all(:status => [1, 2, 4])
+        @orders = @orders.all(:status => 4)
       when 'done'
         @orders = @orders.all(:status => 3)
       when 'cancel'
