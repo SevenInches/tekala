@@ -86,6 +86,7 @@ class User
   belongs_to :teacher
 
   belongs_to :train_field
+
   belongs_to :channel
 
   # Callbacks

@@ -3,8 +3,9 @@ Tekala::Api.controllers :v1 do
 	register WillPaginate::Sinatra
   	enable :sessions
     current_url = '/api/v1'
-    before :except => [:launch_ad, :login, :logout, :unlogin, :signup, :history, :questions, :feedbacks, :complain] do
+    before :except => [:launch_ad, :login, :logout, :unlogin, :signup, :history, :questions] do
       @user = User.get(session[:user_id])
+      $school_remark = 'school_' + @user.school_id.to_s
       redirect_to("#{current_url}/unlogin") if @user.nil?
     end
 
@@ -140,6 +141,7 @@ Tekala::Api.controllers :v1 do
     post :complain, :provides => [:html] do
       @complain = Complain.create(:user_id => session[:user_id].to_i, :content => params[:content])
       if @complain
+        $redis.lpush $school_remark, '学员投诉'
         render 'v1/static_pages/success'
       else
         redirect(:v1, :complain)
@@ -154,6 +156,7 @@ Tekala::Api.controllers :v1 do
     post :feedbacks, :provides => [:html] do
       @feedback = Feedback.create(:user_id => session[:user_id].to_i, :content => params[:content])
       if @feedback
+        $redis.lpush $school_remark, '意见反馈'
         render 'v1/static_pages/success'
       else
         redirect(:v1, :feedbacks)

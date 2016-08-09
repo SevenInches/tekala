@@ -5,6 +5,7 @@ Tekala::Api.controllers :v1, :tweets do
 
   before :except => [:login, :logout, :unlogin, :signup, :hospitals] do 
     @user = User.get(session[:user_id])
+    $school_remark = 'school_' + @user.school_id.to_s
     redirect_to("#{current_url}/unlogin") if @user.nil?
   end
 
@@ -29,7 +30,8 @@ Tekala::Api.controllers :v1, :tweets do
     if !params[:content].nil? && @tweet.save
 	    (1..9).each do |i|
 	    	TweetPhoto.create(:tweet_id => @tweet.id, :user_id => @user.id, :url => params["photo#{i}"]) if params["photo#{i}"]  
-	    end
+      end
+      $redis.lpush $school_remark, '学员动态'
 	  	render 'v1/tweet'
 	  else 
 	  	{:status => :failure, :msg => @tweet.errors.full_messages.join(',')}.to_json
