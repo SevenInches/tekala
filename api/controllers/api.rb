@@ -3,7 +3,7 @@ Tekala::Api.controllers :v1 do
 	register WillPaginate::Sinatra
   	enable :sessions
     current_url = '/api/v1'
-    before :except => [:launch_ad, :login, :logout, :unlogin, :signup, :hospitals, :history, :city_list, :questions, :exam_info, :feedbacks] do
+    before :except => [:launch_ad, :login, :logout, :unlogin, :signup, :history, :questions, :feedbacks, :complain] do
       @user = User.get(session[:user_id])
       redirect_to("#{current_url}/unlogin") if @user.nil?
     end
@@ -132,6 +132,20 @@ Tekala::Api.controllers :v1 do
       {:uptoken => token_item.value, :expired => (token_item.updated_at+50.minute).strftime('%Y-%m-%d %H:%I:%S') }.to_json
     end
 
+    get :complain, :provides => [:html] do
+      render 'v1/static_pages/complain'
+    end
+
+    #投诉建议
+    post :complain, :provides => [:html] do
+      @complain = Complain.create(:user_id => session[:user_id].to_i, :content => params[:content])
+      if @complain
+        render 'v1/static_pages/success'
+      else
+        redirect(:v1, :complain)
+      end
+    end
+
     get :feedbacks, :provides => [:html] do
       render 'v1/static_pages/feedback'
     end
@@ -151,7 +165,6 @@ Tekala::Api.controllers :v1 do
       render 'v1/static_pages/about'
     end
 
-
     #个人的历史进度
     get :history, :provides => [:html] do 
       key      = "20150607mm"
@@ -161,10 +174,6 @@ Tekala::Api.controllers :v1 do
       else
         render 'v1/static_pages/history'
       end
-    end
-
-    get :city_list, :provides => [:json] do 
-      JSON.parse(city_list).to_json
     end
 
     get :questions, :provides => [:json] do 
@@ -178,8 +187,8 @@ Tekala::Api.controllers :v1 do
       render 'v1/app_configs'
     end
 
-  get :ad, :provides => [:json] do
-    @ad = Ad.first(:order=> :pv.desc, :city_id => params[:city])
-    render 'v1/ad'
-  end
+    get :ad, :provides => [:json] do
+      @ad = Ad.first(:order=> :pv.desc, :city_id => params[:city])
+      render 'v1/ad'
+    end
 end
