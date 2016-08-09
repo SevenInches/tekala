@@ -16,12 +16,12 @@ class Agency
   property :school_logo, String
   property :product_name, String
 
+  # 这里写的不是很好，也许应该是 before :create ？
   before :save, :create_agency_fast
 
   # 创建一个Agency对象只需要输入channel_id和product_id
-  # 这里有个BUG: Encoding::CompatibilityError: incompatible character encodings: ASCII-8BIT and UTF-8
   def create_agency_fast
-    self.amount = 0
+    # self.amount = 0
 
     product = Product.first(:id => product_id)
     self.commission = product.commission.nil? ? 0 : product.commission

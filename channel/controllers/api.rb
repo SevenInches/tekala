@@ -60,7 +60,7 @@ Tekala::Channel.controllers :v1 do
       @orders = Order.all(:created_at => this_month, :channel_id => @channel.id, :status => pay_status)
     end
 
-    if @orders
+    unless @orders.blank?
       render 'income_details'
     else
       {:status => :failure, :msg => '这样的日期范围里没有收入'}.to_json

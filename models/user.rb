@@ -69,6 +69,7 @@ class User
   property :product_id, Integer, :auto_validation => false
 
   property :password, String
+  property :channel_id, Integer
 
   has n, :orders
 
@@ -85,6 +86,7 @@ class User
   belongs_to :teacher
 
   belongs_to :train_field
+  belongs_to :channel
 
   # Callbacks
   before :save, :encrypt_password

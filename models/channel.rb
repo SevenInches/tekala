@@ -25,6 +25,7 @@ class Channel
   property :pay_count, Integer, :default => 0
 
   has n, :orders
+  has n, :users
 
   before :save, :encrypt_password
 
