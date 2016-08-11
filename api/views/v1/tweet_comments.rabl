@@ -10,5 +10,4 @@ child(@comments => :data){
 	child(:reply_user => :reply_user){
 		attributes :id, :name, :nickname, :avatar_url, :avatar_thumb_url
 	}
-
 }

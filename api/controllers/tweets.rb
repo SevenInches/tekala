@@ -74,11 +74,8 @@ Tekala::Api.controllers :v1, :tweets do
     @comments = TweetComment.all(:tweet_id => params[:tweet_id], :order => :created_at.asc, :limit =>20)
     @comments = @comments.all(:city => params[:city]) if params[:city]
     @comments = @comments.all(:order => :created_at.asc, :id.gt => last_id, :limit =>20) if last_id > 0
-    
     @total    = TweetComment.count
-
   	render 'v1/tweet_comments'
-
   end
 
   post :comments, :map => 'v1/tweets/:tweet_id/comments', :provides => [:json] do 
@@ -97,10 +94,9 @@ Tekala::Api.controllers :v1, :tweets do
   	else
   		{:status => :failure}.to_json
   	end
-
   end
 
-  delete :comment, :map => 'v1/tweets/:tweet_id/comments/:comment_id', :provides => [:json], :provides => [:json] do
+  delete :comment, :map => 'v1/tweets/:tweet_id/comments/:comment_id', :provides => [:json] do
     @comment = TweetComment.first(:id => params[:comment_id], :user_id => @user.id, :tweet_id => params[:tweet_id] )
     if @comment
       { :status => @comment.destroy ? :success : :failure }.to_json
