@@ -43,6 +43,8 @@ class School
   has n, :finance_reports   # 财务报告
   has n, :logs  # 操作日志
   has n, :products #产品
+  has n, :users
+  has n, :teachers
 
   before :save, :encrypt_password
 
@@ -127,6 +129,32 @@ class School
   def self.first_school_id(school)
     current = self.first(:name.like => "%#{school}%")
     current.id if current.present?
+  end
+
+  def consult_count
+    0
+  end
+
+  def student_count
+    users.count
+  end
+
+  def teacher_count
+    teachers.count
+  end
+
+  def car_count
+    0
+  end
+
+  def shop_count
+    shops.count
+  end
+
+  def last_7days_signup_count
+    start_date  = Date.today - 6.days
+    end_date    = Date.today
+    users.all(:created_at =>(start_date..end_date)).count
   end
 
 end

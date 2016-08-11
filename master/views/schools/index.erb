@@ -1,0 +1,49 @@
+<div class="container-fluid" style="margin-bottom:20px">
+  <div class="row">
+    <div class="col-lg-1">
+      <form action="">
+        <input type="text" name="name" value="<%= params[:name] %>">
+        <input type="submit" value="搜索">
+      </form>
+    </div>
+  </div>
+
+</div>
+<div class="col-lg-6" >
+  <section class="panel" style="height:320px">
+    <table class="table table-condensed" style="height:280px">
+      <thead>
+      <tr style="padding:0">
+        <th>ID</th>
+        <th>驾校名称</th>
+        <th>咨询人数</th>
+        <th>学员数</th>
+        <th>教练数</th>
+        <th>车辆数</th>
+        <th>门店数</th>
+        <th>最近七天报名人数</th>
+        <th>注册时间</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @schools.each do |school| %>
+          <tr>
+            <td><%=school.id%></td>
+            <td><%=school.name%></td>
+            <td><%=school.consult_count%></td>
+            <td><%=school.student_count%></td>
+            <td><%=school.teacher_count%></td>
+            <td><%=school.car_count%></td>
+            <td><%=school.shop_count%></td>
+            <td><%=school.last_7days_signup_count%></td>
+            <td><%=school.created_at%></td>
+            <td></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <p style="padding:10px">每页5条</p>
+  </section>
+</div>
+<%= will_paginate @schools,renderer: WillPaginate::ViewHelpers::BoostrapLinkRenderer %>

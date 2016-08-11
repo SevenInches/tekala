@@ -22,6 +22,7 @@ end
 
 Padrino.mount('Tekala::Api',   	  :app_file => Padrino.root('api/app.rb')).to('/api')
 Padrino.mount('Tekala::Admin',   	:app_file => Padrino.root('admin/app.rb')).to('/tekala_admin')
+Padrino.mount('Tekala::Master',   	:app_file => Padrino.root('master/app.rb')).to('/tekala_master')
 Padrino.mount('Tekala::Channel',   	:app_file => Padrino.root('channel/app.rb')).to('/channel')
 Padrino.mount('Tekala::TestForStudent',   	:app_file => Padrino.root('test_for_student/app.rb')).to('/test_for_student')
 Padrino.mount('Tekala::App',   	  :app_file => Padrino.root('app/app.rb')).to('/') #官网
