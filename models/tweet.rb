@@ -42,21 +42,6 @@ class Tweet
     tweet_likes.count
   end
 
-  def city_word 
-    case city 
-    when '027'
-      '武汉'
-    when '023'
-      '重庆'
-    else
-      '深圳'
-    end
-  end
-  
-  def self.city
-    return {'深圳' => '0755', '武汉' => '027', '重庆' => '023'}
-  end
-
 
   # 添加日志
   def add_log(type, content, target=nil)

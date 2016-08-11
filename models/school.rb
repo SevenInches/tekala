@@ -23,7 +23,6 @@ class School
   property :note, String
   property :created_at, DateTime
   property :updated_at, DateTime
-  property :crypted_password, String, :length => 70
 
   #新增字段
   #property :contact_user, String
