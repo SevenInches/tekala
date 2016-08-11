@@ -190,14 +190,14 @@
                 currentDetail.hide();
                 $(this).closest('.job-item').removeClass('active');
                 $('.ab-container').css('height',bodyHeight);
-                //footer.css('position','fixed');
+                footer.css('position','fixed');
             }else{
                 details.hide();
                 currentDetail.show();
                 items.removeClass('active');
                 $(this).closest('.job-item').addClass('active');
                 $('.ab-container').css('height','auto');
-                //footer.css('position','relative');
+                footer.css('position','relative');
             }
         });
     })
