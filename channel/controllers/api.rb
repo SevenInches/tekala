@@ -78,7 +78,7 @@ Tekala::Channel.controllers :v1 do
     return {:status => :failure, :msg => '返回URL失败'}.to_json if agency.nil?
 
     product_id = agency.product_id
-    url += product_id.to_s + '?back=http://main/m/11/products?back=http://main/m/11' # 事实上，不太清楚back是否应该是如此，此处需要多加交流//与理解
+    url += product_id.to_s + "?back=http://main/m/11/products?back=http://main/m/11?channel_id=#{agency.channel_id}" # 事实上，不太清楚back是否应该是如此，此处需要多加交流//与理解
     return {:status => :success, :url => url, :msg => '返回URL成功'}.to_json
   end
 
