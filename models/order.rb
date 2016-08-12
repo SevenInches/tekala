@@ -444,15 +444,15 @@ class Order
 
   # 这样写不是很好.. //2016.8.4
   def user_name(user_id)
-    User.first(:id => user_id).name
+    user_id.nil? ? "获取失败，可能这个order并未标明学员名字" : User.first(:id => user_id).name
   end
 
   def school_name(school_id)
-    School.first(:id => school_id).name
+    school_id.nil? ? "获取失败，可能这个order并未标明驾校名字" : School.first(:id => school_id).name
   end
 
   def product_name(product_id)
-    Product.first(:id => product_id).name
+    product_id.nil? ? "获取失败，可能这个order并未标明产品名字" : Product.first(:id => product_id).name
   end
 
 end
