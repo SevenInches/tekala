@@ -1,0 +1,129 @@
+<div class="container-fluid" style="margin-bottom:20px">
+  <div class="row">
+    <div class="col-lg-2">
+      <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">增加推送</button>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6" >
+      <section class="panel">
+        <table class="table table-condensed table-striped">
+          <thead>
+          <tr style="padding:0">
+            <th>ID</th>
+            <th>推送内容</th>
+            <th>渠道</th>
+            <th>条件</th>
+            <th>触达数</th>
+            <th>添加时间</th>
+            <th>推送时间</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @pushs.each do |item| %>
+              <tr>
+                <td><%= item.id %></td>
+                <td><%= item.message %></td>
+                <td><%= item.channel_id %></td>
+                <td><%=  %></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="">重新发送</a></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <p style="padding:10px">每页20条</p>
+      </section>
+    </div>
+  </div>
+  <div class="row">
+    <%= will_paginate @pushs,renderer: WillPaginate::ViewHelpers::BoostrapLinkRenderer %>
+  </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"
+                data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          添加推送
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form action="" class="form-horizontal">
+          <div class="form-group"  style="margin-bottom: 10px;">
+            <div class="col-sm-12">
+              <p class="">推送内容(70字以内)</p>
+              <textarea class="form-control" rows="3" name="content" maxlength="70" required></textarea>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 10px">
+            <label class="col-sm-2 control-label">推送渠道:</label>
+            <label class="radio-inline">
+              <input type="radio" id="" value="all" name="channel" required> 全部
+            </label>
+            <label class="radio-inline">
+              <input type="radio" id="" value="student" name="channel" required> 学员
+            </label>
+            <label class="radio-inline">
+              <input type="radio" id="" value="teacher" name="channel" required> 教练
+            </label>
+            <label class="radio-inline">
+              <input type="radio" id="" value="school" name="channel" required> 驾校
+            </label>
+            <label class="radio-inline">
+              <input type="radio" id="" value="shop" name="channel" required> 门店
+            </label>
+            <label class="radio-inline">
+              <input type="radio" id="" value="channer" name="channel" required> 渠道
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">推送条件:</label>
+            <div class="col-sm-8">
+              <div class="row">
+                <input type="text" class="form-control" id="" placeholder="" name="condition" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">推送时间:</label>
+            <div class="col-sm-8">
+              <div class="row">
+                <input type="text" class="form-control" id="" placeholder="" name="time" required>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                data-dismiss="modal">关闭
+        </button>
+        <button type="button" class="btn btn-success">
+          提交更改
+        </button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal -->
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    var $form = $('form')
+    $(document).on('click','.modal-footer .btn-success',function(){
+      $form.submit();
+    });
+  })
+</script>

@@ -1,0 +1,35 @@
+
+<div class="hpanel">
+    <div class="panel-body">
+        <a class="small-header-action" href="">
+            <div class="clip-header">
+                <i class="fa fa-arrow-up"></i>
+            </div>
+        </a>
+
+        <div id="hbreadcrumb" class="pull-right m-t-lg">
+            <ol class="hbreadcrumb breadcrumb">
+                <li><%= link_to '主页', url(:base, :index)%></li>
+                <li><%= link_to '驾校列表', url(:schools, :index)%></li>
+                <li class="active">
+                    <span>编辑</span>
+                </li>
+            </ol>
+        </div>
+        <h2 class="font-light m-b-xs">
+            驾校
+        </h2>
+        <small>驾校编辑</small>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="hpanel">
+            <div class="panel-body">
+                <% form_for :school, url(:schools, :update, :id => @school.id), :method => :put, :class => 'form-horizontal', :style => 'margin:auto; width: 50%' do |f| %>
+                    <%= partial 'schools/form', :locals => { :f => f } %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

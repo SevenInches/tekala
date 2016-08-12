@@ -6,16 +6,12 @@
   <meta name="description" content="">
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
-
-  <title>Horizontal menu Page</title>
-
+  <title> <%= @title %> </title>
   <%= stylesheet_link_tag '../../master/css/style', '../../master/css/style-responsive' %>
-
+  <%= javascript_include_tag '../../master/js/jquery-1.10.2.min' %>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
-  <%= javascript_include_tag '../../master/js/html5shiv','../../master/js/respond.min' %>
-  <script src="./master/js/html5shiv.js"></script>
-  <script src="./master/js/respond.min.js"></script>
+  <%= javascript_include_tag '../../master/js/html5shiv','../../master/js/respond.min','../../master/js/jquery-1.10.2.min' %>
   <![endif]-->
 </head>
 
@@ -34,26 +30,17 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="index.html">
-          <img src="images/logo.png" alt="" style="height: 30px;">
+          <%=image_tag '../../images/logo.png', :style => 'height: 30px;margin-top: 6px;' %>
         </a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li ><a href="index.html">首页</a></li>
-          <li class="active"><a href="#">驾校管理</a></li>
-          <li class="">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">推送管理</a>
-            <!-- <ul class="dropdown-menu">
-                <li><a href="#">General</a></li>
-                <li><a href="#">Buttons</a></li>
-                <li><a href="#">Widget</a></li>
-                <li><a href="#">Slider</a></li>
-                <li><a href="#">Many More</a></li>
-            </ul> -->
-          </li>
-          <li><a href="#">广告管理</a></li>
+          <li><a href="">首页</a></li>
+          <li><a href="schools">驾校管理</a></li>
+          <li><a href="push">推送管理</a></li>
+          <li><a href="advertisement">广告管理</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -86,15 +73,10 @@
 </section>
 
 <!-- Placed js at the end of the document so the pages load faster -->
-<script src="./master/js/jquery-1.10.2.min.js"></script>
-<script src="./master/js/jquery-ui-1.9.2.custom.min.js"></script>
-<script src="./master/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="./master/js/bootstrap.min.js"></script>
-<script src="./master/js/modernizr.min.js"></script>
-<script src="./master/js/jquery.nicescroll.js"></script>
-
+<%= javascript_include_tag '../../master/js/jquery-ui-1.9.2.custom.min','../../master/js/jquery-migrate-1.2.1.min',
+    '../../master/js/bootstrap.min','../../master/js/modernizr.min','../../master/js/jquery.nicescroll','../../master/js/scripts'
+%>
 <!--common scripts for all pages-->
-<script src="./master/js/scripts.js"></script>
 
 </body>
 </html>

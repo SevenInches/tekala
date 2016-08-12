@@ -1,18 +1,18 @@
 <div class="container-fluid" style="margin-bottom:20px">
   <div class="row">
-    <form action="" class="form-horizontal" role="form">
-      <div class="col-sm-4">
-        <input type="text" name="name" value="<%= params[:name] %>" class="form-control">
-      </div>
-      <input type="submit" value="搜索" class="btn btn-success">
-     </form>
+    <div class="col-lg-2">
+      <form action="">
+        <input type="text" name="name" value="<%= params[:name] %>">
+        <input type="submit" value="搜索">
+      </form>
+    </div>
   </div>
 </div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-6" >
-      <section class="panel">
-        <table class="table table-condensed table-striped">
+      <section class="panel" style="height:320px">
+        <table class="table table-condensed" style="height:280px">
           <thead>
           <tr style="padding:0">
             <th>ID</th>
@@ -39,7 +39,7 @@
                 <td><%=school.shop_count%></td>
                 <td><%=school.last_7days_signup_count%></td>
                 <td><%=school.created_at%></td>
-                <td><a href="">推送</a>|<a href="">广告</a>|<a href="">修改资料</a>|<a href="">禁用</a></td>
+                <td></td>
               </tr>
           <% end %>
           </tbody>

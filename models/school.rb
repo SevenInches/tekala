@@ -35,15 +35,16 @@ class School
 
   belongs_to :city
 
-  has n, :maps  # 训练场数字地图
-  
-  has n, :shops # 门店
+  has n, :maps              # 训练场数字地图
+  has n, :shops             # 门店
   has n, :finances          # 财务记录
   has n, :finance_reports   # 财务报告
-  has n, :logs  # 操作日志
-  has n, :products #产品
-  has n, :users
-  has n, :teachers
+  has n, :logs              # 操作日志
+  has n, :products          # 产品
+  has n, :users             # 用户
+  has n, :teachers          # 教练
+  has n, :cars              # 车辆
+  has n, :shops             # 门店
 
   before :save, :encrypt_password
 
@@ -143,7 +144,7 @@ class School
   end
 
   def car_count
-    0
+    cars.count
   end
 
   def shop_count
