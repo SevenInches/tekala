@@ -67,8 +67,8 @@ Tekala::App.controllers :m do
       @user.password = params[:password]
       @user.save
 
-      @channel_id = params[:channel_id] if params[:channel_id].present? # 识别由谁代理 //2016.8.12
-      if @channel_id
+      if params[:channel_id].present? # 识别由谁代理 //2016.8.12
+        @channel_id = params[:channel_id].to_i
         channel = Channel.get @channel_id
         channel.signup_count += 1 # # 代理的注册人数增加
         channel.save
@@ -126,12 +126,6 @@ Tekala::App.controllers :m do
       @user.product_id = @product.id
       @order = @user.create_signup(@product)
 
-      @channel_id = params[:channel_id] if params[:channel_id].present? # 识别由谁代理 //2016.8.12
-      if @channel_id
-        @order.channel_id = @channel_id
-        @order.save
-      end
-
       @user.city_id = @order.city_id
       @user.save
 
@@ -142,6 +136,13 @@ Tekala::App.controllers :m do
       # rescue
       # end
     end
+
+    if params[:channel_id].present? # 识别由谁代理 //2016.8.12
+      channel_id = params[:channel_id].to_i
+      @order.channel_id = channel_id
+      @order.save
+    end
+
     redirect_to(url(:m, :orders))
   end
 
