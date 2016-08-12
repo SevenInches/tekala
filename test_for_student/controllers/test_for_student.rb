@@ -1,27 +1,24 @@
 require 'json'
 require 'rest-client'
 
-Tekala::TestForStudent.controllers :test_for_student  do
-  enable :sessions
+Tekala::TestForStudent.controllers :test_for_student do
+  	enable :sessions
 
-  get :index, :map => '/' do
-    $arr ||= []
-    $arr << params[:id] unless params[:id].nil?
-    render 'index'
-  end
+  	get :index, :map => '/' do
+  		$arr ||= []
+   		render 'index'
+  	end
 
-  post :login_with_valid_account, :map => '/login_with_valid_account' do
-		mobile = '13094442075'
+  	# 据说登录的post URL要存于一个变量
+  	post :login_with_valid_account, :map => '/login_with_valid_account' do
+		mobile = '1309444207'
 		password = '123456'
-		str =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
+		@status =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
 						:mobile => mobile,
 						:password => password
-                                                 	  ))
-		@status = str["status"]
+                                                 	  ))["status"]
 
-		if @status == "success"
-			$arr << 1
-		end
+		$arr << 'login_with_valid_account' if @status == "success"
 
 		redirect_to '/test_for_student/login_with_an_account_not_registered'
 	end
@@ -29,15 +26,12 @@ Tekala::TestForStudent.controllers :test_for_student  do
 	get :login_with_an_account_not_registered, :map => '/login_with_an_account_not_registered' do
 		mobile = '1309444207'
 		password = '123456'
-		str =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
+		@status =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
 						:mobile => mobile,
 						:password => password
-                                                 	  ))
-		@status = str["status"]
+                                                 	  ))["status"]
 
-		if @status == "failure"
-			$arr << 2
-		end
+		$arr << 'login_with_an_account_not_registered' if @status == "failure"
 
 		redirect_to '/test_for_student/login_with_a_wrong_password'
 	end
@@ -45,43 +39,37 @@ Tekala::TestForStudent.controllers :test_for_student  do
 	get :login_with_a_wrong_password, :map => '/login_with_a_wrong_password' do
 		mobile = '13094442075'
 		password = '12345'
-		str =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
+		@status =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
 						:mobile => mobile,
 						:password => password
-                                                 	  ))
-		@status = str["status"]
+                                                 	  ))["status"]
 
-		if @status == "failure"
-			$arr << 3
-		end
+		$arr << 'login_with_a_wrong_password' if @status == "failure"
 
 		redirect_to '/test_for_student/logout'
 	end
 
 	get :logout, :map => '/logout' do
-		if $arr.include? 1
+		if $arr.include? 'login_with_valid_account'
 			@status = JSON.parse(RestClient.get('https://www.tekala.cn/api/v1/logout'))["status"]
-			if @status == "success"
-				$arr << 4
-			end
+			$arr << 'logout' if @status == "success"
 
 			redirect_to '/test_for_student/get_questions'
 		else
+			$arr << 'over'
 			redirect_to '/test_for_student'
 		end
 	end
 
 	get :get_questions, :map => '/get_questions' do
 		@status = JSON.parse(RestClient.get('https://www.tekala.cn/api/v1/questions'))["status"]
-		if @status == 'success'
-			$arr << 5
-		end
+		$arr << 'get_questions' if @status == 'success'
 
 		redirect_to '/test_for_student/edit_user'
 	end
 
 	get :edit_user, :map => '/edit_user' do
-		@user = User.get(1)
+		@user = User.first
 		if @user
 			@user.name = '莱'
 			@user.nickname = '科'
@@ -89,9 +77,7 @@ Tekala::TestForStudent.controllers :test_for_student  do
 			@user.address = '向南瑞峰'
 			@user.avatar = 'https://ruby-china-files.b0.upaiyun.com/user/avatar/16154.jpg!lg'
 
-			if @user.save
-				$arr << 6
-			end
+			$arr << 'edit_user' if @user.save
 		end
 
 		redirect_to '/test_for_student/reset_password_with_wrong_origin_password'
@@ -101,9 +87,8 @@ Tekala::TestForStudent.controllers :test_for_student  do
 		@user = User.first(:mobile => '13094442075')
 
 		if @user
-			unless User.authenticate_by_mobile('13094442075', '12345')
-				$arr << 7
-			end
+			$arr << 'reset_password_with_wrong_origin_password' unless User.authenticate_by_mobile('13094442075', '12345')
+
 			redirect_to '/test_for_student/reset_password_with_right_origin_password'
 		else
 			@user = User.new
@@ -123,7 +108,7 @@ Tekala::TestForStudent.controllers :test_for_student  do
 				@user.password = '1234567'
 
 				if @user.save
-					$arr << 8
+					$arr << 'reset_password_with_right_origin_password'
 					@user.password = '123456'
 					@user.save
 				end
@@ -138,9 +123,7 @@ Tekala::TestForStudent.controllers :test_for_student  do
 			@user = User.first(:mobile => '13094442075')
 			if @user
 				@feedback = Feedback.first_or_create(:user_id => @user.id, :content =>'lalalala')
-				if @feedback
-					$arr << 9
-				end
+				$arr << 'post_feedbacks' if @feedback
 			end
 		rescue =>e			
 		end
@@ -151,9 +134,7 @@ Tekala::TestForStudent.controllers :test_for_student  do
 	get :get_schools, :map => '/get_schools' do
 		@status =  JSON.parse(RestClient.get('https://www.tekala.cn/api/v1/schools'))["status"]
 
-		if @status == 'success'
-			$arr << 10
-		end
+		$arr << 'get_schools' if @status == 'success'
 
 		redirect_to '/test_for_student/get_class'
 	end
@@ -161,18 +142,14 @@ Tekala::TestForStudent.controllers :test_for_student  do
 	get :get_class, :map => '/get_class' do
 		@status =  JSON.parse(RestClient.get('https://www.tekala.cn/api/v1/school/11'))["status"]
 
-		if @status == 'success'
-			$arr << 11
-		end
+		$arr << 'get_class' if @status == 'success'
 
 		redirect_to '/test_for_student/get_tweets'
 	end
 
 	get :get_tweets, :map => '/get_tweets' do
 		@tweets = Tweet.all(:order => :updated_at.desc, :limit =>20)
-		if @tweets
-			$arr << 12
-		end
+		$arr << 'get_tweets' if @tweets
 
 		redirect_to '/test_for_student/show_comments'
 	end
@@ -181,9 +158,7 @@ Tekala::TestForStudent.controllers :test_for_student  do
 		tweet_id = Tweet.first.id
 		@comments = TweetComment.all(:tweet_id => tweet_id, :order => :created_at.asc, :limit =>20)
 
-		if @comments
-			$arr << 13
-		end
+		$arr << 'show_comments' if @comments
 
 		redirect_to '/test_for_student/post_comment'
 	end
@@ -196,9 +171,7 @@ Tekala::TestForStudent.controllers :test_for_student  do
 		  	@comment.content = 'lalala'
 		  	@comment.tweet_id = tweet_id
 		  	@comment.user_id = @user.id
-		  	if @comment.save
-			      $arr << 14
-			end
+		  	$arr << 'post_comment' if @comment.save
 	  	end
 
 		redirect_to '/test_for_student/post_tweets'
@@ -215,7 +188,7 @@ Tekala::TestForStudent.controllers :test_for_student  do
 			if @tweet.save
 				TweetPhoto.create(:tweet_id => @tweet.id, :user_id => @user.id, :url => 'https://ruby-china-files.b0.upaiyun.com/user/avatar/16154.jpg!lg')
 
-				$arr << 15
+				$arr << 'post_tweets'
 			end
 		end
 
@@ -228,17 +201,13 @@ Tekala::TestForStudent.controllers :test_for_student  do
 
 		if @user
 			@like = TweetLike.first(:tweet_id => tweet_id, :user_id => @user.id)
-			if @like
-				@like.destroy
-			end
+			@like.destroy if @like
 
 			@like = TweetLike.new
 			@like.tweet_id = tweet_id
 	      		@like.user_id  = @user.id
 
-	      		if @like.save
-	      			$arr << 16
-	      		end
+	      		$arr << 'post_like_when_not_liked' if @like.save
       		end
 
       		redirect_to '/test_for_student/delete_like_when_liked'
@@ -251,17 +220,13 @@ Tekala::TestForStudent.controllers :test_for_student  do
 		if @user
 			@like = TweetLike.first(:tweet_id => tweet_id, :user_id => @user.id)
 			if @like
-				if @like.destroy
-					$arr << 17
-				end
+				$arr << 'delete_like_when_liked' if @like.destroy
 			else
 				@like = TweetLike.new
 				@like.tweet_id = tweet_id
 				@like.user_id = @user.id
 
-				if @like.save
-					redirect_to '/test_for_student/delete_like_when_liked'
-				end
+				redirect_to '/test_for_student/delete_like_when_liked' if @like.save
 			end
       		end
 
@@ -278,9 +243,7 @@ Tekala::TestForStudent.controllers :test_for_student  do
 				@tweet.tweet_photos.destroy
 		      		@tweet.tweet_comments.destroy
 		      		@tweet.tweet_likes.destroy
-		      		if @tweet.destroy
-		      			$arr << 18
-		      		end
+		      		$arr << 'delete_my_tweet' if @tweet.destroy
 			end
 		end
 
@@ -293,10 +256,10 @@ Tekala::TestForStudent.controllers :test_for_student  do
 		if @user
 			@comment = TweetComment.first(:user_id => @user.id)
 
-			if @comment.destroy
-		      		$arr << 19
-			end
+			$arr << 'delete_my_comment' if @comment.destroy
 		end
+
+		$arr << 'over'
 
 		redirect_to '/test_for_student'
 	end

@@ -1,10 +1,12 @@
 Tekala::TestForStudent.helpers do
   
-  def result(id)
-    if $arr.include? id
+  def result(status)
+    if $arr.include? status
       "测试成功"
-    else
+    elsif ! $arr.include? 'over'
       "还未测试成功"
+    else
+      "此处测试失败"
     end
   end
 
