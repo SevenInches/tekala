@@ -67,7 +67,7 @@ Tekala::Channel.controllers :v1 do
     end
   end
 
-  get :weChat_share, :provides => [:json], :map => '/v1/acting_for/:agency_id/weChat_share' do
+  get :share, :provides => [:json], :map => '/v1/acting_for/:agency_id/share' do
     # http://www.tekala.cn/m/product/24?back=http%3A%2F%2Fmain%2Fm%2F11%2Fproducts%3Fback%3Dhttp%253A%252F%252Fmain%252Fm%252F11
     # http://www.tekala.cn/m/product/24?back=http://main/m/11/products?back=http://main/m/11
     # http://www.tekala.cn/m/product/24?back=24?back=24
