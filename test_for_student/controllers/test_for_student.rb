@@ -11,12 +11,10 @@ Tekala::TestForStudent.controllers :test_for_student do
 
   	# 据说登录的post URL要存于一个变量
   	post :login_with_valid_account, :map => '/login_with_valid_account' do
-		mobile = '1309444207'
+		mobile = '13094442075'
 		password = '123456'
-		@status =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
-						:mobile => mobile,
-						:password => password
-                                                 	  ))["status"]
+		login_url = 'https://www.tekala.cn/api/v1/login'
+		@status =  JSON.parse(RestClient.post(login_url, :mobile => mobile, :password => password))["status"]
 
 		$arr << 'login_with_valid_account' if @status == "success"
 
@@ -26,10 +24,8 @@ Tekala::TestForStudent.controllers :test_for_student do
 	get :login_with_an_account_not_registered, :map => '/login_with_an_account_not_registered' do
 		mobile = '1309444207'
 		password = '123456'
-		@status =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
-						:mobile => mobile,
-						:password => password
-                                                 	  ))["status"]
+		login_url = 'https://www.tekala.cn/api/v1/login'
+		@status =  JSON.parse(RestClient.post(login_url, :mobile => mobile, :password => password))["status"]
 
 		$arr << 'login_with_an_account_not_registered' if @status == "failure"
 
@@ -39,10 +35,8 @@ Tekala::TestForStudent.controllers :test_for_student do
 	get :login_with_a_wrong_password, :map => '/login_with_a_wrong_password' do
 		mobile = '13094442075'
 		password = '12345'
-		@status =  JSON.parse(RestClient.post('https://www.tekala.cn/api/v1/login',
-						:mobile => mobile,
-						:password => password
-                                                 	  ))["status"]
+		login_url = 'https://www.tekala.cn/api/v1/login'
+		@status =  JSON.parse(RestClient.post(login_url, :mobile => mobile, :password => password))["status"]
 
 		$arr << 'login_with_a_wrong_password' if @status == "failure"
 
@@ -51,7 +45,8 @@ Tekala::TestForStudent.controllers :test_for_student do
 
 	get :logout, :map => '/logout' do
 		if $arr.include? 'login_with_valid_account'
-			@status = JSON.parse(RestClient.get('https://www.tekala.cn/api/v1/logout'))["status"]
+			logout_url = 'https://www.tekala.cn/api/v1/logout'
+			@status = JSON.parse(RestClient.get(logout_url))["status"]
 			$arr << 'logout' if @status == "success"
 
 			redirect_to '/test_for_student/get_questions'
@@ -62,7 +57,8 @@ Tekala::TestForStudent.controllers :test_for_student do
 	end
 
 	get :get_questions, :map => '/get_questions' do
-		@status = JSON.parse(RestClient.get('https://www.tekala.cn/api/v1/questions'))["status"]
+		get_questions_url = 'https://www.tekala.cn/api/v1/questions'
+		@status = JSON.parse(RestClient.get(get_questions_url))["status"]
 		$arr << 'get_questions' if @status == 'success'
 
 		redirect_to '/test_for_student/edit_user'
