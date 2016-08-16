@@ -16,13 +16,13 @@ Tekala::Api.controllers :v1, :orders do
     if tab
       case tab
       when 'yet'
-        @orders = @orders.all(:status => [1, 2])
+        @orders = @orders.all(:status => 1)
       when 'learning'
-        @orders = @orders.all(:status => 4)
+        @orders = @orders.all(:status => 2)
       when 'done'
-        @orders = @orders.all(:status => 3)
+        @orders = @orders.all(:status => [3, 4])
       when 'cancel'
-        @orders = @orders.all(:status => [5, 6, 7])
+        @orders = @orders.all(:status => [5, 6])
       end
     end
     
@@ -45,8 +45,7 @@ Tekala::Api.controllers :v1, :orders do
   end
 
   #客户端下订单前请求该接口看看是否需要付款 付款多少钱
-  post :book_info, :provides => [:json] do 
-
+  post :book_info, :provides => [:json] do
     teacher = Teacher.get params[:teacher_id]
     return {:status => :failure, :msg => '未能找到该教练'}.to_json if teacher.nil?
 
@@ -54,11 +53,6 @@ Tekala::Api.controllers :v1, :orders do
     total_hours       = @user.user_plan.exam_two_standard + @user.user_plan.exam_three_standard
 
     current_hours     = @user.user_plan.exam_two + @user.user_plan.exam_three
-
-
-    #当前所学学时是否大于限制的总学时
-
-    #pay_money = quantity* teacher.price if teacher.price.present?
 
     {:status => :success, :data => {:standard_hours => total_hours, :current_hours => current_hours, :quantity => quantity  } }.to_json
   end
@@ -78,8 +72,7 @@ Tekala::Api.controllers :v1, :orders do
   end
 
   post :index, :provides => [:json] do
-    quantity       = params[:quantity].to_i
-
+    quantity              = params[:quantity].to_i
     @order                = Order.new
     @order.user_id        = @user.id
     if params[:teacher_id].present?
@@ -93,7 +86,7 @@ Tekala::Api.controllers :v1, :orders do
       {:status => :failure, :msg =>'训练场不能为空'}.to_json
     end
     @order.school_id        = @user.school_id
-    @order.quantity       = quantity
+    @order.quantity         = quantity
     book_time             = "#{params[:book_date]} #{params[:book_time]}"
     @book_info            = @user.can_book_order(@order, book_time)
     @book_info.to_json
@@ -118,7 +111,7 @@ Tekala::Api.controllers :v1, :orders do
     @order.latitude   = params[:latitude]
     @order.city_id       = @user.city_id
     @order.subject    = "#{@order.quantity}小时学车费"
-    @order.status     = 2
+    @order.status     = 1
     @order.theme      = @user.status_flag > 6 ? 7 : params[:theme]
     @order.book_time  = book_time
 

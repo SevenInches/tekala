@@ -4,15 +4,12 @@ class Order
   #before_status after save 保存之前的状态
   attr_accessor :before_status
 
-  #VIP订单 1 普通订单 0,2 需要支付给教练 0, 无需支付给教练 2
-  VIPTYPE       = 1
-  NORMALTYPE    = [1,2]
-  PAYTOTEACHER  = 1
-  FREETOTEACHER = 2
-
-  STATUS_CANCEL     = 7   # 取消状态
-  STATUS_REFUNDING  = 5   # 退款中
-  STATUS_DONE       = 3    # 已经完成
+  STATUS_CANCEL     = 6   # 已经取消
+  STATUS_REFUSE     = 5   # 已拒单
+  STATUS_DONE       = 4   # 已经完成
+  STATUS_STUDY      = 3   # 待评价
+  STATUS_RECEIVE    = 2   # 已接单
+  STATUS_PAY        = 1   # 等待接单
   #补贴
 
   C2_ALLOWANCE = 10
@@ -49,8 +46,7 @@ class Order
   
   property :ch_id, String #ping++ ch_id
 
-
-  #'未支付'=>1, '已预约'=>2, '已完成'=>3, '已确定'=>4, '退款中' => 5, '已退款' => 6, '取消'=>7
+  #'待接单'=>1, '已接单'=>2, '待评价'=>3, '已完成'=>4, '已拒单' => 5, '已取消' => 6
   property :status, Integer, :default => 1
 
   #'练车预约订单' => 1, '打包订单' => 2, '活动预付款' => 3
@@ -112,11 +108,6 @@ class Order
                                           :status     => 0)
     JPush::order_confirm(current_confirm.order_id)
   end
-
-  # 判断是否可退款
-  def can_refund?
-    ([2,3,4].include? status) && pay_at != nil
-  end
   
   def generate_order_no
     year    = Time.now.year
@@ -144,65 +135,53 @@ class Order
     sec     = "%02d" % Time.now.sec
     user_id = self.user_id
     rands   = rand(9999)
-    return "#{year}#{month}#{day}#{hour}#{min}#{sec}#{rands}".to_s
+    return "#{year}#{month}#{day}#{hour}#{min}#{sec}#{rands}#{user_id}".to_s
   end
 
   def self.get_status
-    return {'未支付'=>'1', '等待接单'=>'2', '已确定'=>'4', '已完成'=>'3', '退款中'=>'5', '退款'=>'6', '取消'=>'7'}
+    return {'待接单'=>1, '已接单'=>2, '待评价'=>3, '已完成'=>4, '已拒单' => 5, '已取消' => 6}
   end
 
   def set_status
     case self.status
-    when 1
-      return '未支付'
-    when 2
-      return '等待接单'
-    when 3
-      return '已完成'
-    when 4
-      return '已确定'
-    when 5
-      return '退款中'
-    when 6
-      return '已退款'
-    when 7
-      return '已取消'
+      when 1
+        return '待接单'
+      when 2
+        return '已接单'
+      when 3
+        return '待评价'
+      when 4
+        return '已完成'
+      when 5
+        return '已拒单'
+      when 6
+        return '已取消'
     end
   end
 
   def status_word
     case self.status
-    when 1
-      return '待支付'
-    when 2
-      return '等待接单'
-    when 3
-      if can_comment && !user_has_comment
-       return '待评价'
-      else
-       return '已完成'
-      end
-    when 4
-      return '已接单'
-    when 5
-      return '退款中'
-    when 6
-      return '已退款'
-    when 7
-      if accept_status == 2
-        return '教练繁忙'
-      else
+      when 1
+        return '待接单'
+      when 2
+        return '已接单'
+      when 3
+        return '待评价'
+      when 4
+        return '已完成'
+      when 5
+        return '已拒单'
+      when 6
         return '已取消'
-      end
     end
   end
 
   def can_comment
-    status == 3 && book_time < Time.now && teacher_comment.nil?
+    status == STATUS_STUDY && book_time < Time.now && teacher_comment.nil?
   end
 
   def teacher_can_comment
-    return  status == 3 && user_comment.nil? ? true : false
+    status == STATUS_STUDY && user_comment.nil? ? true : false
   end
 
   def user_has_comment
@@ -231,24 +210,11 @@ class Order
   end
 
   def self.pay_or_done 
+    [1,2,3,4]
+  end
+
+  def self.receive_or_done
     [2,3,4]
-  end
-
-  def self.normal_order
-    [1,2]
-  end
-
-  def self.signup_status
-    {'未支付' => 1, '已支付' => 2, '退款中'=> 5, '退款'=> 6, '取消'=> 7}
-  end
-
-  def self.unpay 
-    Order.all(:status => 1)
-  end
-
-  #是否显示包过班优惠款
-  def vip_promotion_money_disply
-    user.type == 1 && discount.to_i > 0 && user_coupon.nil?
   end
 
   #教练是否已经接单
@@ -292,8 +258,7 @@ class Order
     theme_arr = theme.split(',')   
     theme_arr.each do |t|
       word_arr << theme_name(t.to_i) if !t.empty?
-    end 
-
+    end
     word_arr
   end
 
@@ -323,10 +288,10 @@ class Order
   end
 
   def self.pay_become_finish
-    o = Order.all(:status =>4, :type => Order::NORMALTYPE)
+    o = Order.all(:status =>STATUS_RECEIVE)
     o.each do |order|
       if order.book_time + (order.quantity).hours < Time.now
-        order.status = 3
+        order.status = STATUS_STUDY
         order.save
       end
     end
@@ -349,29 +314,17 @@ class Order
     false
   end
 
-  #   可否取消订单
-  def can_cancel?
-    status == 1 || status == 2 || status == 4
-  end
-
   # 取消订单操作
   def cancel
     # 未付款订单
-    return if status == 7
-    return set_status_cancel if status == 1 || status == 2
-    #cancel_book_order
+    return if status == STATUS_REFUSE || status == STATUS_CANCEL
+    return set_status_cancel if status == STATUS_PAY
   end
 
   # 将订单改变取消状态
   def set_status_cancel
     update(:status => STATUS_CANCEL, :cancel_at=> Time.now)
   end
-
-  # 将订单改为退款中状态
-  def set_status_refunding
-    update(:status => STATUS_REFUNDING, :cancel_at=> Time.now)
-  end
-
 
   # 取消练车订单
   def cancel_book_order
@@ -384,38 +337,8 @@ class Order
         JPush.order_cancel id         # 推送取消订单的消息
       end
     else
-      return false
+      false
     end
-  end
-
-  # 退款
-  def return_money
-    update(:status=>STATUS_REFUNDING)
-
-    return if amount <= 0
-
-    if pay_channel == 'alipay' #支付宝支付的
-      content = "#{user.name.to_s}学员(手机:#{user.mobile})申请支付宝退款，金额:#{amount}"
-      OptMessage.money(content)
-      set_status_refunding
-      return
-    end
-
-    CustomConfig.pingxx
-    ch = Pingpp::Charge.retrieve(ch_id)
-    reason  = "原因：用户自主取消订单 (by #{user.name})"
-
-    re = ch.refunds.create(
-        :amount => amount * 100,
-        :description => reason
-    )
-
-    data = JSON.parse(re.to_s)
-    OrderRefund.add(data)
-
-    JPush.order_cancel order.id
-
-    true
   end
 
    # 添加日志
