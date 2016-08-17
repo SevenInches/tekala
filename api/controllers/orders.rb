@@ -6,6 +6,7 @@ Tekala::Api.controllers :v1, :orders do
 
   before :except => [:pay_done, :refund] do
     @user = User.get(session[:user_id])
+    $school_remark = 'school_' + @user.school_id.to_s
     redirect_to("#{current_url}/unlogin") if @user.nil?
   end
   
@@ -131,6 +132,7 @@ Tekala::Api.controllers :v1, :orders do
     end
 
     if @order.save
+      $redis.lpush $school_remark, '约车订单'
       @order.generate_order_no
       @order.push_to_teacher #推送通知教练
     else
@@ -149,6 +151,44 @@ Tekala::Api.controllers :v1, :orders do
     else
       return {:status => :failure, :msg => '取消订单不成功，请联系客服'}.to_json
     end
+  end
+
+  post :comment, :map => '/v1/orders/:order_id/comment', :provides => [:json] do
+    @order = Order.get params[:order_id]
+    if @order.nil?
+      return {:status => "failure", :msg => '该订单不存在' }.to_json
+    else
+      return {:status => "failure", :msg => '您已评论过该订单' }.to_json	   if @order.teacher_comment.present?
+      return {:status => "failure", :msg => '该订单尚未能评论' }.to_json    if !@order.can_comment
+    end
+
+    @teacher = @order.teacher
+    return {:status => :failure, :msg => "教练不存在"}.to_json if @teacher.nil?
+
+    @comment            = UserComment.new
+    @comment.content    = params[:content]
+    @comment.order_id   = params[:order_id]
+    @comment.rate       = params[:rate] if !params[:rate].nil? && !params[:rate].empty?
+    @comment.user_id    = @u.id
+    @comment.teacher_id = @teacher.id
+    if @comment.save
+      $redis.lpush $school_remark, '学员评价'
+      (1..9).each do |i|
+        if params["photo#{i.to_s}"]
+          @photo            = CommentPhoto.new
+          @photo.comment_id = @comment.id
+          @photo.photo      = params["photo#{i.to_s}"]
+          @photo.save
+        end
+      end
+      #完成评论 推送给教练
+      JPush::order_comment params[:order_id]
+    else
+      {:status => :failure, :msg => @comment.errors.full_messages.join(',') }.to_json
+    end
+
+    render 'teacher_comment'
+
   end
 
   #app端支付 请求返回的charge内容

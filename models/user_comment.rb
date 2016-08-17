@@ -1,3 +1,4 @@
+#学员给教练的评价
 class UserComment
   include DataMapper::Resource
 
@@ -5,7 +6,7 @@ class UserComment
   property :id, Serial
   property :teacher_id, Integer
   property :user_id, Integer
-  property :rate, Integer
+  property :rate, Integer, :default => 5
   property :content, Text
   property :created_at, DateTime
 
@@ -15,7 +16,6 @@ class UserComment
   belongs_to :user
   belongs_to :teacher
 
-  
   def created_format
     created_at.strftime('%Y-%m-%d')
   end

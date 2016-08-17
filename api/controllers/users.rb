@@ -2,8 +2,6 @@
 Tekala::Api.controllers :v1, :users do  
 	register WillPaginate::Sinatra
   enable :sessions
-  default_latitude  = '24.0000'
-  default_longitude = '100.333'
   current_url       = '/api/v1'
 
   before :except => [:login, :logout, :unlogin, :signup, :hospitals, :validate_sms, :forget_password] do 
@@ -106,7 +104,6 @@ Tekala::Api.controllers :v1, :users do
       else
         {:status => :failure, :msg => '该手机号不存在'}.to_json
       end
-
   end
 
   get :messages, :provides => [:json] do 

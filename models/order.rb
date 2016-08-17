@@ -90,8 +90,8 @@ class Order
   belongs_to :city
   belongs_to :channel
 
-  has 1, :teacher_comment
-  has 1, :user_comment
+  has 1, :teacher_comment  #教练给的评价
+  has 1, :user_comment     #学员给的评价
 
   #教练接单
   has 1, :order_confirm, :constraint => :destroy
@@ -177,11 +177,7 @@ class Order
   end
 
   def can_comment
-    status == STATUS_STUDY && book_time < Time.now && teacher_comment.nil?
-  end
-
-  def teacher_can_comment
-    status == STATUS_STUDY && user_comment.nil? ? true : false
+    status == STATUS_STUDY && book_time < Time.now && user_comment.nil?
   end
 
   def user_has_comment

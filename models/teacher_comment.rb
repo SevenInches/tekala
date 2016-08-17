@@ -1,3 +1,4 @@
+#教练给学员的评价
 class TeacherComment
   include DataMapper::Resource
 

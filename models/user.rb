@@ -468,7 +468,6 @@ class User
     return {:status => :failure, :msg => '第一个时段已被预约'} if tmp1.include?(book_time_first)
     return {:status => :failure, :msg => '第二个时段已被预约'} if tmp1.include?(book_time_second)
     #如果该时段被预约 返回failure */
-    #limit
 
     return {:status => :success}
   end
