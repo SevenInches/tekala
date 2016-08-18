@@ -22,8 +22,7 @@ Tekala::Api.controllers :v1 do
     #####
   	post :login, :provides => [:json] do 
   		@user = User.authenticate_by_mobile(params[:mobile], params[:password])
-  		if @user 
-
+  		if @user
   			@user.device  		 = params[:device]
   			@user.version 		 = params[:version]
   			@user.longitude    = params[:longitude] if params[:longitude]
@@ -53,7 +52,24 @@ Tekala::Api.controllers :v1 do
 
   	get :unlogin, :provides => [:json] do
   		{:status => :failure, :msg => '未登录'}.to_json	
-  	end
+    end
+
+    put :password, :provides => [:json] do
+      if params[:old_password].present? && params[:new_password].present?
+        if @user.has_password?(params[:old_password])
+          password = ::BCrypt::Password.create(params[:new_password])
+          if @user.update(:crypted_password => password)
+            {:status => :success, :msg => '密码修改成功'}.to_json
+          else
+            {:status => :failure, :msg => @user.errors.first.first}.to_json
+          end
+        else
+          {:status => :failure, :msg => '原密码错误'}.to_json
+        end
+      else
+        {:status => :failure, :msg => '参数错误'}.to_json
+      end
+    end
 
     ########
     #
@@ -115,8 +131,9 @@ Tekala::Api.controllers :v1 do
       else
         {:status => :failure, :msg => '该手机号已注册，请直接登录'}.to_json
       end
-
     end
+
+
 
     #七牛请求token 
     get :uptoken do 
