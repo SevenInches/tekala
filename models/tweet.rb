@@ -48,5 +48,4 @@ class Tweet
     user.add_log(type, content, target)
   end
 
-
 end
