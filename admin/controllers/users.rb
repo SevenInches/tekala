@@ -146,7 +146,7 @@ Tekala::Admin.controllers :users do
       sheet[index+1,8]    = user.created_at.present? ? user.created_at.strftime('%m月%d日 %H:%M') : ''
     end
 
-    output_file_name = "user_#{Time.now.to_i}.xls"
+    output_file_name = "user_#{Time.now.to_i}.xlsx"
     book.write "public/uploads/#{output_file_name}"
 
     redirect "/uploads/#{output_file_name}"
