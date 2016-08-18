@@ -44,7 +44,6 @@ class School
   has n, :users             # 用户
   has n, :teachers          # 教练
   has n, :cars              # 车辆
-  has n, :shops             # 门店
 
   before :save, :encrypt_password
 
