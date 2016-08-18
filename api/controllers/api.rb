@@ -140,7 +140,7 @@ Tekala::Api.controllers :v1 do
     #投诉建议
     post :complain, :provides => [:html] do
       @complain = Complain.create(:user_id => session[:user_id].to_i, :content => params[:content])
-      if @complain
+      if @complain.present?
         $redis.lpush $school_remark, '学员投诉'
         render 'v1/static_pages/success'
       else
@@ -155,7 +155,7 @@ Tekala::Api.controllers :v1 do
     #学员反馈
     post :feedbacks, :provides => [:html] do
       @feedback = Feedback.create(:user_id => session[:user_id].to_i, :content => params[:content])
-      if @feedback
+      if @feedback.present?
         $redis.lpush $school_remark, '意见反馈'
         render 'v1/static_pages/success'
       else
