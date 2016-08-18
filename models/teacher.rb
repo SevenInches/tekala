@@ -122,7 +122,7 @@ class Teacher
   end
 
   def has_hour
-    hour = orders.all(:status => Order::pay_or_done, :type => Order::PAYTOTEACHER).sum(:quantity).to_i
+    hour = orders.all(:status => Order::pay_or_done).sum(:quantity).to_i
     return hour-50 if id == 170
     return hour-30 if id == 278
     return hour

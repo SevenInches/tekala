@@ -7,7 +7,7 @@ task :teacher_week_pay => :environment do
     start_date = today - (today.wday - 1).days - 7.days
     end_date   = start_date + 7.days
 
-    orders   = Order.all(:teacher_id => t.id, :type => Order::PAYTOTEACHER, :status => Order::pay_or_done, :order => :book_time.asc )
+    orders   = Order.all(:teacher_id => t.id, :status => Order::pay_or_done, :order => :book_time.asc )
   	orders   = orders.all(:book_time => (start_date..end_date))
 
     c2_hours = orders.all(:exam_type => 2).sum(:quantity).to_i

@@ -35,10 +35,10 @@ class OptMessage
     wh_count      = Order.count(:city=>'027', :status => Order.pay_or_done, :type =>Order::VIPTYPE, :pay_at => (Date.yesterday..Date.today))
 
     # 深圳今天练车小时数
-    sz_teacher_count = Order.count(:city=>'0755', :status => Order::pay_or_done, :type => Order::PAYTOTEACHER, :book_time => (Date.today..Date.tomorrow))
+    sz_teacher_count = Order.count(:city=>'0755', :status => Order::pay_or_done, :book_time => (Date.today..Date.tomorrow))
     
     # 武汉今天练车小时数
-    wh_teacher_count = Order.count(:city=>'027', :status => Order::pay_or_done, :type => Order::PAYTOTEACHER, :book_time => (Date.today..Date.tomorrow))
+    wh_teacher_count = Order.count(:city=>'027', :status => Order::pay_or_done, :book_time => (Date.today..Date.tomorrow))
     
     content  = "日报 | 深圳昨天报名#{sz_all_count}人,付款#{sz_count}人, 今天约车#{sz_teacher_count}小时。武汉#{wh_all_count}|#{wh_count}|#{wh_teacher_count}"
     
