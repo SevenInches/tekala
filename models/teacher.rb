@@ -39,7 +39,7 @@ class Teacher
            :messages => {:is_unique => "手机号已经存在",
                           :presence => '请填写联系电话'}
 
-  property :wechat, String, :default => ''
+  property :wechart, String, :default => ''
   property :email,  String, :default => ''
   property :address, String, :default => ''
 
@@ -58,11 +58,8 @@ class Teacher
   property :status, Integer, :default => 1
   
   #用户区域
-  #   {:龙岗 => 1, :宝安 => 2, :罗湖 => 3, :福田 => 4, :南山 => 5, :盐田 => 6, :其他 => 0}
   property :area, Integer, :default => 0
 
-  property :training_field, String, :default => ''
-  property :training_address, String, :default => ''
   property :map, String, :auto_validation => false
 
   property :date_setting, String, :default => ''
