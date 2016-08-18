@@ -6,7 +6,7 @@ task :teacher_daily_pay => :environment do
       yesterday   = Date.today - 1.days
       nex_date    = yesterday  + 1.days
 
-      orders   = Order.all(:teacher_id => t.id, :type => Order::PAYTOTEACHER, :status => Order::pay_or_done, :order => :book_time.asc,:book_time => (yesterday..nex_date) )
+      orders   = Order.all(:teacher_id => t.id, :status => Order::pay_or_done, :order => :book_time.asc,:book_time => (yesterday..nex_date) )
       c2_hours = orders.all(:exam_type => 2).sum(:quantity).to_i
       c1_hours = orders.all(:exam_type.not => 2).sum(:quantity).to_i
 

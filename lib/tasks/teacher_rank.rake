@@ -6,8 +6,7 @@ task :teacher_rank => :environment do
   start_date = last_month.strftime('%Y-%m-01').to_date
   end_date   = Date.today.strftime('%Y-%m-01').to_date
   teacher.each do |t|
-    orders = Order.all(:teacher_id => t.id, 
-                       :type       => Order::PAYTOTEACHER, 
+    orders = Order.all(:teacher_id => t.id,
                        :status     => Order::pay_or_done,
                        :book_time  => (start_date..end_date) )
 
