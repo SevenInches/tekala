@@ -1,4 +1,12 @@
 Tekala::Master.controllers :push do
+  before do
+    if session[:account_id]
+      render 'index/index'
+    else
+      redirect_to(url(:login, :index))
+    end
+  end
+
   get :index do
     @title = "push"
     @pushs = Push.all
@@ -7,12 +15,12 @@ Tekala::Master.controllers :push do
   end
 
   post :create do
-    @school = School.new(params[:school])
-    if @school.save
-      flash[:success] = pat(:create_success, :model => 'School')
-      redirect(url(:schools, :index))
+    @push = Push.new(params[:push])
+    if @push.save
+      # flash[:success] = pat(:create_success, :model => 'Push')
+      redirect(url(:push, :index))
     else
-      render 'schools/new'
+      render 'push/index'
     end
   end
 

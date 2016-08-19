@@ -11,6 +11,7 @@ class Push
   property :school_id, Integer, :auto_validation => false
   property :user_status, Boolean, :auto_validation => false
   property :editions, String, :auto_validation => false
+  property :created_at, DateTime
 
   belongs_to :channel
   belongs_to :school
