@@ -146,7 +146,7 @@ Tekala::Admin.controllers :users do
       sheet[index+1,8]    = user.created_at.present? ? user.created_at.strftime('%m月%d日 %H:%M') : ''
     end
 
-    output_file_name = "user_#{Time.now.to_i}.xlsx"
+    output_file_name = "user_#{Time.now.to_i}.xls"
     book.write "public/uploads/#{output_file_name}"
 
     redirect "/uploads/#{output_file_name}"
@@ -160,7 +160,7 @@ Tekala::Admin.controllers :users do
         f.write(params['file'][:tempfile].read.force_encoding('utf-8'))
       end
 
-      xlsx  = Roo::Excelx.new(excel_name)
+      xlsx  = Roo::Excel.new(excel_name)
       sheet = xlsx.sheet('Worksheet1')
 
       puts sheet.count
