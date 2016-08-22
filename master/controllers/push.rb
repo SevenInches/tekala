@@ -1,8 +1,6 @@
 Tekala::Master.controllers :push do
   before do
-    if session[:account_id]
-      render 'index/index'
-    else
+    if !session[:account_id]
       redirect_to(url(:login, :index))
     end
   end
