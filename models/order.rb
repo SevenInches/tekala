@@ -79,7 +79,6 @@ class Order
   property :sum_time, DateTime
 
   property :pay_channel, String
-  property :channel_id, Integer
   property :commission, Integer, :default => 0 # 代理佣金
 
   belongs_to :user
@@ -88,7 +87,6 @@ class Order
   belongs_to :product, :model => 'Product'
   belongs_to :school
   belongs_to :city
-  belongs_to :channel
 
   has 1, :teacher_comment  #教练给的评价
   has 1, :user_comment     #学员给的评价

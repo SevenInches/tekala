@@ -132,7 +132,7 @@ Tekala::Api.controllers :v1, :orders do
     end
 
     if @order.save
-      $redis.lpush $school_remark, '约车订单'
+      $redis.lpush $school_remark, '订单'
       @order.generate_order_no
       @order.push_to_teacher #推送通知教练
     else

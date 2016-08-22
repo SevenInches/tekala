@@ -32,6 +32,23 @@ Tekala::Channel.controllers :v1 do
     {:status => :failure, :msg => '未登录'}.to_json
   end
 
+  put :password, :provides => [:json] do
+    if params[:old_password].present? && params[:new_password].present?
+      if @channel.has_password?(params[:old_password])
+        password = ::BCrypt::Password.create(params[:new_password])
+        if @channel.update(:crypted_password => password)
+          {:status => :success, :msg => '密码修改成功'}.to_json
+        else
+          {:status => :failure, :msg => @channel.errors.first.first}.to_json
+        end
+      else
+        {:status => :failure, :msg => '原密码错误'}.to_json
+      end
+    else
+      {:status => :failure, :msg => '参数错误'}.to_json
+    end
+  end
+
   get :acting_for, :provides => [:json] do
     @agencies = Agency.all(:channel_id => @channel.id)
     if @agencies
