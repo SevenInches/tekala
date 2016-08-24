@@ -10,7 +10,7 @@ class OptMessage
   property :receiver, String
   property :created_at, DateTime
  
-  after :create, :push_message
+  #after :create, :push_message
 
   # 发送源，萌萌学车
   Source    = "s-a8bec505-0d3c-4210-abec-e5acadaa"
@@ -28,7 +28,7 @@ class OptMessage
     sz_all_count  = Order.count(:city=>'0755', :type =>Order::VIPTYPE, :pay_at => (Date.yesterday..Date.today))
     # 深圳昨天付款人数
     sz_count      = Order.count(:city=>'0755', :status => Order.pay_or_done, :type =>Order::VIPTYPE, :pay_at => (Date.yesterday..Date.today))
-    
+
     # 武汉昨天注册人人数
     wh_all_count  = Order.count(:city=>'027', :type =>Order::VIPTYPE, :pay_at => (Date.yesterday..Date.today))
     # 武汉昨天付款人数
@@ -36,10 +36,10 @@ class OptMessage
 
     # 深圳今天练车小时数
     sz_teacher_count = Order.count(:city=>'0755', :status => Order::pay_or_done, :book_time => (Date.today..Date.tomorrow))
-    
+
     # 武汉今天练车小时数
     wh_teacher_count = Order.count(:city=>'027', :status => Order::pay_or_done, :book_time => (Date.today..Date.tomorrow))
-    
+
     content  = "日报 | 深圳昨天报名#{sz_all_count}人,付款#{sz_count}人, 今天约车#{sz_teacher_count}小时。武汉#{wh_all_count}|#{wh_count}|#{wh_teacher_count}"
     
     OptMessage.create(:title=>'日报', :content=>content, :receiver=>:order)
@@ -47,7 +47,7 @@ class OptMessage
     #统计战报
     current_month = Date.today.strftime('%Y-%m-01 00:00:00').to_time
     next_month    = (Date.today + 1.months).strftime('%Y-%m-01 00:00:00').to_time
-    
+
     sz_pay_count  = Order.count(:city=>'0755', :status => Order::pay_or_done, :type => Order::VIPTYPE, :pay_at => current_month..next_month)
     sz_aims       = 200
 

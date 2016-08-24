@@ -104,7 +104,7 @@ class Order
                                           :start_at   => book_time,
                                           :end_at     => book_time + quantity.hour,
                                           :status     => 0)
-    JPush::order_confirm(current_confirm.order_id)
+    JGPush::order_confirm(current_confirm.order_id)
   end
   
   def generate_order_no
@@ -308,16 +308,49 @@ class Order
     false
   end
 
+  #更新学车计划 统计学车时间 订单支付 +1
+  def user_plan_increase
+    plan = user.user_plan
+    plan.exam_two   += quantity if user.status_flag < 7
+    plan.exam_three += quantity if user.status_flag > 6
+    plan.save
+  end
+
+  #订单取消或者退款 则学时数 -1
+  def user_plan_decrease
+    plan = user.user_plan
+    # 若已经开始练科目三学时，则退科目三，否则退科目二
+    if plan.exam_three > 0
+      plan.exam_three -= quantity
+    else
+      plan.exam_two   -= quantity
+    end
+    plan.save
+  end
+
+  #更新教练已教学时
+  def teacher_tech_increase
+    return unless teacher
+    teacher.tech_hours += quantity
+    teacher.save
+  end
+
+  def teacher_tech_decrease
+    return unless teacher
+    teacher.tech_hours -= quantity
+    teacher.save
+  end
+
   # 取消订单操作
   def cancel
     # 未付款订单
     return if status == STATUS_REFUSE || status == STATUS_CANCEL
-    return set_status_cancel if status == STATUS_PAY
+    return cancel_book_order if status == STATUS_PAY
   end
 
   # 将订单改变取消状态
   def set_status_cancel
-    update(:status => STATUS_CANCEL, :cancel_at=> Time.now)
+    update(:status => STATUS_CANCEL, :cancel_at => Time.now)
   end
 
   # 取消练车订单
@@ -325,10 +358,9 @@ class Order
     # 已支付、已确定，已完成
     if Order.pay_or_done.include? status.to_i
       if set_status_cancel
-        user_plan_decrease
-        learn_hours_decrease 
-        teacher_tech_decrease
-        JPush.order_cancel id         # 推送取消订单的消息
+        #user_plan_decrease
+        #teacher_tech_decrease
+        JGPush.order_cancel id         # 推送取消订单的消息
       end
     else
       false
