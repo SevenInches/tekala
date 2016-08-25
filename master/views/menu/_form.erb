@@ -1,0 +1,85 @@
+<div class="form-group">
+  <label for="firstname" class="col-lg-2 control-label">图标</label>
+  <div class="col-lg-6">
+    <%= f.file_field :pic, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true  %>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="firstname" class="col-lg-2 control-label">名字</label>
+  <div class="col-lg-6">
+    <%= f.text_field :name, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true ,:required => 'required',:value => @menu.present? ? @menu.name : ''%>
+  </div>
+</div>
+
+<!--<div class="form-group">-->
+  <!--<label for="firstname" class="col-lg-2 control-label">权重</label>-->
+  <!--<div class="col-lg-6">-->
+    <!--<%#= f.text_field :weight, :class => 'form-control input-xlarge input-with-feedback', :placeholder => '为0时不显示在客户端',:autofocus => true ,:required => 'required',:value => @menu.weight%>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="form-group">
+  <label for="firstname" class="col-lg-2 control-label">类型</label>
+  <div class="col-lg-6">
+    <% if @menu.present? && @menu.config != 2 %>
+      <label class="checkbox-inline">
+        <input type="radio" name="user[config]" value="1" checked="" class="type-radio"> app
+      </label>
+      <label class="checkbox-inline">
+        <input type="radio" name="user[config]" value="2" class="type-radio"> web
+      </label>
+    <% else %>
+      <label class="checkbox-inline">
+        <input type="radio" name="user[config]" value="1" class="type-radio"> app
+      </label>
+      <label class="checkbox-inline">
+        <input type="radio" name="user[config]" value="2" checked class="type-radio"> web
+      </label>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="firstname" class="col-lg-2 control-label">app名称</label>
+  <div class="col-lg-6">
+    <%= f.text_field :client, :class => 'form-control input-xlarge input-with-feedback type-input',:value => @menu.present? ? @menu.client : '' %>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="firstname" class="col-lg-2 control-label">web地址</label>
+  <div class="col-lg-6">
+    <%= f.text_field :route, :class => 'form-control input-xlarge input-with-feedback type-input' ,:value =>  @menu.present? ? @menu.route : '' %>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="firstname" class="col-lg-2 control-label"></label>
+  <div class="col-lg-6">
+    <input type="submit" value="保存" class="btn btn-success">
+  </div>
+</div>
+
+<script>
+  $(function(){
+    var $typeInput = $('.type-input');
+    if($('.type-radio:checked').val()==1){
+      $typeInput.eq(0).removeAttr('disabled')
+      $typeInput.eq(1).attr('disabled','disabled')
+    }else{
+      $typeInput.eq(0).attr('disabled','disabled')
+      $typeInput.eq(1).removeAttr('disabled')
+    }
+
+    $(document).on('click','.type-radio',function(){
+      if($(this).val() == 1 ){
+        $typeInput.eq(1).attr('disabled','disabled')
+        $typeInput.eq(0).removeAttr('disabled')
+      }else{
+        $typeInput.eq(0).attr('disabled','disabled')
+        $typeInput.eq(1).removeAttr('disabled')
+      }
+    })
+  })
+</script>
