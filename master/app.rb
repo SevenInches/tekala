@@ -19,6 +19,9 @@ module Tekala
     # layout  :my_layout              # Layout can be in views/layouts/foo.ext or views/foo.ext (default :application)
     #
 
+    enable :sessions            #使用sessions
+    disable :store_location
+
     # Custom error management
     error(403) { @title = "Error 403"; render('errors/403', :layouts => :error) }
     error(404) { @title = "Error 404"; render('errors/404', :layouts => :error) }
