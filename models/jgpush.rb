@@ -75,49 +75,15 @@ class JGPush
 
     order = Order.get order_id
 
-    if order.order_confirm && order.order_confirm.status == 2
+    if order.order_confirm && order.order_confirm.status != 2
 
-      #如果是教练取消了订单 推送给学员
-      current_alias = "user_"+order.user_id.to_s
-
-      jupush = JPush::Client.new(KEY,SEC)
-
-      pusher = jupush.pusher
-
-      audience = JPush::Push::Audience.new.set_alias(current_alias)
-
-      extras   = {type: "order_cancel", msg: "啊哦～教练太忙接不过来单，预约其他时间或者换个教练试试？", order_id: order_id}
-
-      notification = JPush::Push::Notification.new.
-          set_android(
-              alert: "啊哦～教练太忙接不过来单，预约其他时间或者换个教练试试？",
-              title: "教练拒单",
-              extras: extras
-          ).set_ios(
-          alert: "啊哦～教练太忙接不过来单，预约其他时间或者换个教练试试？",
-          available: true,
-          extras: extras
-      )
-
-      push_payload = JPush::Push::PushPayload.new(
-          platform: 'all',
-          audience: audience,
-          notification: notification
-      ).set_message(
-          "啊哦～教练太忙接不过来单，预约其他时间或者换个教练试试？",
-          title: "教练拒单",
-          content_type: 'text',
-          extras: extras
-      )
-
-    else
       #学员取消预订 则推送给教练
 
       current_alias = "teacher_"+order.teacher_id.to_s
 
-      jtpush = JPush::Client.new(TEACHERKEY,TEACHERSEC)
+      jpush = JPush::Client.new(TEACHERKEY,TEACHERSEC)
 
-      pusher = jtpush.pusher
+      pusher = jpush.pusher
 
       audience = JPush::Push::Audience.new.set_alias(current_alias)
 
