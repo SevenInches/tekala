@@ -211,4 +211,8 @@ Tekala::Api.controllers :v1 do
       @ad = Ad.first(:order=> :pv.desc, :city_id => params[:city])
       render 'v1/ad'
     end
+
+    get :test do
+      JGPush::order_cancel 1
+    end
 end

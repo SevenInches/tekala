@@ -132,7 +132,7 @@ Tekala::Api.controllers :v1, :orders do
     end
 
     if @order.save
-      $redis.lpush $school_remark, '约车订单'
+      $redis.lpush $school_remark, '订单'
       @order.generate_order_no
       @order.push_to_teacher #推送通知教练
     else
@@ -182,7 +182,7 @@ Tekala::Api.controllers :v1, :orders do
         end
       end
       #完成评论 推送给教练
-      JPush::order_comment params[:order_id]
+      JGPush::order_comment params[:order_id]
     else
       {:status => :failure, :msg => @comment.errors.full_messages.join(',') }.to_json
     end

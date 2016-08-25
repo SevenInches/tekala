@@ -39,7 +39,7 @@ class Teacher
            :messages => {:is_unique => "手机号已经存在",
                           :presence => '请填写联系电话'}
 
-  property :wechart, String, :default => ''
+  property :wechat, String, :default => ''
   property :email,  String, :default => ''
   property :address, String, :default => ''
 

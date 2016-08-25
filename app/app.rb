@@ -51,8 +51,9 @@ module Tekala
 
     post :demo do
       if params[:name].present? && params[:phone].present?
-        school = School.new(:name => params[:name], :is_open => 1, :is_vip =>1 ,:password => '123456', :city_id => 236)
+        school = School.new(:name => params[:name], :is_open => 1, :is_vip =>1 , :city_id => 236)
         school.contact_phone = params[:phone]
+        school.school_no = params[:school_no]
         school.address       = params[:address]  if params[:address].present?
         if school.save
           @name = school.name

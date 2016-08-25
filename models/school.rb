@@ -7,6 +7,7 @@ class School
   # property <name>, <type>
   property :id, Serial
   property :city_id, Integer
+  property :school_no, String
   property :name, String
   property :address, String
   property :contact_phone, String
@@ -44,8 +45,7 @@ class School
   has n, :users             # 用户
   has n, :teachers          # 教练
   has n, :cars              # 车辆
-
-  before :save, :encrypt_password
+  has n, :roles             # 权限
 
   after :create do |school|
     tid = school.demo_teacher
@@ -56,6 +56,7 @@ class School
         TeacherTrainField.new(:teacher_id=>teacher, :train_field_id=>fid).save
       end
     end
+    school.demo_role
   end
 
   def city_name
@@ -117,10 +118,6 @@ class School
     is_open ? '开放' : '关闭'
   end
 
-  def encrypt_password
-    self.crypted_password = ::BCrypt::Password.create(password) if password.present?
-  end
-
   def self.schools
     self.all.collect { |sch| [sch.name, sch.id] }
   end
@@ -156,4 +153,14 @@ class School
     users.all(:created_at =>(start_date..end_date)).count
   end
 
+  def demo_role
+    new_role  =  Role.new(:name => '测试组',:school_id => id)
+    if new_role.save
+      new_user = RoleUser.new(:name => '示例用户',:role_id => new_role.id)
+      new_user.mobile = contact_phone
+      new_user.password = '123456'
+      new_user.created_at = Time.now
+      new_user.save
+    end
+  end
 end

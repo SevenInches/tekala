@@ -18,6 +18,7 @@ class Signup
   property :city_id, Integer
   property :product_id, Integer
   property :pay_channel, String
+  property :channel_id, Integer
 
   #1=>未付款,2=>已付款,3=>退款中,4=>已退款
   property :status, Integer
@@ -30,6 +31,7 @@ class Signup
   belongs_to :product
   belongs_to :school
   belongs_to :city
+  belongs_to :channel
 
   def status_word
     case self.status

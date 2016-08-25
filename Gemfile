@@ -96,9 +96,7 @@ gem 'padrino-cookies'
 
 # gem 'weixin_authorize', "~>1.6.2", :require => false
 #oneapm 性能监测
-source 'http://rubygems.oneapm.com' do
-  gem 'oneapm_rpm'
-end
+gem 'oneapm_rpm'
 
 #chart js
 #gem "chartkick"
@@ -139,6 +137,7 @@ gem 'http-cookie'
 gem 'rest-client'
 
 gem 'szm-chinese-name'
+gem 'jpush'
 
 
 
