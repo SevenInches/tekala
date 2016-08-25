@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# 代理管理
 class Agency
   include DataMapper::Resource
   require 'chinese_name'

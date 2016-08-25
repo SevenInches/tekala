@@ -1,3 +1,4 @@
+#问题类别
 class QuestionCategory
   include DataMapper::Resource
 

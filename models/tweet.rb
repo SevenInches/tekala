@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+#学员动态
 class Tweet
   include DataMapper::Resource
   # property <name>, <type>

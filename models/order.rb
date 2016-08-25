@@ -1,3 +1,4 @@
+#学车订单
 class Order
   include DataMapper::Resource
   attr_accessor :no_jpush

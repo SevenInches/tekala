@@ -1,3 +1,4 @@
+#财务信息
 class Finance
   include DataMapper::Resource
 

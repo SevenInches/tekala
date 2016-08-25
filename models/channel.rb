@@ -1,3 +1,4 @@
+#渠道
 class Channel
   include DataMapper::Resource
   attr_accessor :password

@@ -1,3 +1,4 @@
+#教练管理
 class Teacher
   include DataMapper::Resource
 

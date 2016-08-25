@@ -1,3 +1,4 @@
+#学员投诉
 class Complain
   include DataMapper::Resource
 

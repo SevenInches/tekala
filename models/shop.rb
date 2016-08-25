@@ -1,3 +1,4 @@
+#门店
 class Shop
   include DataMapper::Resource
 

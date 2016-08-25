@@ -1,4 +1,4 @@
-#教练给学员的评价
+#教练得到的评价
 class TeacherComment
   include DataMapper::Resource
 
@@ -19,5 +19,4 @@ class TeacherComment
   def created_format
     created_at.strftime('%Y-%m-%d %H:%M')
   end
-
 end

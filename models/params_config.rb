@@ -1,3 +1,4 @@
+#参数配置
 class ParamsConfig
   include DataMapper::Resource
 

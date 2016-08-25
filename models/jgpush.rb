@@ -1,4 +1,3 @@
-
 # 极光推送
 class JGPush
   #from app@mmxueche.com 管理版

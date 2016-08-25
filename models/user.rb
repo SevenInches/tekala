@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+#学员
 class User
   include DataMapper::Resource
   attr_accessor :password

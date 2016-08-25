@@ -1,3 +1,4 @@
+#产品
 class Product
 
   include DataMapper::Resource

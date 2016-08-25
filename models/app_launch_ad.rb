@@ -1,3 +1,4 @@
+#app推送广告
 class AppLaunchAd
   include DataMapper::Resource
 

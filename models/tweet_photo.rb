@@ -1,3 +1,4 @@
+#动态图片
 class TweetPhoto
   include DataMapper::Resource
 

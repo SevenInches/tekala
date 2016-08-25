@@ -1,3 +1,4 @@
+#教练和训练场的绑定
 class TeacherTrainField
   
   include DataMapper::Resource

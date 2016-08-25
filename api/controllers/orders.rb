@@ -165,7 +165,7 @@ Tekala::Api.controllers :v1, :orders do
     @teacher = @order.teacher
     return {:status => :failure, :msg => "教练不存在"}.to_json if @teacher.nil?
 
-    @comment            = UserComment.new
+    @comment            = TeacherComment.new
     @comment.content    = params[:content]
     @comment.order_id   = params[:order_id]
     @comment.rate       = params[:rate] if !params[:rate].nil? && !params[:rate].empty?

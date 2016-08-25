@@ -1,3 +1,4 @@
+#校区
 class Branch
   include DataMapper::Resource
 

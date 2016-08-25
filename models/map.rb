@@ -1,3 +1,4 @@
+#地图信息
 class Map
   include DataMapper::Resource
 

@@ -1,3 +1,4 @@
+#菜单管理
 class AppConfig
   include DataMapper::Resource
 
