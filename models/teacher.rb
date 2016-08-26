@@ -274,9 +274,6 @@ class Teacher
     self.save
   end
 
-  def train_field_str
-    train_fields.map(&:name).join(',')
-  end
   # 是否VIP教练
   def vip?
     vip == 1

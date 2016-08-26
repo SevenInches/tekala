@@ -65,7 +65,7 @@ Tekala::Api.controllers :v1, :teachers do
 
     #如果查到的数据为空 返回全部训练场
     if @total == 0
-      @train_fields = TrainField.all(:count.gt => 0, :display => true, :open => 1, :school_id => @school.id)
+      @train_fields = TrainField.all(:teacher_count.gt => 0, :display => true, :open => 1, :school_id => @school.id)
       @train_fields = @train_fields.all(:order => @exam_type.to_sym.desc, @exam_type.to_sym.gt => 0, ) if @exam_type
       #筛选科目三训练场 暂时未添加科三训练场 所以注释
       @train_fields = @train_fields.all(:subject => @subject) if @subject
