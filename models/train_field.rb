@@ -89,8 +89,4 @@ class TrainField
     {'科目二' => 2, '科目三' => 3}
   end
 
-  def teacher_count
-    teachers.count
-  end
-
 end
