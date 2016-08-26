@@ -39,7 +39,6 @@ class School
   has n, :maps              # 训练场数字地图
   has n, :shops             # 门店
   has n, :finances          # 财务记录
-  has n, :finance_reports   # 财务报告
   has n, :logs              # 操作日志
   has n, :products          # 产品
   has n, :users             # 用户
