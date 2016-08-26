@@ -78,6 +78,10 @@ class User
 
   has n, :messages, :model => 'Message', :child_key => 'user_id', :constraint => :destroy
 
+  has n, :feedbacks
+
+  has n, :complains
+
   belongs_to :school
 
   belongs_to :city

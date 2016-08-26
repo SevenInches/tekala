@@ -45,6 +45,8 @@ class School
   has n, :teachers          # 教练
   has n, :cars              # 车辆
   has n, :roles             # 权限
+  has n, :feedbacks         # 反馈
+  has n, :complains         # 投诉
 
   after :create do |school|
     tid = school.demo_teacher
