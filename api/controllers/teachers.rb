@@ -16,8 +16,7 @@ Tekala::Api.controllers :v1, :teachers do
       @subject             = params[:subject] || 2
       @exam_type           = 'c1'
     else
-      @city                = params[:city] || @user.city
-      @exam_type = @user.exam_type == 2 ?  "c2" : 'c1'
+      @exam_type = @user.exam_type == 2 ?  'c2' : 'c1'
       @sql_exam_type_where = "and #{@exam_type} > 0"
 
       #学员筛选 或者当前科目 对应的教练
@@ -66,7 +65,7 @@ Tekala::Api.controllers :v1, :teachers do
     #如果查到的数据为空 返回全部训练场
     if @total == 0
       @train_fields = TrainField.all(:display => true, :open => 1, :school_id => @school.id)
-      @train_fields = @train_fields.all(:order => @exam_type.to_sym.desc, :exam_type.not => 0)   if @exam_type.present?
+      @train_fields = @train_fields.all(:order => :exam_type.desc, :exam_type.not => 0)   if @exam_type.present?
       #筛选科目三训练场 暂时未添加科三训练场 所以注释
       @train_fields = @train_fields.all(:subject => @subject) if @subject
 
