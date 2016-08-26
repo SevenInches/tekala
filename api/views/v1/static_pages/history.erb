@@ -20,8 +20,8 @@
       <%UserCycle.all(:user_id => params[:user_id], :order => :date.desc).each do |cycle|%>
         <div class="cell">
           <div class="time"><%=cycle.date%></div>
-          <div class="point <%=cycle.color%>"><div class="point_inner <%=cycle.color%>_inner"></div></div>
-          <div class="content"><%=UserCycle::get_level_name(cycle.level)%></div>
+          <div class="point <%= 'red_point' if cycle.result.present?%>"><div class="point_inner <%= 'red_point' if cycle.result.present?%>_inner"><%=cycle.result_word%></div></div>
+          <div class="content"><%=cycle.level_word%></div>
         </div>
       <%end%>
       <div class="clear"></div>
