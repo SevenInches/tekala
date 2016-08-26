@@ -33,6 +33,7 @@ class Teacher
 
   #'未知'=>1, 'C1'=>2, 'C2'=>3, 'C1/C2'=>4 #mok 2015-07-24
   property :exam_type, Integer, :default => 2 #教练教学的车型
+
   # '科目二/科目三 => 1', '科目二 => 2'，'科目三 => 3'
   property :tech_type, Integer, :default => 1 #教练教学的类型
 
