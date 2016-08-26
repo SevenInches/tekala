@@ -28,7 +28,7 @@ class UserCycle
   end
 
   def result_word
-    result.present? ? '通过' : '挂科'
+    result.present? ? '过' : '挂'
   end
 
   def level_word
