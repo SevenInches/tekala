@@ -7,20 +7,18 @@ Tekala::Api.controllers :v1, :teachers do
   default_latitude  = '24.0000'
   default_longitude = '100.333'
 
-  before do 
-    @city      = params[:city] || '0755'
+  before do
     @user      = User.get(session[:user_id])
+    @school    = @user.school
 
     if @user.nil?
       @sql_exam_type_where = ''
-      @sql_city_where      = "and city = '#{@city}'"
       @subject             = params[:subject] || 2
       @exam_type           = 'c1'
     else
       @city                = params[:city] || @user.city
       @exam_type = @user.exam_type == 2 ?  "c2" : 'c1'
       @sql_exam_type_where = "and #{@exam_type} > 0"
-      @sql_city_where      = "and city = '#{@city}'"
 
       #学员筛选 或者当前科目 对应的教练
       if params[:subject]
@@ -55,23 +53,22 @@ Tekala::Api.controllers :v1, :teachers do
                count as teacher_count, id, name, latitude, longitude, address, good_tags, bad_tags, area 
                from train_fields 
                where display = 1 and count > 0 
-               and open = 1 
-               
-               #{@sql_city_where}
+               and open = 1
+               and school_id = #{@school.id}
+
                #{@sql_exam_type_where} 
                having distance<=#{distance} 
                order by distance limit #{limit}"
 
     @train_fields = repository(:default).adapter.select(query)
-    @total        = @train_fields ? @train_fields.size : 0 
+    @total        = @train_fields ? @train_fields.size : 0
+
     #如果查到的数据为空 返回全部训练场
     if @total == 0
-      @train_fields = TrainField.all(:count.gt => 0, :display => true, :open => 1,
-                                     :city  => @city)
-      @train_fields = @train_fields.all(:order => @exam_type.to_sym.desc, 
-                                        @exam_type.to_sym.gt => 0, ) if @exam_type
+      @train_fields = TrainField.all(:count.gt => 0, :display => true, :open => 1, :school_id => @school.id)
+      @train_fields = @train_fields.all(:order => @exam_type.to_sym.desc, @exam_type.to_sym.gt => 0, ) if @exam_type
       #筛选科目三训练场 暂时未添加科三训练场 所以注释
-      # @train_fields = @train_fields.all(:subject => @subject) if @subject
+      @train_fields = @train_fields.all(:subject => @subject) if @subject
 
       @total        = @train_fields.count
       @train_fields = @train_fields.paginate(:page => params[:page], :per_page => 100)
@@ -80,19 +77,12 @@ Tekala::Api.controllers :v1, :teachers do
 
     #通过repository 获得的数据是 array 不是 Collection 所以再查一次数据库
     @train_fields = TrainField.all(:id => @train_fields.map(&:id))
+
     # 训练场正常使用的教练
     @teachers = @train_fields.teachers(:open => 1, :status_flag => 1).reverse
     @teachers = @teachers.all(:exam_type => [3, @user.exam_type]) if @user
     @teachers = @teachers.all(:subject => [0,@subject]) if @subject
     @teachers = @teachers.paginate(:page => params[:page], :per_page => 20)
-
-
-    @teachers.each do |teacher|
-      teacher.status_flag      = 0 if @user && @user.city == '027' && @user.type == 0
-      #如果用户是c2 修改价格
-      teacher.price            += 20 if @user && @user.exam_type == 2
-      teacher.promo_price      += 20 if @user && @user.exam_type == 2
-    end
 
     render 'v1/teachers'
   end 

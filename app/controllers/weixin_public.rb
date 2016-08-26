@@ -22,7 +22,6 @@ Tekala::App.controllers :weixin_public do
     end
   end
 
-
   #自主注册 weixin登陆
   get :weixin_login do 
       @appid   = CustomConfig::APPID
@@ -31,8 +30,6 @@ Tekala::App.controllers :weixin_public do
       @url   = (params[:url] && !params[:url].empty?) ? params[:url] : "http%3a%2f%2fwww.mmxueche.com%2fm%2fweixin_public%2fsignup"
       redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{@appid}&redirect_uri=#{@url}&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect")
   end
-
-
 
   get :index do 
     session[:user_id] = cookies[:user_id] if cookies[:user_id] && !cookies[:user_id].empty?
@@ -44,7 +41,6 @@ Tekala::App.controllers :weixin_public do
     end
   	render 'weixin_public/index', :layout => false
   end
-
 
 
   get :signup do 
