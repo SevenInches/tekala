@@ -192,6 +192,7 @@ Tekala::Api.controllers :v1 do
       if params[:token] != token
         'token 不正确'
       else
+        @cycles = UserCycle.all(:user_id => params[:user_id], :order => :date.desc)
         render 'v1/static_pages/history'
       end
     end

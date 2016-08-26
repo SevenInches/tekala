@@ -17,10 +17,10 @@
         <%=image_tag 'pic_process_car.png', :class => 'car_icon' %>
       </div>
       <div class='line'></div>
-      <%UserCycle.all(:user_id => params[:user_id], :order => :date.desc).each do |cycle|%>
+      <% @cycles.each do |cycle|%>
         <div class="cell">
           <div class="time"><%=cycle.date%></div>
-          <div class="point <%= 'red_point' if cycle.result.present?%>"><div class="point_inner <%= 'red_point' if cycle.result.present?%>_inner"><%=cycle.result_word%></div></div>
+          <div class="point <%= 'red_point' if !cycle.result.present?%>"><div class="point_inner <%= 'red_point' if !cycle.result.present?%>_inner"><%=cycle.result_word%></div></div>
           <div class="content"><%=cycle.level_word%></div>
         </div>
       <%end%>
