@@ -7,6 +7,7 @@ class Teacher
   C1 = [1,3]
   C2 = [2,3]
   C2ADD = 20
+
   # property <name>, <type>
   property :id, Serial
   property :crypted_password, String, :length => 70
@@ -21,9 +22,6 @@ class Teacher
   property :hometown, String
   property :avatar, String, :auto_validation => false
   property :bank_card_photo, String, :auto_validation => false
-  
-  # 结算类型，默认是按天结算，合作久的教练改为按周结算
-  property :pay_type, String, :default => 'day'
 
   #银行卡支行名称
   property :bank_name, String, :default => ''
@@ -31,7 +29,7 @@ class Teacher
   #银行卡持卡人姓名
   property :bank_account_name, String, :default => ''
 
-  #'未知'=>1, 'C1'=>2, 'C2'=>3, 'C1/C2'=>4 #mok 2015-07-24
+  #'未知'=>0, 'C1'=>1, 'C2'=>2, 'C1/C2'=>3
   property :exam_type, Integer, :default => 2 #教练教学的车型
 
   # '科目二/科目三 => 1', '科目二 => 2'，'科目三 => 3'
@@ -58,9 +56,6 @@ class Teacher
   
   #'待审核'=>1, '审核通过'=>2, '审核不通过'=>3, '报名' => 4
   property :status, Integer, :default => 1
-  
-  #用户区域
-  property :area, Integer, :default => 0
 
   property :map, String, :auto_validation => false
 
@@ -98,11 +93,7 @@ class Teacher
       score = score + comment.rate.to_f 
     end
     return (score/comments.size).to_f
-    #减少一次mysql 查询
-    # comments.avg(:rate).round(1)
   end
-
-
 
   def avatar_thumb_url
      avatar.thumb && avatar.thumb.url ? CustomConfig::HOST + avatar.thumb.url : CustomConfig::HOST + '/m/images/default_teacher_avatar.png' 
@@ -113,48 +104,12 @@ class Teacher
      avatar && avatar.url ? CustomConfig::HOST + avatar.url : '/images/teacher_default_photo.png'
   end
 
-  
-
-  def driving_age 
-    5
-  end
-
-  def teaching_age 
-    5
-  end
-
   def has_hour
     hour = orders.all(:status => Order::pay_or_done).sum(:quantity).to_i
-    return hour-50 if id == 170
-    return hour-30 if id == 278
-    return hour
-  end
-
-  def self.get_flag
-    {'正常使用' => 1, '休假' => 0}
-  end
-
-  def self.get_vip
-    {'VIP' => 1, '普通' => 0}
   end
 
   def self.status_flag 
     {"休假" =>0 , "正常使用" =>1}
-  end
-
-  def self.pay_type 
-    {"周结算" =>'week' , "天结算" =>'day', '科目二' => 'exam_two', '科目三' => 'exam_three'}
-  end
-
-  def self.city_pay_type(city) 
-    case city
-    when '0755'
-      {"周结算" =>'week' , "天结算" =>'day'}
-    when '027'   
-      {'科目二' => 'exam_two', '科目三' => 'exam_three'}
-    when '023'   
-      {'科目二' => 'exam_two', '科目三' => 'exam_three'}
-    end
   end
 
   def format_created
@@ -167,30 +122,6 @@ class Teacher
 
   def created_at_format 
     created_at.strftime('%m月%d日 %H:%m')
-  end
-
-  def status_color 
-    case self.status
-    when 0
-      return 'danger'
-    when 201
-      return 'success'
-    when 200
-      return 'info'
-    when 100
-      return 'warning'
-    end
-
-  end
-
-
-  def status_flag_color 
-    case self.status_flag
-    when 0
-      return 'danger'
-    when 1
-      return 'success'
-    end
   end
 
   def self.exam_type
@@ -252,34 +183,20 @@ class Teacher
   end
 
   def self.tech_type
-    return {'科目二/科目三' => 0, '科目二' => 1, '科目三' => 2}
+    return {'科目二/科目三' => 1, '科目二' => 2, '科目三' => 3}
   end
 
 
   def tech_type_word
     case self.tech_type
-    when 0
-      return '科目二/科目三'
     when 1
-      return '科目二' 
+      return '科目二/科目三'
     when 2
+      return '科目二' 
+    when 3
       return '科目三' 
     end
   end
-
-  #更新旧数据
-  def refresh_tech_hours
-    if self.tech_hours != self.has_hour
-      self.tech_hours = self.has_hour
-    end
-    self.save
-  end
-
-  # 是否VIP教练
-  def vip?
-    vip == 1
-  end
-
 
   #学员可预约时间
   def time_can_book 
@@ -323,7 +240,6 @@ class Teacher
     result.to_json
   end
 
-
   # 用户添加日志
   def add_log(type, content, target=nil)
     Log.add(self, school_id, type, content, target)
@@ -335,7 +251,7 @@ class Teacher
   end
 
   def self.tech_type_reverse(tech_type)
-    types = {'科目二/科目三' => 0, '科目二' => 1, '科目三' => 2}
+    types = {'科目二/科目三' => 1, '科目二' => 2, '科目三' => 3}
     types[tech_type] if types[tech_type]
   end
 

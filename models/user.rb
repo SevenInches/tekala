@@ -12,7 +12,6 @@ class User
   property :id_card, String
 
   property :crypted_password, String, :length => 70
-  property :cookie, Text, :lazy => false
   property :name, String, :default => ''
   property :nickname, String, :default => ''
 
@@ -95,7 +94,6 @@ class User
   # Callbacks
   before :save, :encrypt_password
 
-
   #已完成学时
   def has_hour
     return orders.all(:status => Order::pay_or_done).sum(:quantity).to_i
@@ -171,15 +169,6 @@ class User
     {"注册" => 0, "已付费" => 1, "已入网" => 12,"拍照" => 2, "体检" => 3, "录指纹" => 4, "科目一" => 5, "科目二" => 6, "科目三" => 7, "考长途" => 8, "科目四" => 9, "已拿驾照" => 10, "已离开" => 11}
   end
 
-  def self.city_status_flag(city)
-    case city
-      when '0755'
-        {"注册" => 0, "已付费" => 1, "拍照" => 2, "体检" => 3, "录指纹" => 4, "科目一" => 5, "科目二" => 6, "科目三" => 7, "考长途" => 8, "科目四" => 9, "已拿驾照" => 10, "已离开" => 11}
-      else
-        {"注册" => 0, "已付费" => 1, "已入网" => 12,"拍照" => 2, "体检" => 3, "科目一" => 5, "科目二" => 6, "科目三" => 7, "科目四" => 9, "已拿驾照" => 10, "已离开" => 11}
-    end
-  end
-
   def status_flag_word
     case status_flag
       when 1
@@ -244,94 +233,6 @@ class User
     end
   end
 
-
-
-  def self.work_area
-    {'龙岗' => 1, '宝安' => 2, '罗湖' => 3, '福田' => 4, '南山' => 5, '盐田' => 6, '其他' => 0}
-  end
-
-  def self.live_area
-
-    {'龙岗' => 1, '宝安' => 2, '罗湖' => 3, '福田' => 4, '南山' => 5, '盐田' => 6, '其他' => 0}
-
-  end
-
-  def self.wh_area
-
-    {'武昌' => 21, '洪山' => 22, '黄陂' => 23, '东西湖' => 24, '蔡甸' => 25, '汉南' => 26, '江夏' => 27, '江岸' => 28, '江汉' => 29, '硚口' => 30, '青山' => 31, '新州' => 32, '汉阳' => 33}
-
-  end
-
-  def work_area_word
-    case self.work_area
-      when 1
-        return '龙岗'
-      when 2
-        return '宝安'
-      when 3
-        return '罗湖'
-      when 4
-        return '福田'
-      when 5
-        return '南山'
-      when 6
-        return '盐田'
-      when 7
-        return '光明新区'
-      when 8
-        return '龙华新区'
-      else
-        return '其他'
-    end
-  end
-
-  def live_area_word
-    case self.work_area
-      when 1
-        return '龙岗'
-      when 2
-        return '宝安'
-      when 3
-        return '罗湖'
-      when 4
-        return '福田'
-      when 5
-        return '南山'
-      when 6
-        return '盐田'
-      when 7
-        return '光明新区'
-      when 8
-        return '龙华新区'
-      else
-        return '其他'
-    end
-  end
-
-  def self.profession
-    {'互联网' => 1, '金融' => 2, '公务员'=>3, '医务人员' => 4, '学生'=>5, '自由职业' => 6, '其他' => 0}
-  end
-
-  def profession_word
-    case self.profession
-      when 1
-        return '互联网'
-      when 2
-        return '金融'
-      when 3
-        return '公务员'
-      when 4
-        return '医务人员'
-      when 5
-        return '学生'
-      when 6
-        return '自由职业'
-      else
-        return '其他'
-    end
-
-  end
-
   def local_word
     case self.local
       when 1
@@ -339,20 +240,6 @@ class User
       else
         '否'
     end
-
-  end
-
-
-  def rate
-    return 5.0  if comments.size < 1
-    score = 0.0
-    comments.each do |comment|
-      score = score + comment.rate.to_f
-    end
-    return (score/comments.size).to_f
-    #减少一次mysql 查询
-    # comments.avg(:rate).round(1)
-
   end
 
   def real_age
@@ -363,35 +250,6 @@ class User
       age = 0
     end
     age
-  end
-
-  #查询学过的用户占比
-  def self.hour_user_learn_count
-    num = 0
-    User.all(:type => 0).each do |user|
-      num+=1 if user.has_hour > 0
-    end
-
-    num
-
-  end
-
-  def self.vip_user_learn_count
-    # User.count(:type => 1, :learn_hours.gt => 0)
-    num = 0
-    User.all(:type => 1).each do |user|
-      num+=1 if user.has_hour > 0
-    end
-
-    num
-  end
-
-  def self.vip
-    all(:type => 1)
-  end
-
-  def self.common
-    all(:type => 0)
   end
 
   # 给用户发送短信
@@ -417,13 +275,8 @@ class User
     order.amount     = product.price
     order.status     = 1
     order.school_id  = product.school_id
-
     order.save
     order
-  end
-
-  def invite_url
-    CustomConfig::HOST+"/invite/#{invite_code}"
   end
 
   #是否打包教练
