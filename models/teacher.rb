@@ -46,7 +46,6 @@ class Teacher
   property :price, Integer, :default => 119, :min => 0
   property :promo_price, Integer, :default => 119, :min => 0
   property :created_at, DateTime
-  property :qq, String, :default => ''
 
   #教练排名
   property :sort, Integer,:default => 0
@@ -56,8 +55,6 @@ class Teacher
   
   #'待审核'=>1, '审核通过'=>2, '审核不通过'=>3, '报名' => 4
   property :status, Integer, :default => 1
-
-  property :map, String, :auto_validation => false
 
   property :date_setting, String, :default => ''
 
