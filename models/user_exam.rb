@@ -1,3 +1,4 @@
+#学员考试成绩
 class UserExam
   include DataMapper::Resource
 

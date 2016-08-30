@@ -1,3 +1,4 @@
+#动态点赞
 class TweetLike
   include DataMapper::Resource
 

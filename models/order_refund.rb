@@ -1,3 +1,4 @@
+#订单退款记录
 class OrderRefund
   include DataMapper::Resource
 

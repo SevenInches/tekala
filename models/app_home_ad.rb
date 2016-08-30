@@ -1,3 +1,4 @@
+#app首页广告
 class AppHomeAd
   include DataMapper::Resource
 

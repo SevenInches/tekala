@@ -1,3 +1,4 @@
+#学员学时
 class UserPlan
   include DataMapper::Resource
 

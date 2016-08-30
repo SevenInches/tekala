@@ -1,3 +1,4 @@
+#训练模块
 class Block
   include DataMapper::Resource
 

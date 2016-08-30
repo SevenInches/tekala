@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CustomConfig
-	HOST      = Padrino.env == :development ? 'http://localhost:9000' : 'http://www.mmxueche.com'
+	HOST      = Padrino.env == :development ? 'http://localhost:9000' : 'http://www.tekala.cn'
 	APPID     = 'wx2518632f280d206d'
 	SECRET    = "b0d8eda74319a5984cfce9f230eab6b9"
 	

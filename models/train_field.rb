@@ -1,3 +1,4 @@
+#训练场
 class TrainField
   include DataMapper::Resource
   attr :distance, true
@@ -87,6 +88,5 @@ class TrainField
   def self.subject 
     {'科目二' => 2, '科目三' => 3}
   end
-
 
 end

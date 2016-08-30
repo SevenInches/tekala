@@ -1,3 +1,4 @@
+#动态评论
 class TweetComment
   include DataMapper::Resource
 

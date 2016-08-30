@@ -1,3 +1,4 @@
+#操作日志
 class Log
   include DataMapper::Resource
 

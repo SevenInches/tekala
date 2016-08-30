@@ -1,3 +1,4 @@
+#消息
 class Message
   include DataMapper::Resource
 

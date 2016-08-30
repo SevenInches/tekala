@@ -1,3 +1,4 @@
+#后台账号
 class Account
   include DataMapper::Resource
   include DataMapper::Validate

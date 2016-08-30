@@ -1,3 +1,4 @@
+#确认订单
 class OrderConfirm
   include DataMapper::Resource
 

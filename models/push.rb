@@ -1,3 +1,4 @@
+#推送
 class Push
   include DataMapper::Resource
 

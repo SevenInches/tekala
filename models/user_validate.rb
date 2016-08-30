@@ -1,3 +1,4 @@
+#学员验证码
 class UserValidate
   include DataMapper::Resource
 

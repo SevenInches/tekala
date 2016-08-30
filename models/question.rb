@@ -1,3 +1,4 @@
+#帮助问题
 class Question
   include DataMapper::Resource
 

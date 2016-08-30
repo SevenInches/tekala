@@ -1,3 +1,4 @@
+#报名订单
 class Signup
   include DataMapper::Resource
   # property <name>, <type>

@@ -1,3 +1,4 @@
+#文章管理
 class Article
   include DataMapper::Resource
 

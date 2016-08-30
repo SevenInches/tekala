@@ -39,13 +39,14 @@ class School
   has n, :maps              # 训练场数字地图
   has n, :shops             # 门店
   has n, :finances          # 财务记录
-  has n, :finance_reports   # 财务报告
   has n, :logs              # 操作日志
   has n, :products          # 产品
   has n, :users             # 用户
   has n, :teachers          # 教练
   has n, :cars              # 车辆
   has n, :roles             # 权限
+  has n, :feedbacks         # 反馈
+  has n, :complains         # 投诉
 
   after :create do |school|
     tid = school.demo_teacher
@@ -154,19 +155,10 @@ class School
   end
 
   def demo_role
-    new_role  =  Role.new(:name => '测试组',:school_id => id)
+    new_role  =  Role.new(:name => '示例用户',:school_id => id, :cate => 1)
     new_role.mobile = contact_phone
     new_role.password = '123456'
     new_role.created_at = Time.now
-    if new_role
-      new_role.save
-      #new_user = Role.new(:name => '示例用户',:role_id => new_role.id)
-      # new_user.mobile = contact_phone
-      # new_user.password = '123456'
-      # new_user.created_at = Time.now
-      # new_user.save
-    else
-      redirect url(:schools, :index)
-    end
+    new_role.save
   end
 end

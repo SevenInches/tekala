@@ -1,3 +1,4 @@
+#车辆
 class Car
   include DataMapper::Resource
 

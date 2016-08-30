@@ -133,8 +133,6 @@ Tekala::Api.controllers :v1 do
       end
     end
 
-
-
     #七牛请求token 
     get :uptoken do 
       token_item = ParamsConfig.first(:name=>'qiniu_policy')
@@ -156,7 +154,7 @@ Tekala::Api.controllers :v1 do
 
     #投诉建议
     post :complain, :provides => [:html] do
-      @complain = Complain.create(:user_id => session[:user_id].to_i, :content => params[:content])
+      @complain = Complain.create(:user_id => session[:user_id].to_i, :content => params[:content], :school_id => @user.school_id)
       if @complain.present?
         $redis.lpush $school_remark, '学员投诉'
         render 'v1/static_pages/success'
@@ -171,7 +169,7 @@ Tekala::Api.controllers :v1 do
 
     #学员反馈
     post :feedbacks, :provides => [:html] do
-      @feedback = Feedback.create(:user_id => session[:user_id].to_i, :content => params[:content])
+      @feedback = Feedback.create(:user_id => session[:user_id].to_i, :content => params[:content], :school_id => @user.school_id)
       if @feedback.present?
         $redis.lpush $school_remark, '意见反馈'
         render 'v1/static_pages/success'
@@ -192,6 +190,7 @@ Tekala::Api.controllers :v1 do
       if params[:token] != token
         'token 不正确'
       else
+        @cycles = UserCycle.all(:user_id => params[:user_id], :order => :date.desc)
         render 'v1/static_pages/history'
       end
     end

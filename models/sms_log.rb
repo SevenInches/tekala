@@ -1,3 +1,4 @@
+#短信日志
 class SmsLog
   include DataMapper::Resource
 
