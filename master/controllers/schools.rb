@@ -9,7 +9,7 @@ Tekala::Master.controllers :schools do
     @title = "Schools"
     @schools = School.all
     @schools = @schools.all(:name => params[:name]) if params[:name].present?
-    @schools = @schools.paginate(:page => params[:page],:per_page => 5)
+    @schools = @schools.paginate(:page => params[:page],:per_page => 20)
     render 'schools/index'
   end
 
@@ -29,7 +29,7 @@ Tekala::Master.controllers :schools do
   end
 
   get :edit, :with => :id do
-    @title = pat(:edit_title, :model => "school #{params[:id]}")
+    @title = '驾校编辑'
     @school = School.get(params[:id])
     if @school
       render 'schools/edit'
@@ -40,7 +40,7 @@ Tekala::Master.controllers :schools do
   end
 
   put :update, :with => :id do
-    @title = pat(:update_title, :model => "school #{params[:id]}")
+    @title  = '驾校编辑'
     @school = School.get(params[:id])
     if @school
       if @school.update(params[:school])

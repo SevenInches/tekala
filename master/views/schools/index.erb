@@ -1,14 +1,25 @@
 <div class="container-fluid" style="margin-bottom:20px">
   <div class="row">
-    <form action="" class="form-horizontal" role="form">
-      <div class="col-sm-2">
-        <input type="text" name="name" value="<%= params[:name] %>" class="form-control">
-      </div>
-      <input type="submit" value="搜索" class="btn btn-success">
-     </form>
+    <div class="col-lg-3">
+      <a href="/magicbox/schools/new" class="btn btn-success">添加驾校</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <form action="" class="form-horizontal row" role="form">
+        <div class="col-lg-10">
+          <input type="text" name="name" value="<%= params[:name] %>" class="form-control">
+        </div>
+        <div class="col-lg-2" >
+          <input type="submit" value="搜索" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <div class="container-fluid">
+  <%= {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info'}.map { |type, class_name| flash_tag(type, :class => "alert alert-#{class_name} fade in", :bootstrap => true) }.join.html_safe %>
+
   <div class="row">
     <div class="col-lg-12" >
       <section class="panel">
@@ -38,13 +49,13 @@
                 <td><%=school.car_count%></td>
                 <td><%=school.shop_count%></td>
                 <td><%=school.last_7days_signup_count%></td>
-                <td><%=school.created_at%></td>
-                <td><a href="">推送</a>|<a href="">广告</a>|<a href="">修改资料</a>|<a href="">禁用</a></td>
+                <td><%=school.created_at.strftime('%Y年%m月%d日') %></td>
+                <td><a href="">推送</a>|<a href="">广告</a>|<a href="/magicbox/schools/edit/<%= school.id %>">修改资料</a>|<a href="">禁用</a></td>
               </tr>
           <% end %>
           </tbody>
         </table>
-        <p style="padding:10px">每页5条</p>
+        <p style="padding:10px">每页20条</p>
       </section>
     </div>
   </div>
