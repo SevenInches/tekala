@@ -155,12 +155,18 @@ class School
 
   def demo_role
     new_role  =  Role.new(:name => '测试组',:school_id => id)
-    if new_role.save
-      new_user = RoleUser.new(:name => '示例用户',:role_id => new_role.id)
-      new_user.mobile = contact_phone
-      new_user.password = '123456'
-      new_user.created_at = Time.now
-      new_user.save
+    new_role.mobile = contact_phone
+    new_role.password = '123456'
+    new_role.created_at = Time.now
+    if new_role
+      new_role.save
+      #new_user = Role.new(:name => '示例用户',:role_id => new_role.id)
+      # new_user.mobile = contact_phone
+      # new_user.password = '123456'
+      # new_user.created_at = Time.now
+      # new_user.save
+    else
+      redirect url(:schools, :index)
     end
   end
 end
