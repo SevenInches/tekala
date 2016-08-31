@@ -21,7 +21,7 @@ class Teacher
 
   # property :hometown, String
   property :avatar, String, :auto_validation => false
-  property :bank_card_photo, String, :auto_validation => false
+  # property :bank_card_photo, String, :auto_validation => false
 
   #银行卡支行名称
   property :bank_name, String, :default => ''
