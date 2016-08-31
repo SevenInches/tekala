@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <section class="panel" style="padding: 10px">
+        <h1 class="text-center"><%= @new.title %></h1>
+        <h4 class="text-center" style="margin-bottom: 20px">阅读数:<%= @new.view_count %></h4>
+        <div class="news-content">
+          <%= @new.content.html_safe %>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="form-group ">
+  <label class="col-sm-2 control-label">标题</label>
+  <div class="col-sm-6">
+    <%= f.text_field :title, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true ,:placeholder => '请输入标题',:required => 'required'%>
+  </div>
+</div>
+
+<fieldset class='form-group'>
+  <%= f.label '内容', :class => 'control-label col-sm-2' %>
+  <div class='controls col-sm-6'>
+    <%= f.text_area :content, :id => 'content', :placeholder=>"请在这里键入你想输入的..." %>
+  </div>
+</fieldset>
+<br>
+
+<div class="form-group">
+  <div class="col-sm-8 col-sm-offset-2">
+    <input type="submit" value="保存" class="btn btn-success">
+    &nbsp;
+    <a href="/magicbox/news/" class="btn btn-default">取消</a>
+  </div>
+</div>
+
+<%=javascript_include_tag '../../editor/js/froala_editor.min' %>
+<%=stylesheet_link_tag '../../editor/css/font-awesome.min', '../../editor/css/froala_editor.min' %>
+<script type="text/javascript">
+  $('#content').editable({inlineMode: false, alwaysBlank: true});
+
+  $('.summernote').summernote({
+    height: 150,   //set editable area's height
+    codemirror: { // codemirror options
+      theme: 'monokai'
+    }
+  });
+</script>
