@@ -45,7 +45,7 @@ class Product
   #服务特色
   property :special, String
   #训练场地
-  property :fields, Text
+  property :places, Text
   #名额数量
   property :limit_count, Integer, :default => 0
 
