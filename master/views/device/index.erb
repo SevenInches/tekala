@@ -1,7 +1,7 @@
 <div class="container-fluid" style="margin-bottom:20px">
   <div class="row">
     <div class="col-lg-3" style="margin-bottom: 10px">
-      <a href="/magicbox/schools/new" class="btn btn-success">添加驾校</a>
+      <a href="/magicbox/device/new" class="btn btn-success">添加设备</a>
     </div>
   </div>
   <div class="row">
@@ -21,7 +21,29 @@
           </tr>
           </thead>
           <tbody>
-
+            <% @devices.each do |item| %>
+              <tr>
+                <td><%= item.id %></td>
+                <td><%= item.device_no %></td>
+                <td><%= item.hardware_version %></td>
+                <td><%= item.software_version %></td>
+                <td><%= item.status %></td>
+                <td><%= item.convet_status_word %></td>
+                <td><%= item.created_at.strftime("%Y年%m月%d日") %></td>
+                <td style="position: relative">
+                  <a href="/magicbox/device/edit/<%= item.id %>">编辑</a>|
+                  <a href="" onclick="javascript:return false;" class="delete-device">删除</a>
+                  <div class="popover list-row-action-popover-delete-one left" style="left: -140px; top: -24px; display: none;">
+                    <div class="arrow"> </div>
+                    <h3 class="popover-title">确认删除吗</h3>
+                    <div class="popover-content">
+                      <a href="/magicbox/device/destroy/<%= item.id %>" class="btn btn-danger">删除</a>
+                      <div class="btn btn-default btn-small cancel">取消</div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <%end%>
           </tbody>
         </table>
         <p style="padding:10px">每页20条</p>
@@ -29,6 +51,17 @@
     </div>
   </div>
   <div class="row">
-    <%#= will_paginate @schools,renderer: WillPaginate::ViewHelpers::BoostrapLinkRenderer %>
+    <%= will_paginate @devices,renderer: WillPaginate::ViewHelpers::BoostrapLinkRenderer %>
   </div>
 </div>
+<script>
+  $(function(){
+    $(document).on('click','.delete-device',function(){
+      $(this).next('.popover').css('display','block');
+    });
+
+    $(document).on('click','.cancel',function(){
+      $(this).closest('.popover').css('display','none')
+    })
+  })
+</script>

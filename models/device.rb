@@ -11,5 +11,12 @@ class Device
   property :created_at, DateTime
   property :updated_at, DateTime
 
-
+  def convet_status_word
+    case is_active
+      when true
+        return '是'
+      when false
+        return '否'
+    end
+  end
 end
