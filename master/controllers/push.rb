@@ -1,12 +1,13 @@
 Tekala::Master.controllers :push do
   before do
+    @user_name = Account.first(:id => session[:account_id])[:email]
     if !session[:account_id]
       redirect_to(url(:login, :index))
     end
   end
 
   get :index do
-    @title = "push"
+    @title = "推送管理"
     @pushs = Push.all
     @pushs = @pushs.paginate(:page => params[:page],:per_page => 20)
     render 'push/index'
@@ -51,18 +52,17 @@ Tekala::Master.controllers :push do
     end
   end
 
-  delete :destroy, :with => :id do
-    @title = "Schools"
-    school = School.get(params[:id])
-    if school
-      if school.destroy
-        flash[:success] = pat(:delete_success, :model => 'School', :id => "#{params[:id]}")
+  get :destroy, :with => :id do
+    push = Push.get(params[:id])
+    if push
+      if push.destroy
+        #flash[:success] = pat(:delete_success, :model => 'Push', :id => "#{params[:id]}")
       else
-        flash[:error] = pat(:delete_error, :model => 'School')
+        #flash[:error] = pat(:delete_error, :model => 'Push')
       end
-      redirect url(:schools, :index)
+      redirect url(:push, :index)
     else
-      flash[:warning] = pat(:delete_warning, :model => 'School', :id => "#{params[:id]}")
+      #flash[:warning] = pat(:delete_warning, :model => 'Push', :id => "#{params[:id]}")
       halt 404
     end
   end

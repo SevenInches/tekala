@@ -19,7 +19,7 @@ class Teacher
   property :id_card, String
   property :bank_card, String, :default => ''
 
-  property :hometown, String
+  # property :hometown, String
   property :avatar, String, :auto_validation => false
   property :bank_card_photo, String, :auto_validation => false
 
