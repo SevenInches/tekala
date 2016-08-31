@@ -26,6 +26,29 @@ class Product
   property :city_id, Integer, :default => 0
   property :show, Boolean, :default => false                          #是否展示
 
+  #包含服务
+  property :services, Text
+  #不含服务
+  property :unservices, Text
+  #训练车品牌
+  property :car, Text
+  #科目二学时
+  property :level_two_hours, Integer
+  #科目三学时
+  property :level_three_hours, Integer
+  #科目二练车方式
+  property :level_two_style, Integer
+  #科目三练车方式
+  property :level_three_style, Integer
+  #拿证时间
+  property :how_long, Integer
+  #服务特色
+  property :special, String
+  #训练场地
+  property :places, Text
+  #名额数量
+  property :limit_count, Integer, :default => 0
+
   belongs_to :city
 
   belongs_to :school
