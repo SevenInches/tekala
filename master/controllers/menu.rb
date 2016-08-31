@@ -1,4 +1,11 @@
 Tekala::Master.controllers :menu do
+  before do
+    @user_name = Account.first(:id => session[:account_id])[:email]
+    if !session[:account_id]
+      redirect_to(url(:login, :index))
+    end
+  end
+
   get :index do
     @title  = '菜单管理'
     @menus  = Subpart.all(:order => :weight)
@@ -47,10 +54,12 @@ Tekala::Master.controllers :menu do
 
   post :create do
     menu = Subpart.new(params[:user])
+    menu[:id] = Subpart.last[:id] + 1
+    menu[:weight] = Subpart.last[:weight] + 1
     if menu.save
-      #flash[:success] = pat(:create_success, :model => 'Menu')
+      # flash[:success] = pat(:create_success, :model => 'Menu')
     else
-      #flash[:error] = pat(:create_error, :model => 'Menu')
+      # flash[:error] = pat(:create_error, :model => 'Menu')
     end
     redirect url(:menu, :index)
   end
