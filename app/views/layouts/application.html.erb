@@ -33,6 +33,7 @@
         <li class=""><a href="/about" class="<%= "active" if current_page?(["about"]) %>">关于我们</a><div class=""></div></li>
       </ul>
       <div class="nav-mask"></div>
+      <%=image_tag 'menu.png', :class => 'inner-top-img' %>
     </div>
   </div>
 </header>
@@ -68,7 +69,8 @@
 
 </footer>
 <script type="text/javascript" charset="utf-8">
-  $('body').fadeOut(0).fadeIn(500);
+  $(function(){
+    $('body').fadeOut(0).fadeIn(500);
 
     var _isMobile = navigator.userAgent.toLowerCase().indexOf('mobile');
     if(_isMobile != -1 ){
@@ -83,6 +85,19 @@
         bottom : 0
       })
     }
+
+    if(navigator.userAgent.toLowerCase().indexOf('mobile') != -1){
+      var $app = $('.app-nav'),_toggle = false;
+      $('.inner-top-img').click(function(){
+        if(!_toggle){
+          $app.css('height','300px');
+        }else{
+          $app.css('height',0);
+        }
+        _toggle = !_toggle;
+      })
+    }
+  })
 </script>
 </body>
 </html>
