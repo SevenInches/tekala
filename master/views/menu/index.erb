@@ -29,8 +29,8 @@
                 <td></td>
                 <td><%= item.name %></td>
                 <td>
-                  <span class="btn btn-success weight-btn up">上</span>
-                  <span class="btn btn-success weight-btn down">下</span>
+                  <span class="btn btn-primary weight-btn up">上</span>
+                  <span class="btn btn-primary weight-btn down">下</span>
                 </td>
                 <td><%= item.config_word %></td>
                 <td><a href="/magicbox/menu/edit/<%= item.id %>">编辑</a>|<a href="/magicbox/menu/destory/<%= item.id %>">删除</a></td>
@@ -51,7 +51,7 @@
         var $last = $tr.prev(),
             $nextAll = $last.prev().length != 0 ? $last.prev().nextAll() : $('.table tbody tr');
         $tr.insertBefore($last);
-        for(var i = 0;i < $nextAll.length;i++){
+        for(var i = 0;i < 2;i++){
           var item = {};
           if(i == 0){
             weight = $tr.attr('data-weight') - 1
@@ -63,9 +63,6 @@
             item.id = $last.attr('data-id');
             item.weight = weight;
             $last.attr('data-weight',weight);
-          }else{
-            item.id = $nextAll.eq(i).attr('data-id');
-            item.weight = $nextAll.eq(i).attr('data-weight');
           }
           arr.push(item);
         }
@@ -73,26 +70,20 @@
         var $next = $tr.next(),
             $nextAll = $tr.prev().length != 0 ? $tr.prev().nextAll() : $('.table tbody tr');
         $tr.insertAfter($next);
-        for(var i=0;i<$nextAll.length;i++){
+        for(var i = 0;i < 2;i++){
           var item = {};
-          switch (i){
-            case 0:
-                weight = parseInt($tr.attr('data-weight')) + 1;
-                item.id = $tr.attr('data-id');
-                item.weight =  weight;
-                $tr.attr('data-weight',weight);
-              break;
-            case 1:
-              weight = parseInt($next.attr('data-weight'))-1;
-              item.id = $next.attr('data-id');
-              item.weight = weight;
-              $next.attr('data-weight',weight);
-              break;
-            default :
-              item.id = $nextAll.eq(i).attr('data-id');
-              item.weight = $nextAll.eq(i).attr('data-weight');
+          if(i == 0){
+            weight = parseInt($tr.attr('data-weight')) + 1;
+            item.id = $tr.attr('data-id');
+            item.weight =  weight;
+            $tr.attr('data-weight',weight);
+          }else if(i == 1){
+            weight = parseInt($next.attr('data-weight'))-1;
+            item.id = $next.attr('data-id');
+            item.weight = weight;
+            $next.attr('data-weight',weight);
           }
-          arr.push(item)
+          arr.push(item);
         }
       }
       $.ajax({

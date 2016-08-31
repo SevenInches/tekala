@@ -1,12 +1,13 @@
 Tekala::Master.controllers :schools do
   before do
+    @user_name = Account.first(:id => session[:account_id])[:email]
     if !session[:account_id]
       redirect_to(url(:login, :index))
     end
   end
 
   get :index do
-    @title = "Schools"
+    @title = "驾校管理"
     @schools = School.all
     @schools = @schools.all(:name => params[:name]) if params[:name].present?
     @schools = @schools.paginate(:page => params[:page],:per_page => 20)
