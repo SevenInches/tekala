@@ -99,4 +99,29 @@ Tekala::Channel.controllers :v1 do
     return {:status => :success, :url => url, :msg => '返回URL成功'}.to_json
   end
 
+  get :hot_messages, :map => '/v1/messages/hot', :provides => [:json] do
+    @messages  = MessageCard.all(:order => [:created_at.desc, :weight.desc], :school_id => @channel.school_id, :limit => 5)
+    @total  =  @messages.count
+    render 'messages'
+  end
+
+  get :messages, :map => '/v1/messages', :provides => [:json] do
+    @messages  =  MessageCard.all(:order => [:created_at.desc, :weight.desc], :school_id => @channel.school_id)
+    @total     =  @messages.count
+    @messages  =  @messages.paginate(:per_page => 20, :page => params[:page])
+    render 'messages'
+  end
+
+  put :message, :map => '/v1/messages/:message_id', :provides => [:json] do
+    msg = MessageCard.get(params[:message_id])
+    if msg.present?
+      msg.click_num += 1
+      if msg.save
+        {:status => :success, :msg => '消息更新'}.to_json
+      end
+    else
+      {:status => :failure, :msg => '消息不存在'}.to_json
+    end
+  end
+
 end
