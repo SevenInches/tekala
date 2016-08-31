@@ -138,7 +138,6 @@ class User
       user.save
     end
     user && user.has_password?(password) ? user : nil
-
   end
 
   def self.find_by_id(id)
