@@ -1,0 +1,60 @@
+<div class="form-group ">
+  <label class="col-sm-2 control-label">设备号</label>
+  <div class="col-sm-6">
+    <%= f.text_field :device_no, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true ,:placeholder => '请输入设备号',:required => 'required'%>
+  </div>
+</div>
+
+<div class="form-group ">
+  <label class="col-sm-2 control-label">硬件版本</label>
+  <div class="col-sm-6">
+    <%= f.text_field :hardware_version, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true ,:placeholder => '请输入硬件版本',:required => 'required'%>
+  </div>
+</div>
+
+<div class="form-group ">
+  <label class="col-sm-2 control-label">软件版本</label>
+  <div class="col-sm-6">
+    <%= f.text_field :software_version, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true ,:placeholder => '请输入软件版本',:required => 'required'%>
+  </div>
+</div>
+
+<div class="form-group ">
+  <label class="col-sm-2 control-label">状态</label>
+  <div class="col-sm-6">
+    <%= f.number_field :status, :class => 'form-control input-xlarge input-with-feedback', :autofocus => true ,:placeholder => '请输入状态',:required => 'required'%>
+  </div>
+</div>
+
+<!--<div class="form-group ">-->
+  <!--<label class="col-sm-2 control-label">激活状态</label>-->
+  <!--<div class="col-sm-6">-->
+    <!--<label class="checkbox-inline">-->
+      <!--<input type="radio" name="device[is_active]" value="true"> 是-->
+    <!--</label>-->
+    <!--<label class="checkbox-inline">-->
+      <!--<input type="radio" name="device[is_active]" value="false"> 否-->
+    <!--</label>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="form-group">
+  <div class="col-sm-8 col-sm-offset-2">
+    <input type="submit" value="保存" class="btn btn-success">
+    &nbsp;
+    <a href="/magicbox/device/" class="btn btn-default">取消</a>
+  </div>
+</div>
+
+<%=javascript_include_tag '../../editor/js/froala_editor.min' %>
+<%=stylesheet_link_tag '../../editor/css/font-awesome.min', '../../editor/css/froala_editor.min' %>
+<script type="text/javascript">
+  $('#content').editable({inlineMode: false, alwaysBlank: true});
+
+  $('.summernote').summernote({
+    height: 150,   //set editable area's height
+    codemirror: { // codemirror options
+      theme: 'monokai'
+    }
+  });
+</script>

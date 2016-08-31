@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <% form_for :device, url(:device, :update,:id => @device.id), :class => 'form-horizontal panel', :style => 'padding:20px 0;' do |f| %>
+          <%= partial 'device/form', :locals => { :f => f } %>
+      <% end %>
+    </div>
+  </div>
+</div>
