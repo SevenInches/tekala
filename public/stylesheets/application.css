@@ -50,6 +50,13 @@ ul li{
     position: relative;
     z-index: 10;
 }
+.inner-top-img{
+    position: absolute;
+    right: 10px;
+    width: 23px;
+    top: 17px;
+    opacity:0;
+}
 .logo{
     float:left;
 }
@@ -286,7 +293,6 @@ ul li{
 }
 
 .app-nav li{
-    float: left;
     margin-right: 20px;
     position: relative;
 }
@@ -588,10 +594,24 @@ ul li{
     .inner-top {
         overflow: hidden;
         padding: 0 5px;
+        height: auto;
     }
-
+    .app-nav{
+        display: block;
+        float: none;
+        height: 0;
+        transition: height .5s ease;
+    }
+    .navbar-header{
+        float: none;
+    }
     .app-nav li a {
-        font-size: 12px;
+        font-size: 18px;
+        line-height: 50px;
+        height: 50px;
+    }
+    .inner-top-img{
+        opacity: 1;
     }
 
     .navbar-header {
@@ -609,6 +629,7 @@ ul li{
         right: 0;
         margin: 0 auto;
     }
+
 }
 
 .vedio-box{

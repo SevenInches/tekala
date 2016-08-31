@@ -93,4 +93,8 @@ Tekala::Master.controllers :push do
     end
     redirect(url(params[:back]))
   end
+
+  get :resend, :with => :id do
+
+  end
 end
