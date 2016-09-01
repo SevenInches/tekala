@@ -23,4 +23,9 @@ class Device
       self.device_no = no
     end
   end
+
+  def convet_status_word
+    is_active ? '是' : '否'
+  end
+
 end
