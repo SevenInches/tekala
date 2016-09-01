@@ -19,7 +19,7 @@ CarrierWave.configure do |config|
 end
 
 # Mounts the core application for this project
-
+Padrino.mount('Tekala::Future',   :app_file => Padrino.root('future/app.rb')).host('f.tekala.cn')
 Padrino.mount('Tekala::Api',   	  :app_file => Padrino.root('api/app.rb')).to('/api')
 Padrino.mount('Tekala::Admin',   	:app_file => Padrino.root('admin/app.rb')).to('/tekala_admin')
 Padrino.mount('Tekala::Master',   	:app_file => Padrino.root('master/app.rb')).to('/magicbox')

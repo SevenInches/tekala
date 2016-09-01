@@ -122,12 +122,10 @@ class User
 
   def self.authenticate(id_card, password)
     user = first(:conditions => ["lower(id_card) = lower(?)", id_card]) if id_card.present?
-
     if user && user.has_password?(password)
       user.last_login_at = Time.now
       user.save
     end
-
     user && user.has_password?(password) ? user : nil
   end
 

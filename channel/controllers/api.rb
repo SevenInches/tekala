@@ -1,3 +1,4 @@
+#渠道版
 Tekala::Channel.controllers :v1 do
 
   register WillPaginate::Sinatra
