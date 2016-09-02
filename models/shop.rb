@@ -8,7 +8,7 @@ class Shop
   property :updated_at, DateTime
   property :name, String
   property :address, String
-  property :longtitude, String
+  property :longitude, String
   property :latitude, String
   property :rent_amount, Integer
   property :area, Integer

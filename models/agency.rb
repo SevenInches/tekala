@@ -15,6 +15,9 @@ class Agency
   property :school_name, String
   property :school_logo, String
   property :product_name, String
+  property :title, String
+  property :content, String
+  property :icon, String
 
   # 这里写的不是很好，也许应该是 before :create ？
   before :save, :create_agency_fast

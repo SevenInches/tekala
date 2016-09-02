@@ -86,18 +86,12 @@ Tekala::Channel.controllers :v1 do
   end
 
   get :share, :provides => [:json], :map => '/v1/acting_for/:agency_id/share' do
-    # http://www.tekala.cn/m/product/24?back=http%3A%2F%2Fmain%2Fm%2F11%2Fproducts%3Fback%3Dhttp%253A%252F%252Fmain%252Fm%252F11
-    # http://www.tekala.cn/m/product/24?back=http://main/m/11/products?back=http://main/m/11
-    # http://www.tekala.cn/m/product/24?back=24?back=24
-    # http://localhost:9292/channel/v1/acting_for/2/weChat_share
-    # 没有back参数会崩溃！
-    url = 'http://www.tekala.cn/m/product/'
-    agency = Agency.get params[:agency_id]
-    return {:status => :failure, :msg => '返回URL失败'}.to_json if agency.nil?
-
-    product_id = agency.product_id
-    url += product_id.to_s + "?back=http://main/m/11/products?back=http://main/m/11?channel_id=#{agency.channel_id}" # 事实上，不太清楚back是否应该是如此，此处需要多加交流//与理解
-    return {:status => :success, :url => url, :msg => '返回URL成功'}.to_json
+    @url = 'http://www.tekala.cn/m/product/'
+    @agency = Agency.get params[:agency_id]
+    return {:status => :failure, :msg => '返回URL失败'}.to_json if @agency.nil?
+    product_id = @agency.product_id
+    @url += product_id.to_s + "?back=http://main/m/11/products?back=http://main/m/11?channel_id=#{@agency.channel_id}" if product_id.present?
+    render 'share'
   end
 
   get :hot_messages, :map => '/v1/messages/hot', :provides => [:json] do
