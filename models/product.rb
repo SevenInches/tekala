@@ -27,27 +27,27 @@ class Product
   property :show, Boolean, :default => false                          #是否展示
 
   #包含服务
-  property :services, Text
+  property :services, Text, :auto_validation => false
   #不含服务
-  property :unservices, Text
+  property :unservices, Text, :auto_validation => false
   #训练车品牌
-  property :car, Text
+  property :car, String, :auto_validation => false
   #科目二学时
-  property :level_two_hours, Integer
+  property :level_two_hours, Integer, :auto_validation => false
   #科目三学时
-  property :level_three_hours, Integer
+  property :level_three_hours, Integer, :auto_validation => false
   #科目二练车方式
-  property :level_two_style, Integer
+  property :level_two_style, Integer, :auto_validation => false
   #科目三练车方式
-  property :level_three_style, Integer
+  property :level_three_style, Integer, :auto_validation => false
   #拿证时间
-  property :how_long, Integer
+  property :how_long, Integer, :auto_validation => false
   #服务特色
-  property :special, String
+  property :special, String, :auto_validation => false
   #训练场地
-  property :places, Text
+  property :places, Text, :auto_validation => false
   #名额数量
-  property :limit_count, Integer, :default => 0
+  property :limit_count, Integer, :auto_validation => false, :default => 0
 
   belongs_to :city
 
